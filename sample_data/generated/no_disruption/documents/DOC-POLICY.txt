@@ -1,0 +1,23 @@
+From: Jordan Ellis <jordan.ellis@atlas-robotics.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: Sample planning policy
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <no_disruption.doc-policy@atlas-robotics.example>
+X-Document-ID: DOC-POLICY
+X-Thread-ID: no_disruption:DOC-POLICY
+X-Simulated-Data: true
+Document: DOC-POLICY
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+Robot X and Robot Y require MC-100 R2. All donor-plant production commitments must remain feasible. At the disrupted plant, minimize unfilled finished units in priority tier 1, then tier 2, then incremental recovery cost. Do not double-count BOM demand as daily consumption. Existing POs are not cancelled when recovery supply is purchased. Unfulfilled production remains backlog; do not silently reschedule it. Show order value exposed, not guaranteed revenue saved.
+
+Best,
+Jordan Ellis
+Operations Director
+Fictional Atlas Robotics — Operations
+jordan.ellis@atlas-robotics.example

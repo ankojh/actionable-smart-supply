@@ -1,0 +1,874 @@
+{
+  "metadata": {
+    "dataset_version": "1.1.0",
+    "profile": "development_sample",
+    "synthetic": true,
+    "scenario_id": "donor_demand_increased",
+    "description": "Plant B needs all 900 controllers for its own committed orders.",
+    "currency": "USD",
+    "as_of": "2026-11-02T12:00:00",
+    "timestamp_timezone": "UTC",
+    "horizon_start": "2026-11-02",
+    "horizon_end": "2026-11-15",
+    "disrupted_location_id": "PLANT-A",
+    "disrupted_part_id": "MC-100",
+    "required_revision": "R2",
+    "need_by_date": "2026-11-05",
+    "protected_location_ids": [
+      "PLANT-B"
+    ]
+  },
+  "tables": {
+    "parts": [
+      {
+        "part_id": "MC-100",
+        "description": "Motor controller",
+        "unit": "each"
+      },
+      {
+        "part_id": "PS-200",
+        "description": "Power supply",
+        "unit": "each"
+      },
+      {
+        "part_id": "HX-100",
+        "description": "Robot X housing",
+        "unit": "each"
+      },
+      {
+        "part_id": "HY-100",
+        "description": "Robot Y housing",
+        "unit": "each"
+      },
+      {
+        "part_id": "SN-100",
+        "description": "Position sensor",
+        "unit": "each"
+      },
+      {
+        "part_id": "FU-100",
+        "description": "Fuse",
+        "unit": "each"
+      },
+      {
+        "part_id": "BL-100",
+        "description": "Bolt",
+        "unit": "each"
+      },
+      {
+        "part_id": "PC-100",
+        "description": "Interface board",
+        "unit": "each"
+      },
+      {
+        "part_id": "FN-100",
+        "description": "Cooling fan",
+        "unit": "each"
+      },
+      {
+        "part_id": "CB-100",
+        "description": "Cable assembly",
+        "unit": "each"
+      }
+    ],
+    "products": [
+      {
+        "product_id": "ROBOT-X",
+        "description": "Light assembly robot"
+      },
+      {
+        "product_id": "ROBOT-Y",
+        "description": "Inspection robot"
+      }
+    ],
+    "bom": [
+      {
+        "bom_id": "BOM-ROBOT-X-MC-100",
+        "product_id": "ROBOT-X",
+        "part_id": "MC-100",
+        "required_revision": "R2",
+        "qty_per_product": 2
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-PS-200",
+        "product_id": "ROBOT-X",
+        "part_id": "PS-200",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-HX-100",
+        "product_id": "ROBOT-X",
+        "part_id": "HX-100",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-SN-100",
+        "product_id": "ROBOT-X",
+        "part_id": "SN-100",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-FU-100",
+        "product_id": "ROBOT-X",
+        "part_id": "FU-100",
+        "required_revision": "R1",
+        "qty_per_product": 2
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-BL-100",
+        "product_id": "ROBOT-X",
+        "part_id": "BL-100",
+        "required_revision": "R1",
+        "qty_per_product": 4
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-PC-100",
+        "product_id": "ROBOT-X",
+        "part_id": "PC-100",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-FN-100",
+        "product_id": "ROBOT-X",
+        "part_id": "FN-100",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-X-CB-100",
+        "product_id": "ROBOT-X",
+        "part_id": "CB-100",
+        "required_revision": "R1",
+        "qty_per_product": 2
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-MC-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "MC-100",
+        "required_revision": "R2",
+        "qty_per_product": 2
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-PS-200",
+        "product_id": "ROBOT-Y",
+        "part_id": "PS-200",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-HY-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "HY-100",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-SN-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "SN-100",
+        "required_revision": "R1",
+        "qty_per_product": 2
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-FU-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "FU-100",
+        "required_revision": "R1",
+        "qty_per_product": 2
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-BL-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "BL-100",
+        "required_revision": "R1",
+        "qty_per_product": 6
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-PC-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "PC-100",
+        "required_revision": "R1",
+        "qty_per_product": 1
+      },
+      {
+        "bom_id": "BOM-ROBOT-Y-CB-100",
+        "product_id": "ROBOT-Y",
+        "part_id": "CB-100",
+        "required_revision": "R1",
+        "qty_per_product": 2
+      }
+    ],
+    "locations": [
+      {
+        "location_id": "PLANT-A",
+        "name": "Assembly Plant A",
+        "kind": "plant"
+      },
+      {
+        "location_id": "PLANT-B",
+        "name": "Assembly Plant B",
+        "kind": "plant"
+      },
+      {
+        "location_id": "WH-C",
+        "name": "Central Warehouse C",
+        "kind": "warehouse"
+      }
+    ],
+    "customers": [
+      {
+        "customer_id": "CUS-1",
+        "name": "Fictional Northstar Automation"
+      },
+      {
+        "customer_id": "CUS-2",
+        "name": "Fictional Harbor Manufacturing"
+      },
+      {
+        "customer_id": "CUS-3",
+        "name": "Fictional Cedar Inspection"
+      }
+    ],
+    "customer_orders": [
+      {
+        "customer_order_id": "CO-A-HIGH",
+        "customer_id": "CUS-1",
+        "product_id": "ROBOT-X",
+        "qty": 500,
+        "due_date": "2026-11-05",
+        "priority": 1,
+        "unit_value_cents": 18000
+      },
+      {
+        "customer_order_id": "CO-A-NORMAL",
+        "customer_id": "CUS-2",
+        "product_id": "ROBOT-X",
+        "qty": 400,
+        "due_date": "2026-11-05",
+        "priority": 2,
+        "unit_value_cents": 18000
+      },
+      {
+        "customer_order_id": "CO-B-HIGH",
+        "customer_id": "CUS-3",
+        "product_id": "ROBOT-Y",
+        "qty": 450,
+        "due_date": "2026-11-06",
+        "priority": 1,
+        "unit_value_cents": 24000
+      },
+      {
+        "customer_order_id": "CO-A-LATER",
+        "customer_id": "CUS-1",
+        "product_id": "ROBOT-X",
+        "qty": 450,
+        "due_date": "2026-11-10",
+        "priority": 2,
+        "unit_value_cents": 18000
+      }
+    ],
+    "production_orders": [
+      {
+        "production_order_id": "WO-A-HIGH",
+        "customer_order_id": "CO-A-HIGH",
+        "product_id": "ROBOT-X",
+        "location_id": "PLANT-A",
+        "production_date": "2026-11-05",
+        "qty": 500
+      },
+      {
+        "production_order_id": "WO-A-NORMAL",
+        "customer_order_id": "CO-A-NORMAL",
+        "product_id": "ROBOT-X",
+        "location_id": "PLANT-A",
+        "production_date": "2026-11-05",
+        "qty": 400
+      },
+      {
+        "production_order_id": "WO-B-HIGH",
+        "customer_order_id": "CO-B-HIGH",
+        "product_id": "ROBOT-Y",
+        "location_id": "PLANT-B",
+        "production_date": "2026-11-06",
+        "qty": 450
+      },
+      {
+        "production_order_id": "WO-A-LATER",
+        "customer_order_id": "CO-A-LATER",
+        "product_id": "ROBOT-X",
+        "location_id": "PLANT-A",
+        "production_date": "2026-11-10",
+        "qty": 450
+      }
+    ],
+    "inventory_snapshots": [
+      {
+        "inventory_id": "INV-PLANT-A-MC-100-R2",
+        "location_id": "PLANT-A",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 300,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-PS-200-R1",
+        "location_id": "PLANT-A",
+        "part_id": "PS-200",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-HX-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "HX-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-HY-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "HY-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-SN-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "SN-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-FU-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "FU-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-BL-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "BL-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-PC-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "PC-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-FN-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "FN-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-CB-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "CB-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-MC-100-R2",
+        "location_id": "PLANT-B",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 900,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-PS-200-R1",
+        "location_id": "PLANT-B",
+        "part_id": "PS-200",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-HX-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "HX-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-HY-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "HY-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-SN-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "SN-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-FU-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "FU-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-BL-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "BL-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-PC-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "PC-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-FN-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "FN-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-B-CB-100-R1",
+        "location_id": "PLANT-B",
+        "part_id": "CB-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 10000,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-WH-C-MC-100-R2",
+        "location_id": "WH-C",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 400,
+        "quality_hold_qty": 0
+      },
+      {
+        "inventory_id": "INV-PLANT-A-MC-100-R1",
+        "location_id": "PLANT-A",
+        "part_id": "MC-100",
+        "revision": "R1",
+        "snapshot_date": "2026-11-02",
+        "on_hand_qty": 200,
+        "quality_hold_qty": 50
+      }
+    ],
+    "suppliers": [
+      {
+        "supplier_id": "SUP-A",
+        "name": "Fictional Anchor Components"
+      },
+      {
+        "supplier_id": "SUP-B",
+        "name": "Fictional Bridge Electronics"
+      },
+      {
+        "supplier_id": "SUP-C",
+        "name": "Fictional Cobalt Express"
+      },
+      {
+        "supplier_id": "SUP-D",
+        "name": "Fictional Delta Legacy Parts"
+      }
+    ],
+    "supplier_qualifications": [
+      {
+        "qualification_id": "QUAL-A",
+        "supplier_id": "SUP-A",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "valid_from": "2026-01-01",
+        "valid_to": "2026-12-31",
+        "source_document_id": "DOC-QUAL-A"
+      },
+      {
+        "qualification_id": "QUAL-B",
+        "supplier_id": "SUP-B",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "valid_from": "2026-01-01",
+        "valid_to": "2026-12-31",
+        "source_document_id": "DOC-QUAL-B"
+      },
+      {
+        "qualification_id": "QUAL-C",
+        "supplier_id": "SUP-C",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "valid_from": "2026-01-01",
+        "valid_to": "2026-12-31",
+        "source_document_id": "DOC-QUAL-C"
+      },
+      {
+        "qualification_id": "QUAL-D",
+        "supplier_id": "SUP-D",
+        "part_id": "MC-100",
+        "revision": "R1",
+        "valid_from": "2026-01-01",
+        "valid_to": "2026-12-31",
+        "source_document_id": "DOC-QUAL-D"
+      }
+    ],
+    "purchase_orders": [
+      {
+        "po_id": "PO-18492",
+        "supplier_id": "SUP-A",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "destination_id": "PLANT-A",
+        "qty": 1500,
+        "original_eta": "2026-11-04"
+      },
+      {
+        "po_id": "PO-18500",
+        "supplier_id": "SUP-A",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "destination_id": "PLANT-A",
+        "qty": 900,
+        "original_eta": "2026-11-09"
+      }
+    ],
+    "inbound_deliveries": [
+      {
+        "delivery_id": "DEL-PO-18492",
+        "po_id": "PO-18492",
+        "qty": 1500,
+        "arrival_date": "2026-11-09",
+        "source_document_id": "DOC-PO18492"
+      },
+      {
+        "delivery_id": "DEL-PO-18500",
+        "po_id": "PO-18500",
+        "qty": 900,
+        "arrival_date": "2026-11-09",
+        "source_document_id": "DOC-ROUTINE"
+      }
+    ],
+    "supplier_offers": [
+      {
+        "offer_id": "OFFER-B-EARLY",
+        "supplier_id": "SUP-B",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "destination_id": "PLANT-A",
+        "available_qty": 700,
+        "arrival_date": "2026-11-04",
+        "accept_by": "2026-11-02",
+        "min_order_qty": 0,
+        "fixed_cost_cents": 10000,
+        "unit_premium_cents": 300,
+        "source_document_id": "DOC-QUOTE-B"
+      },
+      {
+        "offer_id": "OFFER-C-EXPRESS",
+        "supplier_id": "SUP-C",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "destination_id": "PLANT-A",
+        "available_qty": 800,
+        "arrival_date": "2026-11-05",
+        "accept_by": "2026-11-02",
+        "min_order_qty": 0,
+        "fixed_cost_cents": 20000,
+        "unit_premium_cents": 600,
+        "source_document_id": "DOC-QUOTE-C"
+      },
+      {
+        "offer_id": "OFFER-D-LEGACY",
+        "supplier_id": "SUP-D",
+        "part_id": "MC-100",
+        "revision": "R1",
+        "destination_id": "PLANT-A",
+        "available_qty": 2000,
+        "arrival_date": "2026-11-04",
+        "accept_by": "2026-11-02",
+        "min_order_qty": 0,
+        "fixed_cost_cents": 0,
+        "unit_premium_cents": 100,
+        "source_document_id": "DOC-QUOTE-D"
+      }
+    ],
+    "transfer_lanes": [
+      {
+        "lane_id": "LANE-B-A",
+        "source_id": "PLANT-B",
+        "destination_id": "PLANT-A",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "dispatch_date": "2026-11-02",
+        "transit_days": 1,
+        "capacity_qty": 900,
+        "fixed_cost_cents": 15000,
+        "unit_cost_cents": 50
+      },
+      {
+        "lane_id": "LANE-C-A",
+        "source_id": "WH-C",
+        "destination_id": "PLANT-A",
+        "part_id": "MC-100",
+        "revision": "R2",
+        "dispatch_date": "2026-11-02",
+        "transit_days": 2,
+        "capacity_qty": 400,
+        "fixed_cost_cents": 10000,
+        "unit_cost_cents": 100
+      }
+    ],
+    "source_documents": [
+      {
+        "document_id": "DOC-QUAL-A",
+        "kind": "qualification",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "SUP-A component approval",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nSupplier SUP-A is approved for MC-100 revision R2 from 2026-01-01 through 2026-12-31. Approval is specific to that revision. No substitution or deviation waiver is active.\n\nBest,\nMorgan Lee\nSupplier Quality Lead\nFictional Atlas Robotics — Supplier Quality\nmorgan.lee@atlas-robotics.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-qual-a@atlas-robotics.example>",
+        "from_name": "Morgan Lee",
+        "from_email": "morgan.lee@atlas-robotics.example",
+        "from_organization": "Fictional Atlas Robotics — Supplier Quality",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUAL-A",
+        "in_reply_to_message_id": "",
+        "subject": "SUP-A component approval"
+      },
+      {
+        "document_id": "DOC-QUAL-B",
+        "kind": "qualification",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "SUP-B component approval",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nSupplier SUP-B is approved for MC-100 revision R2 from 2026-01-01 through 2026-12-31. Approval is specific to that revision. No substitution or deviation waiver is active.\n\nBest,\nMorgan Lee\nSupplier Quality Lead\nFictional Atlas Robotics — Supplier Quality\nmorgan.lee@atlas-robotics.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-qual-b@atlas-robotics.example>",
+        "from_name": "Morgan Lee",
+        "from_email": "morgan.lee@atlas-robotics.example",
+        "from_organization": "Fictional Atlas Robotics — Supplier Quality",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUAL-B",
+        "in_reply_to_message_id": "",
+        "subject": "SUP-B component approval"
+      },
+      {
+        "document_id": "DOC-QUAL-C",
+        "kind": "qualification",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "SUP-C component approval",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nSupplier SUP-C is approved for MC-100 revision R2 from 2026-01-01 through 2026-12-31. Approval is specific to that revision. No substitution or deviation waiver is active.\n\nBest,\nMorgan Lee\nSupplier Quality Lead\nFictional Atlas Robotics — Supplier Quality\nmorgan.lee@atlas-robotics.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-qual-c@atlas-robotics.example>",
+        "from_name": "Morgan Lee",
+        "from_email": "morgan.lee@atlas-robotics.example",
+        "from_organization": "Fictional Atlas Robotics — Supplier Quality",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUAL-C",
+        "in_reply_to_message_id": "",
+        "subject": "SUP-C component approval"
+      },
+      {
+        "document_id": "DOC-QUAL-D",
+        "kind": "qualification",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "SUP-D component approval",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nSupplier SUP-D is approved for MC-100 revision R1 from 2026-01-01 through 2026-12-31. Approval is specific to that revision. No substitution or deviation waiver is active.\n\nBest,\nMorgan Lee\nSupplier Quality Lead\nFictional Atlas Robotics — Supplier Quality\nmorgan.lee@atlas-robotics.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-qual-d@atlas-robotics.example>",
+        "from_name": "Morgan Lee",
+        "from_email": "morgan.lee@atlas-robotics.example",
+        "from_organization": "Fictional Atlas Robotics — Supplier Quality",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUAL-D",
+        "in_reply_to_message_id": "",
+        "subject": "SUP-D component approval"
+      },
+      {
+        "document_id": "DOC-PO18492",
+        "kind": "supplier_update",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "PO-18492 delivery delay",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nFor PO-18492, all 1,500 MC-100 revision R2 controllers originally due November 4 will now arrive at Plant A on November 9, 2026. This replaces the previous commitment; it is not an additional shipment.\n\nBest,\nAlex Chen\nSupplier Account Manager\nFictional Anchor Components\nalex.chen@anchor-components.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-po18492@anchor-components.example>",
+        "from_name": "Alex Chen",
+        "from_email": "alex.chen@anchor-components.example",
+        "from_organization": "Fictional Anchor Components",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-PO18492",
+        "in_reply_to_message_id": "",
+        "subject": "PO-18492 delivery delay"
+      },
+      {
+        "document_id": "DOC-ROUTINE",
+        "kind": "supplier_update",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "PO-18500 routine replenishment",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nPO-18500 is a separate order for 900 MC-100 R2 controllers. All 900 will arrive at Plant A on November 9, 2026.\n\nBest,\nAlex Chen\nSupplier Account Manager\nFictional Anchor Components\nalex.chen@anchor-components.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-routine@anchor-components.example>",
+        "from_name": "Alex Chen",
+        "from_email": "alex.chen@anchor-components.example",
+        "from_organization": "Fictional Anchor Components",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-ROUTINE",
+        "in_reply_to_message_id": "",
+        "subject": "PO-18500 routine replenishment"
+      },
+      {
+        "document_id": "DOC-QUOTE-B",
+        "kind": "quote",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "Supplier B recovery quote",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nOffer OFFER-B-EARLY: 700 MC-100 R2 available for Plant A, arriving November 4, 2026. Accept by November 2. No minimum order. Incremental premium $3 per unit, plus one $100 handling fee. The normal component purchase price is excluded from this premium quote.\n\nBest,\nPriya Shah\nSupply Coordinator\nFictional Bridge Electronics\npriya.shah@bridge-electronics.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-quote-b@bridge-electronics.example>",
+        "from_name": "Priya Shah",
+        "from_email": "priya.shah@bridge-electronics.example",
+        "from_organization": "Fictional Bridge Electronics",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUOTE-B",
+        "in_reply_to_message_id": "",
+        "subject": "Supplier B recovery quote"
+      },
+      {
+        "document_id": "DOC-QUOTE-C",
+        "kind": "quote",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "Supplier C express quote",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nOffer OFFER-C-EXPRESS: up to 800 MC-100 R2 for Plant A, arriving November 5, 2026 before production. Accept by November 2. No minimum order. Incremental premium $6 per unit plus one $200 express fee.\n\nBest,\nDaniel Rivera\nExpedited Supply Manager\nFictional Cobalt Express\ndaniel.rivera@cobalt-express.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-quote-c@cobalt-express.example>",
+        "from_name": "Daniel Rivera",
+        "from_email": "daniel.rivera@cobalt-express.example",
+        "from_organization": "Fictional Cobalt Express",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUOTE-C",
+        "in_reply_to_message_id": "",
+        "subject": "Supplier C express quote"
+      },
+      {
+        "document_id": "DOC-QUOTE-D",
+        "kind": "quote",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "Supplier D legacy stock quote",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nOffer OFFER-D-LEGACY: 2,000 MC-100 revision R1, arriving Plant A November 4, 2026. Accept by November 2. Incremental premium $1 per unit, no fixed fee, no minimum order. This is R1 stock; no R2 stock is offered.\n\nBest,\nElena Brooks\nSales Representative\nFictional Delta Legacy Parts\nelena.brooks@delta-legacy.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-quote-d@delta-legacy.example>",
+        "from_name": "Elena Brooks",
+        "from_email": "elena.brooks@delta-legacy.example",
+        "from_organization": "Fictional Delta Legacy Parts",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-QUOTE-D",
+        "in_reply_to_message_id": "",
+        "subject": "Supplier D legacy stock quote"
+      },
+      {
+        "document_id": "DOC-POLICY",
+        "kind": "policy",
+        "issued_at": "2026-11-02T09:00:00",
+        "title": "Sample planning policy",
+        "body": "Hi Sam,\n\nSIMULATED DEVELOPMENT DATA — fictional companies and commitments.\n\nRobot X and Robot Y require MC-100 R2. All donor-plant production commitments must remain feasible. At the disrupted plant, minimize unfilled finished units in priority tier 1, then tier 2, then incremental recovery cost. Do not double-count BOM demand as daily consumption. Existing POs are not cancelled when recovery supply is purchased. Unfulfilled production remains backlog; do not silently reschedule it. Show order value exposed, not guaranteed revenue saved.\n\nBest,\nJordan Ellis\nOperations Director\nFictional Atlas Robotics — Operations\njordan.ellis@atlas-robotics.example",
+        "supersedes_document_id": "",
+        "message_id": "<donor_demand_increased.doc-policy@atlas-robotics.example>",
+        "from_name": "Jordan Ellis",
+        "from_email": "jordan.ellis@atlas-robotics.example",
+        "from_organization": "Fictional Atlas Robotics — Operations",
+        "to_name": "Sam Taylor",
+        "to_email": "sam.taylor@atlas-robotics.example",
+        "cc_name": "Riley Park",
+        "cc_email": "riley.park@atlas-robotics.example",
+        "thread_id": "donor_demand_increased:DOC-POLICY",
+        "in_reply_to_message_id": "",
+        "subject": "Sample planning policy"
+      }
+    ],
+    "supply_events": [
+      {
+        "event_id": "EVENT-001",
+        "po_id": "PO-18492",
+        "delivery_id": "DEL-PO-18492",
+        "event_type": "delay",
+        "previous_arrival_date": "2026-11-04",
+        "new_arrival_date": "2026-11-09",
+        "source_document_id": "DOC-PO18492"
+      }
+    ]
+  }
+}

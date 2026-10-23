@@ -1,0 +1,2 @@
+{"scenario_id": "baseline_delay", "po_id": "PO-18492", "supplier_id": "SUP-A", "part_id": "MC-100", "revision": "R2", "destination_id": "PLANT-A", "qty": 1500, "original_eta": "2026-11-04"}
+{"scenario_id": "baseline_delay", "po_id": "PO-18500", "supplier_id": "SUP-A", "part_id": "MC-100", "revision": "R2", "destination_id": "PLANT-A", "qty": 900, "original_eta": "2026-11-09"}

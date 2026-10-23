@@ -1,0 +1,1 @@
+{"scenario_id": "donor_demand_increased", "event_id": "EVENT-001", "po_id": "PO-18492", "delivery_id": "DEL-PO-18492", "event_type": "delay", "previous_arrival_date": "2026-11-04", "new_arrival_date": "2026-11-09", "source_document_id": "DOC-PO18492"}

@@ -1,0 +1,506 @@
+{
+  "parts": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Component identifier."
+    },
+    "description": {
+      "type": "VARCHAR",
+      "description": "Human-readable component name."
+    },
+    "unit": {
+      "type": "VARCHAR",
+      "description": "All sample quantities use each, never mixed units."
+    }
+  },
+  "products": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "product_id": {
+      "type": "VARCHAR",
+      "description": "Finished product identifier."
+    },
+    "description": {
+      "type": "VARCHAR",
+      "description": "Finished product name."
+    }
+  },
+  "bom": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "bom_id": {
+      "type": "VARCHAR",
+      "description": "Unique bill-of-materials line."
+    },
+    "product_id": {
+      "type": "VARCHAR",
+      "description": "Product consuming the component."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Component identifier."
+    },
+    "required_revision": {
+      "type": "VARCHAR",
+      "description": "Exact required revision; no substitutions in sample."
+    },
+    "qty_per_product": {
+      "type": "NUMBER(12,0)",
+      "description": "Whole components per finished unit."
+    }
+  },
+  "locations": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "location_id": {
+      "type": "VARCHAR",
+      "description": "Plant or warehouse identifier."
+    },
+    "name": {
+      "type": "VARCHAR",
+      "description": "Fictional location name."
+    },
+    "kind": {
+      "type": "VARCHAR",
+      "description": "plant or warehouse."
+    }
+  },
+  "customers": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "customer_id": {
+      "type": "VARCHAR",
+      "description": "Fictional customer identifier."
+    },
+    "name": {
+      "type": "VARCHAR",
+      "description": "Fictional company name."
+    }
+  },
+  "customer_orders": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "customer_order_id": {
+      "type": "VARCHAR",
+      "description": "One finished product per order in sample."
+    },
+    "customer_id": {
+      "type": "VARCHAR",
+      "description": "Customer identifier."
+    },
+    "product_id": {
+      "type": "VARCHAR",
+      "description": "Ordered product."
+    },
+    "qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Whole finished units."
+    },
+    "due_date": {
+      "type": "DATE",
+      "description": "Production-completion due date; outbound transport excluded."
+    },
+    "priority": {
+      "type": "NUMBER(12,0)",
+      "description": "1 = highest, 2 = normal; minimize unfilled units lexicographically."
+    },
+    "unit_value_cents": {
+      "type": "NUMBER(18,0)",
+      "description": "Order value in USD cents; exposure is not lost profit."
+    }
+  },
+  "production_orders": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "production_order_id": {
+      "type": "VARCHAR",
+      "description": "Scheduled production identifier."
+    },
+    "customer_order_id": {
+      "type": "VARCHAR",
+      "description": "Customer order fulfilled by this production."
+    },
+    "product_id": {
+      "type": "VARCHAR",
+      "description": "Finished product; must match the customer order."
+    },
+    "location_id": {
+      "type": "VARCHAR",
+      "description": "Producing plant."
+    },
+    "production_date": {
+      "type": "DATE",
+      "description": "All BOM components consumed on this day after receipts."
+    },
+    "qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Whole finished units; derive demand from this and BOM only."
+    }
+  },
+  "inventory_snapshots": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "inventory_id": {
+      "type": "VARCHAR",
+      "description": "Unique stock balance."
+    },
+    "location_id": {
+      "type": "VARCHAR",
+      "description": "Physical location."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Component identifier."
+    },
+    "revision": {
+      "type": "VARCHAR",
+      "description": "Physical part revision."
+    },
+    "snapshot_date": {
+      "type": "DATE",
+      "description": "Start-of-day opening stock, before receipts and consumption."
+    },
+    "on_hand_qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Physical whole units, includes quality-held units."
+    },
+    "quality_hold_qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Physical units unavailable for production or transfer."
+    }
+  },
+  "suppliers": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "supplier_id": {
+      "type": "VARCHAR",
+      "description": "Fictional supplier identifier."
+    },
+    "name": {
+      "type": "VARCHAR",
+      "description": "Fictional supplier name."
+    }
+  },
+  "supplier_qualifications": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "qualification_id": {
+      "type": "VARCHAR",
+      "description": "Qualification record."
+    },
+    "supplier_id": {
+      "type": "VARCHAR",
+      "description": "Qualified supplier."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Qualified component."
+    },
+    "revision": {
+      "type": "VARCHAR",
+      "description": "Qualified revision; approval does not imply other revisions."
+    },
+    "valid_from": {
+      "type": "DATE",
+      "description": "First valid day, inclusive."
+    },
+    "valid_to": {
+      "type": "DATE",
+      "description": "Last valid day, inclusive."
+    },
+    "source_document_id": {
+      "type": "VARCHAR",
+      "description": "Evidence for qualification."
+    }
+  },
+  "purchase_orders": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "po_id": {
+      "type": "VARCHAR",
+      "description": "Existing committed purchase order, not a recovery purchase."
+    },
+    "supplier_id": {
+      "type": "VARCHAR",
+      "description": "Supplier identifier."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Ordered component."
+    },
+    "revision": {
+      "type": "VARCHAR",
+      "description": "Ordered revision."
+    },
+    "destination_id": {
+      "type": "VARCHAR",
+      "description": "Receiving location."
+    },
+    "qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Total ordered quantity; delivery quantities sum to this."
+    },
+    "original_eta": {
+      "type": "DATE",
+      "description": "Original commitment retained for before/after analysis."
+    }
+  },
+  "inbound_deliveries": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "delivery_id": {
+      "type": "VARCHAR",
+      "description": "One current commitment per delivery lot; updates replace, not add."
+    },
+    "po_id": {
+      "type": "VARCHAR",
+      "description": "Existing purchase order."
+    },
+    "qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Committed whole units."
+    },
+    "arrival_date": {
+      "type": "DATE",
+      "description": "Current committed start-of-day arrival."
+    },
+    "source_document_id": {
+      "type": "VARCHAR",
+      "description": "Source of the current commitment."
+    }
+  },
+  "supplier_offers": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "offer_id": {
+      "type": "VARCHAR",
+      "description": "Independent optional recovery supply lot."
+    },
+    "supplier_id": {
+      "type": "VARCHAR",
+      "description": "Offering supplier."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Offered component."
+    },
+    "revision": {
+      "type": "VARCHAR",
+      "description": "Offered revision."
+    },
+    "destination_id": {
+      "type": "VARCHAR",
+      "description": "Quoted destination."
+    },
+    "available_qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Maximum new purchase quantity; not already on order."
+    },
+    "arrival_date": {
+      "type": "DATE",
+      "description": "Guaranteed arrival if accepted by the deadline."
+    },
+    "accept_by": {
+      "type": "DATE",
+      "description": "Last date on which this quote may be accepted."
+    },
+    "min_order_qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Minimum positive order; zero means no minimum."
+    },
+    "fixed_cost_cents": {
+      "type": "NUMBER(18,0)",
+      "description": "One incremental fee if any quantity is selected."
+    },
+    "unit_premium_cents": {
+      "type": "NUMBER(18,0)",
+      "description": "Incremental premium per component, not total purchase price."
+    },
+    "source_document_id": {
+      "type": "VARCHAR",
+      "description": "Current quote evidence."
+    }
+  },
+  "transfer_lanes": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "lane_id": {
+      "type": "VARCHAR",
+      "description": "One optional transfer shipment for this planning run."
+    },
+    "source_id": {
+      "type": "VARCHAR",
+      "description": "Donor location."
+    },
+    "destination_id": {
+      "type": "VARCHAR",
+      "description": "Receiving location."
+    },
+    "part_id": {
+      "type": "VARCHAR",
+      "description": "Component allowed on lane."
+    },
+    "revision": {
+      "type": "VARCHAR",
+      "description": "Required revision on lane."
+    },
+    "dispatch_date": {
+      "type": "DATE",
+      "description": "Stock removed from donor before its production this day."
+    },
+    "transit_days": {
+      "type": "NUMBER(12,0)",
+      "description": "Calendar days; arrival = dispatch + transit."
+    },
+    "capacity_qty": {
+      "type": "NUMBER(12,0)",
+      "description": "Shipment capacity, not proof that donor stock is spare."
+    },
+    "fixed_cost_cents": {
+      "type": "NUMBER(18,0)",
+      "description": "One fee if a transfer is selected."
+    },
+    "unit_cost_cents": {
+      "type": "NUMBER(18,0)",
+      "description": "Incremental shipping cost per component."
+    }
+  },
+  "source_documents": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "document_id": {
+      "type": "VARCHAR",
+      "description": "Evidence identifier."
+    },
+    "kind": {
+      "type": "VARCHAR",
+      "description": "supplier_update, quote, qualification, or policy."
+    },
+    "issued_at": {
+      "type": "TIMESTAMP_NTZ",
+      "description": "Fictional timestamp in UTC."
+    },
+    "title": {
+      "type": "VARCHAR",
+      "description": "Human-readable document title."
+    },
+    "body": {
+      "type": "VARCHAR",
+      "description": "Simulated evidence text; never real supplier correspondence."
+    },
+    "supersedes_document_id": {
+      "type": "VARCHAR",
+      "description": "Previous document ID, or empty string if none."
+    },
+    "message_id": {
+      "type": "VARCHAR",
+      "description": "RFC-style email Message-ID, unique across scenario snapshots."
+    },
+    "thread_id": {
+      "type": "VARCHAR",
+      "description": "Stable scenario-scoped conversation identifier."
+    },
+    "in_reply_to_message_id": {
+      "type": "VARCHAR",
+      "description": "Parent email Message-ID, or empty string for a new thread."
+    },
+    "from_name": {
+      "type": "VARCHAR",
+      "description": "Fictional sender's display name."
+    },
+    "from_email": {
+      "type": "VARCHAR",
+      "description": "Fictional sender address on a reserved .example domain."
+    },
+    "from_organization": {
+      "type": "VARCHAR",
+      "description": "Fictional company or internal team speaking."
+    },
+    "to_name": {
+      "type": "VARCHAR",
+      "description": "Primary recipient's display name."
+    },
+    "to_email": {
+      "type": "VARCHAR",
+      "description": "Primary recipient address."
+    },
+    "cc_name": {
+      "type": "VARCHAR",
+      "description": "Copied planner's display name."
+    },
+    "cc_email": {
+      "type": "VARCHAR",
+      "description": "Copied planner address."
+    },
+    "subject": {
+      "type": "VARCHAR",
+      "description": "Email subject; updates retain the original thread subject with Re:."
+    }
+  },
+  "supply_events": {
+    "scenario_id": {
+      "type": "VARCHAR",
+      "description": "Required when loading multiple scenarios; scope every join by this column."
+    },
+    "event_id": {
+      "type": "VARCHAR",
+      "description": "Disruption or confirmation event."
+    },
+    "po_id": {
+      "type": "VARCHAR",
+      "description": "Affected purchase order."
+    },
+    "delivery_id": {
+      "type": "VARCHAR",
+      "description": "Affected lot; event is not extra supply."
+    },
+    "event_type": {
+      "type": "VARCHAR",
+      "description": "delay or confirmation."
+    },
+    "previous_arrival_date": {
+      "type": "DATE",
+      "description": "Previous commitment."
+    },
+    "new_arrival_date": {
+      "type": "DATE",
+      "description": "Revised commitment."
+    },
+    "source_document_id": {
+      "type": "VARCHAR",
+      "description": "Event evidence."
+    }
+  }
+}

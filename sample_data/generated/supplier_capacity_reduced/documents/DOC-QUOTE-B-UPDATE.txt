@@ -1,0 +1,25 @@
+From: Priya Shah <priya.shah@bridge-electronics.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: Re: Supplier B recovery quote
+Date: Mon, 02 Nov 2026 11:00:00 +0000
+Message-ID: <supplier_capacity_reduced.doc-quote-b-update@bridge-electronics.example>
+In-Reply-To: <supplier_capacity_reduced.doc-quote-b@bridge-electronics.example>
+References: <supplier_capacity_reduced.doc-quote-b@bridge-electronics.example>
+X-Document-ID: DOC-QUOTE-B-UPDATE
+X-Thread-ID: supplier_capacity_reduced:DOC-QUOTE-B
+X-Simulated-Data: true
+Document: DOC-QUOTE-B-UPDATE
+Supersedes: DOC-QUOTE-B
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+Correction to our earlier 700-unit quote: only 400 MC-100 R2 controllers can arrive at Plant A on November 4, 2026 (OFFER-B-EARLY). The remaining 300 can arrive November 8 (OFFER-B-LATE). Accept either lot by November 2. Each lot has its own $100 handling fee and $3 per-unit incremental premium, with no minimum order. This replaces the previous offer; total availability is still 700, not 1,400.
+
+Best,
+Priya Shah
+Supply Coordinator
+Fictional Bridge Electronics
+priya.shah@bridge-electronics.example

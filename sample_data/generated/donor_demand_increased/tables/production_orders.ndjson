@@ -1,0 +1,4 @@
+{"scenario_id": "donor_demand_increased", "production_order_id": "WO-A-HIGH", "customer_order_id": "CO-A-HIGH", "product_id": "ROBOT-X", "location_id": "PLANT-A", "production_date": "2026-11-05", "qty": 500}
+{"scenario_id": "donor_demand_increased", "production_order_id": "WO-A-NORMAL", "customer_order_id": "CO-A-NORMAL", "product_id": "ROBOT-X", "location_id": "PLANT-A", "production_date": "2026-11-05", "qty": 400}
+{"scenario_id": "donor_demand_increased", "production_order_id": "WO-B-HIGH", "customer_order_id": "CO-B-HIGH", "product_id": "ROBOT-Y", "location_id": "PLANT-B", "production_date": "2026-11-06", "qty": 450}
+{"scenario_id": "donor_demand_increased", "production_order_id": "WO-A-LATER", "customer_order_id": "CO-A-LATER", "product_id": "ROBOT-X", "location_id": "PLANT-A", "production_date": "2026-11-10", "qty": 450}

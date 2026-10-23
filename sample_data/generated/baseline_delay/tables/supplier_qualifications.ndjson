@@ -1,0 +1,4 @@
+{"scenario_id": "baseline_delay", "qualification_id": "QUAL-A", "supplier_id": "SUP-A", "part_id": "MC-100", "revision": "R2", "valid_from": "2026-01-01", "valid_to": "2026-12-31", "source_document_id": "DOC-QUAL-A"}
+{"scenario_id": "baseline_delay", "qualification_id": "QUAL-B", "supplier_id": "SUP-B", "part_id": "MC-100", "revision": "R2", "valid_from": "2026-01-01", "valid_to": "2026-12-31", "source_document_id": "DOC-QUAL-B"}
+{"scenario_id": "baseline_delay", "qualification_id": "QUAL-C", "supplier_id": "SUP-C", "part_id": "MC-100", "revision": "R2", "valid_from": "2026-01-01", "valid_to": "2026-12-31", "source_document_id": "DOC-QUAL-C"}
+{"scenario_id": "baseline_delay", "qualification_id": "QUAL-D", "supplier_id": "SUP-D", "part_id": "MC-100", "revision": "R1", "valid_from": "2026-01-01", "valid_to": "2026-12-31", "source_document_id": "DOC-QUAL-D"}

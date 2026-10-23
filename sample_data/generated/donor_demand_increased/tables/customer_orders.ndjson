@@ -1,0 +1,4 @@
+{"scenario_id": "donor_demand_increased", "customer_order_id": "CO-A-HIGH", "customer_id": "CUS-1", "product_id": "ROBOT-X", "qty": 500, "due_date": "2026-11-05", "priority": 1, "unit_value_cents": 18000}
+{"scenario_id": "donor_demand_increased", "customer_order_id": "CO-A-NORMAL", "customer_id": "CUS-2", "product_id": "ROBOT-X", "qty": 400, "due_date": "2026-11-05", "priority": 2, "unit_value_cents": 18000}
+{"scenario_id": "donor_demand_increased", "customer_order_id": "CO-B-HIGH", "customer_id": "CUS-3", "product_id": "ROBOT-Y", "qty": 450, "due_date": "2026-11-06", "priority": 1, "unit_value_cents": 24000}
+{"scenario_id": "donor_demand_increased", "customer_order_id": "CO-A-LATER", "customer_id": "CUS-1", "product_id": "ROBOT-X", "qty": 450, "due_date": "2026-11-10", "priority": 2, "unit_value_cents": 18000}

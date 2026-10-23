@@ -1,0 +1,23 @@
+From: Alex Chen <alex.chen@anchor-components.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: PO-18492 delivery delay
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <supplier_capacity_reduced.doc-po18492@anchor-components.example>
+X-Document-ID: DOC-PO18492
+X-Thread-ID: supplier_capacity_reduced:DOC-PO18492
+X-Simulated-Data: true
+Document: DOC-PO18492
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+For PO-18492, all 1,500 MC-100 revision R2 controllers originally due November 4 will now arrive at Plant A on November 9, 2026. This replaces the previous commitment; it is not an additional shipment.
+
+Best,
+Alex Chen
+Supplier Account Manager
+Fictional Anchor Components
+alex.chen@anchor-components.example

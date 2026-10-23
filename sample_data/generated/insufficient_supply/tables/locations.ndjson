@@ -1,0 +1,3 @@
+{"scenario_id": "insufficient_supply", "location_id": "PLANT-A", "name": "Assembly Plant A", "kind": "plant"}
+{"scenario_id": "insufficient_supply", "location_id": "PLANT-B", "name": "Assembly Plant B", "kind": "plant"}
+{"scenario_id": "insufficient_supply", "location_id": "WH-C", "name": "Central Warehouse C", "kind": "warehouse"}

@@ -1,0 +1,25 @@
+From: Daniel Rivera <daniel.rivera@cobalt-express.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: Re: Supplier C express quote
+Date: Mon, 02 Nov 2026 11:15:00 +0000
+Message-ID: <insufficient_supply.doc-quote-c-update@cobalt-express.example>
+In-Reply-To: <insufficient_supply.doc-quote-c@cobalt-express.example>
+References: <insufficient_supply.doc-quote-c@cobalt-express.example>
+X-Document-ID: DOC-QUOTE-C-UPDATE
+X-Thread-ID: insufficient_supply:DOC-QUOTE-C
+X-Simulated-Data: true
+Document: DOC-QUOTE-C-UPDATE
+Supersedes: DOC-QUOTE-C
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+OFFER-C-EXPRESS now has a maximum of 200 MC-100 R2 controllers for Plant A, replacing the earlier maximum of 800. Arrival remains November 5, 2026 before production. Accept by November 2. No minimum. The incremental $6 per-unit premium and one $200 express fee are unchanged.
+
+Best,
+Daniel Rivera
+Expedited Supply Manager
+Fictional Cobalt Express
+daniel.rivera@cobalt-express.example

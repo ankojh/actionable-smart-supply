@@ -1,0 +1,2 @@
+{"scenario_id": "baseline_delay", "lane_id": "LANE-B-A", "source_id": "PLANT-B", "destination_id": "PLANT-A", "part_id": "MC-100", "revision": "R2", "dispatch_date": "2026-11-02", "transit_days": 1, "capacity_qty": 900, "fixed_cost_cents": 15000, "unit_cost_cents": 50}
+{"scenario_id": "baseline_delay", "lane_id": "LANE-C-A", "source_id": "WH-C", "destination_id": "PLANT-A", "part_id": "MC-100", "revision": "R2", "dispatch_date": "2026-11-02", "transit_days": 2, "capacity_qty": 400, "fixed_cost_cents": 10000, "unit_cost_cents": 100}

@@ -1,0 +1,23 @@
+From: Priya Shah <priya.shah@bridge-electronics.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: Supplier B recovery quote
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <no_disruption.doc-quote-b@bridge-electronics.example>
+X-Document-ID: DOC-QUOTE-B
+X-Thread-ID: no_disruption:DOC-QUOTE-B
+X-Simulated-Data: true
+Document: DOC-QUOTE-B
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+Offer OFFER-B-EARLY: 700 MC-100 R2 available for Plant A, arriving November 4, 2026. Accept by November 2. No minimum order. Incremental premium $3 per unit, plus one $100 handling fee. The normal component purchase price is excluded from this premium quote.
+
+Best,
+Priya Shah
+Supply Coordinator
+Fictional Bridge Electronics
+priya.shah@bridge-electronics.example

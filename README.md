@@ -5,6 +5,19 @@ Minimal React (Vite) + FastAPI scaffold wired to Snowflake. Product scope is TBD
 ```
 backend/   FastAPI app, Snowflake connector, config from env vars
 frontend/  React page that calls the backend and shows the Snowflake result
+sample_data/  Small synthetic planning scenarios, generator, validation, and test answers
+```
+
+## Development sample data
+
+See [sample_data/README.md](sample_data/README.md) for five reproducible supply-chain
+scenarios, data definitions, simulated supplier documents, and expected outcomes.
+The generated JSON is ready for local development; no Snowflake data is loaded.
+
+```bash
+python3 -m sample_data.generate
+python3 -m sample_data.validate
+python3 -m unittest discover -s sample_data/tests -v
 ```
 
 ## Backend

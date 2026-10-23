@@ -1,0 +1,10 @@
+{"scenario_id": "no_disruption", "part_id": "MC-100", "description": "Motor controller", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "PS-200", "description": "Power supply", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "HX-100", "description": "Robot X housing", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "HY-100", "description": "Robot Y housing", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "SN-100", "description": "Position sensor", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "FU-100", "description": "Fuse", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "BL-100", "description": "Bolt", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "PC-100", "description": "Interface board", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "FN-100", "description": "Cooling fan", "unit": "each"}
+{"scenario_id": "no_disruption", "part_id": "CB-100", "description": "Cable assembly", "unit": "each"}

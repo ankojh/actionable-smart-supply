@@ -1,0 +1,23 @@
+From: Morgan Lee <morgan.lee@atlas-robotics.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: SUP-A component approval
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <donor_demand_increased.doc-qual-a@atlas-robotics.example>
+X-Document-ID: DOC-QUAL-A
+X-Thread-ID: donor_demand_increased:DOC-QUAL-A
+X-Simulated-Data: true
+Document: DOC-QUAL-A
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+Supplier SUP-A is approved for MC-100 revision R2 from 2026-01-01 through 2026-12-31. Approval is specific to that revision. No substitution or deviation waiver is active.
+
+Best,
+Morgan Lee
+Supplier Quality Lead
+Fictional Atlas Robotics — Supplier Quality
+morgan.lee@atlas-robotics.example

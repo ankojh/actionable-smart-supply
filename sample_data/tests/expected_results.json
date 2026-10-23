@@ -1,0 +1,47 @@
+{
+  "baseline_delay": {
+    "shortage_qty": 1500,
+    "recovered_qty": 1500,
+    "remaining_shortage_qty": 0,
+    "recovery_cost_cents": 380000,
+    "action_quantities": {"LANE-B-A": 300, "LANE-C-A": 400, "OFFER-B-EARLY": 700, "OFFER-C-EXPRESS": 100},
+    "unfilled_production_units": {},
+    "unfilled_order_value_cents": 0
+  },
+  "supplier_capacity_reduced": {
+    "shortage_qty": 1500,
+    "recovered_qty": 1500,
+    "remaining_shortage_qty": 0,
+    "recovery_cost_cents": 470000,
+    "action_quantities": {"LANE-B-A": 300, "LANE-C-A": 400, "OFFER-B-EARLY": 400, "OFFER-C-EXPRESS": 400},
+    "unfilled_production_units": {},
+    "unfilled_order_value_cents": 0
+  },
+  "donor_demand_increased": {
+    "shortage_qty": 1500,
+    "recovered_qty": 1500,
+    "remaining_shortage_qty": 0,
+    "recovery_cost_cents": 530000,
+    "action_quantities": {"LANE-C-A": 400, "OFFER-B-EARLY": 700, "OFFER-C-EXPRESS": 400},
+    "unfilled_production_units": {},
+    "unfilled_order_value_cents": 0
+  },
+  "insufficient_supply": {
+    "shortage_qty": 1500,
+    "recovered_qty": 1300,
+    "remaining_shortage_qty": 200,
+    "recovery_cost_cents": 350000,
+    "action_quantities": {"LANE-B-A": 300, "LANE-C-A": 400, "OFFER-B-EARLY": 400, "OFFER-C-EXPRESS": 200},
+    "unfilled_production_units": {"WO-A-NORMAL": 100},
+    "unfilled_order_value_cents": 1800000
+  },
+  "no_disruption": {
+    "shortage_qty": 0,
+    "recovered_qty": 0,
+    "remaining_shortage_qty": 0,
+    "recovery_cost_cents": 0,
+    "action_quantities": {},
+    "unfilled_production_units": {},
+    "unfilled_order_value_cents": 0
+  }
+}

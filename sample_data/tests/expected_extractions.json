@@ -1,0 +1,33 @@
+[
+  {
+    "scenario_id": "supplier_capacity_reduced",
+    "document_id": "DOC-QUOTE-B-UPDATE",
+    "supersedes_document_id": "DOC-QUOTE-B",
+    "targets": [
+      {"table": "supplier_offers", "id": "OFFER-B-EARLY", "field": "available_qty", "value": 400, "source_span": "only 400 MC-100 R2 controllers can arrive at Plant A on November 4, 2026"},
+      {"table": "supplier_offers", "id": "OFFER-B-EARLY", "field": "arrival_date", "value": "2026-11-04", "source_span": "only 400 MC-100 R2 controllers can arrive at Plant A on November 4, 2026"},
+      {"table": "supplier_offers", "id": "OFFER-B-LATE", "field": "available_qty", "value": 300, "source_span": "The remaining 300 can arrive November 8 (OFFER-B-LATE)."},
+      {"table": "supplier_offers", "id": "OFFER-B-LATE", "field": "arrival_date", "value": "2026-11-08", "source_span": "The remaining 300 can arrive November 8 (OFFER-B-LATE)."},
+      {"table": "supplier_offers", "id": "OFFER-B-EARLY", "field": "fixed_cost_cents", "value": 10000, "source_span": "Each lot has its own $100 handling fee and $3 per-unit incremental premium"},
+      {"table": "supplier_offers", "id": "OFFER-B-EARLY", "field": "unit_premium_cents", "value": 300, "source_span": "Each lot has its own $100 handling fee and $3 per-unit incremental premium"}
+    ]
+  },
+  {
+    "scenario_id": "insufficient_supply",
+    "document_id": "DOC-QUOTE-C-UPDATE",
+    "supersedes_document_id": "DOC-QUOTE-C",
+    "targets": [
+      {"table": "supplier_offers", "id": "OFFER-C-EXPRESS", "field": "available_qty", "value": 200, "source_span": "maximum of 200 MC-100 R2 controllers for Plant A, replacing the earlier maximum of 800"},
+      {"table": "supplier_offers", "id": "OFFER-C-EXPRESS", "field": "arrival_date", "value": "2026-11-05", "source_span": "Arrival remains November 5, 2026 before production."},
+      {"table": "supplier_offers", "id": "OFFER-C-EXPRESS", "field": "unit_premium_cents", "value": 600, "source_span": "The incremental $6 per-unit premium and one $200 express fee are unchanged."}
+    ]
+  },
+  {
+    "scenario_id": "baseline_delay",
+    "document_id": "DOC-QUAL-D",
+    "supersedes_document_id": "",
+    "targets": [
+      {"table": "supplier_qualifications", "id": "QUAL-D", "field": "revision", "value": "R1", "source_span": "Supplier SUP-D is approved for MC-100 revision R1"}
+    ]
+  }
+]

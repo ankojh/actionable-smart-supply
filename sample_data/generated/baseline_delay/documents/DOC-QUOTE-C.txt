@@ -1,0 +1,23 @@
+From: Daniel Rivera <daniel.rivera@cobalt-express.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: Supplier C express quote
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <baseline_delay.doc-quote-c@cobalt-express.example>
+X-Document-ID: DOC-QUOTE-C
+X-Thread-ID: baseline_delay:DOC-QUOTE-C
+X-Simulated-Data: true
+Document: DOC-QUOTE-C
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+Offer OFFER-C-EXPRESS: up to 800 MC-100 R2 for Plant A, arriving November 5, 2026 before production. Accept by November 2. No minimum order. Incremental premium $6 per unit plus one $200 express fee.
+
+Best,
+Daniel Rivera
+Expedited Supply Manager
+Fictional Cobalt Express
+daniel.rivera@cobalt-express.example

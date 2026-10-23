@@ -1,0 +1,23 @@
+From: Elena Brooks <elena.brooks@delta-legacy.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: Supplier D legacy stock quote
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <donor_demand_increased.doc-quote-d@delta-legacy.example>
+X-Document-ID: DOC-QUOTE-D
+X-Thread-ID: donor_demand_increased:DOC-QUOTE-D
+X-Simulated-Data: true
+Document: DOC-QUOTE-D
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+Offer OFFER-D-LEGACY: 2,000 MC-100 revision R1, arriving Plant A November 4, 2026. Accept by November 2. Incremental premium $1 per unit, no fixed fee, no minimum order. This is R1 stock; no R2 stock is offered.
+
+Best,
+Elena Brooks
+Sales Representative
+Fictional Delta Legacy Parts
+elena.brooks@delta-legacy.example

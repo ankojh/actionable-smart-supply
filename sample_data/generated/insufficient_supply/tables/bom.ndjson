@@ -1,0 +1,17 @@
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-MC-100", "product_id": "ROBOT-X", "part_id": "MC-100", "required_revision": "R2", "qty_per_product": 2}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-PS-200", "product_id": "ROBOT-X", "part_id": "PS-200", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-HX-100", "product_id": "ROBOT-X", "part_id": "HX-100", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-SN-100", "product_id": "ROBOT-X", "part_id": "SN-100", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-FU-100", "product_id": "ROBOT-X", "part_id": "FU-100", "required_revision": "R1", "qty_per_product": 2}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-BL-100", "product_id": "ROBOT-X", "part_id": "BL-100", "required_revision": "R1", "qty_per_product": 4}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-PC-100", "product_id": "ROBOT-X", "part_id": "PC-100", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-FN-100", "product_id": "ROBOT-X", "part_id": "FN-100", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-X-CB-100", "product_id": "ROBOT-X", "part_id": "CB-100", "required_revision": "R1", "qty_per_product": 2}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-MC-100", "product_id": "ROBOT-Y", "part_id": "MC-100", "required_revision": "R2", "qty_per_product": 2}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-PS-200", "product_id": "ROBOT-Y", "part_id": "PS-200", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-HY-100", "product_id": "ROBOT-Y", "part_id": "HY-100", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-SN-100", "product_id": "ROBOT-Y", "part_id": "SN-100", "required_revision": "R1", "qty_per_product": 2}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-FU-100", "product_id": "ROBOT-Y", "part_id": "FU-100", "required_revision": "R1", "qty_per_product": 2}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-BL-100", "product_id": "ROBOT-Y", "part_id": "BL-100", "required_revision": "R1", "qty_per_product": 6}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-PC-100", "product_id": "ROBOT-Y", "part_id": "PC-100", "required_revision": "R1", "qty_per_product": 1}
+{"scenario_id": "insufficient_supply", "bom_id": "BOM-ROBOT-Y-CB-100", "product_id": "ROBOT-Y", "part_id": "CB-100", "required_revision": "R1", "qty_per_product": 2}

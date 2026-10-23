@@ -1,0 +1,23 @@
+From: Alex Chen <alex.chen@anchor-components.example>
+To: Sam Taylor <sam.taylor@atlas-robotics.example>
+Cc: Riley Park <riley.park@atlas-robotics.example>
+Subject: PO-18500 routine replenishment
+Date: Mon, 02 Nov 2026 09:00:00 +0000
+Message-ID: <supplier_capacity_reduced.doc-routine@anchor-components.example>
+X-Document-ID: DOC-ROUTINE
+X-Thread-ID: supplier_capacity_reduced:DOC-ROUTINE
+X-Simulated-Data: true
+Document: DOC-ROUTINE
+Supersedes: (none)
+
+Hi Sam,
+
+SIMULATED DEVELOPMENT DATA — fictional companies and commitments.
+
+PO-18500 is a separate order for 900 MC-100 R2 controllers. All 900 will arrive at Plant A on November 9, 2026.
+
+Best,
+Alex Chen
+Supplier Account Manager
+Fictional Anchor Components
+alex.chen@anchor-components.example

@@ -1,0 +1,127 @@
+{
+  "dataset_version": "1.1.0",
+  "synthetic": true,
+  "profile": "development_sample",
+  "scenarios": [
+    {
+      "scenario_id": "baseline_delay",
+      "description": "A late purchase order creates a 1,500-controller shortage at Plant A.",
+      "dataset_path": "baseline_delay/dataset.json",
+      "table_counts": {
+        "parts": 10,
+        "products": 2,
+        "bom": 17,
+        "locations": 3,
+        "customers": 3,
+        "customer_orders": 4,
+        "production_orders": 4,
+        "inventory_snapshots": 22,
+        "suppliers": 4,
+        "supplier_qualifications": 4,
+        "purchase_orders": 2,
+        "inbound_deliveries": 2,
+        "supplier_offers": 3,
+        "transfer_lanes": 2,
+        "source_documents": 10,
+        "supply_events": 1
+      },
+      "sha256": "de32b0645f358cf1598e3385b50a21878d284c35b037558597ea917883237ef6"
+    },
+    {
+      "scenario_id": "supplier_capacity_reduced",
+      "description": "Supplier B can deliver only 400 on time; 300 arrive too late.",
+      "dataset_path": "supplier_capacity_reduced/dataset.json",
+      "table_counts": {
+        "parts": 10,
+        "products": 2,
+        "bom": 17,
+        "locations": 3,
+        "customers": 3,
+        "customer_orders": 4,
+        "production_orders": 4,
+        "inventory_snapshots": 22,
+        "suppliers": 4,
+        "supplier_qualifications": 4,
+        "purchase_orders": 2,
+        "inbound_deliveries": 2,
+        "supplier_offers": 4,
+        "transfer_lanes": 2,
+        "source_documents": 11,
+        "supply_events": 1
+      },
+      "sha256": "e89ea11b61ff457dd9adeb5bb938def36ad5890f782a80304f6c537e8a50e48c"
+    },
+    {
+      "scenario_id": "donor_demand_increased",
+      "description": "Plant B needs all 900 controllers for its own committed orders.",
+      "dataset_path": "donor_demand_increased/dataset.json",
+      "table_counts": {
+        "parts": 10,
+        "products": 2,
+        "bom": 17,
+        "locations": 3,
+        "customers": 3,
+        "customer_orders": 4,
+        "production_orders": 4,
+        "inventory_snapshots": 22,
+        "suppliers": 4,
+        "supplier_qualifications": 4,
+        "purchase_orders": 2,
+        "inbound_deliveries": 2,
+        "supplier_offers": 3,
+        "transfer_lanes": 2,
+        "source_documents": 10,
+        "supply_events": 1
+      },
+      "sha256": "61ae49be15ee60edc7d43869833f3c8bbf5c87a7235f8cf39aa9b561ee3ae81e"
+    },
+    {
+      "scenario_id": "insufficient_supply",
+      "description": "Supplier B provides 400 on time and express Supplier C only 200.",
+      "dataset_path": "insufficient_supply/dataset.json",
+      "table_counts": {
+        "parts": 10,
+        "products": 2,
+        "bom": 17,
+        "locations": 3,
+        "customers": 3,
+        "customer_orders": 4,
+        "production_orders": 4,
+        "inventory_snapshots": 22,
+        "suppliers": 4,
+        "supplier_qualifications": 4,
+        "purchase_orders": 2,
+        "inbound_deliveries": 2,
+        "supplier_offers": 4,
+        "transfer_lanes": 2,
+        "source_documents": 12,
+        "supply_events": 1
+      },
+      "sha256": "58e3c298255e92af3c32de180559ce3d547a2b56aaab7b58db02c35bac7a339f"
+    },
+    {
+      "scenario_id": "no_disruption",
+      "description": "Control: the original purchase order arrives on November 4 as promised.",
+      "dataset_path": "no_disruption/dataset.json",
+      "table_counts": {
+        "parts": 10,
+        "products": 2,
+        "bom": 17,
+        "locations": 3,
+        "customers": 3,
+        "customer_orders": 4,
+        "production_orders": 4,
+        "inventory_snapshots": 22,
+        "suppliers": 4,
+        "supplier_qualifications": 4,
+        "purchase_orders": 2,
+        "inbound_deliveries": 2,
+        "supplier_offers": 3,
+        "transfer_lanes": 2,
+        "source_documents": 10,
+        "supply_events": 1
+      },
+      "sha256": "10ca6d858d722d5c74bb418588d4b0e9baa77437ece6e01b50a94208e0afd0bf"
+    }
+  ]
+}
