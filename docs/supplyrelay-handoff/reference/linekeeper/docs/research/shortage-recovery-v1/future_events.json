@@ -1,0 +1,63 @@
+{
+  "provenance": "Simulated future supplier replies. They do not exist in the initial evidence snapshot. A test operator may inject them as dated events after an evidence request; no message is actually sent. The event schedule is fixed independently of whether an agent proposes a mistaken plan.",
+  "events": [
+    {
+      "id": "EV-EXPRESS",
+      "available_at": "2026-11-02T11:00:00",
+      "document": {
+        "id": "DOC-CONFIRM-EXPRESS",
+        "supersedes_quantity_claim": "OFFER-EXPRESS",
+        "text": "SIMULATED supplier reply: we can reserve only 20 DRV-24-B revision B drivers for usable receipt at Plant A by 08:00 Thursday November 5. The remaining catalog quantity is not available for this delivery. Price $16 each plus $60 freight; MOQ and multiple 20. Reservation expires Tuesday November 3 at 12:00."
+      },
+      "validated_fields": {
+        "part": "DRV-24-B",
+        "revision": "B",
+        "confirmed_max_quantity": 20,
+        "usable_receipt": "2026-11-05T08:00:00",
+        "unit_price_usd": 16,
+        "freight_usd": 60,
+        "moq": 20,
+        "multiple": 20,
+        "reservation_deadline": "2026-11-03T12:00:00"
+      }
+    },
+    {
+      "id": "EV-STANDARD",
+      "available_at": "2026-11-02T12:00:00",
+      "document": {
+        "id": "DOC-CONFIRM-STANDARD",
+        "text": "SIMULATED supplier reply: up to 80 DRV-24-B revision B drivers can be reserved at $12 each plus $40 freight, MOQ and multiple 20. Standard delivery will make them usable at Plant A by 08:00 Friday November 6; we cannot commit to Thursday receipt. Reservation expires Tuesday November 3 at 12:00."
+      },
+      "validated_fields": {
+        "part": "DRV-24-B",
+        "revision": "B",
+        "confirmed_max_quantity": 80,
+        "usable_receipt": "2026-11-06T08:00:00",
+        "unit_price_usd": 12,
+        "freight_usd": 40,
+        "moq": 20,
+        "multiple": 20,
+        "reservation_deadline": "2026-11-03T12:00:00"
+      }
+    },
+    {
+      "id": "EV-RESERVE",
+      "available_at": "2026-11-02T12:00:00",
+      "document": {
+        "id": "DOC-CONFIRM-RESERVE",
+        "text": "SIMULATED supplier reply: up to 200 DRV-24-B revision B drivers are available for reservation with usable receipt at Plant A Thursday November 5 at 08:00. MOQ 100, multiples of 20, price $13 each plus $100 freight. Reservation expires Tuesday November 3 at 12:00."
+      },
+      "validated_fields": {
+        "part": "DRV-24-B",
+        "revision": "B",
+        "confirmed_max_quantity": 200,
+        "usable_receipt": "2026-11-05T08:00:00",
+        "unit_price_usd": 13,
+        "freight_usd": 100,
+        "moq": 100,
+        "multiple": 20,
+        "reservation_deadline": "2026-11-03T12:00:00"
+      }
+    }
+  ]
+}

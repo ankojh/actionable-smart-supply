@@ -1,0 +1,2530 @@
+{
+  "status": "OFFLINE_SYNTHETIC_OUTCOME_EVALUATION_NOT_AN_AGENT_TRIAL",
+  "assumptions": [
+    "Future supplier fixture confirmations are supplied to this evaluator only.",
+    "No actual orders or transfers are executed; selected plan receipts are hypothetical.",
+    "Production follows FIFO; no overtime, resequencing or early starts.",
+    "One-day delay means one Monday-Friday business day, with no holidays.",
+    "Each stress dimension is zero or one business day late; primary PO stays unchanged.",
+    "All 16 stress cases are design points, not observations or probabilities.",
+    "Expenditure is paid even if delayed; no penalties, credits or profit assumed.",
+    "No model, Snowflake, external API or live agent execution was tested."
+  ],
+  "enumeration": {
+    "feasible_plans": 2442,
+    "plans_at_or_below_1500": 23,
+    "minimum_nominal_expenditure_usd": 1220,
+    "nominal_cost_optimality_gap_percent": 0
+  },
+  "optional_resilience_policy": {
+    "scope": "Benchmark-only policy; the initial case policy remains unchanged.",
+    "objective": [
+      "Require nominal full recovery and new expenditure at or below $1,500.",
+      "Maximize full recovery coverage of the predefined 16-case delay grid.",
+      "Then minimize expenditure, excess quantity and supplier purchase count."
+    ],
+    "selected_quantities": {
+      "warehouse": 20,
+      "standard": 0,
+      "express": 0,
+      "reserve": 100
+    },
+    "selected_expenditure_usd": 1480,
+    "stress_full_recovery_cases": 8,
+    "selection_warning": "Stress coverage is not an estimated real-world probability."
+  },
+  "plans": {
+    "no_recovery": {
+      "quantities": {
+        "warehouse": 0,
+        "standard": 0,
+        "express": 0,
+        "reserve": 0
+      },
+      "new_recovery_expenditure_usd": 0,
+      "nominal": {
+        "on_time_robots": 90,
+        "on_time_robot_fraction": 0.6,
+        "whole_orders_on_time": 3,
+        "full_recovery": false,
+        "schedule": [
+          {
+            "start_date": "2026-11-02",
+            "robots_started": 30,
+            "closing_stock": 120
+          },
+          {
+            "start_date": "2026-11-03",
+            "robots_started": 30,
+            "closing_stock": 60
+          },
+          {
+            "start_date": "2026-11-04",
+            "robots_started": 30,
+            "closing_stock": 0
+          },
+          {
+            "start_date": "2026-11-05",
+            "robots_started": 0,
+            "closing_stock": 0
+          },
+          {
+            "start_date": "2026-11-06",
+            "robots_started": 0,
+            "closing_stock": 0
+          },
+          {
+            "start_date": "2026-11-09",
+            "robots_started": 30,
+            "closing_stock": 180
+          },
+          {
+            "start_date": "2026-11-10",
+            "robots_started": 30,
+            "closing_stock": 120
+          }
+        ]
+      },
+      "one_source_one_day_late": {},
+      "stress_grid": {
+        "cases": 16,
+        "full_recovery_cases": 0,
+        "worst_on_time_robots": 90,
+        "unweighted_mean_on_time_robots": 90.0,
+        "rows": [
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 180
+              },
+              {
+                "start_date": "2026-11-10",
+                "robots_started": 30,
+                "closing_stock": 120
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "minimum_nominal_cost": {
+      "quantities": {
+        "warehouse": 40,
+        "standard": 60,
+        "express": 20,
+        "reserve": 0
+      },
+      "new_recovery_expenditure_usd": 1220,
+      "nominal": {
+        "on_time_robots": 150,
+        "on_time_robot_fraction": 1.0,
+        "whole_orders_on_time": 5,
+        "full_recovery": true,
+        "schedule": [
+          {
+            "start_date": "2026-11-02",
+            "robots_started": 30,
+            "closing_stock": 120
+          },
+          {
+            "start_date": "2026-11-03",
+            "robots_started": 30,
+            "closing_stock": 60
+          },
+          {
+            "start_date": "2026-11-04",
+            "robots_started": 30,
+            "closing_stock": 0
+          },
+          {
+            "start_date": "2026-11-05",
+            "robots_started": 30,
+            "closing_stock": 0
+          },
+          {
+            "start_date": "2026-11-06",
+            "robots_started": 30,
+            "closing_stock": 0
+          }
+        ]
+      },
+      "one_source_one_day_late": {
+        "warehouse": {
+          "on_time_robots": 110,
+          "on_time_robot_fraction": 0.7333333333333333,
+          "whole_orders_on_time": 3,
+          "full_recovery": false,
+          "schedule": [
+            {
+              "start_date": "2026-11-02",
+              "robots_started": 30,
+              "closing_stock": 120
+            },
+            {
+              "start_date": "2026-11-03",
+              "robots_started": 30,
+              "closing_stock": 60
+            },
+            {
+              "start_date": "2026-11-04",
+              "robots_started": 30,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-05",
+              "robots_started": 10,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-06",
+              "robots_started": 30,
+              "closing_stock": 40
+            },
+            {
+              "start_date": "2026-11-09",
+              "robots_started": 20,
+              "closing_stock": 240
+            }
+          ]
+        },
+        "standard": {
+          "on_time_robots": 120,
+          "on_time_robot_fraction": 0.8,
+          "whole_orders_on_time": 4,
+          "full_recovery": false,
+          "schedule": [
+            {
+              "start_date": "2026-11-02",
+              "robots_started": 30,
+              "closing_stock": 120
+            },
+            {
+              "start_date": "2026-11-03",
+              "robots_started": 30,
+              "closing_stock": 60
+            },
+            {
+              "start_date": "2026-11-04",
+              "robots_started": 30,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-05",
+              "robots_started": 30,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-06",
+              "robots_started": 0,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-09",
+              "robots_started": 30,
+              "closing_stock": 240
+            }
+          ]
+        },
+        "express": {
+          "on_time_robots": 130,
+          "on_time_robot_fraction": 0.8666666666666667,
+          "whole_orders_on_time": 3,
+          "full_recovery": false,
+          "schedule": [
+            {
+              "start_date": "2026-11-02",
+              "robots_started": 30,
+              "closing_stock": 120
+            },
+            {
+              "start_date": "2026-11-03",
+              "robots_started": 30,
+              "closing_stock": 60
+            },
+            {
+              "start_date": "2026-11-04",
+              "robots_started": 30,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-05",
+              "robots_started": 20,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-06",
+              "robots_started": 30,
+              "closing_stock": 20
+            },
+            {
+              "start_date": "2026-11-09",
+              "robots_started": 10,
+              "closing_stock": 240
+            }
+          ]
+        }
+      },
+      "stress_grid": {
+        "cases": 16,
+        "full_recovery_cases": 2,
+        "worst_on_time_robots": 90,
+        "unweighted_mean_on_time_robots": 112.5,
+        "rows": [
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 130,
+            "on_time_robot_fraction": 0.8666666666666667,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 20,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 20
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 10,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 130,
+            "on_time_robot_fraction": 0.8666666666666667,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 20,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 20
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 10,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 120,
+            "on_time_robot_fraction": 0.8,
+            "whole_orders_on_time": 4,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 120,
+            "on_time_robot_fraction": 0.8,
+            "whole_orders_on_time": 4,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 20,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 20,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 20,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 20,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 100,
+            "on_time_robot_fraction": 0.6666666666666666,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 20,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 100,
+            "on_time_robot_fraction": 0.6666666666666666,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 20,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "reserve_fallback": {
+      "quantities": {
+        "warehouse": 20,
+        "standard": 0,
+        "express": 0,
+        "reserve": 100
+      },
+      "new_recovery_expenditure_usd": 1480,
+      "nominal": {
+        "on_time_robots": 150,
+        "on_time_robot_fraction": 1.0,
+        "whole_orders_on_time": 5,
+        "full_recovery": true,
+        "schedule": [
+          {
+            "start_date": "2026-11-02",
+            "robots_started": 30,
+            "closing_stock": 120
+          },
+          {
+            "start_date": "2026-11-03",
+            "robots_started": 30,
+            "closing_stock": 60
+          },
+          {
+            "start_date": "2026-11-04",
+            "robots_started": 30,
+            "closing_stock": 0
+          },
+          {
+            "start_date": "2026-11-05",
+            "robots_started": 30,
+            "closing_stock": 60
+          },
+          {
+            "start_date": "2026-11-06",
+            "robots_started": 30,
+            "closing_stock": 0
+          }
+        ]
+      },
+      "one_source_one_day_late": {
+        "warehouse": {
+          "on_time_robots": 150,
+          "on_time_robot_fraction": 1.0,
+          "whole_orders_on_time": 5,
+          "full_recovery": true,
+          "schedule": [
+            {
+              "start_date": "2026-11-02",
+              "robots_started": 30,
+              "closing_stock": 120
+            },
+            {
+              "start_date": "2026-11-03",
+              "robots_started": 30,
+              "closing_stock": 60
+            },
+            {
+              "start_date": "2026-11-04",
+              "robots_started": 30,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-05",
+              "robots_started": 30,
+              "closing_stock": 40
+            },
+            {
+              "start_date": "2026-11-06",
+              "robots_started": 30,
+              "closing_stock": 0
+            }
+          ]
+        },
+        "reserve": {
+          "on_time_robots": 110,
+          "on_time_robot_fraction": 0.7333333333333333,
+          "whole_orders_on_time": 3,
+          "full_recovery": false,
+          "schedule": [
+            {
+              "start_date": "2026-11-02",
+              "robots_started": 30,
+              "closing_stock": 120
+            },
+            {
+              "start_date": "2026-11-03",
+              "robots_started": 30,
+              "closing_stock": 60
+            },
+            {
+              "start_date": "2026-11-04",
+              "robots_started": 30,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-05",
+              "robots_started": 10,
+              "closing_stock": 0
+            },
+            {
+              "start_date": "2026-11-06",
+              "robots_started": 30,
+              "closing_stock": 40
+            },
+            {
+              "start_date": "2026-11-09",
+              "robots_started": 20,
+              "closing_stock": 240
+            }
+          ]
+        }
+      },
+      "stress_grid": {
+        "cases": 16,
+        "full_recovery_cases": 8,
+        "worst_on_time_robots": 90,
+        "unweighted_mean_on_time_robots": 125.0,
+        "rows": [
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 20,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 0,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 20,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 20,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 0,
+              "standard": 1,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 110,
+            "on_time_robot_fraction": 0.7333333333333333,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 10,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 20,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 0,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 0,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 0,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 1,
+              "reserve": 0
+            },
+            "on_time_robots": 150,
+            "on_time_robot_fraction": 1.0,
+            "whole_orders_on_time": 5,
+            "full_recovery": true,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 30,
+                "closing_stock": 40
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 0
+              }
+            ]
+          },
+          {
+            "business_day_delays": {
+              "warehouse": 1,
+              "standard": 1,
+              "express": 1,
+              "reserve": 1
+            },
+            "on_time_robots": 90,
+            "on_time_robot_fraction": 0.6,
+            "whole_orders_on_time": 3,
+            "full_recovery": false,
+            "schedule": [
+              {
+                "start_date": "2026-11-02",
+                "robots_started": 30,
+                "closing_stock": 120
+              },
+              {
+                "start_date": "2026-11-03",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-04",
+                "robots_started": 30,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-05",
+                "robots_started": 0,
+                "closing_stock": 0
+              },
+              {
+                "start_date": "2026-11-06",
+                "robots_started": 30,
+                "closing_stock": 60
+              },
+              {
+                "start_date": "2026-11-09",
+                "robots_started": 30,
+                "closing_stock": 240
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

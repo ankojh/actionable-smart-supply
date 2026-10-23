@@ -1,0 +1,83 @@
+{
+  "access": "EVALUATOR_ONLY: never provide this file to an agent under test",
+  "checks": {
+    "plan_robots": 150,
+    "drivers_required": 300,
+    "plant_usable": 180,
+    "uncovered_drivers": 120,
+    "first_unmet_start": "2026-11-05T09:00:00",
+    "baseline_contracted_robots_at_risk": 60,
+    "warehouse_transferable": 40,
+    "external_drivers_required": 80,
+    "external_minimum_by_thursday": 20,
+    "external_additional_by_friday": 60,
+    "express_confirmed_max": 20
+  },
+  "optimal_verified_plan": {
+    "warehouse_drivers": 40,
+    "standard_drivers": 60,
+    "express_drivers": 20,
+    "reserve_drivers": 0,
+    "external_cash_usd": 1140,
+    "transfer_charge_usd": 80,
+    "recovery_expenditure_usd": 1220,
+    "excess_drivers": 0
+  },
+  "schedule": [
+    {
+      "start_date": "2026-11-02",
+      "usable_receipts": 0,
+      "drivers_consumed": 60,
+      "closing_usable_inventory": 120,
+      "robots_started": 30,
+      "ship_date": "2026-11-04"
+    },
+    {
+      "start_date": "2026-11-03",
+      "usable_receipts": 0,
+      "drivers_consumed": 60,
+      "closing_usable_inventory": 60,
+      "robots_started": 30,
+      "ship_date": "2026-11-05"
+    },
+    {
+      "start_date": "2026-11-04",
+      "usable_receipts": 0,
+      "drivers_consumed": 60,
+      "closing_usable_inventory": 0,
+      "robots_started": 30,
+      "ship_date": "2026-11-06"
+    },
+    {
+      "start_date": "2026-11-05",
+      "usable_receipts": 60,
+      "drivers_consumed": 60,
+      "closing_usable_inventory": 0,
+      "robots_started": 30,
+      "ship_date": "2026-11-09"
+    },
+    {
+      "start_date": "2026-11-06",
+      "usable_receipts": 60,
+      "drivers_consumed": 60,
+      "closing_usable_inventory": 0,
+      "robots_started": 30,
+      "ship_date": "2026-11-10"
+    }
+  ],
+  "original_po_obligation_usd": 2400,
+  "enumerated_feasible_combinations": 2442,
+  "cost_definition": "New purchase cash plus supplier freight and internal transfer charge. Not premium-only, not net economic benefit; original PO obligation remains separate.",
+  "planning_boundary": "No executable full-recovery plan is certified from the initial quotes alone.",
+  "review_limit_feasible_combinations": 23,
+  "reserve_only_external_fallback": {
+    "warehouse_drivers": 20,
+    "standard_drivers": 0,
+    "express_drivers": 0,
+    "reserve_drivers": 100,
+    "external_cash_usd": 1400,
+    "transfer_charge_usd": 80,
+    "recovery_expenditure_usd": 1480,
+    "excess_drivers": 0
+  }
+}
