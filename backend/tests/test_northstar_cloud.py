@@ -50,7 +50,8 @@ class CloudSource(SnowflakeNorthStarSource):
 
 
 @pytest.fixture
-def source():
+def source(monkeypatch):
+    monkeypatch.setenv('PROJECT_NORTHSTAR_AI_PROVIDER', 'ai_complete')
     return CloudSource()
 
 
@@ -199,3 +200,207 @@ def test_connector_session_preserves_domain_conflict(monkeypatch):
         with source.session():
             raise Conflict('stale')
     assert source.conn is None
+
+
+
+class NativeAgents:
+    """Separate managed-agent responses, including actual client tool callbacks."""
+    def __init__(self, source, monkeypatch):
+        from app.northstar_agent import AGENT_NAMES
+        self.names = AGENT_NAMES
+        self.calls, self.threads, self.journal = [], [], []
+        self.positions = dict.fromkeys(AGENT_NAMES, 0)
+        self.overrides = {}
+        monkeypatch.setenv('PROJECT_NORTHSTAR_AI_PROVIDER', 'cortex_agent')
+        monkeypatch.setattr(SnowflakePlatform, 'complete', lambda *a: pytest.fail('Native delegation fell back to AI_COMPLETE'))
+        monkeypatch.setattr(SnowflakePlatform, 'create_agent_thread', lambda platform: self.thread())
+        monkeypatch.setattr(SnowflakePlatform, 'run_agent', lambda platform, *args, **kwargs: self.run(*args, **kwargs))
+        original = source.sql
+        def sql(statement, params=None):
+            if 'SELECT PAYLOAD FROM' in statement and 'receipt_key' in statement:
+                return [{'PAYLOAD': row} for row in self.journal if row.get('receipt_key') == params[1]]
+            if 'INSERT INTO' in statement and 'AUDIT_EVENTS' in statement:
+                self.journal.append(json.loads(params[3]))
+            return original(statement, params)
+        monkeypatch.setattr(source, 'sql', sql)
+
+    def thread(self):
+        value = str(9223372036854770000 + len(self.threads) + 1)
+        self.threads.append(value)
+        return value
+
+    @staticmethod
+    def tools(*names):
+        return [{'type': 'tool_use', 'tool_use': {'name': name, 'tool_use_id': name,
+                'client_side_execute': True, 'input': {}}} for name in names]
+
+    @staticmethod
+    def answer(text='Reviewed the dated evidence.', citations=None):
+        return {'text': text, 'citations': citations or ['DOC-SUP-001']}
+
+    def run(self, role, thread, parent, content, *, agent_name):
+        import copy
+        kind = next(k for k, name in self.names.items() if name == agent_name)
+        index = self.positions[kind]
+        self.positions[kind] += 1
+        self.calls.append(dict(kind=kind, thread=thread, parent=parent, content=copy.deepcopy(content)))
+        plans = {
+            'coordinator': [self.tools('risk_detection_agent'), self.tools('recovery_plan_agent'),
+                            [{'type': 'text', 'text': json.dumps(self.answer('Protect contracts using the qualified recovery plan.', ['DOC-CONF-C']))}]],
+            'risk_detection': [self.tools('read_evidence', 'operations_analysis'),
+                               [{'type': 'text', 'text': json.dumps(self.answer('The drive shortage puts two contracted customers at risk.'))}]],
+            'recovery_plan': [self.tools('read_evidence', 'recovery_options'), self.tools('qualification_review'),
+                              [{'type': 'text', 'text': json.dumps({'findings': {
+                                  'sourcing': self.answer('Hybrid spending is $24,000.', ['DOC-CONF-C']),
+                                  'qualification': self.answer('Supplier confirmation and pilot release support the hybrid.', ['DOC-CONF-C']),
+                              }})}]],
+        }
+        result = self.overrides.get((kind, index), plans[kind][index])
+        if isinstance(result, Exception):
+            raise result
+        return {'content': result, 'metadata': {'assistant_message_id': str(index+1), 'thread_id': thread,
+                'run_id': kind + '-' + str(index), 'request_id': 'request-' + kind + '-' + str(index)}}
+
+
+def test_three_native_agents_delegate_in_order_and_survive_restart(source, monkeypatch):
+    native = NativeAgents(source, monkeypatch)
+    service = LiveNorthStarService(source)
+    case = service.read()
+    result = service.investigate(case['revision'], case['snapshot_id'])
+    assert len(native.threads) == 3 and len(native.calls) == 8
+    assert [c['kind'] for c in native.calls] == [
+        'coordinator', 'risk_detection', 'risk_detection', 'coordinator',
+        'recovery_plan', 'recovery_plan', 'recovery_plan', 'coordinator',
+    ]
+    assert set(result['findings']) == {'operations', 'sourcing', 'qualification'}
+    operations = result['findings']['operations']
+    recovery = result['findings']['sourcing']
+    assert operations['agent_execution']['agent'].endswith(native.names['risk_detection'])
+    assert recovery['agent_execution']['agent'].endswith(native.names['recovery_plan'])
+    assert operations['text'] != operations['execution']['summary']['text']
+    assert len(operations['execution']['children']) == 2
+    assert operations['execution']['thread_id'] == native.threads[0]
+    risk_input = json.loads(native.calls[1]['content'][0]['text'])
+    assert risk_input['question'].startswith('Report baseline risk only:')
+    risk_tools = native.calls[2]['content']
+    facts = next(b['tool_result']['content'][0]['json']['result']['verified_facts']
+                 for b in risk_tools if b['tool_result']['name'] == 'operations_analysis')
+    assert 'forecast_robots_unbuilt_by_option' not in facts
+    assert facts['gross_revenue_exposure_usd'] == '1080000.00'
+    child_input = json.loads(native.calls[4]['content'][0]['text'])
+    assert child_input['snapshot_id'] == case['snapshot_id']
+    assert child_input['validated_risk']['findings']['operations']['text'] == operations['text']
+    assert child_input['validated_risk']['execution']['thread_id'] == native.threads[1]
+    # Snowflake may omit earlier generic tool results from thread history.
+    # The final continuation must carry every completed result without new callbacks.
+    restored = native.calls[6]['content'][-2]['text']
+    assert restored.startswith('COMPLETED_TOOL_RESULTS_JSON')
+    restored = json.loads(restored.split('\n')[1])
+    assert set(restored) == {'read_evidence', 'recovery_options', 'qualification_review'}
+    assert restored['recovery_options']['result']['plans'][2]['expenditure_usd'] == '24000.00'
+    assert native.calls[6]['content'][-1]['text'].startswith('All required tools have completed.')
+    for call in native.calls:
+        for block in call['content']:
+            if block['type'] == 'tool_result':
+                assert block['tool_result']['content'][0]['json']['snapshot_id'] == case['snapshot_id']
+    assert sum(row['kind'] == 'delegated_agent_completed' for row in native.journal) == 2
+    service.investigate(case['revision'], case['snapshot_id'])
+    assert len(native.calls) == 8
+    # Interruption before finding admission: replay all three native threads
+    # from the durable receipts without repeating paid requests.
+    source.findings.clear()
+    resumed = LiveNorthStarService(source).investigate(case['revision'], case['snapshot_id'])
+    assert len(resumed['findings']) == 3 and len(native.calls) == 8 and len(native.threads) == 3
+
+
+@pytest.mark.parametrize('tools,code', [
+    (NativeAgents.tools('approve'), 'INVALID_AGENT_TOOL'),
+    (NativeAgents.tools('recovery_plan_agent'), 'AGENT_TOOL_ORDER'),
+    (NativeAgents.tools('risk_detection_agent', 'recovery_plan_agent'), 'AGENT_TOOL_ORDER'),
+    ([{'type': 'text', 'text': json.dumps(NativeAgents.answer())}], 'AGENT_MISSING_TOOLS'),
+    (NativeAgents.tools('risk_detection_agent', 'risk_detection_agent'), 'INVALID_AGENT_TOOL'),
+    ([{'type': 'tool_use', 'tool_use': {'name': 'risk_detection_agent', 'tool_use_id': 'x', 'client_side_execute': True,
+                                      'input': {'snapshot_id': 'future'}}}], 'INVALID_AGENT_TOOL'),
+])
+def test_coordinator_cannot_bypass_delegation_or_change_scope(source, monkeypatch, tools, code):
+    native = NativeAgents(source, monkeypatch)
+    native.overrides['coordinator', 0] = tools
+    service = LiveNorthStarService(source)
+    with pytest.raises(PlatformError) as error:
+        service.agent_review('investigate', 'Review', service.read())
+    assert error.value.code == code
+    assert len(native.calls) == 1 and len(native.threads) == 1 and not source.findings
+
+
+@pytest.mark.parametrize('text,citations,code', [
+    ('Unsupported evidence.', ['FUTURE-DOC'], 'INVALID_AGENT_FINDING'),
+    ('Gross exposure is $108,000,000.', ['DOC-SUP-001'], 'UNSUPPORTED_MODEL_AMOUNT'),
+    ('word ' * 91, ['DOC-SUP-001'], 'INVALID_AGENT_FINDING'),
+])
+def test_invalid_risk_is_rejected_before_recovery_and_coordinator_resume(source, monkeypatch, text, citations, code):
+    native = NativeAgents(source, monkeypatch)
+    native.overrides['risk_detection', 1] = [{'type': 'text', 'text': json.dumps(native.answer(text, citations))}]
+    service = LiveNorthStarService(source)
+    case = service.read()
+    with pytest.raises(PlatformError) as error:
+        service.investigate(case['revision'], case['snapshot_id'])
+    assert error.value.code == code
+    assert [c['kind'] for c in native.calls] == ['coordinator', 'risk_detection', 'risk_detection']
+    assert not source.findings
+
+
+def test_recovery_cannot_skip_qualification_dependencies(source, monkeypatch):
+    native = NativeAgents(source, monkeypatch)
+    native.overrides['recovery_plan', 0] = native.tools('qualification_review')
+    service = LiveNorthStarService(source)
+    with pytest.raises(PlatformError) as error:
+        service.agent_review('investigate', 'Review', service.read())
+    assert error.value.code == 'AGENT_TOOL_ORDER' and not source.findings
+
+
+def test_native_word_limit_counts_words_without_standalone_punctuation(source, monkeypatch):
+    native = NativeAgents(source, monkeypatch)
+    text = 'word ' * 90 + '— × —'
+    native.overrides['coordinator', 2] = [{'type': 'text', 'text': json.dumps(native.answer(text))}]
+    service = LiveNorthStarService(source)
+    case = service.read()
+    result = service.investigate(case['revision'], case['snapshot_id'])
+    assert result['findings']['operations']['execution']['summary']['text'] == text
+
+
+def test_child_agent_failure_does_not_repeat_uncertain_request_or_fallback(source, monkeypatch):
+    native = NativeAgents(source, monkeypatch)
+    native.overrides['recovery_plan', 0] = PlatformError('CORTEX_UNAVAILABLE')
+    service = LiveNorthStarService(source)
+    case = service.read()
+    with pytest.raises(PlatformError) as error:
+        service.investigate(case['revision'], case['snapshot_id'])
+    assert error.value.code == 'CORTEX_UNAVAILABLE'
+    assert len(native.calls) == 5 and not source.findings
+    with pytest.raises(PlatformError) as error:
+        LiveNorthStarService(source).investigate(case['revision'], case['snapshot_id'])
+    assert error.value.code == 'AGENT_CALL_UNCERTAIN'
+    assert len(native.calls) == 5 and len(native.threads) == 3 and not source.findings
+
+
+def test_native_chat_synthesizes_both_real_child_reviews_without_approval(source, monkeypatch):
+    native = NativeAgents(source, monkeypatch)
+    service = LiveNorthStarService(source)
+    case = service.read()
+    answer = service.chat('How can we protect contracts?', case['revision'], case['snapshot_id'])
+    assert answer['provider'] == 'snowflake_cortex_agent'
+    assert answer['text'] == 'Protect contracts using the qualified recovery plan.'
+    assert {e['kind'] for e in answer['execution']['children']} == {'risk_detection', 'recovery_plan'}
+    assert len(native.threads) == 3 and len(native.calls) == 8
+    assert source.saved['revision'] == 0 and not source.saved['decision']
+    assert any(row['kind'] == 'company_brain' for row in native.journal)
+
+
+def test_each_native_spec_has_only_its_role_tools():
+    from app.northstar_agent import AGENT_NAMES, TOOLS, agent_spec
+    assert len(set(AGENT_NAMES.values())) == 3
+    for kind in AGENT_NAMES:
+        spec = agent_spec('claude-sonnet-4-6', kind)
+        assert {t['tool_spec']['name'] for t in spec['tools']} == set(TOOLS[kind])
+        assert spec['orchestration']['tool_not_accessible'] == 'reject'
+        assert spec['models']['orchestration'] == 'claude-sonnet-4-6'

@@ -27,8 +27,8 @@ before opening the app. There is no local fallback after a cloud failure.
 The restored Risk Inbox opens the active V2 case with its complete, dated
 NorthStar evidence. The workflow keeps the original Analysis, Investigate,
 Compare, Decision and Action screens, with Company Brain alongside the case.
-Operations, Sourcing and Qualification run real Snowflake-hosted Claude calls;
-Company Brain answers from that same cloud evidence. Future scripted approvals
+Risk Detection and Recovery Plan run as separate Snowflake Cortex Agents under
+the native coordinator; Company Brain uses the same team and cloud evidence. Future scripted approvals
 and execution records remain outside planning evidence.
 
 The engine derives 500 required drives, 120 usable warehouse drives, and a
@@ -89,12 +89,14 @@ security regressions use exact test-only aliases to archived fixtures in
 The active frontend uses the `/api/northstar/*` case, investigation and chat
 endpoints. See [the integration guide](docs/northstar-integration.md) for schema,
 permissions, API and verification commands. Claude responses retain their
-Snowflake query IDs, model, token usage, snapshot and prompt version. The engine
+Snowflake thread/run IDs, tool traces, model, token usage, snapshot and prompt version. The engine
 owns all approval-critical calculations; model output is advisory.
 
 The historical `/api/graph/*` implementation and its managed Cortex Agent,
-Search and Analyst contracts remain separate. The NorthStar path uses
-Snowflake `AI_COMPLETE` and does not claim those other surfaces executed.
+Search and Analyst contracts remain separate. NorthStar uses its own managed
+Cortex coordinator and two specialist objects. [Live acceptance](docs/northstar-agent-live-verification.json)
+verifies investigation and Company Brain, including their six threads and saved audits.
+NorthStar does not claim Cortex Search or Analyst execution.
 Drafts stay unsent; no real procurement or inventory transaction is performed.
 
 Older datasets and acceptance results are preserved in

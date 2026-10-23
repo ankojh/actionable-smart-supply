@@ -48,6 +48,7 @@ class AppSettings(BaseSettings):
     cors_origins: str = "http://localhost:5173"
     project_store: str | None = None
     project_northstar_mode: Literal["live", "offline"] = "live"
+    project_northstar_ai_provider: Literal["cortex_agent", "ai_complete"] = "cortex_agent"
     project_northstar_max_completion_tokens: int = Field(default=1200, ge=256, le=4096)
     project_live_reviewer_id: str | None = None
     project_live_reviewer_token: str | None = Field(default=None, repr=False)

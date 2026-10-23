@@ -145,16 +145,17 @@ class SnowflakePlatform:
         # Keep Snowflake's 64-bit identifiers as strings for the browser.
         return thread_id
 
-    def run_agent(self, role, thread_id, parent_message_id, content):
+    def run_agent(self, role, thread_id, parent_message_id, content, *, agent_name=None):
         from .cortex import AGENT_NAMES
 
         if role not in AGENT_NAMES or not re.fullmatch(r"[1-9][0-9]*", str(thread_id)):
             raise PlatformError("INVALID_AGENT_REQUEST")
+        name = identifier(agent_name) if agent_name is not None else AGENT_NAMES[role]
         if not re.fullmatch(r"[0-9]+", str(parent_message_id)) or not isinstance(content, list):
             raise PlatformError("INVALID_AGENT_REQUEST")
         self._usage.request_id = None
         result = self._rest(
-            f"/api/v2/databases/{self.database}/schemas/{self.schema}/agents/{AGENT_NAMES[role]}:run",
+            f"/api/v2/databases/{self.database}/schemas/{self.schema}/agents/{name}:run",
             {
                 "thread_id": int(thread_id), "parent_message_id": int(parent_message_id),
                 "messages": [{"role": "user", "content": content}], "stream": False,

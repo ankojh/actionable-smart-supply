@@ -1,0 +1,35 @@
+{
+  "coordinator": {
+    "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_ORCHESTRATOR_V2",
+    "spec_matches": true,
+    "app_role": "PROJECT_RECOVERY_APP_V1",
+    "privileges": [
+      "MONITOR",
+      "USAGE"
+    ],
+    "spec_query_id": "01c7ee62-030c-6e5d-0034-2877001d83fa",
+    "grants_query_id": "01c7ee62-030c-6e5e-0034-2877001a0c36"
+  },
+  "risk_detection": {
+    "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+    "spec_matches": true,
+    "app_role": "PROJECT_RECOVERY_APP_V1",
+    "privileges": [
+      "MONITOR",
+      "USAGE"
+    ],
+    "spec_query_id": "01c7ee62-030c-6e5c-0034-2877001a1d22",
+    "grants_query_id": "01c7ee62-030c-7677-0034-2877001e307e"
+  },
+  "recovery_plan": {
+    "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+    "spec_matches": true,
+    "app_role": "PROJECT_RECOVERY_APP_V1",
+    "privileges": [
+      "MONITOR",
+      "USAGE"
+    ],
+    "spec_query_id": "01c7ee62-030c-7677-0034-2877001e3082",
+    "grants_query_id": "01c7ee62-030c-7677-0034-2877001e3086"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "endpoint": "http://127.0.0.1:8000/api/northstar",
+  "http_statuses": {
+    "/case": 200,
+    "/investigate": 200,
+    "/chat": 200
+  },
+  "ai_provider": "cortex_agent",
+  "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+  "case_state_unchanged": true,
+  "reused_verified_threads": true,
+  "investigation_thread": "875067180",
+  "chat_thread": "875067192"
+}

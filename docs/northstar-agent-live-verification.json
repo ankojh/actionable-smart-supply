@@ -1,0 +1,1351 @@
+{
+  "status": "passed",
+  "verified_at": "2026-10-23T22:26:49.609248+00:00",
+  "provider": "snowflake",
+  "ai_provider": "cortex_agent",
+  "schema": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2",
+  "source_tables": 25,
+  "source_rows": 205,
+  "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+  "prompt_version": "northstar-multi-agent-v3",
+  "investigation_cached": false,
+  "current_case_approved": false,
+  "findings": {
+    "operations": {
+      "text": "PO-2026-1042 ERP latest_eta was October 20; Pacific Motion Systems confirmed a 21-day slip to November 10 (DOC-SUP-001), leaving only 120 warehouse drives usable. Contracted demand requires 240 drives (120 robots \u00d7 2 drives each); the shortfall is 120 drives. Without recovery, BayShip Fulfillment (40 units, SO-002) and NovaFab Manufacturing (20 units, SO-003) cannot ship by their November 6 promise date; SwiftLog Logistics (60 units, SO-001) is fully covered. Gross revenue exposure is $1,080,000 (60 at-risk units \u00d7 $18,000). This exposure is not a realized loss.",
+      "citations": [
+        "DOC-SUP-001",
+        "DOC-PLAN-001"
+      ],
+      "provider": "snowflake_cortex_agent"
+    },
+    "qualification": {
+      "text": "Both Apex (AVL-HDR-200-02) and Summit Precision (AVL-HDR-200-03) are approved for HDR-200 Rev C through December 31, 2026. Written confirmations for both emergency offers are dated October 26, with acceptance deadlines expiring October 27. REC-001's 80 pilot drives hold pilot-owner release authorization, conditional on manager plan approval; handling cost is a $2,000 planning estimate. REC-002's 16 R&D drives are technically ineligible. Autonomous purchase and stock movement are prohibited; approval scope covers draft preparation only.",
+      "citations": [
+        "DOC-QUAL-APEX",
+        "DOC-QUAL-C",
+        "DOC-PILOT-RELEASE",
+        "DOC-PILOT-001",
+        "DOC-APEX-002",
+        "DOC-CONF-C"
+      ],
+      "provider": "snowflake_cortex_agent"
+    },
+    "sourcing": {
+      "text": "Plans A and C each protect all 120 contracted units on time; Plan B leaves NovaFab's 20 units unbuilt and is not approval-eligible. Plan A commits $194,400 for 400 Apex units usable October 29, covering contracted demand and FC-001 forecast (130 units). Plan C combines the 80-unit REC-001 pilot transfer ($2,000 handling) with a 40-unit Summit PO ($22,000), totaling $24,000 immediate expenditure but leaves FC-001's 130 units unbuilt. Lower Plan C commitment is not economic savings. PO-2026-1042 remains open under all options.",
+      "citations": [
+        "DOC-APEX-002",
+        "DOC-CONF-C",
+        "DOC-COST-001",
+        "DOC-PLAN-001",
+        "DOC-SUP-001"
+      ],
+      "provider": "snowflake_cortex_agent"
+    }
+  },
+  "provisioning": {
+    "coordinator": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_ORCHESTRATOR_V2",
+      "spec_matches": true,
+      "app_role": "PROJECT_RECOVERY_APP_V1",
+      "privileges": [
+        "MONITOR",
+        "USAGE"
+      ],
+      "spec_query_id": "01c7ee62-030c-6e5d-0034-2877001d83fa",
+      "grants_query_id": "01c7ee62-030c-6e5e-0034-2877001a0c36"
+    },
+    "risk_detection": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+      "spec_matches": true,
+      "app_role": "PROJECT_RECOVERY_APP_V1",
+      "privileges": [
+        "MONITOR",
+        "USAGE"
+      ],
+      "spec_query_id": "01c7ee62-030c-6e5c-0034-2877001a1d22",
+      "grants_query_id": "01c7ee62-030c-7677-0034-2877001e307e"
+    },
+    "recovery_plan": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+      "spec_matches": true,
+      "app_role": "PROJECT_RECOVERY_APP_V1",
+      "privileges": [
+        "MONITOR",
+        "USAGE"
+      ],
+      "spec_query_id": "01c7ee62-030c-7677-0034-2877001e3082",
+      "grants_query_id": "01c7ee62-030c-7677-0034-2877001e3086"
+    }
+  },
+  "investigation": {
+    "coordinator": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_ORCHESTRATOR_V2",
+      "children": [
+        {
+          "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+          "kind": "risk_detection",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "status": "COMPLETED",
+          "thread_id": "875067184",
+          "tools": [
+            {
+              "name": "operations_analysis",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+              "tool_use_id": "toolu_bdrk_01J5NMKyHxdDk3AuXXLrdK46"
+            },
+            {
+              "name": "read_evidence",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+              "tool_use_id": "toolu_bdrk_01KnzT5JqVM3VRT5UmGqbum5"
+            }
+          ],
+          "turns": [
+            {
+              "assistant_message_id": "224017196553",
+              "created_on": 1792794209379,
+              "orchestration_model": "claude-sonnet-4-6",
+              "request_id": "4fb85717-7cc3-4c34-af9c-f09e440bef37",
+              "run_id": "875067184-224017192465",
+              "thread_id": "875067184",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 20443,
+                      "cache_write": 0,
+                      "total": 20448,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 110
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017192465
+            },
+            {
+              "assistant_message_id": "224017196557",
+              "created_on": 1792794226311,
+              "orchestration_model": "claude-sonnet-4-6",
+              "request_id": "0238290d-a6c2-4189-ad9f-1a437fa9dd0c",
+              "run_id": "875067184-224017193493",
+              "thread_id": "875067184",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 30206,
+                      "cache_write": 14334,
+                      "total": 44545,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 1583
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193493
+            }
+          ]
+        },
+        {
+          "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+          "kind": "recovery_plan",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "status": "COMPLETED",
+          "thread_id": "875067188",
+          "tools": [
+            {
+              "name": "recovery_options",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+              "tool_use_id": "toolu_bdrk_01SfZunRR3JzyGrkMwq44jqM"
+            },
+            {
+              "name": "read_evidence",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+              "tool_use_id": "toolu_bdrk_01VaeZQVTLuk3Rjm3T8A7YM2"
+            },
+            {
+              "name": "qualification_review",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+              "tool_use_id": "toolu_bdrk_01HbMYwHgDYo8tnFBcbYXT4f"
+            }
+          ],
+          "turns": [
+            {
+              "assistant_message_id": "224017196069",
+              "created_on": 1792794257284,
+              "orchestration_model": "claude-sonnet-4-6",
+              "request_id": "5a3451f4-920c-43d8-82e9-10747a964386",
+              "run_id": "875067188-224017191949",
+              "thread_id": "875067188",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 18614,
+                      "cache_write": 3752,
+                      "total": 22371,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 100
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017191949
+            },
+            {
+              "assistant_message_id": "224017195049",
+              "created_on": 1792794264839,
+              "orchestration_model": "claude-sonnet-4-6",
+              "request_id": "1fcc2c51-3f29-4385-83f5-68a7e6076085",
+              "run_id": "875067188-224017188377",
+              "thread_id": "875067188",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 34787,
+                      "cache_write": 15601,
+                      "total": 50393,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 186
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017188377
+            },
+            {
+              "assistant_message_id": "224017195053",
+              "created_on": 1792794298608,
+              "orchestration_model": "claude-sonnet-4-6",
+              "request_id": "8de287af-d4c0-4116-a809-01b7595982d9",
+              "run_id": "875067188-224017190425",
+              "thread_id": "875067188",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 43812,
+                      "cache_write": 27772,
+                      "total": 71589,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 3356
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017190425
+            }
+          ]
+        }
+      ],
+      "kind": "coordinator",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "status": "COMPLETED",
+      "summary": {
+        "citations": [
+          "DOC-SUP-001",
+          "DOC-PLAN-001",
+          "DOC-APEX-002",
+          "DOC-CONF-C",
+          "DOC-COST-001",
+          "DOC-QUAL-APEX",
+          "DOC-QUAL-C",
+          "DOC-PILOT-RELEASE",
+          "DOC-PILOT-001"
+        ],
+        "text": "PO-2026-1042 slipped 21 days to November 10, creating a 120-drive shortfall against 240 contracted (120 robots \u00d7 2 drives); gross revenue exposure is $1,080,000 across 60 at-risk units \u2014 not a realized loss. Plans A and C each eliminate the shortfall on time; Plan B is ineligible. Plan A ($194,400) also covers the FC-001 forecast; Plan C ($24,000) does not \u2014 lower commitment is not economic savings. Both alternative suppliers hold valid HDR-200 Rev C approval; REC-002's 16 R&D drives are ineligible. Acceptance deadlines expire October 27; autonomous action is prohibited."
+      },
+      "thread_id": "875067180",
+      "tools": [
+        {
+          "name": "risk_detection_agent",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01UZkAXuJKjBvaXgiy7GcvsW"
+        },
+        {
+          "name": "recovery_plan_agent",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01Axjy1M96TpEE62v3CZQVa8"
+        }
+      ],
+      "turns": [
+        {
+          "assistant_message_id": "224017196061",
+          "created_on": 1792794199224,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "d29461f6-1c51-4176-806d-7c900f296224",
+          "run_id": "875067180-224017192969",
+          "thread_id": "875067180",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 18680,
+                  "cache_write": 1714,
+                  "total": 20399,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 128
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017192969
+        },
+        {
+          "assistant_message_id": "224017196065",
+          "created_on": 1792794235492,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "5b9856d6-c650-4c27-a0c3-96805b9747e9",
+          "run_id": "875067180-224017197061",
+          "thread_id": "875067180",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 21572,
+                  "cache_write": 4314,
+                  "total": 25891,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 918
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017197061
+        },
+        {
+          "assistant_message_id": "224017195057",
+          "created_on": 1792794318446,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "bb8b083b-e175-4f97-a70a-4dc400f5bc78",
+          "run_id": "875067180-224017187869",
+          "thread_id": "875067180",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 25633,
+                  "cache_write": 9848,
+                  "total": 35486,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 1731
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017187869
+        }
+      ]
+    },
+    "risk_detection": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+      "kind": "risk_detection",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "status": "COMPLETED",
+      "thread_id": "875067184",
+      "tools": [
+        {
+          "name": "operations_analysis",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01J5NMKyHxdDk3AuXXLrdK46"
+        },
+        {
+          "name": "read_evidence",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01KnzT5JqVM3VRT5UmGqbum5"
+        }
+      ],
+      "turns": [
+        {
+          "assistant_message_id": "224017196553",
+          "created_on": 1792794209379,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "4fb85717-7cc3-4c34-af9c-f09e440bef37",
+          "run_id": "875067184-224017192465",
+          "thread_id": "875067184",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 20443,
+                  "cache_write": 0,
+                  "total": 20448,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 110
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017192465
+        },
+        {
+          "assistant_message_id": "224017196557",
+          "created_on": 1792794226311,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "0238290d-a6c2-4189-ad9f-1a437fa9dd0c",
+          "run_id": "875067184-224017193493",
+          "thread_id": "875067184",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 30206,
+                  "cache_write": 14334,
+                  "total": 44545,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 1583
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017193493
+        }
+      ]
+    },
+    "recovery_plan": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+      "kind": "recovery_plan",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "status": "COMPLETED",
+      "thread_id": "875067188",
+      "tools": [
+        {
+          "name": "recovery_options",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01SfZunRR3JzyGrkMwq44jqM"
+        },
+        {
+          "name": "read_evidence",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01VaeZQVTLuk3Rjm3T8A7YM2"
+        },
+        {
+          "name": "qualification_review",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "tool_use_id": "toolu_bdrk_01HbMYwHgDYo8tnFBcbYXT4f"
+        }
+      ],
+      "turns": [
+        {
+          "assistant_message_id": "224017196069",
+          "created_on": 1792794257284,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "5a3451f4-920c-43d8-82e9-10747a964386",
+          "run_id": "875067188-224017191949",
+          "thread_id": "875067188",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 18614,
+                  "cache_write": 3752,
+                  "total": 22371,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 100
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017191949
+        },
+        {
+          "assistant_message_id": "224017195049",
+          "created_on": 1792794264839,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "1fcc2c51-3f29-4385-83f5-68a7e6076085",
+          "run_id": "875067188-224017188377",
+          "thread_id": "875067188",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 34787,
+                  "cache_write": 15601,
+                  "total": 50393,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 186
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017188377
+        },
+        {
+          "assistant_message_id": "224017195053",
+          "created_on": 1792794298608,
+          "orchestration_model": "claude-sonnet-4-6",
+          "request_id": "8de287af-d4c0-4116-a809-01b7595982d9",
+          "run_id": "875067188-224017190425",
+          "thread_id": "875067188",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 43812,
+                  "cache_write": 27772,
+                  "total": 71589,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 3356
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017190425
+        }
+      ]
+    }
+  },
+  "company_brain": {
+    "text": "The manager recovery approval limit is $250,000. Plan A (Apex only: 400 units \u00d7 $486) totals $194,400 \u2014 within the limit and flagged approval_eligible. Plan C (hybrid: REC-001 pilot transfer + Summit 40-unit PO) totals $24,000 \u2014 also within the limit and flagged approval_eligible. Pacific PO-2026-1042 remains open separately at $164,800 and is excluded from both recovery expenditure figures; the difference between plans reflects a commitment comparison, not economic savings.",
+    "citations": [
+      "DOC-APEX-002",
+      "DOC-CONF-C",
+      "DOC-COST-001"
+    ],
+    "provider": "snowflake_cortex_agent",
+    "prompt_version": "northstar-multi-agent-v3",
+    "model": "claude-sonnet-4-6",
+    "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+    "created_at": "2026-10-23T22:28:39.106260+00:00",
+    "execution": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_ORCHESTRATOR_V2",
+      "kind": "coordinator",
+      "thread_id": "875067192",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "turns": [
+        {
+          "assistant_message_id": "224017195061",
+          "created_on": 1792794421656,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067192-224017192973",
+          "thread_id": "875067192",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 17600,
+                  "cache_write": 2795,
+                  "total": 20400,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 109
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017192973,
+          "request_id": "b74567db-c73e-4484-be6e-dd2f743bc57b"
+        },
+        {
+          "assistant_message_id": "224017195065",
+          "created_on": 1792794454935,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067192-224017191957",
+          "thread_id": "875067192",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 21570,
+                  "cache_write": 4327,
+                  "total": 25902,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 428
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017191957,
+          "request_id": "87b985ad-708f-427b-a0ff-0989e0c2a5c8"
+        },
+        {
+          "assistant_message_id": "224017196573",
+          "created_on": 1792794515412,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067192-875067152",
+          "thread_id": "875067192",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 25542,
+                  "cache_write": 8363,
+                  "total": 33910,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 261
+                }
+              }
+            ]
+          },
+          "user_message_id": 875067152,
+          "request_id": "2355d99e-97be-4c5d-b824-d8ca276bb343"
+        }
+      ],
+      "tools": [
+        {
+          "name": "risk_detection_agent",
+          "tool_use_id": "toolu_bdrk_01MB2RcEJwKirxQ5XgDh8CBh",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        },
+        {
+          "name": "recovery_plan_agent",
+          "tool_use_id": "toolu_bdrk_012K2FesNqWDGc2wegfK6XGu",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        }
+      ],
+      "status": "COMPLETED",
+      "children": [
+        {
+          "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+          "kind": "risk_detection",
+          "thread_id": "875067196",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "turns": [
+            {
+              "assistant_message_id": "224017196561",
+              "created_on": 1792794431309,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067196-224017188381",
+              "thread_id": "875067196",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 17626,
+                      "cache_write": 2817,
+                      "total": 20448,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 220
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017188381,
+              "request_id": "390d1747-d6ea-4b79-bfdb-d0726b7b951d"
+            },
+            {
+              "assistant_message_id": "224017196073",
+              "created_on": 1792794445554,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067196-224017191953",
+              "thread_id": "875067196",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 30206,
+                      "cache_write": 13519,
+                      "total": 43730,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 726
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017191953,
+              "request_id": "168490df-f0c6-4bb2-97fb-3ff7bc26c431"
+            }
+          ],
+          "tools": [
+            {
+              "name": "operations_analysis",
+              "tool_use_id": "toolu_bdrk_01QiuQySeASWGPLckQHq9ZQ3",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            },
+            {
+              "name": "read_evidence",
+              "tool_use_id": "toolu_bdrk_01N9JCEU3bzbAkFzYnmwNo2V",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            }
+          ],
+          "status": "COMPLETED"
+        },
+        {
+          "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+          "kind": "recovery_plan",
+          "thread_id": "875067200",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "turns": [
+            {
+              "assistant_message_id": "224017196565",
+              "created_on": 1792794471834,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067200-224017193497",
+              "thread_id": "875067200",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 18632,
+                      "cache_write": 3735,
+                      "total": 22372,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 182
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193497,
+              "request_id": "ac2cae2d-9ac5-4930-8571-2eb581e69bd3"
+            },
+            {
+              "assistant_message_id": "224017196077",
+              "created_on": 1792794483133,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067200-224017193501",
+              "thread_id": "875067200",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 34753,
+                      "cache_write": 15601,
+                      "total": 50359,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 173
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193501,
+              "request_id": "77b53e32-0091-4209-9784-2017d17f000e"
+            },
+            {
+              "assistant_message_id": "224017196569",
+              "created_on": 1792794506442,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067200-224017193505",
+              "thread_id": "875067200",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 43778,
+                      "cache_write": 26229,
+                      "total": 70012,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 1794
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193505,
+              "request_id": "c058d430-1323-4c36-a01b-b4b64f9f31e5"
+            }
+          ],
+          "tools": [
+            {
+              "name": "recovery_options",
+              "tool_use_id": "toolu_bdrk_01Cab1e8zRMnaaCXEbKCEEWH",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            },
+            {
+              "name": "read_evidence",
+              "tool_use_id": "toolu_bdrk_01SLRmc8q8HaGT72oeF44EYA",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            },
+            {
+              "name": "qualification_review",
+              "tool_use_id": "toolu_bdrk_016qc8BuHGt3xdaRT1EwRQWt",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            }
+          ],
+          "status": "COMPLETED"
+        }
+      ],
+      "summary": {
+        "text": "The manager recovery approval limit is $250,000. Plan A (Apex only: 400 units \u00d7 $486) totals $194,400 \u2014 within the limit and flagged approval_eligible. Plan C (hybrid: REC-001 pilot transfer + Summit 40-unit PO) totals $24,000 \u2014 also within the limit and flagged approval_eligible. Pacific PO-2026-1042 remains open separately at $164,800 and is excluded from both recovery expenditure figures; the difference between plans reflects a commitment comparison, not economic savings.",
+        "citations": [
+          "DOC-APEX-002",
+          "DOC-CONF-C",
+          "DOC-COST-001"
+        ]
+      }
+    }
+  },
+  "chat_execution": {
+    "coordinator": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_ORCHESTRATOR_V2",
+      "kind": "coordinator",
+      "thread_id": "875067192",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "turns": [
+        {
+          "assistant_message_id": "224017195061",
+          "created_on": 1792794421656,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067192-224017192973",
+          "thread_id": "875067192",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 17600,
+                  "cache_write": 2795,
+                  "total": 20400,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 109
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017192973,
+          "request_id": "b74567db-c73e-4484-be6e-dd2f743bc57b"
+        },
+        {
+          "assistant_message_id": "224017195065",
+          "created_on": 1792794454935,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067192-224017191957",
+          "thread_id": "875067192",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 21570,
+                  "cache_write": 4327,
+                  "total": 25902,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 428
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017191957,
+          "request_id": "87b985ad-708f-427b-a0ff-0989e0c2a5c8"
+        },
+        {
+          "assistant_message_id": "224017196573",
+          "created_on": 1792794515412,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067192-875067152",
+          "thread_id": "875067192",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 25542,
+                  "cache_write": 8363,
+                  "total": 33910,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 261
+                }
+              }
+            ]
+          },
+          "user_message_id": 875067152,
+          "request_id": "2355d99e-97be-4c5d-b824-d8ca276bb343"
+        }
+      ],
+      "tools": [
+        {
+          "name": "risk_detection_agent",
+          "tool_use_id": "toolu_bdrk_01MB2RcEJwKirxQ5XgDh8CBh",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        },
+        {
+          "name": "recovery_plan_agent",
+          "tool_use_id": "toolu_bdrk_012K2FesNqWDGc2wegfK6XGu",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        }
+      ],
+      "status": "COMPLETED",
+      "children": [
+        {
+          "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+          "kind": "risk_detection",
+          "thread_id": "875067196",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "turns": [
+            {
+              "assistant_message_id": "224017196561",
+              "created_on": 1792794431309,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067196-224017188381",
+              "thread_id": "875067196",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 17626,
+                      "cache_write": 2817,
+                      "total": 20448,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 220
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017188381,
+              "request_id": "390d1747-d6ea-4b79-bfdb-d0726b7b951d"
+            },
+            {
+              "assistant_message_id": "224017196073",
+              "created_on": 1792794445554,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067196-224017191953",
+              "thread_id": "875067196",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 30206,
+                      "cache_write": 13519,
+                      "total": 43730,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 726
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017191953,
+              "request_id": "168490df-f0c6-4bb2-97fb-3ff7bc26c431"
+            }
+          ],
+          "tools": [
+            {
+              "name": "operations_analysis",
+              "tool_use_id": "toolu_bdrk_01QiuQySeASWGPLckQHq9ZQ3",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            },
+            {
+              "name": "read_evidence",
+              "tool_use_id": "toolu_bdrk_01N9JCEU3bzbAkFzYnmwNo2V",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            }
+          ],
+          "status": "COMPLETED"
+        },
+        {
+          "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+          "kind": "recovery_plan",
+          "thread_id": "875067200",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+          "turns": [
+            {
+              "assistant_message_id": "224017196565",
+              "created_on": 1792794471834,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067200-224017193497",
+              "thread_id": "875067200",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 18632,
+                      "cache_write": 3735,
+                      "total": 22372,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 182
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193497,
+              "request_id": "ac2cae2d-9ac5-4930-8571-2eb581e69bd3"
+            },
+            {
+              "assistant_message_id": "224017196077",
+              "created_on": 1792794483133,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067200-224017193501",
+              "thread_id": "875067200",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 34753,
+                      "cache_write": 15601,
+                      "total": 50359,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 173
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193501,
+              "request_id": "77b53e32-0091-4209-9784-2017d17f000e"
+            },
+            {
+              "assistant_message_id": "224017196569",
+              "created_on": 1792794506442,
+              "orchestration_model": "claude-sonnet-4-6",
+              "run_id": "875067200-224017193505",
+              "thread_id": "875067200",
+              "usage": {
+                "tokens_consumed": [
+                  {
+                    "context_window": 1000000,
+                    "input_tokens": {
+                      "cache_read": 43778,
+                      "cache_write": 26229,
+                      "total": 70012,
+                      "uncached": 5
+                    },
+                    "model_name": "claude-sonnet-4-6",
+                    "model_role": "orchestration",
+                    "output_tokens": {
+                      "total": 1794
+                    }
+                  }
+                ]
+              },
+              "user_message_id": 224017193505,
+              "request_id": "c058d430-1323-4c36-a01b-b4b64f9f31e5"
+            }
+          ],
+          "tools": [
+            {
+              "name": "recovery_options",
+              "tool_use_id": "toolu_bdrk_01Cab1e8zRMnaaCXEbKCEEWH",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            },
+            {
+              "name": "read_evidence",
+              "tool_use_id": "toolu_bdrk_01SLRmc8q8HaGT72oeF44EYA",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            },
+            {
+              "name": "qualification_review",
+              "tool_use_id": "toolu_bdrk_016qc8BuHGt3xdaRT1EwRQWt",
+              "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+            }
+          ],
+          "status": "COMPLETED"
+        }
+      ],
+      "summary": {
+        "text": "The manager recovery approval limit is $250,000. Plan A (Apex only: 400 units \u00d7 $486) totals $194,400 \u2014 within the limit and flagged approval_eligible. Plan C (hybrid: REC-001 pilot transfer + Summit 40-unit PO) totals $24,000 \u2014 also within the limit and flagged approval_eligible. Pacific PO-2026-1042 remains open separately at $164,800 and is excluded from both recovery expenditure figures; the difference between plans reflects a commitment comparison, not economic savings.",
+        "citations": [
+          "DOC-APEX-002",
+          "DOC-CONF-C",
+          "DOC-COST-001"
+        ]
+      }
+    },
+    "risk_detection": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RISK_DETECTION_V1",
+      "kind": "risk_detection",
+      "thread_id": "875067196",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "turns": [
+        {
+          "assistant_message_id": "224017196561",
+          "created_on": 1792794431309,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067196-224017188381",
+          "thread_id": "875067196",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 17626,
+                  "cache_write": 2817,
+                  "total": 20448,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 220
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017188381,
+          "request_id": "390d1747-d6ea-4b79-bfdb-d0726b7b951d"
+        },
+        {
+          "assistant_message_id": "224017196073",
+          "created_on": 1792794445554,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067196-224017191953",
+          "thread_id": "875067196",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 30206,
+                  "cache_write": 13519,
+                  "total": 43730,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 726
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017191953,
+          "request_id": "168490df-f0c6-4bb2-97fb-3ff7bc26c431"
+        }
+      ],
+      "tools": [
+        {
+          "name": "operations_analysis",
+          "tool_use_id": "toolu_bdrk_01QiuQySeASWGPLckQHq9ZQ3",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        },
+        {
+          "name": "read_evidence",
+          "tool_use_id": "toolu_bdrk_01N9JCEU3bzbAkFzYnmwNo2V",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        }
+      ],
+      "status": "COMPLETED"
+    },
+    "recovery_plan": {
+      "agent": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2.SUMO_NORTHSTAR_RECOVERY_PLAN_V1",
+      "kind": "recovery_plan",
+      "thread_id": "875067200",
+      "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+      "turns": [
+        {
+          "assistant_message_id": "224017196565",
+          "created_on": 1792794471834,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067200-224017193497",
+          "thread_id": "875067200",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 18632,
+                  "cache_write": 3735,
+                  "total": 22372,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 182
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017193497,
+          "request_id": "ac2cae2d-9ac5-4930-8571-2eb581e69bd3"
+        },
+        {
+          "assistant_message_id": "224017196077",
+          "created_on": 1792794483133,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067200-224017193501",
+          "thread_id": "875067200",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 34753,
+                  "cache_write": 15601,
+                  "total": 50359,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 173
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017193501,
+          "request_id": "77b53e32-0091-4209-9784-2017d17f000e"
+        },
+        {
+          "assistant_message_id": "224017196569",
+          "created_on": 1792794506442,
+          "orchestration_model": "claude-sonnet-4-6",
+          "run_id": "875067200-224017193505",
+          "thread_id": "875067200",
+          "usage": {
+            "tokens_consumed": [
+              {
+                "context_window": 1000000,
+                "input_tokens": {
+                  "cache_read": 43778,
+                  "cache_write": 26229,
+                  "total": 70012,
+                  "uncached": 5
+                },
+                "model_name": "claude-sonnet-4-6",
+                "model_role": "orchestration",
+                "output_tokens": {
+                  "total": 1794
+                }
+              }
+            ]
+          },
+          "user_message_id": 224017193505,
+          "request_id": "c058d430-1323-4c36-a01b-b4b64f9f31e5"
+        }
+      ],
+      "tools": [
+        {
+          "name": "recovery_options",
+          "tool_use_id": "toolu_bdrk_01Cab1e8zRMnaaCXEbKCEEWH",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        },
+        {
+          "name": "read_evidence",
+          "tool_use_id": "toolu_bdrk_01SLRmc8q8HaGT72oeF44EYA",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        },
+        {
+          "name": "qualification_review",
+          "tool_use_id": "toolu_bdrk_016qc8BuHGt3xdaRT1EwRQWt",
+          "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+        }
+      ],
+      "status": "COMPLETED"
+    }
+  },
+  "case_state_unchanged": true
+}
