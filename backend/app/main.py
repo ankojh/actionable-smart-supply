@@ -20,6 +20,7 @@ from .workflow import Workflow
 from .cases import CaseService, detect_risks
 from .lifecycle_models import CaseBinding, DispatchInput, ExecutionEventInput, RiskEventInput, ScenarioProposal
 from .monitor import FileFeedMonitor
+from .northstar import CASE_ID
 
 @asynccontextmanager
 async def lifespan(app):
@@ -61,21 +62,25 @@ class NorthStarAction(BaseModel):
 
 
 @app.get("/api/northstar/case")
-def northstar_case():
-    return get_northstar_service().read()
+def northstar_case(case_id: str | None = None):
+    return select_northstar_service(case_id).read()
 
 
 @app.post("/api/northstar/case")
-def northstar_action(payload: NorthStarAction):
-    return get_northstar_service().mutate(**payload.model_dump())
+def northstar_action(payload: NorthStarAction, case_id: str | None = None):
+    return select_northstar_service(case_id).mutate(**payload.model_dump())
 
 
-def get_northstar_service():
+def get_northstar_service(case_id=CASE_ID):
     if AppSettings().project_northstar_mode == "offline":
         from .northstar import NorthStarService
-        return NorthStarService(store)
+        return NorthStarService(store, case_id=case_id)
     from .northstar_cloud import LiveNorthStarService
-    return LiveNorthStarService()
+    return LiveNorthStarService(case_id=case_id)
+
+
+def select_northstar_service(case_id):
+    return get_northstar_service() if case_id is None else get_northstar_service(case_id)
 
 
 class NorthStarBinding(BaseModel):
@@ -88,28 +93,43 @@ class NorthStarQuestion(NorthStarBinding):
     question: str = Field(min_length=1, max_length=2000)
 
 
+class NorthStarDemoCase(NorthStarBinding):
+    case_id: str = Field(pattern=r"^NS-[A-Z0-9-]{1,96}$")
+    title: str = Field(min_length=1, max_length=100)
+
+
+@app.get("/api/northstar/cases")
+def northstar_cases():
+    return {"cases": get_northstar_service().list_cases()}
+
+
+@app.post("/api/northstar/cases", status_code=201)
+def northstar_create_case(payload: NorthStarDemoCase):
+    return get_northstar_service().create_demo(**payload.model_dump())
+
+
 @app.post("/api/northstar/investigate")
-def northstar_investigate(payload: NorthStarBinding):
-    service = get_northstar_service()
+def northstar_investigate(payload: NorthStarBinding, case_id: str | None = None):
+    service = select_northstar_service(case_id)
     if not hasattr(service, "investigate"):
         raise ValueError("Cortex analysis requires the live Snowflake connection")
     return service.investigate(**payload.model_dump())
 
 
 @app.post("/api/northstar/chat")
-def northstar_chat(payload: NorthStarQuestion):
-    service = get_northstar_service()
+def northstar_chat(payload: NorthStarQuestion, case_id: str | None = None):
+    service = select_northstar_service(case_id)
     if not hasattr(service, "chat"):
         raise ValueError("Company Brain requires the live Snowflake connection")
     return service.chat(**payload.model_dump())
 
 
 @app.post("/api/northstar/chat/jobs", status_code=202)
-def northstar_chat_start(payload: NorthStarQuestion, background: BackgroundTasks):
+def northstar_chat_start(payload: NorthStarQuestion, background: BackgroundTasks, case_id: str | None = None):
     from .northstar_chat import NorthStarChatJobs
     if not payload.question.strip():
         raise ValueError('Enter a question for Company Brain')
-    service = get_northstar_service()
+    service = select_northstar_service(case_id)
     if not hasattr(service, "chat"):
         raise ValueError("Company Brain requires the live Snowflake connection")
     current = service.read()

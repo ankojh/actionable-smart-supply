@@ -17,7 +17,7 @@ import snowflake.connector
 
 from .config import AppSettings, get_settings
 from .domain import fingerprint, utc_now
-from .northstar import CASE_ID, NorthStarService, validate_snapshot
+from .northstar import CASE_ID, NorthStarService, case_summary, demo_state, validate_case_id, validate_snapshot
 from .platform import PlatformError, SnowflakePlatform, decoded, identifier
 from .snowflake_client import connection
 from .storage import Conflict
@@ -143,8 +143,9 @@ class SnowflakeNorthStarSource:
 
 
 class LiveNorthStarService(NorthStarService):
-    def __init__(self, source=None):
+    def __init__(self, source=None, case_id=CASE_ID):
         self.source = source or SnowflakeNorthStarSource()
+        self.case_id = validate_case_id(case_id)
         self.on_progress = lambda message: None
 
     @property
@@ -156,13 +157,51 @@ class LiveNorthStarService(NorthStarService):
         return AGENT_VERSION if self.native_agents else PROMPT_VERSION
 
     def state(self):
-        rows = self.source.sql(f'SELECT REVISION,PAYLOAD FROM {self.source.prefix}.CASE_STATE WHERE CASE_ID=%s', (CASE_ID,))
+        rows = self.source.sql(f'SELECT REVISION,PAYLOAD FROM {self.source.prefix}.CASE_STATE WHERE CASE_ID=%s', (self.case_id,))
+        if not rows and self.case_id != CASE_ID:
+            raise KeyError('NorthStar case not found')
         if len(rows) != 1:
             raise PlatformError('NORTHSTAR_CASE_UNAVAILABLE', 'The NorthStar case has not been initialized in Snowflake.')
         state = decoded(rows[0]['PAYLOAD'])
         if rows[0]['REVISION'] != state['revision']:
             raise PlatformError('CASE_INTEGRITY')
         return state
+
+    def list_cases(self):
+        with self.source.session():
+            rows = self.source.sql(f'SELECT CASE_ID,REVISION,PAYLOAD FROM {self.source.prefix}.CASE_STATE ORDER BY CASE_ID LIMIT 100')
+        cases = []
+        for row in rows:
+            state = decoded(row['PAYLOAD'])
+            if row['REVISION'] != state['revision']:
+                raise PlatformError('CASE_INTEGRITY')
+            cases.append(case_summary(row['CASE_ID'], state))
+        return cases
+
+    def create_demo(self, case_id, title, revision, snapshot_id):
+        validate_case_id(case_id)
+        with CASE_LOCK, self.source.session():
+            current = self.present(self.state())
+            if revision != current['revision'] or snapshot_id != current['snapshot_id']:
+                raise Conflict('NorthStar evidence changed; reload before creating a demo case')
+            state = demo_state(title, current['stage'], CASE_ID)
+            self.source.sql('BEGIN')
+            try:
+                result = self.source.sql(f'''MERGE INTO {self.source.prefix}.CASE_STATE T
+                    USING (SELECT %s CASE_ID,0 REVISION,PARSE_JSON(%s) PAYLOAD) S ON T.CASE_ID=S.CASE_ID
+                    WHEN NOT MATCHED THEN INSERT (CASE_ID,REVISION,PAYLOAD) VALUES(S.CASE_ID,S.REVISION,S.PAYLOAD)''',
+                    (case_id, json.dumps(state)))
+                count = next(iter(result[0].values())) if result else 0
+                if count != 1:
+                    raise Conflict('This NorthStar case ID already exists')
+                LiveNorthStarService(self.source, case_id).audit('case_created', snapshot_id,
+                    {'run_id': state['run_id'], 'title': state['title'], 'demo': True,
+                     'source_case_id': CASE_ID, 'source_revision': revision})
+                self.source.sql('COMMIT')
+            except Exception:
+                self.source.sql('ROLLBACK')
+                raise
+        return LiveNorthStarService(self.source, case_id).read()
 
     def read(self):
         with self.source.session():
@@ -188,7 +227,7 @@ class LiveNorthStarService(NorthStarService):
 
     def audit(self, kind, snapshot_id, payload):
         self.source.sql(f'''INSERT INTO {self.source.prefix}.AUDIT_EVENTS(EVENT_ID,CASE_ID,SNAPSHOT_ID,PAYLOAD)
-            SELECT %s,%s,%s,PARSE_JSON(%s)''', (str(uuid.uuid4()), CASE_ID, snapshot_id, json.dumps({'kind': kind, **payload})))
+            SELECT %s,%s,%s,PARSE_JSON(%s)''', (str(uuid.uuid4()), self.case_id, snapshot_id, json.dumps({'kind': kind, **payload})))
 
     def mutate(self, revision, snapshot_id, action, actor='', reason='', plan_id=''):
         # Serialize this deployment; the revision predicate also protects other writers.
@@ -202,7 +241,7 @@ class LiveNorthStarService(NorthStarService):
             self.source.sql('BEGIN')
             try:
                 result = self.source.sql(f'''UPDATE {self.source.prefix}.CASE_STATE SET REVISION=%s,PAYLOAD=PARSE_JSON(%s)
-                    WHERE CASE_ID=%s AND REVISION=%s''', (updated['revision'], json.dumps(updated), CASE_ID, revision))
+                    WHERE CASE_ID=%s AND REVISION=%s''', (updated['revision'], json.dumps(updated), self.case_id, revision))
                 count = next(iter(result[0].values())) if result else 0
                 if count != 1:
                     raise Conflict('Another reviewer updated this case. Refresh to continue.')

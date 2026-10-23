@@ -176,3 +176,36 @@ def test_http_workflow(tmp_path, monkeypatch):
         assert client.get('/api/northstar/case').json() == clean
         stale_reset = client.post('/api/northstar/case', json=dict(action='reset', revision=approved['revision'], snapshot_id=approved['snapshot_id']))
         assert stale_reset.status_code == 409
+
+
+def test_http_demo_case_lifecycle_is_separate(tmp_path, monkeypatch):
+    from app import main
+    monkeypatch.setenv('PROJECT_NORTHSTAR_MODE', 'offline')
+    monkeypatch.setattr(main, 'store', Store(tmp_path / 'demo-api.sqlite3'))
+    with TestClient(main.app) as client:
+        current = client.get('/api/northstar/case').json()
+        for _ in range(4):
+            current = client.post('/api/northstar/case', json=dict(action='advance', revision=current['revision'], snapshot_id=current['snapshot_id'])).json()
+        demo_id = 'NS-2026-1042-DEMO-01'
+        payload = dict(case_id=demo_id, title='Separate demo', revision=current['revision'], snapshot_id=current['snapshot_id'])
+        response = client.post('/api/northstar/cases', json=payload)
+        assert response.status_code == 201
+        created = response.json()
+        assert created['id'] == demo_id and created['demo'] and created['decision'] is None and not created['drafts']
+        assert created['run_id'] != current['run_id']
+        assert created['snapshot'] == current['snapshot']
+        assert len(client.get('/api/northstar/cases').json()['cases']) == 2
+        url = '/api/northstar/case?case_id=' + demo_id
+        assert client.get(url).json() == created
+        approved = client.post(url, json=dict(action='approve', revision=created['revision'], snapshot_id=created['snapshot_id'], actor='Demo reviewer', reason='Demo only', plan_id='C'))
+        assert approved.status_code == 200
+        approved = approved.json()
+        assert all(d['case_id'] == demo_id for d in approved['drafts'])
+        clean = client.post(url, json=dict(action='reset', revision=approved['revision'], snapshot_id=approved['snapshot_id'])).json()
+        assert clean['title'] == 'Separate demo' and clean['demo'] and not clean['drafts'] and clean['decision'] is None
+        assert client.get('/api/northstar/case').json() == current
+        assert client.post('/api/northstar/cases', json=payload).status_code == 409
+        assert client.post('/api/northstar/cases', json={**payload, 'case_id': 'NS-OTHER', 'revision': 999}).status_code == 409
+        assert client.get('/api/northstar/case?case_id=NS-MISSING').status_code == 404
+        assert client.post('/api/northstar/cases', json={**payload, 'case_id': 'NS-BLANK', 'title': '  '}).status_code == 400
+        assert len(client.get('/api/northstar/cases').json()['cases']) == 2

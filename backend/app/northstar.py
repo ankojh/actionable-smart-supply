@@ -17,6 +17,28 @@ STAGES = ('00_detection', '01_impact', '02_initial_options', '03_manager_challen
 CASE_ID = 'NS-2026-1042'
 
 
+def validate_case_id(case_id):
+    if not isinstance(case_id, str) or not re.fullmatch(r'NS-[A-Z0-9-]{1,96}', case_id):
+        raise ValueError('Use a NorthStar case ID containing uppercase letters, numbers and hyphens')
+    return case_id
+
+
+def demo_state(title, stage, source_case_id):
+    title = title.strip()
+    if not title or len(title) > 100:
+        raise ValueError('A demo case title between 1 and 100 characters is required')
+    return dict(title=title, demo=True, source_case_id=source_case_id, created_at=utc_now(),
+                stage=stage, revision=0, run_id=str(uuid.uuid4()), run_started_at=utc_now(),
+                decision=None, drafts=[], monitoring_released=False)
+
+
+def case_summary(case_id, state):
+    return dict(id=case_id, title=state.get('title', 'HDR-200 delivery delay'),
+                demo=state.get('demo', False), source_case_id=state.get('source_case_id', CASE_ID),
+                status='APPROVED' if state.get('decision') else 'READY_FOR_REVIEW',
+                revision=state['revision'], stage=state['stage'], run_id=state.get('run_id', 'initial'))
+
+
 def supplier_update(snapshot):
     """Extract the explicit revised date from the dated Pacific source email."""
     doc = next(d for d in snapshot['tables']['documents'] if d['document_id'] == 'DOC-SUP-001')
@@ -143,36 +165,60 @@ def analyze(snapshot):
 
 
 class NorthStarService:
-    def __init__(self, store, source=None):
+    def __init__(self, store, source=None, case_id=CASE_ID):
         self.store = store
         self.source = source
+        self.case_id = validate_case_id(case_id)
         with store.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS northstar_cases (id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
             db.execute('CREATE TABLE IF NOT EXISTS northstar_run_history (run_id TEXT PRIMARY KEY, case_id TEXT NOT NULL, payload TEXT NOT NULL, archived_at TEXT NOT NULL)')
             db.execute('INSERT OR IGNORE INTO northstar_cases VALUES (?, ?)', (CASE_ID, json.dumps(dict(stage=0, revision=0, decision=None, drafts=[], monitoring_released=False))))
 
+    def state(self, db):
+        row = db.execute('SELECT payload FROM northstar_cases WHERE id=?', (self.case_id,)).fetchone()
+        if row is None:
+            raise KeyError('NorthStar case not found')
+        return json.loads(row[0])
+
     def read(self):
         with self.store.connect() as db:
-            state = json.loads(db.execute('SELECT payload FROM northstar_cases WHERE id=?', (CASE_ID,)).fetchone()[0])
+            state = self.state(db)
         return self.present(state)
+
+    def list_cases(self):
+        with self.store.connect() as db:
+            rows = db.execute('SELECT id,payload FROM northstar_cases ORDER BY rowid LIMIT 100').fetchall()
+        return [case_summary(case_id, json.loads(payload)) for case_id, payload in rows]
+
+    def create_demo(self, case_id, title, revision, snapshot_id):
+        validate_case_id(case_id)
+        with self.store.transaction() as db:
+            current = self.present(self.state(db))
+            if revision != current['revision'] or snapshot_id != current['snapshot_id']:
+                raise Conflict('NorthStar evidence changed; reload before creating a demo case')
+            if db.execute('SELECT 1 FROM northstar_cases WHERE id=?', (case_id,)).fetchone():
+                raise Conflict('This NorthStar case ID already exists')
+            state = demo_state(title, current['stage'], CASE_ID)
+            db.execute('INSERT INTO northstar_cases VALUES (?, ?)', (case_id, json.dumps(state)))
+        return NorthStarService(self.store, self.source, case_id).read()
 
     def present(self, state):
         snapshot = self.source.load_stage(state['stage']) if self.source else load_stage(state['stage'])
         digest = fingerprint(snapshot)
         if state['decision'] and state['decision']['snapshot_id'] != digest:
             raise Conflict('Approved NorthStar evidence has changed; the saved drafts require a new assessment')
-        return {**state, 'run_id': state.get('run_id', 'initial'), 'id': CASE_ID, 'mode': 'live' if self.source else 'offline', 'snapshot_id': digest, 'snapshot': snapshot, 'supplier_update': supplier_update(snapshot), 'analysis': analyze(snapshot)}
+        return {**state, **case_summary(self.case_id, state), 'mode': 'live' if self.source else 'offline', 'snapshot_id': digest, 'snapshot': snapshot, 'supplier_update': supplier_update(snapshot), 'analysis': analyze(snapshot)}
 
     def mutate(self, revision, snapshot_id, action, actor='', reason='', plan_id=''):
         with self.store.transaction() as db:
-            state = json.loads(db.execute('SELECT payload FROM northstar_cases WHERE id=?', (CASE_ID,)).fetchone()[0])
+            state = self.state(db)
             current = self.present(state)
             if revision != state['revision'] or snapshot_id != current['snapshot_id']:
                 raise Conflict('NorthStar evidence changed; reload the current case')
             if action == 'reset':
-                db.execute('INSERT INTO northstar_run_history VALUES (?, ?, ?, ?)', (current['run_id'], CASE_ID, json.dumps(state), utc_now()))
+                db.execute('INSERT INTO northstar_run_history VALUES (?, ?, ?, ?)', (current['run_id'], self.case_id, json.dumps(state), utc_now()))
             self.transition(state, current, action, actor, reason, plan_id)
-            db.execute('UPDATE northstar_cases SET payload=? WHERE id=?', (json.dumps(state), CASE_ID))
+            db.execute('UPDATE northstar_cases SET payload=? WHERE id=?', (json.dumps(state), self.case_id))
         return self.present(state)
 
     def transition(self, state, current, action, actor, reason, plan_id):
@@ -181,8 +227,9 @@ class NorthStarService:
         if action == 'reset':
             # Keep the released source evidence; start a distinct workflow over it.
             stage = state['stage']
+            metadata = {key: state[key] for key in ('title', 'demo', 'source_case_id', 'created_at') if key in state}
             state.clear()
-            state.update(stage=stage, revision=revision, run_id=str(uuid.uuid4()), run_started_at=utc_now(),
+            state.update(**metadata, stage=stage, revision=revision, run_id=str(uuid.uuid4()), run_started_at=utc_now(),
                          decision=None, drafts=[], monitoring_released=False)
         elif action == 'advance':
             if state['stage'] >= 4 or state['decision']:
@@ -194,10 +241,10 @@ class NorthStarService:
             plan = next((p for p in current['analysis']['plans'] if p['id'] == plan_id and p['approval_eligible']), None)
             if not actor.strip() or not reason.strip() or not plan:
                 raise ValueError('Reviewer, rationale and an evidence-qualified plan are required')
-            approval_id = f'{CASE_ID}-approval-{revision}'
+            approval_id = f'{self.case_id}-approval-{revision}'
             state['decision'] = dict(id=approval_id, actor=actor.strip(), reason=reason.strip(), plan_id=plan_id, scenario_version=2 if state['stage'] >= 3 else 1, snapshot_id=snapshot_id, created_at=utc_now(), scope='prepare_drafts_only')
             purchase_total = sum(a['quantity'] * a['unit_price_cents'] for a in plan['actions'] if a['kind'] == 'purchase_order')
-            state['drafts'] = [dict(id=f'{approval_id}-{i}', case_id=CASE_ID, approval_id=approval_id, scenario_version=state['decision']['scenario_version'], part_number='HDR-200', destination_location_id='PRODUCTION', total_cents=a['quantity'] * a['unit_price_cents'] if a['kind'] == 'purchase_order' else plan['expenditure_cents'] - purchase_total, status='DRAFT_NOT_SUBMITTED', transmitted=False, **a) for i, a in enumerate(plan['actions'])]
+            state['drafts'] = [dict(id=f'{approval_id}-{i}', case_id=self.case_id, approval_id=approval_id, scenario_version=state['decision']['scenario_version'], part_number='HDR-200', destination_location_id='PRODUCTION', total_cents=a['quantity'] * a['unit_price_cents'] if a['kind'] == 'purchase_order' else plan['expenditure_cents'] - purchase_total, status='DRAFT_NOT_SUBMITTED', transmitted=False, **a) for i, a in enumerate(plan['actions'])]
         elif action == 'monitor':
             if not state['decision'] or state['decision']['plan_id'] != 'C':
                 raise ValueError('The supplied simulated feed applies only to approved Option C')

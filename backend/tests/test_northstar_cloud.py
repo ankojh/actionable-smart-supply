@@ -6,7 +6,7 @@ import pytest
 
 from app.config import Settings
 from app.domain import fingerprint
-from app.northstar import load_stage
+from app.northstar import CASE_ID, load_stage
 from app.northstar_cloud import LiveNorthStarService, SnowflakeNorthStarSource
 from app.platform import PlatformError, SnowflakePlatform
 from app.storage import Conflict
@@ -16,11 +16,15 @@ class CloudSource(SnowflakeNorthStarSource):
     def __init__(self):
         super().__init__(Settings(user='test', database='TEST_DB', account='test-account'))
         self.snapshot = load_stage(4)
-        self.saved = dict(stage=4, revision=0, decision=None, drafts=[], monitoring_released=False)
+        self.states = {CASE_ID: dict(stage=4, revision=0, decision=None, drafts=[], monitoring_released=False)}
         self.findings = {}
         self.statements = []
         self.pending = None
         self.reject_update = False
+
+    @property
+    def saved(self):
+        return self.states[CASE_ID]
 
     @contextmanager
     def session(self):
@@ -29,19 +33,30 @@ class CloudSource(SnowflakeNorthStarSource):
     def sql(self, statement, params=None):
         self.statements.append((statement, params))
         if 'SELECT REVISION,PAYLOAD' in statement:
-            return [{'REVISION': self.saved['revision'], 'PAYLOAD': json.dumps(self.saved)}]
+            state = self.states.get(params[0])
+            return [{'REVISION': state['revision'], 'PAYLOAD': json.dumps(state)}] if state else []
+        if 'SELECT CASE_ID,REVISION,PAYLOAD' in statement:
+            return [{'CASE_ID': key, 'REVISION': state['revision'], 'PAYLOAD': json.dumps(state)}
+                    for key, state in sorted(self.states.items())]
+        if statement.startswith('MERGE INTO '):
+            if params[0] in self.states:
+                return [{'number of rows inserted': 0}]
+            self.pending = (params[0], json.loads(params[1]))
+            return [{'number of rows inserted': 1}]
         if 'FROM TEST_DB.NORTHSTAR_RECOVERY_V2.PUBLISHED_SNAPSHOTS' in statement:
             return [{'SNAPSHOT_ID': fingerprint(self.snapshot), 'PAYLOAD': json.dumps(self.snapshot), 'INGESTION_ID': 'test-ingestion', 'MANIFEST': json.dumps({'table_counts': {'inventory': 14}, 'planning_snapshots': 5})}]
         if 'SELECT ROLE,PAYLOAD' in statement:
             return [{'ROLE': k, 'PAYLOAD': v} for k, v in self.findings.items()
                     if v.get('run_id', 'initial') == params[2] and v.get('prompt_version', params[1]) == params[1]]
         if statement.startswith('UPDATE '):
-            if self.reject_update or params[3] != self.saved['revision']:
+            state = self.states.get(params[2])
+            if self.reject_update or not state or params[3] != state['revision']:
                 return [{'number of rows updated': 0}]
-            self.pending = json.loads(params[1])
+            self.pending = (params[2], json.loads(params[1]))
             return [{'number of rows updated': 1}]
         if statement == 'COMMIT' and self.pending:
-            self.saved = self.pending
+            case_id, state = self.pending
+            self.states[case_id] = state
             self.pending = None
         if statement == 'ROLLBACK':
             self.pending = None
@@ -67,6 +82,53 @@ def test_live_read_never_opens_fixture_fallback(source, monkeypatch):
     assert '/test/account/' in case['cloud']['url']
     assert not case['decision']
     assert case['snapshot']['tables']['plan_approvals'] == []
+
+
+def test_cloud_demo_case_is_persistent_and_independent(source):
+    original = LiveNorthStarService(source)
+    before = original.read()
+    original.mutate(before['revision'], before['snapshot_id'], 'approve', 'Reviewer', 'Reviewed', 'C')
+    before = original.read()
+    source.findings = {'operations': {'text': 'Original findings', 'run_id': before['run_id']}}
+    demo_id = 'NS-2026-1042-DEMO-01'
+    created = original.create_demo(demo_id, 'Separate NorthStar demo', before['revision'], before['snapshot_id'])
+    assert created['id'] == demo_id and created['demo'] and created['source_case_id'] == CASE_ID
+    assert created['run_id'] != before['run_id'] and created['run_id'] != 'initial'
+    assert created['snapshot'] == before['snapshot'] and created['snapshot_id'] == before['snapshot_id']
+    assert created['findings'] == {} and created['decision'] is None and created['drafts'] == []
+    demo = LiveNorthStarService(source, demo_id)
+    approved = demo.mutate(created['revision'], created['snapshot_id'], 'approve', 'Demo reviewer', 'Demo only', 'C')
+    assert all(d['case_id'] == demo_id and d['id'].startswith(demo_id) for d in approved['drafts'])
+    assert original.read()['decision'] == before['decision']
+    clean = demo.mutate(approved['revision'], approved['snapshot_id'], 'reset')
+    assert clean['title'] == created['title'] and clean['demo'] and clean['source_case_id'] == CASE_ID
+    assert clean['decision'] is None and clean['drafts'] == []
+    assert LiveNorthStarService(source, demo_id).read() == clean
+    assert {case['id'] for case in original.list_cases()} == {CASE_ID, demo_id}
+    events = [(p[1], json.loads(p[3])) for s, p in source.statements if 'INSERT INTO' in s and 'AUDIT_EVENTS' in s]
+    assert any(key == demo_id and event['kind'] == 'case_created' for key, event in events)
+    with pytest.raises(Conflict):
+        original.create_demo(demo_id, 'Duplicate', before['revision'], before['snapshot_id'])
+    with pytest.raises(Conflict):
+        original.create_demo('NS-DEMO-STALE', 'Stale', 999, before['snapshot_id'])
+    with pytest.raises(KeyError):
+        LiveNorthStarService(source, 'NS-MISSING').read()
+    assert len(source.states) == 2
+
+
+def test_cloud_demo_creation_rolls_back_if_audit_fails(source, monkeypatch):
+    service = LiveNorthStarService(source)
+    before = service.read()
+    original_sql = source.sql
+    def fail_audit(sql, params=None):
+        if 'INSERT INTO' in sql and 'AUDIT_EVENTS' in sql:
+            raise ValueError('Audit unavailable')
+        return original_sql(sql, params)
+    monkeypatch.setattr(source, 'sql', fail_audit)
+    with pytest.raises(ValueError, match='Audit unavailable'):
+        service.create_demo('NS-DEMO-FAILED', 'Failed demo', before['revision'], before['snapshot_id'])
+    assert set(source.states) == {CASE_ID}
+    assert source.pending is None
 
 
 def test_missing_or_corrupt_cloud_evidence_fails_closed(source, monkeypatch):

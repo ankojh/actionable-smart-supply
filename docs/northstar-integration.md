@@ -77,10 +77,23 @@ and [structured-output contract](https://docs.snowflake.com/en/sql-reference/fun
 
 - `GET /api/northstar/case`: cloud case, evidence, calculations and current findings.
 - `POST /api/northstar/case`: `revision`, `snapshot_id`, `action`; approval adds
-  `actor`, `reason` and `plan_id`. Supported actions: `approve`, `monitor`, and
+  `actor`, `reason` and `plan_id`. Supported actions: `reset`, `approve`, `monitor`, and
   stage `advance` when a case is at an earlier planning stage.
+- `GET /api/northstar/cases`: list the original case and independent demo cases.
+- `POST /api/northstar/cases`: create a demo using `case_id`, `title`, and the
+  original case's current `revision` and `snapshot_id`. The new ID must start
+  with `NS-` and contain uppercase letters, numbers and hyphens. Existing IDs
+  return 409. The demo retains the released NorthStar evidence and starts with
+  its own run ID, no findings, no approval, no drafts and no execution tracking.
 - `POST /api/northstar/investigate`: current `revision` and `snapshot_id`.
 - `POST /api/northstar/chat`: the same binding plus `question`.
+
+Add `?case_id=NS-...` to the case, investigation, chat and chat-job creation
+endpoints to work on a demo. Omitting it selects `NS-2026-1042`. Demo approvals,
+resets, drafts, findings and audit events stay scoped to that case; the evidence
+snapshot retains its original source case ID. Creation performs no model calls.
+These are backend endpoints; the current frontend still selects the original
+case and does not list demo cases.
 
 Stale bindings return 409. Cloud/model failures return 503. The frontend exposes
 actual provider state and per-request failures; it never relabels a local case live.
