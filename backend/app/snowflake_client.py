@@ -35,8 +35,10 @@ def _connect_args(s: Settings) -> dict[str, Any]:
     elif s.auth == "externalbrowser":
         args["authenticator"] = "externalbrowser"
     elif s.auth == "pat":
-        args["authenticator"] = "PROGRAMMATIC_ACCESS_TOKEN"
-        args["token"] = s.token
+        # Snowflake accepts a PAT in place of a password, which works on every connector version
+        if not s.token:
+            raise ValueError("SNOWFLAKE_TOKEN is required for pat auth")
+        args["password"] = s.token
     return {k: v for k, v in args.items() if v is not None}
 
 
