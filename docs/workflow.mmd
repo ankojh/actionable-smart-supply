@@ -1,0 +1,90 @@
+flowchart TD
+    delivery([Supplier delay or delivery change]) --> validate[Validate inputs and save dated immutable evidence snapshot]
+
+    subgraph investigate["1 · Investigate impact and recovery options"]
+        ops[Operations investigation: inventory, allocations, BOM, production capacity, affected orders]
+        shortage[Derive time-phased material shortage and recovery deadlines]
+        discovery[Sourcing discovery: internal reallocation and alternative suppliers]
+        candidates[Bind recovery quantities to source terms and underlying citations]
+        ops --> shortage
+        discovery --> candidates
+        shortage --> candidates
+    end
+    validate --> ops
+    validate --> discovery
+    concurrent[Independent Operations and Sourcing discovery may run concurrently; at most two workers] -.-> discovery
+
+    subgraph qualify["2 · Qualify evidence and evaluate plans"]
+        review{Independent Qualification review: evidence complete and candidate predicates supported?}
+        engine[Calculate feasible recovery plans: deterministic material balance, business calendars, shared capacity, deliveries, and costs]
+        checks{Independent checks: complete recovery, constraints, policy, authority, and known costs satisfied?}
+        review -->|Qualified| engine --> checks
+    end
+    candidates --> review
+    review -->|Unsupported option with explicit reasons| discovery
+
+    subgraph decide["3 · Recommend and obtain a human decision"]
+        recommend[Present recommendation and alternatives; explain trade-offs and projected outcomes]
+        freeze[Freeze exact recommendation, evidence fingerprint, policy, and forecast]
+        human{Human decision bound to exact run, company, scope, snapshot, policy, and checkpoint}
+        defer([Defer: save decision and pause])
+        revalidate[Revalidate selected plan: current evidence, feasibility, reservation deadlines, and authority]
+        valid{Still valid?}
+        selected[Freeze the human-selected plan separately]
+        drafts([Generate review-only action drafts: DRAFT_NOT_SUBMITTED; human review before any business action])
+        recommend --> freeze --> human
+        human -->|Approve recommendation or choose alternative| revalidate --> valid
+        human -->|Defer| defer
+        valid -->|Yes| selected --> drafts
+    end
+    checks -->|Pass| recommend
+
+    subgraph evidence["Evidence and investigation loop"]
+        request[Prepare precise targeted evidence-request draft]
+        wait[Durable wait for supplied dated response; never send automatically]
+        admit[Validate scoped response against source authority; human text is evidence, not automatic truth]
+        snapshot[Save new immutable evidence snapshot; invalidate prior selection and drafts]
+        targeted[Rerun affected Operations or Sourcing investigation; reuse only unchanged validated dependencies]
+        gap[Investigate remaining recovery gap]
+        path{Further supported investigation possible?}
+        escalate([Escalate unresolved shortfall for human review])
+        request --> wait --> admit --> snapshot --> targeted
+        gap --> path
+        path -->|Further investigation| targeted
+        path -->|No viable path| escalate
+    end
+    review -->|Missing or contradictory evidence| request
+    checks -->|Incomplete recovery or failed criteria| gap
+    valid -->|Changed: require a new selection| snapshot
+    targeted --> ops
+    targeted --> discovery
+    defer -->|Explicit resume within original deadline and budgets| targeted
+
+    subgraph evaluate["4 · Separate offline outcome evaluation branch"]
+        gate[Select an immutable frozen forecast before opening held-out events]
+        replay[Replay separate held-out synthetic delivery events]
+        score[Compare outcome with frozen forecast and no-recovery baseline: on-time units, whole orders, shortages, expenditure]
+        note[Stress cases are declared sensitivity points, not measured probabilities]
+        gate --> replay --> score
+        note -.-> score
+    end
+    freeze -.->|Separate evaluation branch| gate
+    selected -.->|Evaluate selected alternative separately| gate
+
+    audit[(One durable orchestration owner: checkpoints, persistent budgets, receipts, immutable artifacts, idempotent audit outbox)]
+    validate -.-> audit
+    wait -.-> audit
+    human -.-> audit
+    drafts -.-> audit
+    snowflake[(Live Snowflake authority: versioned operational rows, governed views, scoped Search, evidence membership, and audit records)]
+    snowflake -.-> validate
+    snowflake -.-> revalidate
+
+    classDef action fill:#eff6f1,stroke:#8eaa98,color:#25493a;
+    classDef gate fill:#faf4e7,stroke:#bc9d61,color:#715a2a;
+    classDef human fill:#f3f0f8,stroke:#a395ba,color:#665a7e;
+    classDef neutral fill:#f6f8fa,stroke:#a8b8c2,color:#3e5664;
+    class delivery,validate,ops,shortage,discovery,candidates,engine,recommend,freeze,revalidate,snapshot,targeted,request,wait,admit,gap,gate,replay,score neutral;
+    class review,checks,valid,path gate;
+    class human,defer,escalate human;
+    class selected,drafts action;

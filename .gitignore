@@ -14,3 +14,9 @@ node_modules/
 dist/
 
 .DS_Store
+
+# local workflow state and checks
+.runtime/
+.pytest_cache/
+.ruff_cache/
+*.sqlite3*

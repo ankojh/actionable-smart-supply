@@ -1,0 +1,204 @@
+{
+  "case_id": "shortage-investigation-v1",
+  "status": "SYNTHETIC_SCENARIO_V1",
+  "provenance": "All companies, parts, costs, inventory, operational records and supplier messages in this case are fictional. Public catalog datasets are separate benchmarks, not sources for these quantities or commitments.",
+  "as_of": "2026-11-02T08:00:00",
+  "calendar": {
+    "working_days": "Monday-Friday, no holidays",
+    "production_start": "09:00",
+    "production_capacity_robots_per_day": 30,
+    "drivers_per_robot": 2,
+    "material_to_ship_business_days": 2,
+    "receipts": "usable at the stated receipt time, before 09:00 for same-day production"
+  },
+  "policies": {
+    "product_required": "DRV-24-B, revision B",
+    "substitutions": "Require documented engineering approval; revision A has none",
+    "objective": "Protect all contracted deadlines if feasible, then minimize verified new recovery expenditure; break equal-cost ties by fewer excess drivers, then fewer supplier purchases.",
+    "source_stock": "On hand minus recorded allocations; transfer may not consume another commitment",
+    "supplier_commitment": "Catalog stock and quoted dates are candidates only; verify exact part, reserved quantity and usable receipt deadline",
+    "cost": "New external purchase cash plus confirmed supplier freight plus internal transfer charge; original PO remains separate",
+    "action_boundary": "Review-only drafts. No send, purchase, inventory movement or customer-promise tools.",
+    "approval": {
+      "manager_review_required": true,
+      "recovery_expenditure_limit_usd": 1500,
+      "above_limit": "Escalate; do not authorize automatically"
+    }
+  },
+  "production_orders": [
+    {
+      "id": "SO-001",
+      "robots": 30,
+      "start_date": "2026-11-02",
+      "promised_ship_date": "2026-11-04",
+      "contracted": true
+    },
+    {
+      "id": "SO-002",
+      "robots": 30,
+      "start_date": "2026-11-03",
+      "promised_ship_date": "2026-11-05",
+      "contracted": true
+    },
+    {
+      "id": "SO-003",
+      "robots": 30,
+      "start_date": "2026-11-04",
+      "promised_ship_date": "2026-11-06",
+      "contracted": true
+    },
+    {
+      "id": "SO-004",
+      "robots": 30,
+      "start_date": "2026-11-05",
+      "promised_ship_date": "2026-11-09",
+      "contracted": true
+    },
+    {
+      "id": "SO-005",
+      "robots": 30,
+      "start_date": "2026-11-06",
+      "promised_ship_date": "2026-11-10",
+      "contracted": true
+    }
+  ],
+  "inventory_on_hand": [
+    {
+      "id": "INV-PLANT",
+      "location": "Plant A",
+      "part": "DRV-24-B",
+      "on_hand": 200,
+      "as_of": "2026-11-02T08:00:00"
+    },
+    {
+      "id": "INV-WH",
+      "location": "Warehouse B",
+      "part": "DRV-24-B",
+      "on_hand": 100,
+      "as_of": "2026-11-02T08:00:00"
+    }
+  ],
+  "allocation_ledger": [
+    {
+      "id": "ALLOC-PLANT",
+      "inventory_id": "INV-PLANT",
+      "quantity": 20,
+      "purpose": "Separate service commitment, outside these five production orders"
+    },
+    {
+      "id": "ALLOC-WH",
+      "inventory_id": "INV-WH",
+      "quantity": 60,
+      "purpose": "Existing customer commitment at another plant"
+    }
+  ],
+  "internal_transfer": {
+    "id": "TRANSFER-B",
+    "from": "Warehouse B",
+    "to": "Plant A",
+    "part": "DRV-24-B",
+    "confirmed_usable_receipt": "2026-11-05T08:00:00",
+    "charge_if_used_usd": 80,
+    "authority": "Transfer approved only for stock unallocated at the source",
+    "evidence": "DOC-TRANSFER-B"
+  },
+  "primary_po": {
+    "id": "PO-PRIMARY",
+    "part": "DRV-24-B",
+    "quantity": 240,
+    "unit_price_usd": 10,
+    "erp_eta": "2026-11-03T08:00:00",
+    "status": "Open",
+    "supplier_confirmed_eta": "2026-11-09T08:00:00",
+    "confirmed_eta_evidence": "DOC-DELAY",
+    "unmodified_obligation_usd": 2400
+  },
+  "candidate_offers": [
+    {
+      "id": "OFFER-STANDARD",
+      "supplier": "Standard Supply",
+      "offered_part": "DRV-24-B",
+      "revision": "B",
+      "approved_supplier": true,
+      "catalog_quantity": 80,
+      "unit_price_usd": 12,
+      "moq": 20,
+      "multiple": 20,
+      "freight_usd": 40,
+      "quote_dispatch": "2026-11-04",
+      "delivery_confirmation": null,
+      "evidence": "DOC-QUOTE-STANDARD"
+    },
+    {
+      "id": "OFFER-EXPRESS",
+      "supplier": "Express Supply",
+      "offered_part": "DRV-24-B",
+      "revision": "B",
+      "approved_supplier": true,
+      "catalog_quantity": 80,
+      "unit_price_usd": 16,
+      "moq": 20,
+      "multiple": 20,
+      "freight_usd": 60,
+      "quoted_receipt": "2026-11-05T08:00:00",
+      "delivery_confirmation": null,
+      "evidence": "DOC-QUOTE-EXPRESS"
+    },
+    {
+      "id": "OFFER-CHEAP",
+      "supplier": "Budget Supply",
+      "offered_part": "DRV-24-A",
+      "revision": "A",
+      "approved_supplier": true,
+      "catalog_quantity": 500,
+      "unit_price_usd": 8,
+      "moq": 20,
+      "multiple": 20,
+      "freight_usd": 30,
+      "quoted_receipt": "2026-11-04T08:00:00",
+      "engineering_substitution_approval": null,
+      "evidence": "DOC-TECH-A"
+    },
+    {
+      "id": "OFFER-RESERVE",
+      "supplier": "Reserve Supply",
+      "offered_part": "DRV-24-B",
+      "revision": "B",
+      "approved_supplier": true,
+      "catalog_quantity": 200,
+      "unit_price_usd": 13,
+      "moq": 100,
+      "multiple": 20,
+      "freight_usd": 100,
+      "quoted_receipt": "2026-11-05T08:00:00",
+      "delivery_confirmation": null,
+      "evidence": "DOC-QUOTE-RESERVE"
+    }
+  ],
+  "initial_documents": [
+    {
+      "id": "DOC-DELAY",
+      "text": "SIMULATED supplier confirmation: all 240 units on PO-PRIMARY will be usable at Plant A at 08:00 Monday November 9, rather than November 3. No partial shipment is confirmed."
+    },
+    {
+      "id": "DOC-TRANSFER-B",
+      "text": "SIMULATED internal transfer authorization: usable unallocated DRV-24-B stock can reach Plant A at 08:00 November 5 for an $80 shipment charge. Check the allocation ledger before proposing a quantity."
+    },
+    {
+      "id": "DOC-QUOTE-STANDARD",
+      "text": "SIMULATED quote: DRV-24-B revision B, $12 per driver, minimum 20 and multiples of 20, freight $40 per purchase. Catalog shows 80. Planned dispatch is Wednesday November 4. This quote does not reserve stock or confirm Plant A receipt."
+    },
+    {
+      "id": "DOC-QUOTE-EXPRESS",
+      "text": "SIMULATED quote: DRV-24-B revision B, $16 per driver, minimum 20 and multiples of 20, freight $60 per purchase. Catalog shows 80, quoted usable receipt Thursday November 5 at 08:00. Quantity and receipt remain subject to a written reservation confirmation."
+    },
+    {
+      "id": "DOC-TECH-A",
+      "text": "SIMULATED technical record: DRV-24-A revision A has a different connector pinout from the required DRV-24-B revision B. No engineering substitution approval is recorded. An approved distributor does not establish product interchangeability."
+    },
+    {
+      "id": "DOC-QUOTE-RESERVE",
+      "text": "SIMULATED quote: DRV-24-B revision B, $13 each, MOQ 100 and order multiples of 20, freight $100. Catalog quantity 200. Quoted usable receipt is Thursday November 5 at 08:00, subject to written reservation confirmation."
+    }
+  ]
+}

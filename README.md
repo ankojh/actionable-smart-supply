@@ -1,55 +1,72 @@
-# Actionable Smart Supply
+# The project
 
-Minimal React (Vite) + FastAPI scaffold wired to Snowflake. Product scope is TBD; this just proves the connection works.
+A local supply-chain investigation and recovery application built with FastAPI, React, a deterministic planning engine, and Snowflake-hosted Claude. It follows the supplied workflow: dated evidence → Operations and Sourcing investigations → independent Qualification review → recovery evaluation → human decision → revalidation → review-only action drafts.
 
-```
-backend/   FastAPI app, Snowflake connector, config from env vars
-frontend/  React page that calls the backend and shows the Snowflake result
-sample_data/  Small synthetic planning scenarios, generator, validation, and test answers
-```
+The offline demo uses synthetic evidence and scripted specialists. Live assessments read governed Snowflake evidence and use application-controlled Claude tool loops through Snowflake. A live failure never falls back to local fixtures or another model provider. These loops are not native managed Cortex Agent resources.
 
-## Development sample data
+## Start locally
 
-See [sample_data/README.md](sample_data/README.md) for five reproducible supply-chain
-scenarios, data definitions, simulated supplier documents, and expected outcomes.
-The generated JSON is ready for local development; no Snowflake data is loaded.
+Use Python 3.12, uv, and Node.js 22.12 or newer (verified on Node.js 24). Run from the repository root:
 
-```bash
-python3 -m sample_data.generate
-python3 -m sample_data.validate
-python3 -m unittest discover -s sample_data/tests -v
+```sh
+uv venv --python 3.12 backend/.venv
+uv pip sync --python backend/.venv/bin/python backend/requirements.txt
+npm --prefix frontend ci
+npm --prefix frontend run build
+bash scripts/dev.sh
 ```
 
-## Backend
+Open [the local console](http://127.0.0.1:5173). The API is available at [localhost:8000](http://127.0.0.1:8000), with [interactive API documentation](http://127.0.0.1:8000/docs). The launcher starts both local services and stops them together. Offline assessments require no Snowflake credentials. The console's connection check may report Snowflake unavailable while the offline workflow remains usable; it does not start model inference.
 
-```bash
+The console opens in **Risk Inbox**, with severity filters, search, and scenario-derived impact indicators. Select **View analysis & recovery options** to open the offline decision workspace, or use **New assessment → Offline scenario → Concurrent specialists**. The six-step workflow follows **Risk alert → Analysis → Investigate → Compare → Decision → Action**. Company Brain answers supported offline questions from the current snapshot; live questions use the existing Snowflake Analyst surface. Use **Add new scenario** to combine exact qualified source quantities and compare the engine’s cost, shortage, schedule, and authority checks. Only feasible scenarios within authority can be selected. The initial investigation deliberately stops at an evidence wait. Review the source requests, then select **Load demo confirmations** to admit the scenario's dated source responses. The engine evaluates supported plans and freezes the recommendation. Enter a reviewer name and rationale to approve, choose an alternative, or defer. Approval revalidates the exact plan before preparing `DRAFT_NOT_SUBMITTED` artifacts. The separate **Outcome evaluation** page replays held-out synthetic events only after a forecast is frozen.
+
+For the supplied recovery scenario, the engine derives 300 required drivers, 180 initially usable, and 120 uncovered. Recovery must supply 60 cumulatively before Thursday's production start and 120 before Friday's. Warehouse on-hand is 100, while only 40 are transferable. After the required source confirmations, the cost-first plan is transfer 40 + Express 20 + Standard 60 for **$1,220**. A supported Reserve fallback costs **$1,480**. The existing **$2,400** primary PO obligation stays separate from incremental recovery expenditure.
+
+Every workflow step includes a **Snowflake** link and a context panel explaining the cloud resources used. The panel links to governed data, evidence, Query History, and audit records, with copyable read-only lookups for the current case. Cortex Search and Analyst links open the configured service and semantic view directly. Offline cases label these as reference links and do not export their activity. Console links use the configured account; accounts using a locator can set `SNOWFLAKE_SNOWSIGHT_URL=https://app.snowflake.com/organization/account`. Generating links does not authenticate or query Snowflake.
+
+## Live Snowflake setup
+
+Keep credentials in the private, gitignored `backend/.env`. Preserve any existing file; copy `backend/.env.example` only when creating a new configuration. The account, database, warehouse, app role, Search service, semantic view, and supported Claude model are configurable there. SQL authentication and REST authentication are separate: SQL can use password, PAT, keypair, or browser authentication; Search and Analyst use an explicit `SNOWFLAKE_REST_AUTH` route: `session` uses the configured SQL login and its short-lived session token; `pat` uses `SNOWFLAKE_TOKEN`. Authentication failures never switch routes automatically. REST requests explicitly carry the dedicated application role in `X-Snowflake-Role`.
+
+Read the [Snowflake setup and verification guide](snowflake/README.md) before applying cloud assets. The implementation session provisioned the dedicated `DEFAULT_DATABASE.SUPPLY_RECOVERY_V1` and `DEFAULT_DATABASE.SUPPLY_RECOVERY_V1_EVAL` synthetic schemas and loaded an initial snapshot under explicit user authorization. Reproducible setup remains available for a fresh environment. Search can be intentionally suspended after validation; an SQL connection badge does not establish that Search or Analyst is available. Refer to the [acceptance report](docs/acceptance/report.md) for independent, final verification statuses and limitations.
+
+Live human decisions also require `PROJECT_LIVE_REVIEWER_ID` and `PROJECT_LIVE_REVIEWER_TOKEN` in the backend configuration. The reviewer ID must match the decision actor; the console sends the token in `X-Reviewer-Token` and keeps it only in browser memory.
+
+## Verification
+
+Run backend tests from `backend/` so the private configuration resolves consistently:
+
+```sh
 cd backend
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-cp .env.example .env   # set SNOWFLAKE_USER and SNOWFLAKE_TOKEN; .env is gitignored
-uvicorn app.main:app --reload --port 8000
+.venv/bin/python -m pytest -q
 ```
 
-Endpoints:
+The suite includes a real local HTTP process restart test, so its execution environment must permit local socket binding and subprocesses. It covers deterministic calculations, evidence and source isolation, invalid candidates, stale decisions, budgets, durable waits, idempotent I/O, and evaluator isolation. Frontend verification is `npm --prefix frontend run build` from the repository root, followed by the browser workflow in the runbook.
 
-- `GET /api/health` – API liveness, no Snowflake call
-- `GET /api/snowflake/health` – runs `SELECT CURRENT_VERSION()` (plus current account/user/role/warehouse/db/schema); returns 503 with the error message if the connection fails
+Generate the matched offline architecture comparison and declared delay sensitivity report without cloud inference:
 
-### Auth options (`SNOWFLAKE_AUTH`)
-
-| value | needs | notes |
-|---|---|---|
-| `password` | `SNOWFLAKE_PASSWORD` | simplest; fails if the user has MFA enforced |
-| `keypair` | `SNOWFLAKE_PRIVATE_KEY_PATH` (+ passphrase if encrypted) | recommended for services |
-| `pat` | `SNOWFLAKE_TOKEN` | programmatic access token from Snowsight |
-| `externalbrowser` | nothing extra | SSO in a browser; local dev only |
-
-Account identifier is `<org>-<account>`, e.g. `sfsehol-anthropic_snowflake_hackathon_fevwgp` for `app.snowflake.com/sfsehol/anthropic_snowflake_hackathon_fevwgp`.
-
-## Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev   # http://localhost:5173, proxies /api to :8000
+```sh
+cd backend
+.venv/bin/python -m app.evaluation.benchmark --output ../docs/acceptance/offline-comparison.json --repetitions 3
 ```
+
+This compares deterministic, single-agent, sequential-specialist, and concurrent-specialist execution with matched evidence, policy, and run-wide limits. Scripted latency and synthetic plan quality do not establish hosted-model performance or multi-agent superiority. Delay sensitivity points have no empirical probability weights.
+
+## Files and operating boundaries
+
+| Path | Purpose |
+| --- | --- |
+| `backend/app/` | Typed contracts, source validation, deterministic engine, specialists, workflow, API, and durable checkpoint owner |
+| `backend/data/initial_case.json` | Planner-visible synthetic initial source package |
+| `backend/evaluator_data/` | Separate held-out replay data; never specialist evidence |
+| `backend/.runtime/` | Gitignored local SQLite checkpoints, artifacts, operation receipts, and export outbox |
+| `frontend/src/` | Responsive assessment, evidence, specialist activity, decisions, drafts, and outcome console |
+| `snowflake/` | Versioned schemas, roles, governed views, Search/Analyst assets, source loader, and independent checks |
+| `docs/runbook.md` | Configuration, demo walkthrough, API contracts, recovery, and validation procedures |
+| `docs/workflow.mmd` | Diagram-aligned Mermaid workflow, including evidence loops and the separate evaluation branch |
+| `docs/acceptance/report.md` | Sanitized acceptance evidence and per-surface live verification statuses |
+| `sample_data/` | Separate pre-existing development fixture family and its own documented rules |
+
+The active 300-driver scenario and the separate `sample_data/` fixture family use different business quantities and rules; do not combine their stock or expectations. Historical reference material under `docs/supplyrelay-handoff/` is documentation, not a runtime implementation dependency.
+
+The project runs locally. It does not deploy, push changes, send supplier messages, place orders, move inventory, or change customer commitments. Every generated purchase, transfer, and evidence-request artifact remains a review-only draft.

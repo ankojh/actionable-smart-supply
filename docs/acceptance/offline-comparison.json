@@ -1,0 +1,1384 @@
+{
+  "delay_sensitivity": {
+    "assumptions": [
+      "Each named source is delayed by zero or one business day.",
+      "Frozen quantities and expenditure are unchanged; no adaptive replanning or execution is assumed.",
+      "An unused source's delay has no effect on a frozen plan."
+    ],
+    "baseline": {
+      "drivers_exposed_by_late_production": 120,
+      "on_time_units": 90,
+      "whole_orders": 3
+    },
+    "design_points": [
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 60,
+            "drivers_exposed_by_late_production": 0,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 150,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 5
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 60,
+            "drivers_exposed_by_late_production": 0,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 150,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 5
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 30,
+            "drivers_exposed_by_late_production": 60,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 120,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 4
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 30,
+            "drivers_exposed_by_late_production": 60,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 120,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 4
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 40,
+            "drivers_exposed_by_late_production": 40,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 130,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 40,
+            "drivers_exposed_by_late_production": 40,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 130,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 20,
+            "drivers_exposed_by_late_production": 80,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 110,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 0
+        },
+        "scores": [
+          {
+            "change_on_time_units": 20,
+            "drivers_exposed_by_late_production": 80,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 110,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 20,
+            "drivers_exposed_by_late_production": 80,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 110,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 20,
+            "drivers_exposed_by_late_production": 80,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 110,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 10,
+            "drivers_exposed_by_late_production": 100,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 100,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 0,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 10,
+            "drivers_exposed_by_late_production": 100,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 100,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 0,
+            "drivers_exposed_by_late_production": 120,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 90,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 0,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 0,
+            "drivers_exposed_by_late_production": 120,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 90,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 0,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 0,
+            "drivers_exposed_by_late_production": 120,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 90,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      },
+      {
+        "business_day_delays": {
+          "OFFER-EXPRESS": 1,
+          "OFFER-RESERVE": 1,
+          "OFFER-STANDARD": 1,
+          "TRANSFER-B": 1
+        },
+        "scores": [
+          {
+            "change_on_time_units": 0,
+            "drivers_exposed_by_late_production": 120,
+            "expenditure_usd": 1220.0,
+            "frozen_id": "frozen-49a54efc05aab7ed9267a980",
+            "kind": "recommended",
+            "on_time_units": 90,
+            "plan_id": "plan-9545f5ffbc52146af7cc",
+            "whole_orders": 3
+          }
+        ]
+      }
+    ],
+    "label": "Design-point delay sensitivity; these 16 cases have no probabilities or empirical reliability weights"
+  },
+  "label": "Offline scripted architecture comparison; synthetic evidence only",
+  "limits": [
+    "Measured application, storage and deterministic engine latency; no hosted model was invoked.",
+    "Equal run-wide limits and fresh role caches; role tool counts can differ by architecture.",
+    "Usage and model cost are unknown/not applicable to scripted execution and are reported as null.",
+    "A single synthetic family and these samples do not establish multi-agent superiority or generalization."
+  ],
+  "matched_evidence_policy_and_budget_limits": true,
+  "median_elapsed_seconds": {
+    "concurrent": 0.5236933749984019,
+    "deterministic": 0.4720958329999121,
+    "sequential": 0.5147324999998091,
+    "single": 0.524013542002649
+  },
+  "repetitions": 3,
+  "results": [
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "invalidated": 1,
+          "tool_completed": 2,
+          "tool_started": 4
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 0,
+        "role_invocations": 0,
+        "role_spans": [],
+        "tool_completed_events": 2,
+        "tool_started_events": 4,
+        "validated_cache_reuses": 0
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.4720958329999121,
+      "execution": "deterministic",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 1,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 2,
+          "invalidated": 1,
+          "started": 2,
+          "tool_completed": 10,
+          "tool_started": 10
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 8,
+        "role_invocations": 2,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:53.048007+00:00",
+            "role": "single",
+            "seconds": 0.007931,
+            "start": "2026-10-23T20:15:53.040076+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:53.067440+00:00",
+            "role": "single",
+            "seconds": 0.010389,
+            "start": "2026-10-23T20:15:53.057051+00:00"
+          }
+        ],
+        "tool_completed_events": 10,
+        "tool_started_events": 10,
+        "validated_cache_reuses": 0
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.5001690419885563,
+      "execution": "single",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 1,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 5,
+          "invalidated": 1,
+          "reuse": 1,
+          "started": 5,
+          "tool_completed": 11,
+          "tool_started": 11
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 9,
+        "role_invocations": 5,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:53.548655+00:00",
+            "role": "operations",
+            "seconds": 0.005836,
+            "start": "2026-10-23T20:15:53.542819+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:53.554204+00:00",
+            "role": "sourcing",
+            "seconds": 0.00494,
+            "start": "2026-10-23T20:15:53.549264+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:53.560914+00:00",
+            "role": "qualification",
+            "seconds": 0.006105,
+            "start": "2026-10-23T20:15:53.554809+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:53.580683+00:00",
+            "role": "sourcing",
+            "seconds": 0.007082,
+            "start": "2026-10-23T20:15:53.573601+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:53.588084+00:00",
+            "role": "qualification",
+            "seconds": 0.006541,
+            "start": "2026-10-23T20:15:53.581543+00:00"
+          }
+        ],
+        "tool_completed_events": 11,
+        "tool_started_events": 11,
+        "validated_cache_reuses": 1
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.5147324999998091,
+      "execution": "sequential",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 1,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 5,
+          "invalidated": 1,
+          "reuse": 1,
+          "started": 5,
+          "tool_completed": 11,
+          "tool_started": 11
+        },
+        "model_calls": 0,
+        "observed_role_overlap": true,
+        "registered_role_tool_calls": 9,
+        "role_invocations": 5,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:54.067084+00:00",
+            "role": "operations",
+            "seconds": 0.004898,
+            "start": "2026-10-23T20:15:54.062186+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:54.069069+00:00",
+            "role": "sourcing",
+            "seconds": 0.008211,
+            "start": "2026-10-23T20:15:54.060858+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:54.075148+00:00",
+            "role": "qualification",
+            "seconds": 0.005424,
+            "start": "2026-10-23T20:15:54.069724+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:54.103971+00:00",
+            "role": "sourcing",
+            "seconds": 0.008583,
+            "start": "2026-10-23T20:15:54.095388+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:54.113032+00:00",
+            "role": "qualification",
+            "seconds": 0.008077,
+            "start": "2026-10-23T20:15:54.104955+00:00"
+          }
+        ],
+        "tool_completed_events": 11,
+        "tool_started_events": 11,
+        "validated_cache_reuses": 1
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.5236933749984019,
+      "execution": "concurrent",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 1,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "invalidated": 1,
+          "tool_completed": 2,
+          "tool_started": 4
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 0,
+        "role_invocations": 0,
+        "role_spans": [],
+        "tool_completed_events": 2,
+        "tool_started_events": 4,
+        "validated_cache_reuses": 0
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.5066219580039615,
+      "execution": "deterministic",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 2,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 2,
+          "invalidated": 1,
+          "started": 2,
+          "tool_completed": 10,
+          "tool_started": 10
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 8,
+        "role_invocations": 2,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:55.110668+00:00",
+            "role": "single",
+            "seconds": 0.014088,
+            "start": "2026-10-23T20:15:55.096580+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:55.163113+00:00",
+            "role": "single",
+            "seconds": 0.012277,
+            "start": "2026-10-23T20:15:55.150836+00:00"
+          }
+        ],
+        "tool_completed_events": 10,
+        "tool_started_events": 10,
+        "validated_cache_reuses": 0
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.5290174589899834,
+      "execution": "single",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 2,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 5,
+          "invalidated": 1,
+          "reuse": 1,
+          "started": 5,
+          "tool_completed": 11,
+          "tool_started": 11
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 9,
+        "role_invocations": 5,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:55.630207+00:00",
+            "role": "operations",
+            "seconds": 0.003374,
+            "start": "2026-10-23T20:15:55.626833+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:55.635257+00:00",
+            "role": "sourcing",
+            "seconds": 0.004531,
+            "start": "2026-10-23T20:15:55.630726+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:55.641374+00:00",
+            "role": "qualification",
+            "seconds": 0.005546,
+            "start": "2026-10-23T20:15:55.635828+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:55.659280+00:00",
+            "role": "sourcing",
+            "seconds": 0.006577,
+            "start": "2026-10-23T20:15:55.652703+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:55.666735+00:00",
+            "role": "qualification",
+            "seconds": 0.006597,
+            "start": "2026-10-23T20:15:55.660138+00:00"
+          }
+        ],
+        "tool_completed_events": 11,
+        "tool_started_events": 11,
+        "validated_cache_reuses": 1
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.4940314999985276,
+      "execution": "sequential",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 2,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 5,
+          "invalidated": 1,
+          "reuse": 1,
+          "started": 5,
+          "tool_completed": 11,
+          "tool_started": 11
+        },
+        "model_calls": 0,
+        "observed_role_overlap": true,
+        "registered_role_tool_calls": 9,
+        "role_invocations": 5,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:56.129445+00:00",
+            "role": "operations",
+            "seconds": 0.004888,
+            "start": "2026-10-23T20:15:56.124557+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:56.131371+00:00",
+            "role": "sourcing",
+            "seconds": 0.007866,
+            "start": "2026-10-23T20:15:56.123505+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:56.136609+00:00",
+            "role": "qualification",
+            "seconds": 0.004603,
+            "start": "2026-10-23T20:15:56.132006+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:56.153586+00:00",
+            "role": "sourcing",
+            "seconds": 0.006959,
+            "start": "2026-10-23T20:15:56.146627+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:56.161356+00:00",
+            "role": "qualification",
+            "seconds": 0.006815,
+            "start": "2026-10-23T20:15:56.154541+00:00"
+          }
+        ],
+        "tool_completed_events": 11,
+        "tool_started_events": 11,
+        "validated_cache_reuses": 1
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.49119025000254624,
+      "execution": "concurrent",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 2,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "invalidated": 1,
+          "tool_completed": 2,
+          "tool_started": 4
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 0,
+        "role_invocations": 0,
+        "role_spans": [],
+        "tool_completed_events": 2,
+        "tool_started_events": 4,
+        "validated_cache_reuses": 0
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.4658697499980917,
+      "execution": "deterministic",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 3,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 2,
+          "invalidated": 1,
+          "started": 2,
+          "tool_completed": 10,
+          "tool_started": 10
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 8,
+        "role_invocations": 2,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:57.094880+00:00",
+            "role": "single",
+            "seconds": 0.009541,
+            "start": "2026-10-23T20:15:57.085339+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:57.117581+00:00",
+            "role": "single",
+            "seconds": 0.012556,
+            "start": "2026-10-23T20:15:57.105025+00:00"
+          }
+        ],
+        "tool_completed_events": 10,
+        "tool_started_events": 10,
+        "validated_cache_reuses": 0
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.524013542002649,
+      "execution": "single",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 3,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 5,
+          "invalidated": 1,
+          "reuse": 1,
+          "started": 5,
+          "tool_completed": 11,
+          "tool_started": 11
+        },
+        "model_calls": 0,
+        "observed_role_overlap": false,
+        "registered_role_tool_calls": 9,
+        "role_invocations": 5,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:57.617051+00:00",
+            "role": "operations",
+            "seconds": 0.003363,
+            "start": "2026-10-23T20:15:57.613688+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:57.621841+00:00",
+            "role": "sourcing",
+            "seconds": 0.00427,
+            "start": "2026-10-23T20:15:57.617571+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:57.629656+00:00",
+            "role": "qualification",
+            "seconds": 0.007242,
+            "start": "2026-10-23T20:15:57.622414+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:57.650178+00:00",
+            "role": "sourcing",
+            "seconds": 0.00789,
+            "start": "2026-10-23T20:15:57.642288+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:57.658183+00:00",
+            "role": "qualification",
+            "seconds": 0.007135,
+            "start": "2026-10-23T20:15:57.651048+00:00"
+          }
+        ],
+        "tool_completed_events": 11,
+        "tool_started_events": 11,
+        "validated_cache_reuses": 1
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.542751834000228,
+      "execution": "sequential",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 3,
+      "usage": null
+    },
+    {
+      "actual_activity": {
+        "engine_evaluations": 2,
+        "event_counts": {
+          "completed": 5,
+          "invalidated": 1,
+          "reuse": 1,
+          "started": 5,
+          "tool_completed": 11,
+          "tool_started": 11
+        },
+        "model_calls": 0,
+        "observed_role_overlap": true,
+        "registered_role_tool_calls": 9,
+        "role_invocations": 5,
+        "role_spans": [
+          {
+            "end": "2026-10-23T20:15:58.164952+00:00",
+            "role": "operations",
+            "seconds": 0.006485,
+            "start": "2026-10-23T20:15:58.158467+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:58.167362+00:00",
+            "role": "sourcing",
+            "seconds": 0.007785,
+            "start": "2026-10-23T20:15:58.159577+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:58.173245+00:00",
+            "role": "qualification",
+            "seconds": 0.005157,
+            "start": "2026-10-23T20:15:58.168088+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:58.196233+00:00",
+            "role": "sourcing",
+            "seconds": 0.009282,
+            "start": "2026-10-23T20:15:58.186951+00:00"
+          },
+          {
+            "end": "2026-10-23T20:15:58.209121+00:00",
+            "role": "qualification",
+            "seconds": 0.011617,
+            "start": "2026-10-23T20:15:58.197504+00:00"
+          }
+        ],
+        "tool_completed_events": 11,
+        "tool_started_events": 11,
+        "validated_cache_reuses": 1
+      },
+      "budget_limits": {
+        "max_engine_evaluations": 12,
+        "max_model_turns": 72,
+        "max_plan_revisions": 3,
+        "max_refreshes": 6,
+        "max_tool_calls": 64
+      },
+      "elapsed_seconds": 0.5912073329964187,
+      "execution": "concurrent",
+      "final_status": "WAITING_DECISION",
+      "forecast_frozen_before_outcomes": true,
+      "initial_evidence_fingerprint": "f868cd010c840a1c6d4aaad8faf976e78127af57c9cb2ba6669c082b13ab0631",
+      "initial_status": "WAITING_EVIDENCE",
+      "model_cost_usd": null,
+      "policy_version": "cost-first-v1",
+      "provider": "scripted offline",
+      "quality": {
+        "expenditure_usd": 1220.0,
+        "feasible": true,
+        "on_time_units": 150,
+        "remaining_shortage": 0,
+        "whole_orders": 5,
+        "within_authority": true
+      },
+      "recommended_actions": [
+        {
+          "candidate_id": "OFFER-EXPRESS",
+          "expenditure_usd": 380.0,
+          "quantity": 20,
+          "usable_receipt": "2026-11-05T08:00:00"
+        },
+        {
+          "candidate_id": "OFFER-STANDARD",
+          "expenditure_usd": 760.0,
+          "quantity": 60,
+          "usable_receipt": "2026-11-06T08:00:00"
+        },
+        {
+          "candidate_id": "TRANSFER-B",
+          "expenditure_usd": 80.0,
+          "quantity": 40,
+          "usable_receipt": "2026-11-05T08:00:00"
+        }
+      ],
+      "released_evidence_fingerprint": "24aff2ec8cbe17b279a99074699f171dff3e89aa3d82cbadacd702a8621da4d4",
+      "repetition": 3,
+      "usage": null
+    }
+  ],
+  "same_validated_plan_quality": true
+}

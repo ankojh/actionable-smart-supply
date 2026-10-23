@@ -1,0 +1,1 @@
+{"check": "analyst", "status": "failed", "code": "ANALYST_SQL_REJECTED", "message": "Analyst returned a statement outside the read-only investigative boundary."}

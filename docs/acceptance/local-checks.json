@@ -1,0 +1,21 @@
+{
+  "backend_tests": {
+    "passed": 120,
+    "warnings": 1,
+    "includes_real_process_restart": true
+  },
+  "existing_sample_data_tests": {
+    "passed": 18
+  },
+  "frontend_build": "passed",
+  "frontend_dependency_audit": {
+    "advisories": 0
+  },
+  "ruff_check": "passed",
+  "ruff_format": "passed",
+  "secret_literal_scan": {
+    "configured_secret_matches": 0,
+    "matching_files": []
+  },
+  "git_diff_check": "passed"
+}

@@ -1,0 +1,10 @@
+{
+  "version": "synthetic-realizations-v1",
+  "label": "Synthetic nominal realized delivery events; hypothetical recovery execution",
+  "receipts": {
+    "TRANSFER-B": "2026-11-05T08:00:00",
+    "OFFER-EXPRESS": "2026-11-05T08:00:00",
+    "OFFER-STANDARD": "2026-11-06T08:00:00",
+    "OFFER-RESERVE": "2026-11-05T08:00:00"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "check": "search-suspension",
+  "status": "completed",
+  "indexing_state": "SUSPENDED",
+  "serving_state": "SUSPENDED"
+}
