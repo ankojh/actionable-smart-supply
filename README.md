@@ -13,7 +13,7 @@ frontend/  React page that calls the backend and shows the Snowflake result
 cd backend
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # fill in your Snowflake details; .env is gitignored
+cp .env.example .env   # set SNOWFLAKE_USER and SNOWFLAKE_TOKEN; .env is gitignored
 uvicorn app.main:app --reload --port 8000
 ```
 

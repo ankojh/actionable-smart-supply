@@ -8,7 +8,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_prefix="SNOWFLAKE_", env_ignore_empty=True, extra="ignore")
 
-    account: str
+    account: str = "sfsehol-anthropic_snowflake_hackathon_fevwgp"
     user: str
     role: str | None = None
     warehouse: str | None = None
