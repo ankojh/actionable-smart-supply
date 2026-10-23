@@ -6,6 +6,7 @@ import json
 import fcntl
 import sqlite3
 import threading
+import uuid
 from contextlib import contextmanager
 from pathlib import Path
 
@@ -31,7 +32,25 @@ class Store:
             CREATE TABLE IF NOT EXISTS receipts (id TEXT PRIMARY KEY, status TEXT NOT NULL, payload TEXT);
             CREATE TABLE IF NOT EXISTS outbox (id TEXT PRIMARY KEY, payload TEXT NOT NULL, delivered INTEGER DEFAULT 0);
             CREATE TABLE IF NOT EXISTS idempotency (key TEXT PRIMARY KEY, hash TEXT NOT NULL, run_id TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS decision_cases (id TEXT PRIMARY KEY, payload TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS operational_events (id TEXT PRIMARY KEY, hash TEXT NOT NULL, case_id TEXT NOT NULL, payload TEXT NOT NULL);
             """)
+            # Additive migration: existing assessment IDs and frozen artifacts survive.
+            for run_id, payload in db.execute("SELECT id,payload FROM runs").fetchall():
+                run = json.loads(payload)
+                if run.get("case_id"):
+                    continue
+                case_id = "case-legacy-" + run_id
+                case = {
+                    "id": case_id, "company": run["company"], "scope": run["scope"],
+                    "mode": run["mode"], "status": "OPEN", "revision": 1,
+                    "created_at": run["created_at"], "run_ids": [run_id], "active_run_id": run_id,
+                    "snapshot": run.get("snapshot"), "events": [], "executions": [],
+                    "assessment_status": run["status"],
+                }
+                run["case_id"] = case_id
+                db.execute("INSERT OR IGNORE INTO decision_cases VALUES (?,?)", (case_id, json.dumps(case)))
+                db.execute("UPDATE runs SET payload=? WHERE id=?", (json.dumps(run), run_id))
 
     def connect(self):
         db = sqlite3.connect(self.path, timeout=15)
@@ -54,6 +73,36 @@ class Store:
                         raise Conflict("Idempotency key was used for a different request")
                     return self._get(db, existing[1]), False
                 db.execute("INSERT INTO idempotency VALUES (?,?,?)", (key, request_hash, run["id"]))
+            case_id = run.get("case_id")
+            if case_id:
+                case = self._case_get(db, case_id)
+                if any(case[k] != run[k] for k in ("company", "scope", "mode")):
+                    raise Conflict("Assessment does not match the decision case")
+                active = case.get("active_run_id")
+                if active:
+                    previous = self._get(db, active)
+                    from datetime import datetime, timezone
+
+                    if previous["status"] in ("CREATED", "INVESTIGATING") and datetime.now(timezone.utc) < datetime.fromisoformat(previous["budget"]["deadline_at"]):
+                        raise Conflict("The case already has an active investigation")
+                    # A replacement assessment cannot leave an old approval usable.
+                    previous.update(status="SUPERSEDED", drafts=[], decision=None)
+                    previous["checkpoint"] += 1
+                    db.execute("UPDATE runs SET payload=? WHERE id=?", (json.dumps(previous), active))
+                    self._outbox(db, previous)
+            else:
+                case_id = "case-" + uuid.uuid4().hex
+                run["case_id"] = case_id
+                case = {
+                    "id": case_id, "company": run["company"], "scope": run["scope"],
+                    "mode": run["mode"], "status": "OPEN", "revision": 0,
+                    "created_at": utc_now(), "run_ids": [], "active_run_id": None,
+                    "snapshot": None, "events": [], "executions": [],
+                }
+            case["active_run_id"] = run["id"]
+            case["run_ids"].append(run["id"])
+            case["revision"] += 1
+            db.execute("INSERT OR REPLACE INTO decision_cases VALUES (?,?)", (case_id, json.dumps(case)))
             db.execute("INSERT INTO runs VALUES (?,?)", (run["id"], json.dumps(run)))
             self._outbox(db, run)
         return run, True
@@ -72,7 +121,7 @@ class Store:
         with self.connect() as db:
             rows = db.execute("SELECT payload FROM runs ORDER BY rowid DESC LIMIT 50").fetchall()
         return [
-            {k: r[k] for k in ("id", "mode", "status", "checkpoint", "created_at")}
+            {k: r.get(k) for k in ("id", "case_id", "mode", "status", "checkpoint", "created_at")}
             for r in map(lambda x: json.loads(x[0]), rows)
         ]
 
@@ -88,6 +137,17 @@ class Store:
         return self.mutate(run["id"], lambda target: target.update(run))
 
     def _outbox(self, db, run):
+        if run.get("case_id"):
+            case = self._case_get(db, run["case_id"])
+            if case["active_run_id"] == run["id"]:
+                if run.get("snapshot"):
+                    case["snapshot"] = run["snapshot"]
+                case["assessment_status"] = run["status"]
+                if not case["executions"]:
+                    case["status"] = {"WAITING_DECISION": "READY_FOR_DECISION", "DRAFTS_READY": "APPROVED", "ESCALATED": "NEEDS_REVIEW"}.get(run["status"], "OPEN")
+                case["revision"] += 1
+                case["updated_at"] = utc_now()
+                db.execute("UPDATE decision_cases SET payload=? WHERE id=?", (json.dumps(case), case["id"]))
         db.execute(
             "INSERT OR IGNORE INTO checkpoints VALUES (?,?,?,?,?)",
             (fingerprint(run), run["id"], run["checkpoint"], json.dumps(run), utc_now()),
@@ -113,6 +173,57 @@ class Store:
         record["payload"]["activity_event"] = run["events"][-1] if run["events"] else None
         record["payload"]["activity_events"] = run["events"]
         db.execute("INSERT OR IGNORE INTO outbox(id,payload) VALUES (?,?)", (identifier, json.dumps(record)))
+
+    def _case_get(self, db, case_id):
+        row = db.execute("SELECT payload FROM decision_cases WHERE id=?", (case_id,)).fetchone()
+        if not row:
+            raise KeyError("Decision case not found")
+        return json.loads(row[0])
+
+    def case_get(self, case_id):
+        with self.connect() as db:
+            return self._case_get(db, case_id)
+
+    def case_list(self):
+        with self.connect() as db:
+            return [json.loads(row[0]) for row in db.execute("SELECT payload FROM decision_cases ORDER BY rowid DESC")]
+
+    def case_mutate(self, case_id, mutation):
+        with self.transaction() as db:
+            case = self._case_get(db, case_id)
+            mutation(case)
+            case["revision"] += 1
+            case["updated_at"] = utc_now()
+            db.execute("UPDATE decision_cases SET payload=? WHERE id=?", (json.dumps(case), case_id))
+        return case
+
+    def operational_event(self, event_id):
+        with self.connect() as db:
+            row = db.execute("SELECT hash,case_id,payload FROM operational_events WHERE id=?", (event_id,)).fetchone()
+        return {"hash": row[0], "case_id": row[1], "payload": json.loads(row[2])} if row else None
+
+    def record_case_event(self, case_id, event, request_hash, mutation):
+        """Apply an event and its receipt in the same transaction, including invalidation."""
+        with self.transaction() as db:
+            existing = db.execute("SELECT hash FROM operational_events WHERE id=?", (event["id"],)).fetchone()
+            if existing:
+                if existing[0] != request_hash:
+                    raise Conflict("Event ID was reused with different content")
+                return self._case_get(db, case_id)
+            case = self._case_get(db, case_id)
+            mutation(case)
+            case["events"].append(event)
+            case["revision"] += 1
+            case["updated_at"] = utc_now()
+            if event.get("material_change") and case.get("active_run_id"):
+                run = self._get(db, case["active_run_id"])
+                run.update(status="SUPERSEDED", decision=None, drafts=[], recommended_plan_id=None)
+                run["checkpoint"] += 1
+                db.execute("UPDATE runs SET payload=? WHERE id=?", (json.dumps(run), run["id"]))
+                self._outbox(db, run)
+            db.execute("UPDATE decision_cases SET payload=? WHERE id=?", (json.dumps(case), case_id))
+            db.execute("INSERT INTO operational_events VALUES (?,?,?,?)", (event["id"], request_hash, case_id, json.dumps(event)))
+        return case
 
     def artifact(self, artifact):
         with self.transaction() as db:

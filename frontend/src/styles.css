@@ -19,3 +19,42 @@
 @media(max-width:1080px){.company-brain:not(.expanded) .brain-snowflake-links{display:none}}
 @media(max-width:760px){.workflow{column-gap:5px}.workflow-stage{min-width:30%;flex:1;gap:7px}.workflow-stage>button{min-width:0;font-size:8px}.workflow-cloud-link{margin-left:28px;font-size:6px!important;gap:3px!important}.workflow-cloud-link>svg{width:8px;height:8px}.workflow-stage:nth-child(3)>button>svg{display:none}.snowflake-activity{padding:13px;margin-bottom:20px}.snowflake-activity-heading{gap:8px;flex-wrap:wrap}.snowflake-activity-heading>div{min-width:120px}.snowflake-activity-heading>.badge{font-size:6px}.snowflake-activity h2{font-size:10px}.snowflake-activity-heading p{font-size:7px;line-height:1.7}.snowflake-description{font-size:9px}.snowflake-mode-note{font-size:8px;padding:8px}.snowflake-resource-links{gap:6px}.snowflake-resource-links>.snowflake-link{font-size:8px;padding:5px 7px}.snowflake-inspect>summary{font-size:8px}.snowflake-inspect dl>div{font-size:8px;gap:10px}.snowflake-inspect dt{min-width:90px}.snowflake-inspect-body>p{font-size:8px}.snowflake-inspect code{font-size:8px}.snowflake-sql pre{font-size:9px;padding:10px}.snowflake-sql strong{font-size:8px}.snowflake-sql>div{padding:9px}.snowflake-sql .text-button{font-size:7px}.snowflake-mark{width:29px;height:29px}.snowflake-unavailable{font-size:8px}}
 @media(max-width:420px){.workflow-cloud-link{margin-left:24px;font-size:6px!important}.workflow-stage>button{font-size:7px}.workflow-stage>button>svg{width:8px;margin-right:7px}}
+
+/* Case lifecycle, scenario assumptions, and simulated execution. */
+.lifecycle-card { margin-top: 22px; }
+.lifecycle-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
+.lifecycle-actions small, .lifecycle-card small { color: var(--text-muted, #667085); }
+.lifecycle-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; padding: 18px 0 24px; }
+.lifecycle-metrics small, .lifecycle-metrics strong, .block { display: block; }
+.lifecycle-metrics strong { font-size: 23px; margin-top: 7px; }
+.strategy-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.strategy-item, .scenario-history article, .execution-list article { border: 1px solid #e4e7ec; border-radius: 10px; padding: 16px; }
+.strategy-item .badge { margin: 9px 0; }
+.strategy-item p, .scenario-history p, .execution-list p { color: #667085; font-size: 13px; line-height: 1.6; }
+.scenario-history, .execution-list { display: grid; gap: 12px; }
+.scenario-history article > div, .execution-list article > div { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.scenario-history details, .lifecycle-card details { margin: 14px 0; font-size: 13px; }
+.scenario-history pre { max-height: 240px; overflow: auto; background: #f7f9fc; padding: 12px; font-size: 11px; }
+.scenario-history .button, .execution-list .button { margin-top: 10px; }
+.scenario-source { border-bottom: 1px solid #e4e7ec; padding: 12px 0; }
+.scenario-source > label { display: flex; align-items: center; gap: 12px; }
+.scenario-source > label > div { flex: 1; }
+.scenario-source small { display: block; color: #667085; margin-top: 4px; }
+.scenario-source > label > input { width: 90px; }
+.scenario-source details { margin: 12px 0; font-size: 12px; }
+.assumption-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+.assumption-fields .form-label { margin: 0; }
+.policy-assumptions { margin: 20px 0; font-size: 13px; }
+.check-label { display: flex; align-items: center; gap: 9px; font-size: 13px; margin: 18px 0; }
+.check-label input { width: auto; }
+.dispatch-form { padding: 12px 0 22px; }
+.case-event { border-top: 1px solid #eaecf0; padding: 12px 0; }
+.case-event .badge { margin-left: 10px; }
+.case-event p { color: #667085; font-size: 12px; }
+@media (max-width: 900px) { .lifecycle-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } .strategy-grid { grid-template-columns: 1fr; } }
+@media (max-width: 520px) { .assumption-fields { grid-template-columns: 1fr; } .lifecycle-metrics strong { font-size: 18px; } }
+.lifecycle-card { padding: 22px; }
+.lifecycle-card > .section-heading { padding: 0; }
+.execution-list article > small { display: block; margin: 8px 0; }
+.assumption-fields input, .assumption-fields select { width: 100%; min-width: 0; }
+@media (max-width: 520px) { .lifecycle-card { padding: 16px; } }

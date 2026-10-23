@@ -1,4 +1,8 @@
 flowchart TD
+    scan[Scan synthetic source feed or ingest a dated supply event] --> eventGate{Validate source and deduplicate event}
+    eventGate -->|Manual report| potential[Save unverified risk; request authoritative confirmation]
+    eventGate -->|Simulated authoritative event| caseOwner[Open or update persistent decision case]
+    caseOwner --> delivery
     delivery([Supplier delay or delivery change]) --> validate[Validate inputs and save dated immutable evidence snapshot]
 
     subgraph investigate["1 · Investigate impact and recovery options"]
@@ -35,6 +39,10 @@ flowchart TD
         recommend --> freeze --> human
         human -->|Approve recommendation or choose alternative| revalidate --> valid
         human -->|Defer| defer
+        human -->|Explore scenario| scenario[Save versioned scenario: parent, base evidence, quantities and explicit assumptions]
+        scenario --> scenarioEngine[Recompute material, qualification, production, customer impact, cost and authority]
+        scenarioEngine --> scenarioCompare[Compare V1 and V2; hypothetical plans remain ineligible for approval]
+        scenarioCompare --> human
         valid -->|Yes| selected --> drafts
     end
     checks -->|Pass| recommend
@@ -59,6 +67,12 @@ flowchart TD
     targeted --> ops
     targeted --> discovery
     defer -->|Explicit resume within original deadline and budgets| targeted
+
+    drafts -->|Explicit reviewer submission; offline only| simulated[Atomically submit to local transaction simulator]
+    simulated --> monitoring[Track acknowledgments, shipping, receipts and exceptions]
+    monitoring -->|Material update| executionEvidence[Admit time-phased synthetic evidence; invalidate prior approval and drafts]
+    executionEvidence --> caseOwner
+    monitoring -->|All recovery receipts recorded| receiptsComplete[Receipts complete; production and customer actuals remain unobserved]
 
     subgraph evaluate["4 · Separate offline outcome evaluation branch"]
         gate[Select an immutable frozen forecast before opening held-out events]

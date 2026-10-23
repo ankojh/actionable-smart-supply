@@ -1,4 +1,4 @@
-# The project
+# sumo
 
 A local supply-chain investigation and recovery application built with FastAPI, React, a deterministic planning engine, and Snowflake-hosted Claude. It follows the supplied workflow: dated evidence → Operations and Sourcing investigations → independent Qualification review → recovery evaluation → human decision → revalidation → review-only action drafts.
 
@@ -70,3 +70,17 @@ This compares deterministic, single-agent, sequential-specialist, and concurrent
 The active 300-driver scenario and the separate `sample_data/` fixture family use different business quantities and rules; do not combine their stock or expectations. Historical reference material under `docs/supplyrelay-handoff/` is documentation, not a runtime implementation dependency.
 
 The project runs locally. It does not deploy, push changes, send supplier messages, place orders, move inventory, or change customer commitments. Every generated purchase, transfer, and evidence-request artifact remains a review-only draft.
+
+## Persistent cases and scenario revisions
+
+The workspace now keeps cases across multiple assessments, derives risk alerts from
+evidence, compares versioned scenarios with receipt/MOQ/price/capacity/policy assumptions,
+and shows per-customer delivery and projected financial impact. Hypothetical scenarios
+remain ineligible for approval. Company Brain can prepare grounded scenario proposals
+for review. The existing deterministic arithmetic and live evidence boundaries remain.
+
+After approval, **Action** supports explicit submission to a **local simulator** and
+dated transaction updates. Material changes start a new assessment in the same case;
+idempotent receipt events update synthetic inventory with their actual receipt times.
+Real orders and transfers remain unsubmitted. See the [lifecycle walkthrough and API
+reference](docs/lifecycle-v2.md) for the full workflow, migration, and integration limits.

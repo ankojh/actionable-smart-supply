@@ -17,6 +17,7 @@ from .domain import (
     EvidenceSnapshot,
     FrozenRecommendation,
     HumanDecision,
+    GRAPH_VERSION,
     POLICY_VERSION,
     RecoveryPlanEvaluation,
     fingerprint,
@@ -28,6 +29,8 @@ from .engine import simulate_schedule
 from .sources import OfflineSource
 from .platform import instant
 from .storage import Conflict, Store
+from .impact import business_impact, compare_impact
+from .scenarios import strategy_options
 
 
 class Workflow:
@@ -37,9 +40,13 @@ class Workflow:
         self.offline = OfflineSource()
         graph = StateGraph(dict)
         graph.add_node("investigate", self._investigate)
+        graph.add_node("reconcile", self._reconcile)
+        graph.add_node("business_impact", self._business_impact)
         graph.add_node("evaluate", self._evaluate)
         graph.set_entry_point("investigate")
-        graph.add_edge("investigate", "evaluate")
+        graph.add_edge("investigate", "reconcile")
+        graph.add_edge("reconcile", "business_impact")
+        graph.add_edge("business_impact", "evaluate")
         graph.add_edge("evaluate", END)
         self.graph = graph.compile()
 
@@ -63,7 +70,7 @@ class Workflow:
             finally:
                 fcntl.flock(handle, fcntl.LOCK_UN)
 
-    def create(self, mode="offline", execution="concurrent", policy_version=POLICY_VERSION, key=None):
+    def create(self, mode="offline", execution="concurrent", policy_version=POLICY_VERSION, key=None, case_id=None):
         if mode not in ("offline", "live") or execution not in (
             "concurrent",
             "sequential",
@@ -73,18 +80,22 @@ class Workflow:
             raise ValueError("Unknown assessment mode")
         if policy_version != POLICY_VERSION:
             raise ValueError("Only the separately versioned cost-first-v1 policy is enabled")
+        case = self.store.case_get(case_id) if case_id else None
+        seed = case.get("snapshot") if case and mode == "offline" else None
         run = {
             "id": "run-" + uuid.uuid4().hex,
             "mode": mode,
+            "case_id": case_id,
             "execution": execution,
             "company": "synthetic-company",
             "scope": "shortage-recovery-v1",
             "policy_version": policy_version,
-            "graph_version": "investigation-v1",
+            "graph_version": GRAPH_VERSION,
             "status": "CREATED",
             "checkpoint": 0,
             "created_at": utc_now(),
-            "scenario_time": "2026-11-02T08:00:00",
+            "scenario_time": seed["as_of"] if seed else "2026-11-02T08:00:00",
+            "seed_snapshot": seed,
             "scenario_anchor_at": utc_now(),
             "clarifications": [],
             "snapshot": None,
@@ -116,9 +127,10 @@ class Workflow:
                 "deadline_at": (datetime.now(timezone.utc) + timedelta(minutes=30)).isoformat(),
             },
         }
-        return self.store.create(
-            run, key, fingerprint({"mode": mode, "execution": execution, "policy": policy_version})
-        )[0]
+        request = {"mode": mode, "execution": execution, "policy": policy_version}
+        if case_id:
+            request["case_id"] = case_id
+        return self.store.create(run, key, fingerprint(request))[0]
 
     def event(self, run_id, role, kind, message):
         event = {"id": uuid.uuid4().hex, "at": utc_now(), "role": role, "kind": kind, "message": message}
@@ -147,6 +159,8 @@ class Workflow:
             raise Conflict("The real assessment deadline expired; create a new assessment")
         if run["status"] == "CANCELLED":
             raise Conflict("Assessment was cancelled")
+        if run["status"] == "SUPERSEDED":
+            raise Conflict("Assessment was superseded; open the current case assessment")
 
     def authorization_time(self, run):
         base = instant(run["scenario_time"])
@@ -165,8 +179,8 @@ class Workflow:
 
     def checkpoint(self, run_id, **values):
         def update(run):
-            if run["status"] == "CANCELLED" and values.get("status") != "CANCELLED":
-                raise Conflict("Assessment was cancelled")
+            if run["status"] in ("CANCELLED", "SUPERSEDED") and values.get("status") != run["status"]:
+                raise Conflict("Assessment was cancelled or superseded")
             run.update(values)
             run["checkpoint"] += 1
 
@@ -186,7 +200,7 @@ class Workflow:
                 ):
                     return run
                 if run["snapshot"] is None:
-                    snapshot = self.source(run).load_snapshot(
+                    snapshot = EvidenceSnapshot.model_validate(run["seed_snapshot"]) if run.get("seed_snapshot") else self.source(run).load_snapshot(
                         run["company"], run["scope"], run["scenario_time"]
                     )
                     self.validate_snapshot(snapshot, run)
@@ -199,7 +213,7 @@ class Workflow:
                 self.checkpoint(run_id, status="INVESTIGATING", error=None)
                 self.graph.invoke({"run_id": run_id})
             except Exception as exc:
-                if self.store.get(run_id)["status"] == "CANCELLED":
+                if self.store.get(run_id)["status"] in ("CANCELLED", "SUPERSEDED"):
                     return self.store.get(run_id)
                 # Provider messages may contain SQL, account information or secrets.
                 from .platform import PlatformError
@@ -280,6 +294,27 @@ class Workflow:
         )
         return state
 
+    def _reconcile(self, state):
+        run = self.store.get(state["run_id"])
+        snapshot = EvidenceSnapshot.model_validate(run["snapshot"])
+        operations = analyze_operations(snapshot)
+        self.checkpoint(run["id"], reconciliation={
+            "snapshot_id": snapshot.id,
+            "required": operations.required_drivers, "plant_usable": operations.usable_drivers,
+            "transferable": operations.warehouse_transferable, "shortage": operations.uncovered_drivers,
+            "deadlines": [need.model_dump(mode="json") for need in operations.time_phased],
+            "citations": list(operations.citations),
+        })
+        self.event(run["id"], "reconciliation", "completed", "Inventory and material requirements reconciled against one evidence snapshot")
+        return state
+
+    def _business_impact(self, state):
+        run = self.store.get(state["run_id"])
+        snapshot = EvidenceSnapshot.model_validate(run["snapshot"])
+        self.checkpoint(run["id"], business_impact=business_impact(snapshot))
+        self.event(run["id"], "impact", "completed", "Baseline production, customer delivery and financial exposure evaluated")
+        return state
+
     def _evaluate(self, state):
         run_id = state["run_id"]
         run = self.store.get(run_id)
@@ -354,6 +389,13 @@ class Workflow:
         }
         values = {
             "plans": [p.model_dump(mode="json") for p in supported[:3]],
+            "plan_impacts": {p.id: compare_impact(snapshot, p) for p in supported[:3]},
+            "strategies": strategy_options(snapshot, operations, qualification, plans),
+            "sourcing_phases": {
+                "discovery": "COMPLETE", "verification": "WAITING_EVIDENCE" if requests else "COMPLETE",
+                "discovered": len(qualification.candidates),
+                "qualified": sum(c.status == "supported" for c in qualification.candidates),
+            },
             "evidence_requests": requests,
             "remaining_gap": remaining,
         }
@@ -431,6 +473,10 @@ class Workflow:
             decision=None,
             drafts=[],
             plans=[],
+            plan_impacts={},
+            business_impact=None,
+            reconciliation=None,
+            strategies=[],
             recommended_plan_id=None,
             evaluation=None,
         )
@@ -546,11 +592,18 @@ class Workflow:
             return self.store.get(run_id)
 
     def decide(self, run_id, decision: HumanDecision):
-        with self.owner(run_id):
+        case_lock = self.store.get(run_id).get("case_id") or "legacy-" + run_id
+        with self.owner(case_lock), self.owner(run_id):
             run = self.store.get(run_id)
             self.binding(run, decision.model_dump())
             if run["status"] != "WAITING_DECISION":
                 raise Conflict("Assessment is not waiting for a human decision")
+            if run.get("case_id"):
+                case = self.store.case_get(run["case_id"])
+                if case["active_run_id"] != run_id:
+                    raise Conflict("This assessment is no longer current for the case")
+                if decision.action != "defer" and any(a["status"] not in ("RECEIVED", "CANCELLED", "FAILED") for a in case["executions"]):
+                    raise Conflict("Reconcile or cancel outstanding simulated transactions before approving replacement recovery")
             if decision.action == "defer":
                 result = self.checkpoint(
                     run_id, status="DEFERRED", decision=decision.model_dump(mode="json"), drafts=[]

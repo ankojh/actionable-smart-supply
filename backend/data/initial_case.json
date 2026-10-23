@@ -199,6 +199,73 @@
     {
       "id": "DOC-QUOTE-RESERVE",
       "text": "SIMULATED quote: DRV-24-B revision B, $13 each, MOQ 100 and order multiples of 20, freight $100. Catalog quantity 200. Quoted usable receipt is Thursday November 5 at 08:00, subject to written reservation confirmation."
+    },
+    {
+      "id": "DOC-COMMERCIAL-SO-001",
+      "text": "Fictional demonstration terms for SO-001. {\"citations\": [\"DOC-COMMERCIAL-SO-001\"], \"customer_id\": \"CUST-001\", \"customer_name\": \"Apex Automation\", \"late_unit_penalty_per_day_usd\": 15, \"unit_revenue_usd\": 2500}"
+    },
+    {
+      "id": "DOC-COMMERCIAL-SO-002",
+      "text": "Fictional demonstration terms for SO-002. {\"citations\": [\"DOC-COMMERCIAL-SO-002\"], \"customer_id\": \"CUST-001\", \"customer_name\": \"Apex Automation\", \"late_unit_penalty_per_day_usd\": 15, \"unit_revenue_usd\": 2750}"
+    },
+    {
+      "id": "DOC-COMMERCIAL-SO-003",
+      "text": "Fictional demonstration terms for SO-003. {\"citations\": [\"DOC-COMMERCIAL-SO-003\"], \"customer_id\": \"CUST-002\", \"customer_name\": \"Pilot Systems\", \"late_unit_penalty_per_day_usd\": 15, \"unit_revenue_usd\": 3000}"
+    },
+    {
+      "id": "DOC-COMMERCIAL-SO-004",
+      "text": "Fictional demonstration terms for SO-004. {\"citations\": [\"DOC-COMMERCIAL-SO-004\"], \"customer_id\": \"CUST-002\", \"customer_name\": \"Pilot Systems\", \"late_unit_penalty_per_day_usd\": 15, \"unit_revenue_usd\": 3250}"
+    },
+    {
+      "id": "DOC-COMMERCIAL-SO-005",
+      "text": "Fictional demonstration terms for SO-005. {\"citations\": [\"DOC-COMMERCIAL-SO-005\"], \"customer_id\": \"CUST-003\", \"customer_name\": \"Harbor Robotics\", \"late_unit_penalty_per_day_usd\": 15, \"unit_revenue_usd\": 3500}"
     }
-  ]
+  ],
+  "commercial_terms": {
+    "SO-001": {
+      "customer_id": "CUST-001",
+      "customer_name": "Apex Automation",
+      "unit_revenue_usd": 2500,
+      "late_unit_penalty_per_day_usd": 15,
+      "citations": [
+        "DOC-COMMERCIAL-SO-001"
+      ]
+    },
+    "SO-002": {
+      "customer_id": "CUST-001",
+      "customer_name": "Apex Automation",
+      "unit_revenue_usd": 2750,
+      "late_unit_penalty_per_day_usd": 15,
+      "citations": [
+        "DOC-COMMERCIAL-SO-002"
+      ]
+    },
+    "SO-003": {
+      "customer_id": "CUST-002",
+      "customer_name": "Pilot Systems",
+      "unit_revenue_usd": 3000,
+      "late_unit_penalty_per_day_usd": 15,
+      "citations": [
+        "DOC-COMMERCIAL-SO-003"
+      ]
+    },
+    "SO-004": {
+      "customer_id": "CUST-002",
+      "customer_name": "Pilot Systems",
+      "unit_revenue_usd": 3250,
+      "late_unit_penalty_per_day_usd": 15,
+      "citations": [
+        "DOC-COMMERCIAL-SO-004"
+      ]
+    },
+    "SO-005": {
+      "customer_id": "CUST-003",
+      "customer_name": "Harbor Robotics",
+      "unit_revenue_usd": 3500,
+      "late_unit_penalty_per_day_usd": 15,
+      "citations": [
+        "DOC-COMMERCIAL-SO-005"
+      ]
+    }
+  }
 }

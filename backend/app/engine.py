@@ -87,7 +87,7 @@ def _money(value: Any) -> Decimal | None:
     return amount
 
 
-def _stock(case: dict[str, Any], location: str) -> tuple[int, tuple[str, ...]]:
+def _stock(case: dict[str, Any], location: str, opening_only=False) -> tuple[int, tuple[str, ...]]:
     part, revision = _required_part(case)
     allocated: dict[str, int] = defaultdict(int)
     citations: list[str] = []
@@ -95,8 +95,10 @@ def _stock(case: dict[str, Any], location: str) -> tuple[int, tuple[str, ...]]:
         allocated[row["inventory_id"]] += _quantity(row["quantity"])
     available = 0
     for row in case["inventory_on_hand"]:
+        if opening_only and row.get("receipt_at"):
+            continue
         if row["location"] == location and row["part"] == part and row.get("revision", revision) == revision:
-            on_hand = _quantity(row["on_hand"])
+            on_hand = _quantity(row.get("opening_on_hand", row["on_hand"]) if opening_only else row["on_hand"])
             # An overallocated ledger is a data error, not additional stock.
             available += max(0, on_hand - allocated[row["id"]])
             citations.append(row["id"])
@@ -145,7 +147,7 @@ def analyze_operations(snapshot: EvidenceSnapshot) -> OperationsFinding:
     if not drivers_per_robot:
         raise ValueError("BOM drivers per robot must be positive")
     plant = case["internal_transfer"]["to"]
-    usable, stock_citations = _stock(case, plant)
+    usable, stock_citations = _stock(case, plant, opening_only=True)
     donor = case["internal_transfer"]["from"]
     transferable, donor_citations = _stock(case, donor)
     part, _ = _required_part(case)
@@ -165,6 +167,13 @@ def analyze_operations(snapshot: EvidenceSnapshot) -> OperationsFinding:
     for day, rows in sorted(grouped.items()):
         cumulative += sum(_quantity(row["robots"]) for row in rows) * drivers_per_robot
         committed = primary[1] if primary and primary[0] < _start(case, date.fromisoformat(day)) else 0
+        committed += sum(
+            max(0, row["on_hand"] - sum(a["quantity"] for a in case["allocation_ledger"] if a["inventory_id"] == row["id"]))
+            for row in case["inventory_on_hand"]
+            if row["location"] == plant and row["part"] == part and row.get("receipt_at")
+            and _instant(row["receipt_at"]) < _start(case, date.fromisoformat(day))
+        )
+        committed += sum(row["quantity_delta"] for row in case.get("inventory_adjustments", ()) if row["location"] == plant and row["part"] == part and _instant(row["usable_at"]) < _start(case, date.fromisoformat(day)))
         recovery = max(0, cumulative - usable - committed)
         if recovery:
             affected.extend(row["id"] for row in rows)
@@ -408,8 +417,14 @@ def simulate_schedule(snapshot: EvidenceSnapshot, actions: Iterable[PlanAction])
     if not capacity or not per_robot:
         raise ValueError("Production capacity and BOM quantity must be positive")
     ship_days = _quantity(case["calendar"]["material_to_ship_business_days"])
-    stock, _ = _stock(case, case["internal_transfer"]["to"])
+    stock, _ = _stock(case, case["internal_transfer"]["to"], opening_only=True)
     receipts = [(_instant(action.usable_receipt), _quantity(action.quantity)) for action in actions]
+    receipts.extend(
+        (_instant(row["receipt_at"]), max(0, row["on_hand"] - sum(a["quantity"] for a in case["allocation_ledger"] if a["inventory_id"] == row["id"])))
+        for row in case["inventory_on_hand"]
+        if row["location"] == case["internal_transfer"]["to"] and row["part"] == case["primary_po"]["part"] and row.get("receipt_at")
+    )
+    receipts.extend((_instant(row["usable_at"]), row["quantity_delta"]) for row in case.get("inventory_adjustments", ()) if row["location"] == case["internal_transfer"]["to"] and row["part"] == case["primary_po"]["part"])
     primary = _primary_receipt(snapshot)
     if primary:
         receipts.append(primary)
@@ -425,7 +440,7 @@ def simulate_schedule(snapshot: EvidenceSnapshot, actions: Iterable[PlanAction])
         if _workday(day, case):
             start = _start(case, day)
             while cursor < len(receipts) and receipts[cursor][0] < start:
-                stock += receipts[cursor][1]
+                stock = max(0, stock + receipts[cursor][1])
                 cursor += 1
             daily_capacity = capacity
             for order in orders:

@@ -23,7 +23,7 @@ def _connect_args(s: Settings) -> dict[str, Any]:
         "warehouse": s.warehouse,
         "database": s.database,
         "schema": s.schema_,
-        "application": "actionable-smart-supply",
+        "application": "sumo",
         "login_timeout": s.network_timeout_seconds,
         "network_timeout": s.network_timeout_seconds,
         "session_parameters": {

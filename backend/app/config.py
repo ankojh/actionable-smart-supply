@@ -48,6 +48,8 @@ class AppSettings(BaseSettings):
     project_store: str | None = None
     project_live_reviewer_id: str | None = None
     project_live_reviewer_token: str | None = Field(default=None, repr=False)
+    project_simulated_feed_path: str | None = None
+    project_monitor_interval_seconds: int = Field(default=10, ge=1, le=300)
 
 
 @lru_cache

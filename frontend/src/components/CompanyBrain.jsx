@@ -40,7 +40,10 @@ export default function CompanyBrain({ run, workspace, onScenario, onSource, onC
     setMessages((current) => [...current, { role: "user", text }]);
     let answer;
     try {
-      if (run.mode === "live") {
+      if (/^(try|what if|simulate|scenario)\b/i.test(text)) {
+        const result = await api(`/graph/runs/${run.id}/scenario-proposal`, { snapshot_id: run.snapshot.id, checkpoint: run.checkpoint, question: text });
+        answer = { text: "I prepared a scenario proposal. Review its quantities and assumptions before running the simulation.", proposal: result.proposal, note: result.note };
+      } else if (run.mode === "live") {
         const result = await api(`/graph/runs/${run.id}/analyst`, { question: text });
         answer = { text: result.content?.filter((b) => b.type === "text").map((b) => b.text).join("\n\n") || result.note || "No text answer was returned.", blocks: result.content?.filter((b) => b.type === "sql"), note: result.note };
       } else answer = snapshotAnswer(text, run);
@@ -59,6 +62,7 @@ export default function CompanyBrain({ run, workspace, onScenario, onSource, onC
         {message.inventory && <table className="chat-table"><caption>Driver availability</caption><tbody><tr><td>Plant usable</td><td>{operations.usable_drivers}</td></tr><tr><td>Warehouse transferable</td><td>{operations.warehouse_transferable}</td></tr><tr><td>Total required</td><td>{operations.required_drivers}</td></tr><tr className="shortage"><td>Plant shortage</td><td>{operations.uncovered_drivers}</td></tr></tbody></table>}
         {message.plan && <div className="chat-plan"><Badge tone="green">Feasible</Badge><strong>{money(message.plan.expenditure_usd)} recovery cost</strong><button className="text-button" onClick={onCompare}>Compare recovery options <Icon name="arrow" size={13}/></button></div>}
         {message.scenario && <Button onClick={onScenario} disabled={!run.plans?.length}><Icon name="plus" size={14}/>New scenario</Button>}
+        {message.proposal && <Button onClick={() => onScenario(message.proposal)} disabled={run.status !== "WAITING_DECISION"}>Review proposed scenario</Button>}
         {message.blocks?.map((block, i) => <details key={i}><summary>Review proposed query · Not executed</summary><pre>{block.statement}</pre></details>)}
         {message.citations?.length > 0 && <div className="chat-sources">{[...new Set(message.citations)].slice(0, 3).map((id) => <button key={id} onClick={() => onSource(id)}><Icon name="file" size={11}/>{id}</button>)}</div>}
         {message.note && <small>{message.note}</small>}

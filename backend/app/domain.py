@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 SCHEMA_VERSION = "recovery-v1"
 POLICY_VERSION = "cost-first-v1"
-GRAPH_VERSION = "investigation-v1"
+GRAPH_VERSION = "case-lifecycle-v2"
 
 
 def fingerprint(value: Any) -> str:

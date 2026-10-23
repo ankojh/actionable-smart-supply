@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 import secrets
+import asyncio
+from contextlib import asynccontextmanager, nullcontext, suppress
 from pathlib import Path
 from typing import Literal
 
 from fastapi import BackgroundTasks, FastAPI, Header, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
 
 from .config import AppSettings
 from .domain import EvidenceReply, HumanDecision, POLICY_VERSION
@@ -15,8 +17,26 @@ from .platform import PlatformError, SnowflakePlatform
 from .snowflake_client import query
 from .storage import Conflict, Store
 from .workflow import Workflow
+from .cases import CaseService, detect_risks
+from .lifecycle_models import CaseBinding, DispatchInput, ExecutionEventInput, RiskEventInput, ScenarioProposal
+from .monitor import FileFeedMonitor
 
-app = FastAPI(title="The project API")
+@asynccontextmanager
+async def lifespan(app):
+    settings = AppSettings()
+    monitor = FileFeedMonitor(get_workflow, settings.project_simulated_feed_path, settings.project_monitor_interval_seconds)
+    app.state.monitor = monitor
+    task = asyncio.create_task(monitor.run()) if monitor.path else None
+    try:
+        yield
+    finally:
+        if task:
+            task.cancel()
+            with suppress(asyncio.CancelledError):
+                await task
+
+
+app = FastAPI(title="sumo API", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip() for o in AppSettings().cors_origins.split(",") if o.strip()],
@@ -56,6 +76,7 @@ class CreateRun(BaseModel):
     mode: Literal["offline", "live"] = "offline"
     execution: Literal["concurrent", "sequential", "single", "deterministic"] = "concurrent"
     policy_version: str = POLICY_VERSION
+    case_id: str | None = None
 
 
 class Binding(BaseModel):
@@ -72,9 +93,21 @@ class AnalystInput(BaseModel):
     question: str = Field(min_length=1, max_length=2000)
 
 
-class ScenarioInput(Binding):
-    name: str = Field(min_length=1, max_length=80)
-    quantities: dict[str, StrictInt] = Field(max_length=20)
+class BrainProposalInput(Binding):
+    question: str = Field(min_length=1, max_length=2000)
+
+
+@app.post("/api/graph/runs/{run_id}/scenario-proposal")
+def scenario_proposal(run_id: str, payload: BrainProposalInput):
+    from .brain import propose_scenario
+
+    wf = get_workflow()
+    with wf.owner(run_id):
+        run = store.get(run_id)
+        wf.binding(run, payload.model_dump())
+        if run["status"] != "WAITING_DECISION":
+            raise Conflict("The current assessment must be waiting for a decision")
+        return propose_scenario(payload.question, run)
 
 
 @app.exception_handler(Conflict)
@@ -141,24 +174,117 @@ def runs():
     return {"runs": store.list()}
 
 
+@app.get("/api/cases")
+def cases():
+    return {"cases": [{k: v for k, v in c.items() if k not in ("snapshot", "events")} for c in store.case_list()]}
+
+
+@app.get("/api/monitor/status")
+def monitor_status():
+    monitor = getattr(app.state, "monitor", None)
+    return monitor.status if monitor else {"enabled": False, "adapter": "local_simulated_file"}
+
+
+@app.get("/api/cases/{case_id}")
+def case_detail(case_id: str):
+    return store.case_get(case_id)
+
+
+@app.post("/api/cases/{case_id}/assessments", status_code=202)
+def case_assessment(case_id: str, payload: CaseBinding, background: BackgroundTasks):
+    wf = get_workflow()
+    if store.case_get(case_id)["mode"] == "live":
+        ensure_live(wf)
+    run = CaseService(wf).reassess(case_id, payload.revision)
+    background.add_task(wf.advance, run["id"])
+    return run
+
+
+@app.post("/api/risk-events", status_code=202)
+def risk_event(payload: RiskEventInput, background: BackgroundTasks):
+    wf = get_workflow()
+    result = CaseService(wf).ingest(payload)
+    if result["run"]["status"] == "CREATED" and result["case"]["events"][-1]["validation"] == "CONFIRMED":
+        background.add_task(wf.advance, result["run"]["id"])
+    return result
+
+
+@app.post("/api/monitor/scan", status_code=202)
+def monitor_scan(background: BackgroundTasks):
+    """Explicit local scan; no cloud polling, inference, or background scheduler."""
+    from .sources import OfflineSource
+
+    snapshot = OfflineSource().load_snapshot()
+    local_cases = [c for c in store.case_list() if c["mode"] == "offline" and c.get("snapshot")]
+    if local_cases:
+        from .domain import EvidenceSnapshot
+
+        snapshot = EvidenceSnapshot.model_validate(local_cases[0]["snapshot"])
+    po = snapshot.case["primary_po"]
+    from .domain import fingerprint
+
+    event_id = "scan-" + fingerprint({"company": snapshot.company, "scope": snapshot.scope, "po": po["id"], "receipt": po["supplier_confirmed_eta"], "quantity": po["quantity"]})[:24]
+    prior = store.operational_event("risk:" + event_id)
+    if prior:
+        case = store.case_get(prior["case_id"])
+        return {"case": case, "run": store.get(case["active_run_id"]), "duplicate": True}
+    event = RiskEventInput(
+        id=event_id, case_id=local_cases[0]["id"] if local_cases else None,
+        source="simulated_supplier", source_reference=po["confirmed_eta_evidence"],
+        observed_at=snapshot.as_of, po_id=po["id"], part=po["part"],
+        location=snapshot.case["internal_transfer"]["to"], usable_receipt=po["supplier_confirmed_eta"],
+    )
+    wf = get_workflow()
+    result = CaseService(wf).ingest(event)
+    if result["run"]["status"] == "CREATED":
+        background.add_task(wf.advance, result["run"]["id"])
+    return result
+
+
+@app.post("/api/cases/{case_id}/dispatch")
+def dispatch(case_id: str, payload: DispatchInput):
+    return CaseService(get_workflow()).dispatch(case_id, payload)
+
+
+@app.post("/api/cases/{case_id}/execution-events", status_code=202)
+def execution_event(case_id: str, payload: ExecutionEventInput, background: BackgroundTasks):
+    wf = get_workflow()
+    result = CaseService(wf).execution_event(case_id, payload)
+    if result["run"]["status"] == "CREATED":
+        background.add_task(wf.advance, result["run"]["id"])
+    return result
+
+
 @app.get("/api/risk-inbox")
 def risk_inbox():
     from .engine import analyze_operations, discover_sources
     from .sources import OfflineSource
 
     snapshot = OfflineSource().load_snapshot()
+    cases = [c for c in store.case_list() if c["mode"] == "offline"]
+    if cases and cases[0].get("snapshot"):
+        from .domain import EvidenceSnapshot
+
+        snapshot = EvidenceSnapshot.model_validate(cases[0]["snapshot"])
+    alerts = detect_risks(snapshot)
+    for case in cases:
+        for event in case["events"]:
+            if event.get("validation") == "UNVERIFIED":
+                alerts.append({"id": event["id"], "case_id": case["id"], "level": "Medium", "title": "Potential disruption reported", "supplier": event["source_reference"], "text": event["po_id"], "detail": "Awaiting an authoritative supplier confirmation", "icon": "alert", "destination": "evidence", "validation": "UNVERIFIED"})
     return {
         "mode": "offline",
         "snapshot": snapshot.model_dump(mode="json"),
         "operations": analyze_operations(snapshot).model_dump(mode="json"),
         "sourcing": discover_sources(snapshot).model_dump(mode="json"),
+        "alerts": alerts,
+        "case_id": cases[0]["id"] if cases else None,
     }
 
 
 @app.post("/api/graph/runs/{run_id}/scenario")
-def scenario(run_id: str, payload: ScenarioInput):
+def scenario(run_id: str, payload: ScenarioProposal):
     from .domain import EvidenceSnapshot
-    from .engine import evaluate_scenario
+    from .scenarios import build_scenario
 
     wf = get_workflow()
     with wf.owner(run_id):
@@ -167,21 +293,18 @@ def scenario(run_id: str, payload: ScenarioInput):
         if run["status"] != "WAITING_DECISION":
             raise Conflict("Complete source qualification before creating a scenario")
         snapshot = EvidenceSnapshot.model_validate(run["snapshot"])
-        plan = evaluate_scenario(snapshot, payload.quantities)
         wf.reserve(run_id, "engine_evaluations")
+        baseline = next((p for p in run["plans"] if p["id"] == run["recommended_plan_id"]), None)
+        result = build_scenario(snapshot, payload, run.get("scenarios", []), run_id, baseline)
+        plan = result["plan"]
         plans = run["plans"]
-        if plan.feasible and plan.within_authority and not any(p["id"] == plan.id for p in plans):
-            plans = [*plans, plan.model_dump(mode="json")]
-        scenarios = [
-            s
-            for s in run.get("scenarios", [])
-            if s["snapshot_id"] == snapshot.id and s["plan"]["id"] != plan.id
-        ]
-        scenarios.append(
-            {"name": payload.name, "snapshot_id": snapshot.id, "plan": plan.model_dump(mode="json")}
-        )
+        if result["approval_eligible"] and not any(p["id"] == plan["id"] for p in plans):
+            plans = [*plans, plan]
+        scenarios = [*run.get("scenarios", []), result]
+        store.artifact({"kind": "scenario_version", "run_id": run_id, **result})
         wf.event(run_id, "engine", "scenario_evaluated", f"Evaluated manager scenario: {payload.name}")
-        return wf.checkpoint(run_id, plans=plans, scenarios=scenarios)
+        impacts = {**run.get("plan_impacts", {}), plan["id"]: result["impact"]}
+        return wf.checkpoint(run_id, plans=plans, scenarios=scenarios, plan_impacts=impacts)
 
 
 @app.post("/api/graph/runs", status_code=202)
@@ -191,7 +314,10 @@ def create_run(
     wf = get_workflow()
     if payload.mode == "live":
         ensure_live(wf)
-    run = wf.create(**payload.model_dump(), key=idempotency_key)
+    with wf.owner(payload.case_id) if payload.case_id else nullcontext():
+        active = store.case_get(payload.case_id)["active_run_id"] if payload.case_id else None
+        with wf.owner(active) if active else nullcontext():
+            run = wf.create(**payload.model_dump(), key=idempotency_key)
     if run["status"] == "CREATED":
         background.add_task(wf.advance, run["id"])
     return run
@@ -207,7 +333,10 @@ def get_run(run_id: str):
     ):
         wf = get_workflow()
         ensure_live(wf)
-        return wf.ensure_current(run_id)
+        run = wf.ensure_current(run_id)
+    if run.get("case_id"):
+        case = store.case_get(run["case_id"])
+        return {**run, "decision_case": {k: v for k, v in case.items() if k != "snapshot"}}
     return run
 
 
