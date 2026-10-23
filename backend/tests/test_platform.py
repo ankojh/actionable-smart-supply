@@ -603,14 +603,18 @@ def test_analyst_ordinary_comments_and_quoted_text_are_review_only():
         review_sql("SELECT 1; -- explanation\nDELETE FROM X")
 
 
-def test_search_readiness_is_a_metadata_only_preflight():
+@pytest.mark.parametrize("state", ["ACTIVE", "RUNNING", "SUSPENDED", "FAILED", "", None])
+def test_search_readiness_is_a_metadata_only_preflight(state):
     calls = []
 
     def metadata(sql, params):
         calls.append(sql)
-        return [{"SERVING_STATE": "SUSPENDED"}]
+        return [{"SERVING_STATE": state}]
 
     p = platform(metadata)
-    with pytest.raises(PlatformError, match="paused"):
+    if state in {"ACTIVE", "RUNNING"}:
         p.check_search_ready()
+    else:
+        with pytest.raises(PlatformError, match="paused"):
+            p.check_search_ready()
     assert len(calls) == 1 and calls[0].startswith("DESCRIBE CORTEX SEARCH SERVICE")

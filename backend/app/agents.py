@@ -1,7 +1,7 @@
-"""Application-controlled Claude specialists with role-specific typed tool loops.
+"""Managed Cortex specialists, plus explicit legacy and offline providers.
 
-These are not native managed Cortex Agent resources. Model text never supplies
-approval-critical facts; the deterministic tool results remain authoritative.
+Native Agents choose typed client-side tools bound to one immutable snapshot.
+Model text never supplies approval-critical facts; deterministic results remain authoritative.
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ from pydantic import Field
 from .domain import Contract, fingerprint
 from .engine import analyze_operations, discover_sources, qualify_sources
 from .platform import PlatformError
+from .cortex import AGENT_NAMES, TOOLS
 
 
 class Turn(Contract):
@@ -27,12 +28,6 @@ class Turn(Contract):
     outcome: Literal["reviewed"] = "reviewed"
 
 
-TOOLS = {
-    "operations": ("material_balance",),
-    "sourcing": ("source_candidates", "search_evidence"),
-    "qualification": ("independent_qualification", "search_evidence"),
-    "single": ("material_balance", "source_candidates", "independent_qualification", "search_evidence"),
-}
 REQUIRED = {key: set(value) for key, value in TOOLS.items()}
 
 
@@ -64,6 +59,8 @@ class SpecialistRunner:
         self.event, self.reserve = event, reserve
 
     def invoke(self, run_id, role, snapshot, mode):
+        if mode == "live" and getattr(self.platform, "native_agents", False):
+            return self._invoke_managed(run_id, role, snapshot)
         run = self.store.get(run_id)
         dependency = role_fingerprint(role, snapshot)
         invocation_key = f"{run_id}:{role}:{dependency}"
@@ -281,6 +278,124 @@ class SpecialistRunner:
             results.update(new_results)
             transcript.extend({"tool": name, "result": value} for name, value in new_results.items())
         raise ValueError("Specialist invocation reached its eight-turn limit")
+
+    def _invoke_managed(self, run_id, role, snapshot):
+        dependency = role_fingerprint(role, snapshot)
+        key = f"{run_id}:{role}:{dependency}:managed-v1"
+        cached = self.store.get(run_id).get("role_cache", {}).get(key)
+        if cached:
+            self.event(run_id, role, "reuse", "Reused managed Agent execution; evidence dependencies are unchanged")
+            return cached
+        self.event(run_id, role, "started", "Managed Snowflake Cortex Agent investigation started")
+        thread_id = self.store.begin_receipt(key + ":thread")
+        if thread_id is None:
+            thread_id = self.platform.create_agent_thread()
+            self.store.complete_receipt(key + ":thread", thread_id)
+        execution = {
+            "agent_name": AGENT_NAMES[role], "thread_id": thread_id,
+            "snapshot_id": snapshot.id, "status": "RUNNING", "turns": [],
+        }
+
+        def record_execution():
+            def update(run):
+                entries = run.setdefault("agent_executions", {}).setdefault(role, [])
+                previous = next((e for e in entries if e["thread_id"] == thread_id), None)
+                if previous is None:
+                    entries.append(copy.deepcopy(execution))
+                else:
+                    previous.update(copy.deepcopy(execution))
+            self.store.mutate(run_id, update)
+
+        record_execution()
+        content = [{"type": "text", "text": json.dumps({
+            "assessment_id": run_id, "role": role, "snapshot_id": snapshot.id,
+            "company": snapshot.company, "scope": snapshot.scope, "as_of": snapshot.as_of,
+            "task": "Investigate this bound snapshot. Call every configured tool exactly once, then summarize your review. Cite source IDs returned by the tools. No business actions are authorized.",
+        })}]
+        parent = "0"
+        results = {}
+        usage = []
+        for turn_index in range(8):
+            if self.store.get(run_id)["status"] in {"CANCELLED", "SUPERSEDED"}:
+                raise ValueError("Assessment was cancelled or superseded")
+            receipt_key = key + f":turn:{turn_index}"
+            response = self.store.begin_receipt(receipt_key)
+            if response is None:
+                self.reserve(run_id, "model_turns")
+                response = self.platform.run_agent(role, thread_id, parent, content)
+                self.store.complete_receipt(receipt_key, response)
+            metadata = response["metadata"]
+            parent = str(metadata["assistant_message_id"])
+            execution["turns"].append({
+                field: str(metadata[field]) for field in ("run_id", "request_id", "assistant_message_id")
+                if metadata.get(field) is not None
+            })
+            usage.append(metadata.get("usage"))
+            record_execution()
+            tool_uses = [block["tool_use"] for block in response["content"] if block.get("type") == "tool_use"]
+            pending = [tool for tool in tool_uses if tool.get("client_side_execute") is True]
+            if tool_uses and len(pending) != len(tool_uses):
+                raise ValueError("Specialist requested an unregistered server-side tool")
+            if not pending:
+                text = "\n".join(block.get("text", "") for block in response["content"] if block.get("type") == "text")
+                if not REQUIRED[role].issubset(results) or not text.strip():
+                    raise ValueError("Specialist submission lacks required tools or final review")
+                citations = set()
+                for name, value in results.items():
+                    if name == "search_evidence":
+                        citations.update(doc["id"] for doc in value)
+                    elif name == "material_balance":
+                        citations.update(value["citations"])
+                    else:
+                        citations.update(c for candidate in value["candidates"] for c in candidate["citations"])
+                permitted = {doc.id for doc in snapshot.documents}
+                if not citations or not citations.issubset(permitted):
+                    raise ValueError("Specialist tool citations are outside the bound snapshot")
+                execution["status"] = "COMPLETED"
+                record_execution()
+                result = {
+                    "role": role, "tools": list(results), "citations": sorted(citations),
+                    "summary": self._summary(role, results), "agent_review": text[:12000],
+                    "dependency": dependency, "provider": "Snowflake Cortex Agent",
+                    "execution": copy.deepcopy(execution),
+                    "usage": usage if all(item is not None for item in usage) else None,
+                }
+                self.store.mutate(run_id, lambda run: run.setdefault("role_cache", {}).update({key: result}))
+                self.event(run_id, role, "completed", result["summary"])
+                return result
+            names = [tool.get("name") for tool in pending]
+            if len(set(names)) != len(names) or any(name not in TOOLS[role] or name in results for name in names):
+                raise ValueError("Specialist requested a duplicate or unregistered tool")
+            if role == "single" and "independent_qualification" in names and not {"material_balance", "source_candidates"}.issubset(results):
+                raise ValueError("Specialist requested qualification before its dependencies")
+            content = []
+            for tool in pending:
+                name = tool["name"]
+                arguments = tool.get("input", {})
+                if not isinstance(arguments, dict) or set(arguments) - {"query"}:
+                    raise ValueError("Specialist tool input cannot change the bound scope")
+                query = arguments.get("query", "")
+                if not isinstance(query, str) or len(query) > 256:
+                    raise ValueError("Specialist supplied an invalid evidence query")
+                if tool.get("permission", {}).get("options"):
+                    raise PlatformError("AGENT_TOOL_PERMISSION_REQUIRED", "The managed Agent requested additional tool permission.")
+                tool_id = tool.get("tool_use_id")
+                if not isinstance(tool_id, str) or not tool_id:
+                    raise ValueError("Specialist tool request is missing its identity")
+                tool_key = key + f":tool:{turn_index}:" + tool_id
+                value = self.store.begin_receipt(tool_key)
+                if value is None:
+                    self.reserve(run_id, "tool_calls")
+                    self.event(run_id, role, "tool_started", name)
+                    value = self._tool(name, snapshot, query or "DRV-24-B reserved quantity usable receipt")
+                    self.store.complete_receipt(tool_key, value)
+                    self.event(run_id, role, "tool_completed", name)
+                results[name] = value
+                content.append({"type": "tool_result", "tool_result": {
+                    "tool_use_id": tool_id, "type": "generic", "name": name,
+                    "content": [{"type": "json", "json": value}], "status": "success",
+                }})
+        raise ValueError("Specialist managed Agent reached its eight-request limit")
 
     def _tool(self, name, snapshot, query):
         if name == "material_balance":

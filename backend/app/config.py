@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     semantic_view: str = "RECOVERY_ANALYTICS"
     snowsight_url: str | None = None
     cortex_model: str = "claude-sonnet-4-6"
+    use_cortex_agents: bool = True
     rest_auth: Literal["pat", "session"] = "pat"
     rest_base_url: str | None = None
     statement_timeout_seconds: int = Field(default=45, ge=1, le=120)

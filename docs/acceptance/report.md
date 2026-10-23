@@ -1,5 +1,13 @@
 # Implementation acceptance
 
+## Subsequent live recheck — October 23, 2026, 2:22 PM Pacific
+
+The requested live rerun used the existing initial and confirmed Snowflake snapshots without republishing source data. Case `SR-1D01A698` reached `WAITING_DECISION` with the $1,220 recommendation and $1,460 / $1,480 alternatives. SQL evidence validation, scoped Search, hosted Claude specialists, Cortex Analyst (including the browser flow), a fixed warehouse demand aggregation, and audit delivery passed. All 82 audit records arrived with unique IDs and zero pending exports. This rerun used 11 hosted Claude calls and two Analyst requests.
+
+Search is now **active and left running for live use**, with ongoing Snowflake service charges. This supersedes the suspended Search and failed Analyst statuses in the original implementation record below. Two fixes were verified: accepting Snowflake's `ACTIVE` serving state and retrying transient busy-checkpoint responses during browser polling. The frontend build, 155 backend tests, and 18 separate sample-data tests passed. Live human approval and cloud outcome replay remain unverified because reviewer configuration and separate evaluator credentials are absent. Existing source data also lacks customer/commercial terms; those impact values correctly remain unknown.
+
+The sanitized [live recheck record](live-recheck-2026-10-23.json) contains the exact run, snapshot, computations, results and limitations. The following sections retain the original implementation-session evidence and budgets.
+
 Verified on 2026-10-23 on branch `dev/implementation-v1`. Changes are local and have not been pushed. The pre-existing `.idea/` directory was preserved. No Git credentials, remotes, account network policies, or model-region settings were changed.
 
 ## Result and diagram alignment

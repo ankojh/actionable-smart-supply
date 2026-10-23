@@ -134,6 +134,48 @@ class SnowflakePlatform:
         self._usage = threading.local()
 
     @property
+    def native_agents(self):
+        return self.settings.use_cortex_agents
+
+    def create_agent_thread(self):
+        result = self._rest("/api/v2/cortex/threads", {"origin_application": "sumo"})
+        thread_id = str(result.get("thread_id", ""))
+        if not re.fullmatch(r"[1-9][0-9]*", thread_id):
+            raise PlatformError("INVALID_AGENT_THREAD")
+        # Keep Snowflake's 64-bit identifiers as strings for the browser.
+        return thread_id
+
+    def run_agent(self, role, thread_id, parent_message_id, content):
+        from .cortex import AGENT_NAMES
+
+        if role not in AGENT_NAMES or not re.fullmatch(r"[1-9][0-9]*", str(thread_id)):
+            raise PlatformError("INVALID_AGENT_REQUEST")
+        if not re.fullmatch(r"[0-9]+", str(parent_message_id)) or not isinstance(content, list):
+            raise PlatformError("INVALID_AGENT_REQUEST")
+        self._usage.request_id = None
+        result = self._rest(
+            f"/api/v2/databases/{self.database}/schemas/{self.schema}/agents/{AGENT_NAMES[role]}:run",
+            {
+                "thread_id": int(thread_id), "parent_message_id": int(parent_message_id),
+                "messages": [{"role": "user", "content": content}], "stream": False,
+            },
+        )
+        if not isinstance(result.get("content"), list) or result.get("error") or result.get("warnings"):
+            raise PlatformError("INVALID_AGENT_RESPONSE", "The managed Snowflake Agent did not return a complete usable response.")
+        metadata = result.get("metadata")
+        if not isinstance(metadata, dict):
+            raise PlatformError("INVALID_AGENT_RESPONSE")
+        message_id = str(metadata.get("assistant_message_id", ""))
+        if not re.fullmatch(r"[1-9][0-9]*", message_id):
+            raise PlatformError("INVALID_AGENT_RESPONSE")
+        if str(metadata.get("thread_id", thread_id)) != str(thread_id):
+            raise PlatformError("INVALID_AGENT_RESPONSE")
+        metadata = {**metadata, "thread_id": str(thread_id), "assistant_message_id": message_id}
+        if getattr(self._usage, "request_id", None):
+            metadata["request_id"] = self._usage.request_id
+        return {"content": result["content"], "metadata": metadata}
+
+    @property
     def last_usage(self) -> dict[str, Any] | None:
         return getattr(self._usage, "value", None)
 
@@ -256,8 +298,9 @@ class SnowflakePlatform:
                     return None
 
             with build_opener(NoRedirect()).open(
-                req, timeout=self.settings.network_timeout_seconds
+                req, timeout=90 if "/agents/" in path and path.endswith(":run") else self.settings.network_timeout_seconds
             ) as response:
+                self._usage.request_id = getattr(response, "headers", {}).get("X-Snowflake-Request-ID")
                 raw = response.read(1024 * 1024 + 1)
                 if len(raw) > 1024 * 1024:
                     raise PlatformError("RESPONSE_LIMIT")
@@ -316,7 +359,8 @@ class SnowflakePlatform:
 
     def check_search_ready(self):
         rows = self._sql(f"DESCRIBE CORTEX SEARCH SERVICE {self.prefix}.{self.search_service}")
-        if len(rows) != 1 or str(rows[0].get("SERVING_STATE", "")).upper() != "RUNNING":
+        # DESCRIBE reports ACTIVE on the live service; some accounts return RUNNING.
+        if len(rows) != 1 or str(rows[0].get("SERVING_STATE", "")).upper() not in {"ACTIVE", "RUNNING"}:
             raise PlatformError(
                 "SEARCH_PAUSED",
                 "The evidence search service is paused or unavailable. Resume it before starting a live assessment.",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "./api";
 import CompanyBrain from "./components/CompanyBrain";
+import AgentExecutions from "./components/AgentExecutions";
 import { BusinessImpact, ExecutionMonitor, RiskEventEditor, ScenarioEditor, ScenarioVersions, StrategyReview } from "./components/Lifecycle";
 import SnowflakeActivity, { SnowflakeLink, snowflakeSteps } from "./components/SnowflakeActivity";
 import { Badge, Button, Empty, EventList, Icon, Metric, Modal, SectionHeading, date, money, planTitle, words } from "./components/ui";
@@ -47,7 +48,9 @@ export default function App() {
   useEffect(() => {
     if (!run || !["CREATED", "INVESTIGATING"].includes(run.status)) return;
     let active = true;
-    const poll = async () => { try { const next = await api(`/graph/runs/${run.id}`); if (active) { setRun(next); if (!["CREATED", "INVESTIGATING"].includes(next.status)) loadRuns().catch(() => {}); } } catch (err) { if (active) setError(err.message); } };
+    // A completed live run remains locked while its audit outbox is delivered.
+    // Keep polling until the server can validate and return the current checkpoint.
+    const poll = async () => { try { const next = await api(`/graph/runs/${run.id}`); if (active) { setRun(next); if (!["CREATED", "INVESTIGATING"].includes(next.status)) loadRuns().catch(() => {}); } } catch (err) { if (active && !(err.status === 409 && err.code === "STALE_OR_BUSY_CHECKPOINT")) setError(err.message); } };
     const timer = setInterval(poll, 1200);
     return () => { active = false; clearInterval(timer); };
   }, [run?.id, run?.status]);
@@ -138,6 +141,7 @@ export default function App() {
           {run.error && <div className="error-banner" role="alert"><Icon name="alert"/><div><strong>This assessment needs attention</strong><p>{run.error}</p></div></div>}
           {["CANCELLED", "DEFERRED", "ESCALATED", "FAILED"].includes(run.status) && <div className="notice amber"><Icon name="alert" size={18}/><div><strong>{statusLabel(run)}</strong><p>{run.status === "ESCALATED" ? "No complete recovery is supported by the current evidence. Review the remaining gap and source requests." : "Review case activity and controls before continuing this assessment."}</p></div><Button onClick={() => setPage("evidence")}>Review evidence</Button></div>}
           <SnowflakeActivity workspace={snowflakeWorkspace} page={page} run={run}/>
+          {["overview", "investigate", "activity"].includes(page) && <AgentExecutions run={run} workspace={snowflakeWorkspace}/>}
           <div className={`case-layout ${["overview", "investigate", "impact", "recovery", "suppliers", "orders", "compare"].includes(page) ? "with-brain" : ""}`}>
             <div className="case-content">
               {isAnalysis && <>

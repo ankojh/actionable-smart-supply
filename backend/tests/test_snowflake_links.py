@@ -45,6 +45,12 @@ def test_workspace_endpoint_is_read_only_and_excludes_credentials(monkeypatch):
     assert data["resources"]["analyst"]["url"].endswith(
         "/semantic-view/RECOVERY_ANALYTICS/semantic-information"
     )
+    assert data["agents"]["operations"]["url"].endswith(
+        "/agents/database/TEST_DB/schema/SUPPLY_RECOVERY_V1/agent/SUMO_OPERATIONS_V1/details"
+    )
+    assert data["agents"]["qualification"]["executions_url"].endswith(
+        "SUMO_QUALIFICATION_V1/details?tab=observability&preset=PRESET_LAST_DAY&type=relative"
+    )
 
 
 @pytest.mark.parametrize(

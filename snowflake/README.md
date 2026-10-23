@@ -1,5 +1,27 @@
 # Snowflake integration
 
+## Managed Cortex Agents
+
+New live specialist runs default to four versioned managed objects in the existing application schema: `SUMO_OPERATIONS_V1`, `SUMO_SOURCING_V1`, `SUMO_QUALIFICATION_V1`, and `SUMO_SINGLE_V1`. **Cloud provisioning is pending explicit approval:** automatic approval review blocked creating these objects and granting their access. The existing running process and historical cases have not been converted or represented as native Agent executions.
+
+From `backend/`, render the exact proposed DDL without network calls:
+
+```sh
+.venv/bin/python ../snowflake/load/agents.py
+# After approval of these exact objects and grants:
+.venv/bin/python ../snowflake/load/agents.py --apply
+```
+
+The setup identity needs CREATE AGENT on the dedicated schema. The script creates only these objects with `IF NOT EXISTS` and grants their USAGE and MONITOR to the existing `PROJECT_RECOVERY_APP_V1` role. It does not grant that role object-creation or evaluator privileges. Agent specifications use the configured Claude model, an 8,000-token/60-second orchestration budget per request, and only the role's read-only generic tools. No additional Search service is created.
+
+The Agent Run REST API orchestrates tool requests; callbacks validate their names and input and bind them to the assessment's exact authoritative snapshot. Material balance, independent qualification and recovery planning remain deterministic. Search callbacks use the existing scoped Cortex Search adapter and revalidate SQL citations. A native failure does not fall back to direct completion. `SNOWFLAKE_USE_CORTEX_AGENTS=false` selects the legacy provider explicitly.
+
+Each invocation journals thread creation, paid requests and tool receipts before I/O. Completed receipts survive restart; uncertain calls are not repeated. Findings record the managed object, 64-bit thread/message IDs as strings, request/run IDs and available usage. Analysis and activity display Agent page and Observability-history links with identifiers for locating the exact execution. Old direct-completion cases retain their original provenance.
+
+After provisioning, restart the backend and create a fresh live assessment, then use Refresh evidence to admit the already-published confirmed snapshot. Verify the resulting native execution records in Snowflake before claiming live acceptance. This integration currently has mocked coverage; native live execution remains blocked on the approval above.
+
+Official references: [Agent objects](https://docs.snowflake.com/en/sql-reference/sql/create-agent), [Run API](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-run), [Threads API](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-threads-rest-api), and [Observability](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents-monitor).
+
 The backend uses immutable Snowflake source rows, governed operational views and snapshot manifests. It validates payload/document hashes before planning. A live failure stays a live failure. Local fixtures are used only by the separately labeled offline provider and explicit synthetic source loader.
 
 Run these from `backend/` with its virtual environment. Credentials belong only in `.env`; commands below never print them. The existing `SNOWFLAKE_DATABASE` and `SNOWFLAKE_WAREHOUSE` select the destination. The dedicated schema defaults to `SUPPLY_RECOVERY_V1`. The application uses `PROJECT_RECOVERY_APP_V1` regardless of a broader setup role. Configure `SNOWFLAKE_CORTEX_MODEL` to an account-supported Claude model; the default `claude-sonnet-4-6` is a candidate, not proof of account availability. `SNOWFLAKE_REST_BASE_URL` can explicitly select the official HTTPS account URL.

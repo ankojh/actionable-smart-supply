@@ -2,7 +2,7 @@
 
 A local supply-chain investigation and recovery application built with FastAPI, React, a deterministic planning engine, and Snowflake-hosted Claude. It follows the supplied workflow: dated evidence → Operations and Sourcing investigations → independent Qualification review → recovery evaluation → human decision → revalidation → review-only action drafts.
 
-The offline demo uses synthetic evidence and scripted specialists. Live assessments read governed Snowflake evidence and use application-controlled Claude tool loops through Snowflake. A live failure never falls back to local fixtures or another model provider. These loops are not native managed Cortex Agent resources.
+The offline demo uses synthetic evidence and scripted specialists. New live assessments default to managed Snowflake Cortex Agent objects with scoped, typed application tool callbacks. Provision the dedicated objects before starting a new live assessment; see [managed Agent setup](snowflake/README.md#managed-cortex-agents). A live failure never falls back to local fixtures or another model provider. Earlier saved assessments used direct `AI_COMPLETE` calls and retain that provider label; they do not acquire native execution records retroactively.
 
 ## Start locally
 

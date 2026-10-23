@@ -7,7 +7,10 @@ export async function api(path, body, headers = {}) {
   try { data = await response.json(); } catch { throw new Error("The service is unavailable. Please try again."); }
   if (!response.ok) {
     const detail = typeof data.detail === "string" ? data.detail : data.error;
-    throw new Error(detail ? String(detail).slice(0, 500) : "The request could not be completed. Check your inputs and try again.");
+    const error = new Error(detail ? String(detail).slice(0, 500) : "The request could not be completed. Check your inputs and try again.");
+    error.status = response.status;
+    error.code = data.code;
+    throw error;
   }
   return data;
 }

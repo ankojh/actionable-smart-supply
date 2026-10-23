@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-10-23T21:22:56.698854+00:00",
+  "app_url": "http://127.0.0.1:5173",
+  "run_id": "run-000fa01bbc3a4f5a929d9ddcc53ed893",
+  "case_id": "case-1d01a6986ad84b388a35378185e375cb",
+  "mode": "live",
+  "status": "WAITING_DECISION",
+  "snapshot_id": "sf-snap-ef08e97de505262675cb",
+  "documents": 24,
+  "surfaces": {
+    "sql_and_evidence_hashes": "live_verified",
+    "cortex_search": "live_verified_and_left_active",
+    "snowflake_hosted_claude": "live_verified",
+    "cortex_analyst": "live_verified_review_sql_not_executed",
+    "fixed_warehouse_demand_aggregate": {
+      "status": "live_verified",
+      "robots": 150,
+      "required_drivers": 300,
+      "orders": 5
+    },
+    "audit": {
+      "status": "live_verified",
+      "records": 82,
+      "pending_exports": 0
+    }
+  },
+  "model_calls": 11,
+  "analyst_requests": 2,
+  "recommendation": {
+    "cost_usd": 1220.0,
+    "quantities": {
+      "OFFER-EXPRESS": 20,
+      "OFFER-STANDARD": 60,
+      "TRANSFER-B": 40
+    },
+    "forecast_on_time_robots": 150,
+    "remaining_shortage": 0
+  },
+  "local_checks": {
+    "backend_tests_passed": 155,
+    "sample_data_tests_passed": 18,
+    "frontend_build": "passed",
+    "api_polling_smoke": "passed",
+    "changed_backend_lint": "passed"
+  },
+  "limitations": {
+    "live_human_approval": "not_exercised_missing_reviewer_configuration",
+    "live_evaluator_replay": "not_run_missing_separate_evaluator_credentials",
+    "commercial_impact": "customer and financial terms absent from existing source data; UI correctly shows unknown values"
+  },
+  "fixes": [
+    "Accept ACTIVE Search serving state",
+    "Retry transient busy checkpoint responses during background UI polling"
+  ],
+  "search_left_active": true
+}

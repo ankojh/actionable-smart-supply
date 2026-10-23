@@ -5,6 +5,7 @@ from urllib.parse import quote, urlsplit
 
 from .config import Settings
 from .platform import identifier
+from .cortex import AGENT_NAMES
 
 
 def workspace_links(settings: Settings) -> dict:
@@ -47,6 +48,9 @@ def workspace_links(settings: Settings) -> dict:
         }
 
     resources = {
+        "agents": {
+            "label": "Snowflake Agents", "url": f"{base}/#/agent-studio", "destination": "agents",
+        },
         "snapshots": resource("SNAPSHOTS", label="Evidence snapshots"),
         "documents": resource("EVIDENCE_DOCUMENTS", label="Source documents"),
         "inventory": resource("V_INVENTORY", "view", "Inventory"),
@@ -69,6 +73,13 @@ def workspace_links(settings: Settings) -> dict:
             "destination": "history",
         },
     }
+    agents = {}
+    for role, name in AGENT_NAMES.items():
+        url = f"{base}/#/agents/database/{quote(database)}/schema/{quote(schema)}/agent/{quote(name)}/details"
+        agents[role] = {
+            "name": name, "object": f"{prefix}.{name}", "url": url,
+            "executions_url": url + "?tab=observability&preset=PRESET_LAST_DAY&type=relative",
+        }
     return {
         "status": "configured",
         "base_url": base,
@@ -80,4 +91,6 @@ def workspace_links(settings: Settings) -> dict:
         "model": settings.cortex_model,
         "query_tag": "project:recovery-v1:backend",
         "resources": resources,
+        "agents": agents,
+        "live_agent_provider": "cortex_agents" if settings.use_cortex_agents else "ai_complete",
     }
