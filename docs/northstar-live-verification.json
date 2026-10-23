@@ -1,0 +1,61 @@
+{
+  "status": "passed",
+  "provider": "snowflake",
+  "schema": "DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2",
+  "source_tables": 25,
+  "source_rows": 205,
+  "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158",
+  "prompt_version": "northstar-brief-v4",
+  "specialist_queries": {
+    "operations": "01c7ee48-030c-6e58-0034-28770019fc4e",
+    "qualification": "01c7ee48-030c-6e5a-0034-2877001a4c0e",
+    "sourcing": "01c7ee48-030c-6e5d-0034-2877001d8386"
+  },
+  "current_case_approved": false,
+  "company_brain": {
+    "citations": [
+      "DOC-APEX-002",
+      "DOC-CONF-C",
+      "DOC-COST-001",
+      "DOC-PILOT-RELEASE",
+      "DOC-SUP-001"
+    ],
+    "text": "The manager approval limit is $250,000. Plan A (Apex only) commits $194,400, which is within that limit. Plan C (hybrid: pilot transfer plus Supplier C) commits $24,000, also within the limit. Neither plan is approved yet; both require manager plan approval. The Pacific PO-2026-1042 remains open separately at $164,800 for 400 HDR-200 units from Pacific Motion Systems, delayed to November 10, and is not part of either recovery plan's expenditure figure.",
+    "provider": "snowflake_cortex",
+    "prompt_version": "northstar-brief-v4",
+    "model": "claude-sonnet-4-6",
+    "query_id": "01c7ee48-030c-6e59-0034-2877001a3cde",
+    "usage": {
+      "completion_tokens": 211,
+      "prompt_tokens": 12054,
+      "total_tokens": 12265
+    },
+    "created_at": "2026-10-23T22:00:40.526848+00:00",
+    "snapshot_id": "e6baf40cab57c06539987757850c2cc3490b9de6817e73e113ae1e1bead7b158"
+  },
+  "approval_transaction": {
+    "status": "executed_and_rolled_back",
+    "generated_drafts": 2,
+    "spending_cents": 2400000,
+    "user_case_unchanged": true
+  },
+  "browser_verification": {
+    "status": "passed",
+    "pages": [
+      "Risk Inbox",
+      "Analysis",
+      "Specialist findings",
+      "Compare",
+      "Decision"
+    ],
+    "company_brain_query_id": "01c7ee49-030c-6e5b-0034-2877001a2c6e",
+    "opened_citation": "DOC-COST-001",
+    "submitted_user_approval": false
+  },
+  "local_checks": {
+    "backend_tests_passed": 193,
+    "data_pack_tests_passed": 9,
+    "data_integrity_checks_passed": 3437,
+    "frontend_build": "passed"
+  }
+}

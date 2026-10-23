@@ -102,9 +102,13 @@ Older data and acceptance results are in
 They are not part of this dataset and must not be loaded or retrieved as current
 evidence. The archive manifest records original paths and hashes.
 
-The existing backend/frontend still implement the retired scenario contract.
-**This change generates data only; the new pack is not wired into that app.**
-The old local JSON paths and old Snowflake load inputs were deliberately retired;
-the old app workflow and its fixture-dependent tests need an adapter/update before
-use. No fallback to archived data is provided. Existing remote Snowflake tables
-have not been altered or deleted. Migration and application integration are later work.
+The default application now reads stages 00–04 from the dedicated Snowflake
+NorthStar schema, with deterministic recovery calculations, live hosted Claude
+specialists and Company Brain, cloud reviewer decisions and unsent drafts.
+The typed source tables and five planning snapshots have been ingested. See the
+[application integration guide](../../docs/northstar-integration.md).
+
+The retired workflow and its loaders still use the previous contract. The
+NorthStar loader is `snowflake/load/northstar.py`; verification is
+`snowflake/verify/northstar.py`. No runtime fallback to archived data is provided.
+Existing legacy Snowflake tables are preserved.

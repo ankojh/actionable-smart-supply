@@ -1,11 +1,31 @@
 # Snowflake integration
 
-> **Retired scenario integration.** The load JSON files described below have moved
-> to `archive_data/pre_northstar_happy_path/snowflake/load/`. Do not load those files
-> or treat existing cloud snapshots as the current happy path. The new local pack
-> is [NorthStar V2](../data/northstar_happy_path/README.md); its dictionary and flat
-> exports are prepared for a later migration. No cloud migration or deletion was
-> performed. The remaining instructions document the previous implementation.
+## Active NorthStar integration
+
+The NorthStar data is published in `DEFAULT_DATABASE.NORTHSTAR_RECOVERY_V2`:
+25 typed source tables (205 records), five planning snapshots, cloud case state,
+Claude findings and audit events. The app defaults to live Snowflake reads and
+hosted Claude through `AI_COMPLETE`; there is no local or provider fallback.
+See [the active integration guide](../docs/northstar-integration.md).
+
+From `backend/`:
+
+```sh
+.venv/bin/python ../snowflake/load/northstar.py                 # validate only
+.venv/bin/python ../snowflake/load/northstar.py --apply         # authorized ingestion
+.venv/bin/python ../snowflake/verify/northstar.py --live         # verify cloud rows and findings
+.venv/bin/python ../snowflake/verify/northstar.py --live --investigate --chat
+```
+
+The NorthStar path uses its own published evidence and does not read the retired
+fixtures below. Scripted approval/draft examples in the raw source tables are
+not application authorization. Existing schemas and historical data are preserved.
+
+---
+
+The rest of this document describes the **historical recovery-v1 integration**.
+Its fixture inputs were archived; its Search, Analyst and native Agent contracts
+are separate from the active NorthStar AI_COMPLETE workflow.
 
 ## Managed Cortex Agents
 

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sumo-api
+    runtime: python
+    branch: dev/implementation-v1
+    rootDir: .
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: PROJECT_STORE
+        value: /tmp/sumo/project.sqlite3

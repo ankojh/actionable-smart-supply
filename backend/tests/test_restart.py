@@ -1,4 +1,4 @@
-"""Real HTTP process restarts at both durable human wait boundaries."""
+"""Real NorthStar HTTP restarts preserve evidence and actual approvals."""
 
 import os
 import socket
@@ -15,7 +15,7 @@ def test_real_api_restart_preserves_both_waits(tmp_path):
         sock.bind(("127.0.0.1", 0))
         port = sock.getsockname()[1]
     url = f"http://127.0.0.1:{port}"
-    environment = {**os.environ, "PROJECT_STORE": str(tmp_path / "restart.db")}
+    environment = {**os.environ, "PROJECT_STORE": str(tmp_path / "restart.db"), "PROJECT_NORTHSTAR_MODE": "offline"}
     backend = Path(__file__).resolve().parents[1]
 
     def launch():
@@ -42,36 +42,37 @@ def test_real_api_restart_preserves_both_waits(tmp_path):
         proc.terminate()
         proc.wait(timeout=10)
 
-    def poll(identifier, status):
-        for _ in range(100):
-            run = httpx.get(url + "/api/graph/runs/" + identifier).json()
-            if run["status"] == status:
-                return run
-            assert run["status"] != "FAILED", run.get("error")
-            time.sleep(0.05)
-        raise AssertionError("Expected durable wait was not reached")
+    def read():
+        response = httpx.get(url + "/api/northstar/case")
+        response.raise_for_status()
+        return response.json()
+
+    def action(current, name, **kwargs):
+        response = httpx.post(url + "/api/northstar/case", json={
+            "action": name, "revision": current["revision"],
+            "snapshot_id": current["snapshot_id"], **kwargs,
+        })
+        response.raise_for_status()
+        return response.json()
 
     proc = launch()
     try:
-        identifier = httpx.post(url + "/api/graph/runs", json={"mode": "offline"}).json()["id"]
-        first = poll(identifier, "WAITING_EVIDENCE")
+        current = read()
+        for _ in range(3):
+            current = action(current, "advance")
+        assert current["stage"] == 3
+        assert not current["decision"]
         stop(proc)
         proc = launch()
-        restored = httpx.get(url + "/api/graph/runs/" + identifier).json()
-        assert restored["evidence_requests"] == first["evidence_requests"]
-        assert restored["budget"] == first["budget"]
-        response = httpx.post(
-            url + "/api/graph/runs/" + identifier + "/demo-confirmations",
-            json={"snapshot_id": restored["snapshot"]["id"], "checkpoint": restored["checkpoint"]},
-        )
-        assert response.status_code == 202
-        ready = poll(identifier, "WAITING_DECISION")
+        assert read() == current
+        current = action(read(), "advance")
+        assert current["analysis"]["recommended_plan_id"] == "C"
+        current = action(current, "approve", actor="Restart reviewer", reason="Reviewed V2", plan_id="C")
         stop(proc)
         proc = launch()
-        again = httpx.get(url + "/api/graph/runs/" + identifier).json()
-        assert again["frozen"] == ready["frozen"]
-        assert again["plans"] == ready["plans"]
-        assert again["budget"] == ready["budget"]
+        assert read() == current
+        assert len(read()["drafts"]) == 2
+        assert all(not d["transmitted"] for d in read()["drafts"])
     finally:
         if proc.poll() is None:
             stop(proc)

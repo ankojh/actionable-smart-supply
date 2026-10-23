@@ -4,7 +4,8 @@
 > `archive_data/pre_northstar_happy_path/`; local JSON inputs are no longer active.
 > Use [the NorthStar data guide](../data/northstar_happy_path/README.md) and
 > [role-play guide](../data/northstar_happy_path/ROLE_PLAY.md) for the new pack.
-> Application adaptation and Snowflake migration are pending.
+> The active local application uses [the NorthStar integration](northstar-integration.md).
+> The historical workflow below and its Snowflake migration remain separate.
 
 ## 1. Local installation and launch
 

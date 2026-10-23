@@ -14,7 +14,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from .config import AppSettings
 from .domain import EvidenceReply, HumanDecision, POLICY_VERSION
 from .platform import PlatformError, SnowflakePlatform
-from .snowflake_client import query
+from .snowflake_client import SnowflakeError, query
 from .storage import Conflict, Store
 from .workflow import Workflow
 from .cases import CaseService, detect_risks
@@ -48,6 +48,60 @@ store = Store(
 )
 # Offline startup does not require Snowflake credentials or trigger cloud I/O.
 workflow = Workflow(store)
+
+
+class NorthStarAction(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    revision: int = Field(ge=0)
+    snapshot_id: str
+    action: Literal["advance", "approve", "monitor"]
+    actor: str = Field(default="", max_length=100)
+    reason: str = Field(default="", max_length=2000)
+    plan_id: str = ""
+
+
+@app.get("/api/northstar/case")
+def northstar_case():
+    return get_northstar_service().read()
+
+
+@app.post("/api/northstar/case")
+def northstar_action(payload: NorthStarAction):
+    return get_northstar_service().mutate(**payload.model_dump())
+
+
+def get_northstar_service():
+    if AppSettings().project_northstar_mode == "offline":
+        from .northstar import NorthStarService
+        return NorthStarService(store)
+    from .northstar_cloud import LiveNorthStarService
+    return LiveNorthStarService()
+
+
+class NorthStarBinding(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    revision: int = Field(ge=0)
+    snapshot_id: str
+
+
+class NorthStarQuestion(NorthStarBinding):
+    question: str = Field(min_length=1, max_length=2000)
+
+
+@app.post("/api/northstar/investigate")
+def northstar_investigate(payload: NorthStarBinding):
+    service = get_northstar_service()
+    if not hasattr(service, "investigate"):
+        raise ValueError("Cortex analysis requires the live Snowflake connection")
+    return service.investigate(**payload.model_dump())
+
+
+@app.post("/api/northstar/chat")
+def northstar_chat(payload: NorthStarQuestion):
+    service = get_northstar_service()
+    if not hasattr(service, "chat"):
+        raise ValueError("Company Brain requires the live Snowflake connection")
+    return service.chat(**payload.model_dump())
 
 
 def enqueue(wf, run_id, background):
@@ -129,6 +183,11 @@ def validation_handler(request: Request, error: ValueError):
 
 @app.exception_handler(PlatformError)
 def platform_handler(request: Request, error: PlatformError):
+    return JSONResponse(status_code=503, content={"error": str(error), "code": error.code})
+
+
+@app.exception_handler(SnowflakeError)
+def snowflake_handler(request: Request, error: SnowflakeError):
     return JSONResponse(status_code=503, content={"error": str(error), "code": error.code})
 
 
