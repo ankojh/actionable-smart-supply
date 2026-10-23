@@ -22,6 +22,18 @@ Open [the workspace](http://127.0.0.1:5173). The API runs on
 For a new account, validate and apply the [NorthStar ingestion](docs/northstar-integration.md)
 before opening the app. There is no local fallback after a cloud failure.
 
+Use **Clean run** in the top bar to restart the shared NorthStar workflow from
+the Risk Inbox. It clears active Claude findings, approval, drafts, execution
+tracking, and the current Company Brain conversation while keeping the released
+source evidence. Prior runs remain in audit history. New analysis uses a fresh
+run scope; restarting the servers or refreshing the page retains the active run.
+
+Company Brain runs its native agent review as a background job with visible
+progress. The first answer can take a few minutes. Chat and pending requests
+survive navigation and page reloads in the same browser tab. **Stop waiting**
+leaves the review running; **Check response** reconnects to that same request.
+Reviews have a six-minute limit, and interruptions show an explicit retry state.
+
 ## NorthStar workflow
 
 The restored Risk Inbox opens the active V2 case with its complete, dated

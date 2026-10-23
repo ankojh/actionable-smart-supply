@@ -116,7 +116,7 @@ def _parse_findings(blocks, kind, allowed, validate_finding):
     return findings
 
 
-def run_review(platform, current, context, task, question, receipt, *, validate_finding):
+def run_review(platform, current, context, task, question, receipt, *, validate_finding, on_progress=lambda message: None):
     """The coordinator chooses delegation; callbacks invoke named child Agents.
 
     One isolated thread per Agent. No AI_COMPLETE fallback, arbitrary SQL,
@@ -127,6 +127,9 @@ def run_review(platform, current, context, task, question, receipt, *, validate_
         raise ValueError('Invalid NorthStar agent task')
     root_key = fingerprint({'version': VERSION, 'snapshot': current['snapshot_id'], 'task': task, 'question': question,
                             'model': platform.settings.cortex_model, 'agents': AGENT_NAMES})
+    # Preserve legacy retry keys until an explicit clean run starts a new scope.
+    if current.get('run_id', 'initial') != 'initial':
+        root_key = fingerprint({'run_id': current['run_id'], 'request': root_key})
     allowed = {d['document_id'] for d in current['snapshot']['tables']['documents']}
     tool_values = {
         'read_evidence': {'metadata': context['metadata'], 'policies': context['policies'],
@@ -165,6 +168,9 @@ def run_review(platform, current, context, task, question, receipt, *, validate_
             if time.monotonic() > deadline or requests_used >= 24:
                 raise PlatformError('AGENT_BUDGET', 'The shared multi-agent time or request budget was exhausted.')
             requests_used += 1
+            on_progress(('Coordinator is preparing your answer…' if completed else 'Coordinator is assigning the evidence review…')
+                        if kind == 'coordinator' else 'Risk Detection is reviewing demand and customer exposure…'
+                        if kind == 'risk_detection' else 'Recovery Plan is checking supply options and qualification…')
             response = receipt(key + f':turn:{turn}', lambda: platform.run_agent(
                 'single', thread, parent, content, agent_name=name))
             metadata = response['metadata']

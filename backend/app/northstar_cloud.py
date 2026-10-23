@@ -145,6 +145,7 @@ class SnowflakeNorthStarSource:
 class LiveNorthStarService(NorthStarService):
     def __init__(self, source=None):
         self.source = source or SnowflakeNorthStarSource()
+        self.on_progress = lambda message: None
 
     @property
     def native_agents(self):
@@ -168,7 +169,8 @@ class LiveNorthStarService(NorthStarService):
             current = self.present(self.state())
             rows = self.source.sql(f'''SELECT ROLE,PAYLOAD FROM {self.source.prefix}.AI_FINDINGS
                 WHERE SNAPSHOT_ID=%s AND PAYLOAD:prompt_version::VARCHAR=%s
-                QUALIFY ROW_NUMBER() OVER(PARTITION BY ROLE ORDER BY CREATED_AT DESC)=1''', (current['snapshot_id'], self.prompt_version))
+                AND COALESCE(PAYLOAD:run_id::VARCHAR, 'initial')=%s
+                QUALIFY ROW_NUMBER() OVER(PARTITION BY ROLE ORDER BY CREATED_AT DESC)=1''', (current['snapshot_id'], self.prompt_version, current['run_id']))
             current['findings'] = {r['ROLE']: decoded(r['PAYLOAD']) for r in rows}
             current['cloud'] = {**self.source.provenance, 'model': self.source.settings.cortex_model, 'query_ids': self.source.query_ids[-3:]}
             from .snowflake_links import workspace_links
@@ -204,7 +206,10 @@ class LiveNorthStarService(NorthStarService):
                 count = next(iter(result[0].values())) if result else 0
                 if count != 1:
                     raise Conflict('Another reviewer updated this case. Refresh to continue.')
-                self.audit(action, snapshot_id, {'revision': updated['revision'], 'actor': actor, 'decision': updated.get('decision'), 'drafts': updated.get('drafts', [])})
+                event = {'run_id': updated.get('run_id', 'initial'), 'revision': updated['revision'], 'actor': actor, 'decision': updated.get('decision'), 'drafts': updated.get('drafts', [])}
+                if action == 'reset':
+                    event['previous_run'] = {**state, 'run_id': current['run_id']}
+                self.audit(action, snapshot_id, event)
                 self.source.sql('COMMIT')
             except Exception:
                 self.source.sql('ROLLBACK')
@@ -271,11 +276,16 @@ class LiveNorthStarService(NorthStarService):
         if not set(answer['citations']) <= allowed:
             raise PlatformError('INVALID_CITATION', 'The response cited evidence outside the current case.')
         validate_narrative(answer, current)
-        return {**answer, 'provider': 'snowflake_cortex', 'prompt_version': PROMPT_VERSION, 'model': settings.cortex_model, 'query_id': query_ids[-1] if query_ids else None, 'usage': platform.last_usage, 'created_at': utc_now(), 'snapshot_id': current['snapshot_id']}
+        return {**answer, 'run_id': current['run_id'], 'provider': 'snowflake_cortex', 'prompt_version': PROMPT_VERSION, 'model': settings.cortex_model, 'query_id': query_ids[-1] if query_ids else None, 'usage': platform.last_usage, 'created_at': utc_now(), 'snapshot_id': current['snapshot_id']}
 
     def agent_review(self, task, question, current):
-        with AGENT_LOCK:
+        self.on_progress('Waiting for the current agent review to finish…')
+        if not AGENT_LOCK.acquire(timeout=5):
+            raise PlatformError('AGENT_BUSY', 'Another agent review is still running. Try again when it finishes.')
+        try:
             return self._agent_review(task, question, current)
+        finally:
+            AGENT_LOCK.release()
 
     def _agent_review(self, task, question, current):
         platform = SnowflakePlatform(self.source.settings)
@@ -300,10 +310,11 @@ class LiveNorthStarService(NorthStarService):
             findings, execution = run_review(
                 platform, current, self.evidence_context(current), task, question, receipt,
                 validate_finding=lambda finding: validate_narrative(finding, current),
+                on_progress=self.on_progress,
             )
             for finding in findings.values():
                 validate_narrative(finding, current)
-                finding.update(provider='snowflake_cortex_agent', prompt_version=AGENT_VERSION,
+                finding.update(run_id=current['run_id'], provider='snowflake_cortex_agent', prompt_version=AGENT_VERSION,
                                model=self.source.settings.cortex_model, snapshot_id=current['snapshot_id'],
                                created_at=utc_now(), execution=execution)
             with self.source.session():
@@ -357,6 +368,7 @@ class LiveNorthStarService(NorthStarService):
                             self.audit('specialist_failure', snapshot_id, {'role': role, 'code': getattr(error, 'code', type(error).__name__)})
                         continue
                     with self.source.session():
+                        result.update(run_id=current['run_id'], prompt_version=self.prompt_version)
                         self.source.sql(f'INSERT INTO {self.source.prefix}.AI_FINDINGS(SNAPSHOT_ID,ROLE,PAYLOAD) SELECT %s,%s,PARSE_JSON(%s)', (snapshot_id, role, json.dumps(result)))
                         self.audit('specialist_finding', snapshot_id, {'role': role, **result})
                 if failed:

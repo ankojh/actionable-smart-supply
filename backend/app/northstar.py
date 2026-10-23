@@ -4,6 +4,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import uuid
 from collections import defaultdict
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -147,6 +148,7 @@ class NorthStarService:
         self.source = source
         with store.connect() as db:
             db.execute('CREATE TABLE IF NOT EXISTS northstar_cases (id TEXT PRIMARY KEY, payload TEXT NOT NULL)')
+            db.execute('CREATE TABLE IF NOT EXISTS northstar_run_history (run_id TEXT PRIMARY KEY, case_id TEXT NOT NULL, payload TEXT NOT NULL, archived_at TEXT NOT NULL)')
             db.execute('INSERT OR IGNORE INTO northstar_cases VALUES (?, ?)', (CASE_ID, json.dumps(dict(stage=0, revision=0, decision=None, drafts=[], monitoring_released=False))))
 
     def read(self):
@@ -159,7 +161,7 @@ class NorthStarService:
         digest = fingerprint(snapshot)
         if state['decision'] and state['decision']['snapshot_id'] != digest:
             raise Conflict('Approved NorthStar evidence has changed; the saved drafts require a new assessment')
-        return {**state, 'id': CASE_ID, 'mode': 'live' if self.source else 'offline', 'snapshot_id': digest, 'snapshot': snapshot, 'supplier_update': supplier_update(snapshot), 'analysis': analyze(snapshot)}
+        return {**state, 'run_id': state.get('run_id', 'initial'), 'id': CASE_ID, 'mode': 'live' if self.source else 'offline', 'snapshot_id': digest, 'snapshot': snapshot, 'supplier_update': supplier_update(snapshot), 'analysis': analyze(snapshot)}
 
     def mutate(self, revision, snapshot_id, action, actor='', reason='', plan_id=''):
         with self.store.transaction() as db:
@@ -167,6 +169,8 @@ class NorthStarService:
             current = self.present(state)
             if revision != state['revision'] or snapshot_id != current['snapshot_id']:
                 raise Conflict('NorthStar evidence changed; reload the current case')
+            if action == 'reset':
+                db.execute('INSERT INTO northstar_run_history VALUES (?, ?, ?, ?)', (current['run_id'], CASE_ID, json.dumps(state), utc_now()))
             self.transition(state, current, action, actor, reason, plan_id)
             db.execute('UPDATE northstar_cases SET payload=? WHERE id=?', (json.dumps(state), CASE_ID))
         return self.present(state)
@@ -174,7 +178,13 @@ class NorthStarService:
     def transition(self, state, current, action, actor, reason, plan_id):
         revision = state['revision']
         snapshot_id = current['snapshot_id']
-        if action == 'advance':
+        if action == 'reset':
+            # Keep the released source evidence; start a distinct workflow over it.
+            stage = state['stage']
+            state.clear()
+            state.update(stage=stage, revision=revision, run_id=str(uuid.uuid4()), run_started_at=utc_now(),
+                         decision=None, drafts=[], monitoring_released=False)
+        elif action == 'advance':
             if state['stage'] >= 4 or state['decision']:
                 raise ValueError('All available planning evidence is already released')
             state['stage'] += 1

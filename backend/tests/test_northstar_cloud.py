@@ -33,7 +33,8 @@ class CloudSource(SnowflakeNorthStarSource):
         if 'FROM TEST_DB.NORTHSTAR_RECOVERY_V2.PUBLISHED_SNAPSHOTS' in statement:
             return [{'SNAPSHOT_ID': fingerprint(self.snapshot), 'PAYLOAD': json.dumps(self.snapshot), 'INGESTION_ID': 'test-ingestion', 'MANIFEST': json.dumps({'table_counts': {'inventory': 14}, 'planning_snapshots': 5})}]
         if 'SELECT ROLE,PAYLOAD' in statement:
-            return [{'ROLE': k, 'PAYLOAD': v} for k, v in self.findings.items()]
+            return [{'ROLE': k, 'PAYLOAD': v} for k, v in self.findings.items()
+                    if v.get('run_id', 'initial') == params[2] and v.get('prompt_version', params[1]) == params[1]]
         if statement.startswith('UPDATE '):
             if self.reject_update or params[3] != self.saved['revision']:
                 return [{'number of rows updated': 0}]
@@ -117,6 +118,42 @@ def test_competing_cloud_writer_rolls_back_drafts(source):
     with pytest.raises(Conflict):
         service.mutate(case['revision'], case['snapshot_id'], 'approve', 'Reviewer', 'Reviewed', 'C')
     assert source.saved['decision'] is None and not source.saved['drafts']
+    assert any(s == 'ROLLBACK' for s, _ in source.statements)
+
+
+def test_cloud_clean_run_hides_old_findings_and_archives_previous_state(source):
+    service = LiveNorthStarService(source)
+    source.findings = {role: {'text': 'Previous review', 'prompt_version': service.prompt_version}
+                       for role in ('operations', 'sourcing', 'qualification')}
+    case = service.read()
+    previous = service.mutate(case['revision'], case['snapshot_id'], 'approve', 'Reviewer', 'Protect contracts', 'C')
+    source.saved.update(monitoring_released=True, monitoring_events=[{'monitor_id': 'old-event'}])
+    clean = service.mutate(previous['revision'], previous['snapshot_id'], 'reset')
+    assert clean['run_id'] != previous['run_id']
+    assert clean['revision'] == previous['revision'] + 1
+    assert clean['snapshot_id'] == previous['snapshot_id'] and clean['stage'] == 4
+    assert clean['findings'] == {} and clean['decision'] is None and not clean['drafts']
+    assert not clean['monitoring_released'] and 'monitoring_events' not in clean
+    assert len(source.findings) == 3  # History is retained, rather than deleted.
+    assert LiveNorthStarService(source).read()['findings'] == {}
+    events = [json.loads(p[3]) for s, p in source.statements if 'INSERT INTO' in s and 'AUDIT_EVENTS' in s]
+    reset = next(e for e in events if e['kind'] == 'reset')
+    assert reset['previous_run']['decision'] == previous['decision']
+    assert reset['previous_run']['monitoring_events'] == [{'monitor_id': 'old-event'}]
+    assert reset['run_id'] == clean['run_id']
+    with pytest.raises(Conflict):
+        service.mutate(previous['revision'], previous['snapshot_id'], 'reset')
+    assert not any(s.startswith('DELETE') for s, _ in source.statements)
+
+
+def test_competing_cloud_reset_preserves_active_run(source):
+    service = LiveNorthStarService(source)
+    case = service.read()
+    source.reject_update = True
+    with pytest.raises(Conflict):
+        service.mutate(case['revision'], case['snapshot_id'], 'reset')
+    unchanged = service.read()
+    assert unchanged['revision'] == case['revision'] and unchanged['run_id'] == case['run_id']
     assert any(s == 'ROLLBACK' for s, _ in source.statements)
 
 
@@ -260,6 +297,26 @@ class NativeAgents:
             raise result
         return {'content': result, 'metadata': {'assistant_message_id': str(index+1), 'thread_id': thread,
                 'run_id': kind + '-' + str(index), 'request_id': 'request-' + kind + '-' + str(index)}}
+
+
+def test_native_clean_run_uses_fresh_receipts_and_new_threads(source, monkeypatch):
+    native = NativeAgents(source, monkeypatch)
+    service = LiveNorthStarService(source)
+    case = service.read()
+    previous = service.investigate(case['revision'], case['snapshot_id'])
+    old_threads = set(native.threads)
+    clean = service.mutate(previous['revision'], previous['snapshot_id'], 'reset')
+    assert not clean['findings']
+    # The fake agents restart their scripted conversations on each new thread.
+    native.positions = dict.fromkeys(native.names, 0)
+    result = LiveNorthStarService(source).investigate(clean['revision'], clean['snapshot_id'])
+    assert len(native.calls) == 16 and len(native.threads) == 6
+    assert old_threads.isdisjoint(native.threads[3:])
+    assert set(result['findings']) == {'operations', 'sourcing', 'qualification'}
+    assert all(f['run_id'] == clean['run_id'] for f in result['findings'].values())
+    # Retrying this run still reuses its own findings and completed requests.
+    service.investigate(result['revision'], result['snapshot_id'])
+    assert len(native.calls) == 16 and len(native.threads) == 6
 
 
 def test_three_native_agents_delegate_in_order_and_survive_restart(source, monkeypatch):

@@ -16,23 +16,33 @@ export default function NorthStar() {
   const [data, setData] = useState(null), [error, setError] = useState(''), [busy, setBusy] = useState('');
   const [page, setPage] = useState('inbox'), [source, setSource] = useState(null), [selected, setSelected] = useState('');
   const [search, setSearch] = useState(''), [filter, setFilter] = useState('All'), [brainExpanded, setBrainExpanded] = useState(false);
+  const [showCleanRun, setShowCleanRun] = useState(false), [notice, setNotice] = useState('');
   async function load() {
-    setBusy('refresh'); setError('');
+    setBusy('refresh'); setError(''); setNotice('');
     try { setData(await api('/northstar/case')); }
     catch (e) { setError(e.message); }
     finally { setBusy(''); }
   }
   useEffect(() => { load(); }, []);
-  useEffect(() => { if (data) setSelected(data.decision?.plan_id || data.analysis.recommended_plan_id || ''); }, [data?.revision, data?.snapshot_id]);
+  useEffect(() => { if (data) setSelected(data.decision?.plan_id || data.analysis.recommended_plan_id || ''); }, [data?.run_id, data?.revision, data?.snapshot_id]);
+  useEffect(() => { setPage('inbox'); setSource(null); setSearch(''); setFilter('All'); setBrainExpanded(false); }, [data?.run_id]);
   useEffect(() => { document.title = `${page === 'inbox' ? 'Risk Inbox' : 'NorthStar recovery'} · sumo`; }, [page]);
   const binding = () => ({ revision: data.revision, snapshot_id: data.snapshot_id });
   async function work(key, fn) {
-    setBusy(key); setError('');
+    setBusy(key); setError(''); setNotice('');
     try { const result = await fn(); setData(result); return result; }
     catch (e) { setError(e.message); if (e.status === 409 || key === 'investigate') api('/northstar/case').then(setData).catch(() => {}); return null; }
     finally { setBusy(''); }
   }
   const act = (action, extra = {}) => work(action, () => api('/northstar/case', { ...binding(), action, ...extra }));
+  async function cleanRun() {
+    setNotice('');
+    const result = await act('reset');
+    if (result) {
+      setShowCleanRun(false);
+      setNotice('Clean run started. Run Claude analysis when you’re ready.');
+    }
+  }
   const investigate = () => work('investigate', () => api('/northstar/investigate', binding()));
   const docs = data?.snapshot.tables.documents || [];
   const openSource = id => { const doc = docs.find(d => d.document_id === id); if (doc) setSource(doc); };
@@ -61,11 +71,12 @@ export default function NorthStar() {
       <div className="sidebar-bottom"><div className="sidebar-connection"><span className={`connection-dot ${live && !error ? 'connected' : ''}`}/><span>{live ? 'Snowflake connected' : data ? 'Local test provider' : 'Connecting to Snowflake'}</span><Icon name="database" size={13}/></div><div className="user-profile"><span className="profile-avatar">SC</span><div>Supply Chain Manager<small>Operations team</small></div><Icon name="chevron" size={14}/></div></div>
     </aside>
     <div className="main-shell">
-      <header className="topbar"><div className="breadcrumb">Workspace<Icon name="chevron" size={12}/><span>{page === 'inbox' ? 'Risk Inbox' : page === 'cases' ? 'Decision Cases' : 'Decision workspace'}</span>{inCase && <><Icon name="chevron" size={12}/><strong>NS-2026-1042</strong></>}</div><div className="topbar-actions">{live && <span className="nr-live"><i/><Icon name="snow" size={15}/>Snowflake live</span>}<span className="topbar-divider"/><button className="icon-button" aria-label="Refresh data" disabled={!!busy} onClick={load}><Icon name="refresh" size={18}/></button><span className="top-avatar">SC</span></div></header>
+      <header className="topbar"><div className="breadcrumb">Workspace<Icon name="chevron" size={12}/><span>{page === 'inbox' ? 'Risk Inbox' : page === 'cases' ? 'Decision Cases' : 'Decision workspace'}</span>{inCase && <><Icon name="chevron" size={12}/><strong>NS-2026-1042</strong></>}</div><div className="topbar-actions">{live && <span className="nr-live"><i/><Icon name="snow" size={15}/>Snowflake live</span>}<span className="topbar-divider"/><Button className="nr-clean-run" disabled={!data || !!busy} onClick={() => { setError(''); setShowCleanRun(true); }}><Icon name="plus" size={15}/>Clean run</Button><button className="icon-button" aria-label="Refresh data" disabled={!!busy} onClick={load}><Icon name="refresh" size={18}/></button><span className="top-avatar">SC</span></div></header>
       <main className={inCase ? 'case-main' : 'inbox-main'}>
         {error && <div className="error-banner" role="alert"><Icon name="alert"/><div><strong>Something needs attention</strong><p>{error}</p></div><button className="text-button" onClick={load}>Retry</button></div>}
+        {notice && <div className="nr-notice" role="status"><Icon name="check" size={18}/><span>{notice}</span><button className="text-button" onClick={() => setNotice('')}>Dismiss</button></div>}
         {!data ? <div className="nr-loading" role="status"><span className="spinner"/><h2>Connecting to your workspace</h2><p>Reading NorthStar evidence from Snowflake.</p></div> : <>
-          {busy && <div className="nr-progress" role="status"><span className="spinner"/>{busy === 'investigate' ? 'Claude is reviewing the case…' : busy === 'approve' ? 'Recording approval in Snowflake…' : 'Refreshing Snowflake data…'}</div>}
+          {busy && <div className="nr-progress" role="status"><span className="spinner"/>{busy === 'reset' ? 'Starting a clean run…' : busy === 'investigate' ? 'Claude is reviewing the case…' : busy === 'approve' ? 'Recording approval in Snowflake…' : 'Refreshing Snowflake data…'}</div>}
           {page === 'inbox' && <>
             <div className="page-heading"><div><div className="eyebrow">SUPPLY INTELLIGENCE</div><h1>Risk Inbox<span className="heading-dot"/></h1><p>Your supply risks, prioritized.</p></div><Button variant="primary" onClick={() => setPage('overview')}><Icon name="arrow" size={17}/>Open decision workspace</Button></div>
             <div className="inbox-metrics"><Metric label="Critical supply risks" value={1} note="Pacific Motion Systems" icon="alert" tone="red"/><Metric label="Contracted robots at risk" value={atRisk} note="BayShip & NovaFab" icon="users" tone="purple"/><Metric label="Drives to recover" value={a.contract_recovery_drives} note="To protect all contracts" icon="box"/><Metric label="Gross exposure" value={cash(a.baseline?.exposure_cents)} note="At-risk order value" icon="chart" tone="amber"/></div>
@@ -78,7 +89,7 @@ export default function NorthStar() {
             <button className="back-link" onClick={() => setPage('inbox')}><Icon name="back" size={14}/>Back to Risk Inbox</button>
             <div className="case-heading"><div><div className="case-eyebrow">NS-2026-1042 <span>/</span> RECOVERY V2</div><h1>Find a path around the delay.<Badge tone="red">Critical</Badge></h1><p>HDR-200 · Pacific Motion Systems · PO-2026-1042</p></div><Button onClick={load} disabled={!!busy}><Icon name="refresh" size={15}/>Refresh data</Button></div>
             <nav className="workflow" aria-label="Recovery workflow">{steps.map(([label, id], i) => <div className="workflow-stage" key={id}><button className={step === i ? 'current' : i < step ? 'done' : ''} onClick={() => setPage(id)}><span className="step-number">{i < step ? <Icon name="check" size={13}/> : i + 1}</span><span>{label}</span>{i < 5 && <Icon name="chevron" size={13}/>}</button></div>)}</nav>
-            <div className={`case-layout ${withBrain ? 'with-brain' : ''}`}><div className="case-content">
+            <div key={data.run_id} className={`case-layout ${withBrain ? 'with-brain' : ''}`}><div className="case-content">
               {analysisPage && <nav className="case-tabs" aria-label="Analysis tabs">{[['overview', 'Overview'], ['impact', 'Impact analysis'], ['recovery', 'Recovery options'], ['suppliers', 'Supplier details'], ['orders', 'Related orders']].map(([id, label]) => <button key={id} className={page === id ? 'active' : ''} onClick={() => setPage(id)}>{label}</button>)}</nav>}
               {page === 'overview' && <>
                 <section className="executive-summary"><div className="summary-title"><Icon name="spark" size={19}/><h2>Executive summary</h2></div><div className="summary-alert"><Icon name="alert" size={19}/><p>The delay puts <strong>{atRisk} contracted robots</strong> at risk. {recommendation ? <><strong>{names[recommendation.id]}</strong> protects all {a.contracted_units} contracted deliveries for <strong>{cash(recommendation.expenditure_cents)}</strong>.</> : 'Review source confirmations to qualify a recovery.'}</p></div></section>
@@ -112,6 +123,7 @@ export default function NorthStar() {
         </>}
       </main>
     </div>
+    {showCleanRun && <Modal title="Start a clean run" onClose={() => { if (busy !== 'reset') setShowCleanRun(false); }}><p className="modal-description">Clear the current Claude findings, approval, drafts, and execution tracking, then return to the Risk Inbox. Company Brain’s conversation will also be cleared.</p><p className="modal-description">Source evidence stays available, and the previous run is kept in audit history. This updates the shared NorthStar workspace.</p>{error && <p className="nr-reset-error" role="alert">{error}</p>}<div className="nr-reset-actions"><Button disabled={busy === 'reset'} onClick={() => setShowCleanRun(false)}>Cancel</Button><Button variant="primary" disabled={!!busy} onClick={cleanRun}>{busy === 'reset' ? 'Starting…' : 'Start clean run'}<Icon name="arrow" size={15}/></Button></div></Modal>}
     {source && <Modal wide title={docNames[source.document_id] || source.document_id} onClose={() => setSource(null)}><div className="source-meta"><Badge tone="blue">{source.document_date ? date(source.document_date) : 'Draft'}</Badge><small>{source.document_id}</small></div><pre className="source-text">{source.content}</pre></Modal>}
   </div>;
 }

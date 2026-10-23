@@ -54,7 +54,7 @@ class NorthStarAction(BaseModel):
     model_config = ConfigDict(extra="forbid")
     revision: int = Field(ge=0)
     snapshot_id: str
-    action: Literal["advance", "approve", "monitor"]
+    action: Literal["advance", "approve", "monitor", "reset"]
     actor: str = Field(default="", max_length=100)
     reason: str = Field(default="", max_length=2000)
     plan_id: str = ""
@@ -102,6 +102,30 @@ def northstar_chat(payload: NorthStarQuestion):
     if not hasattr(service, "chat"):
         raise ValueError("Company Brain requires the live Snowflake connection")
     return service.chat(**payload.model_dump())
+
+
+@app.post("/api/northstar/chat/jobs", status_code=202)
+def northstar_chat_start(payload: NorthStarQuestion, background: BackgroundTasks):
+    from .northstar_chat import NorthStarChatJobs
+    if not payload.question.strip():
+        raise ValueError('Enter a question for Company Brain')
+    service = get_northstar_service()
+    if not hasattr(service, "chat"):
+        raise ValueError("Company Brain requires the live Snowflake connection")
+    current = service.read()
+    if payload.revision != current['revision'] or payload.snapshot_id != current['snapshot_id']:
+        raise Conflict('Evidence changed. Refresh before asking a new question.')
+    jobs = NorthStarChatJobs(store)
+    job, created = jobs.start(payload.question.strip(), current, service.prompt_version)
+    if created:
+        background.add_task(jobs.run, job['id'], service)
+    return job
+
+
+@app.get("/api/northstar/chat/jobs/{job_id}")
+def northstar_chat_status(job_id: str):
+    from .northstar_chat import NorthStarChatJobs
+    return NorthStarChatJobs(store).get(job_id)
 
 
 def enqueue(wf, run_id, background):

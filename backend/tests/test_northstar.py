@@ -1,4 +1,5 @@
 import copy
+import json
 from concurrent.futures import ThreadPoolExecutor
 
 import pytest
@@ -126,6 +127,31 @@ def test_concurrent_approval_has_one_winner(service):
         assert sum(pool.map(approve, range(2))) == 1
 
 
+def test_clean_run_archives_previous_state_and_survives_restart(service):
+    for _ in range(4):
+        apply(service, 'advance')
+    apply(service, 'approve', actor='Reviewer', reason='Protect contracts', plan_id='C')
+    previous = apply(service, 'monitor')
+    clean = apply(service, 'reset')
+    assert clean['run_id'] != previous['run_id']
+    assert clean['revision'] == previous['revision'] + 1
+    assert clean['stage'] == previous['stage'] == 4
+    assert clean['snapshot_id'] == previous['snapshot_id']
+    assert clean['decision'] is None and clean['drafts'] == []
+    assert not clean['monitoring_released'] and 'monitoring_events' not in clean
+    assert NorthStarService(Store(service.store.path)).read() == clean
+    with service.store.connect() as db:
+        archived = json.loads(db.execute('SELECT payload FROM northstar_run_history WHERE run_id=?', (previous['run_id'],)).fetchone()[0])
+    assert archived['decision'] == previous['decision']
+    assert archived['monitoring_events'] == previous['monitoring_events']
+    with pytest.raises(Conflict):
+        service.mutate(previous['revision'], previous['snapshot_id'], 'approve', actor='Stale reviewer', reason='Old tab', plan_id='C')
+    # A second clean run also gets an independent scope and archives its predecessor.
+    second = apply(service, 'reset')
+    assert second['run_id'] != clean['run_id']
+    assert second['revision'] == clean['revision'] + 1
+
+
 def test_http_workflow(tmp_path, monkeypatch):
     from app import main
     monkeypatch.setenv('PROJECT_NORTHSTAR_MODE', 'offline')
@@ -141,3 +167,12 @@ def test_http_workflow(tmp_path, monkeypatch):
         assert len(response.json()['drafts']) == 2
         stale = client.post('/api/northstar/case', json=dict(action='advance', revision=0, snapshot_id=current['snapshot_id']))
         assert stale.status_code == 409
+        approved = response.json()
+        reset = client.post('/api/northstar/case', json=dict(action='reset', revision=approved['revision'], snapshot_id=approved['snapshot_id']))
+        assert reset.status_code == 200
+        clean = reset.json()
+        assert clean['run_id'] != approved['run_id']
+        assert clean['decision'] is None and not clean['drafts']
+        assert client.get('/api/northstar/case').json() == clean
+        stale_reset = client.post('/api/northstar/case', json=dict(action='reset', revision=approved['revision'], snapshot_id=approved['snapshot_id']))
+        assert stale_reset.status_code == 409
