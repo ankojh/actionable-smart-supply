@@ -1,0 +1,13 @@
+scenario_id,source_ref,available_stage,po_number,part_number,supplier_id,qty,unit_price_cents,original_eta,latest_eta,status,open_qty
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-0961,HDR-200,SUP-006,400,41200,2026-09-14,2026-09-14,Received,0
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1031,SVM-400,SUP-004,300,21000,2026-10-12,2026-10-12,Received,0
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1036,LDR-360,SUP-005,120,68500,2026-10-14,2026-10-14,Received,0
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1042,HDR-200,SUP-006,400,41200,2026-10-20,2026-10-20,Open,400
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1048,MCB-110,SUP-002,150,34000,2026-10-19,2026-10-19,Received,0
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1053,BAT-480,SUP-009,120,89000,2026-10-30,2026-10-30,In Transit,120
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1057,LDR-360,SUP-005,80,68500,2026-10-28,2026-10-28,Open,80
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1061,CDC-050,SUP-003,200,5800,2026-10-27,2026-11-03,Delayed,200
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1063,DCM-020,SUP-005,200,14500,2026-11-02,2026-11-02,Open,200
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1066,WHA-150,SUP-007,300,9600,2026-11-04,2026-11-04,Open,300
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1070,SVM-400,SUP-004,300,21000,2026-11-09,2026-11-09,Open,300
+northstar_happy_path_v2,purchase_orders.csv,0,PO-2026-1074,IMU-060,SUP-005,150,6200,2026-11-12,2026-11-12,Open,150

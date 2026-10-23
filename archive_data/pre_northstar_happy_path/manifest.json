@@ -1,0 +1,1130 @@
+{
+  "status": "retired",
+  "reason": "Replaced by NorthStar happy-path data; not for active retrieval or Snowflake loading",
+  "files": [
+    {
+      "original_path": "sample_data/README.md",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/README.md",
+      "sha256": "083c86eee9b2d613d064836de3a98b66241d79bb27f1e0a19d50a6d8d3e7d46f",
+      "bytes": 12736
+    },
+    {
+      "original_path": "sample_data/__init__.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/__init__.py",
+      "sha256": "6527e649bce2f2faa7289839c9c213b8520a85d6e2fec077f7a7a247f043a0d6",
+      "bytes": 72
+    },
+    {
+      "original_path": "sample_data/generate.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generate.py",
+      "sha256": "d5aec344858f6321cc833d3f3de70145e4aff88a696f47dd70763d166769bc4d",
+      "bytes": 19919
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/dataset.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/dataset.json",
+      "sha256": "de32b0645f358cf1598e3385b50a21878d284c35b037558597ea917883237ef6",
+      "bytes": 30004
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-PO18492.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-PO18492.txt",
+      "sha256": "3f827669c90b22f9fedc8c1b6a97be82b2b4631f24fa85b977a1153635b06dc4",
+      "bytes": 812
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-POLICY.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-POLICY.txt",
+      "sha256": "18bb05871832d2de047a8982dd30ab5c94371f779ed5d46e3c3c2521886b6bb0",
+      "bytes": 1083
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUAL-A.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUAL-A.txt",
+      "sha256": "6744fd444f1c0649a9edf6477aa3c519047ee3974307567b9f890068d5140923",
+      "bytes": 789
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUAL-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUAL-B.txt",
+      "sha256": "fa43d704474d4cc9220961cd8d6551ae547594e709010182196516cb85e1a540",
+      "bytes": 789
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUAL-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUAL-C.txt",
+      "sha256": "a4b0530ae7919ade7d2f3ac1910258da56e2c65919f80f4f9a94e93f9e8871c6",
+      "bytes": 789
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUAL-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUAL-D.txt",
+      "sha256": "89e4032ead9d4d9daf3263127fb4c90eb4ab84eb5879ef322813138a2678676a",
+      "bytes": 789
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUOTE-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUOTE-B.txt",
+      "sha256": "1ee2d2c9485aebcb32b76beb6284dae119b45b9444a5dd85aebb474ba693d609",
+      "bytes": 873
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUOTE-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUOTE-C.txt",
+      "sha256": "06a4ebcec52d855a5f9d254af93fdc5758ff2dd4c2eb77769d41844c08705f08",
+      "bytes": 815
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-QUOTE-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-QUOTE-D.txt",
+      "sha256": "b0a9ebec380243a673be814df09b8b3fb5f3e2cbf45709e3c4c39750c28f39c9",
+      "bytes": 822
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/documents/DOC-ROUTINE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/documents/DOC-ROUTINE.txt",
+      "sha256": "df28cd117d7ae2fbb8bc59fcdb35dfbc9b5899ca1978d52357891b3831dbd275",
+      "bytes": 729
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/inbox.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/inbox.json",
+      "sha256": "6578676674d1af2d939e7b8c8bdb0f3a7f1b0dfffa8fbf00195e41fb47fb0a65",
+      "bytes": 11643
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/bom.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/bom.ndjson",
+      "sha256": "0b319b12276d7f89aa0e585906af6176249996b8288dfd92d53a65ec2f97af86",
+      "bytes": 2737
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/customer_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/customer_orders.ndjson",
+      "sha256": "4ef5e2529eaeaef379759fcd9835ed32b64dd918e916bbbc8febf7cb5b4d5787",
+      "bytes": 791
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/customers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/customers.ndjson",
+      "sha256": "6d404233711284c20ca7f738ad6d3922bcf4bf5283213fdb2ab33f7a86e296a2",
+      "bytes": 296
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/inbound_deliveries.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/inbound_deliveries.ndjson",
+      "sha256": "6b914059e6ff9821ddf55ec49314d6cf5cfbf0ac1a7df5804c651ee9222aee77",
+      "bytes": 331
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/inventory_snapshots.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/inventory_snapshots.ndjson",
+      "sha256": "7895e5e0ee9227d3a1f030234288a082159907ca47d4e8a4400e1c5998a1c2a2",
+      "bytes": 4739
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/locations.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/locations.ndjson",
+      "sha256": "a0441e1fe68caaa0a317aa99575f117823053d71c537c6cda457e95f603779ef",
+      "bytes": 319
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/parts.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/parts.ndjson",
+      "sha256": "8a6ac3ca60315692ed36d8fdf59f565e17451bc388d6c32145947eae1d1bfa7a",
+      "bytes": 1021
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/production_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/production_orders.ndjson",
+      "sha256": "a065fc860f6326dad6777e48be9a0a2b6f384adcc11fbcaa1367d9f0bbf1496a",
+      "bytes": 806
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/products.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/products.ndjson",
+      "sha256": "f640e15e2e5f2df61b08c68f91304a95c1c5371edac93e14652c40dad20c7376",
+      "bytes": 192
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/purchase_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/purchase_orders.ndjson",
+      "sha256": "3f437c6be087c3b489d6c8068fc129787847e8d26055dfb3e0b7136d32889691",
+      "bytes": 379
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/source_documents.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/source_documents.ndjson",
+      "sha256": "9081e2822ea094daa93726c0fcee2e3a4ab83163c71e860488a856ca8e7d62e9",
+      "bytes": 10850
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/supplier_offers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/supplier_offers.ndjson",
+      "sha256": "b2f5bb070206acbe1d0b1af678962c6e1ddf83fbf6c264e107f36a8f523b97cb",
+      "bytes": 1035
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/supplier_qualifications.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/supplier_qualifications.ndjson",
+      "sha256": "f5f8a226ce9054125c3f182c6dae22958ae9350ab7423517ced6f4e299455ec0",
+      "bytes": 868
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/suppliers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/suppliers.ndjson",
+      "sha256": "e89aca402f68c459d03758a3fae704c9bbdf7fc280bd05fdedbb4cf4d533e097",
+      "bytes": 387
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/supply_events.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/supply_events.ndjson",
+      "sha256": "7ed94f33b1d66ac20325c254c81799353ae252bc69febc46f87398c2fb91e9fe",
+      "bytes": 244
+    },
+    {
+      "original_path": "sample_data/generated/baseline_delay/tables/transfer_lanes.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/baseline_delay/tables/transfer_lanes.ndjson",
+      "sha256": "e8e5273648c837ca8fb07230ebf589beca24db2b0c6ad8728acdfeef0b6701cc",
+      "bytes": 538
+    },
+    {
+      "original_path": "sample_data/generated/data_dictionary.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/data_dictionary.json",
+      "sha256": "f05981c7691d5e3851bfeb3cae971acdedd40219778d40637074fed307cda2ac",
+      "bytes": 14277
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/dataset.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/dataset.json",
+      "sha256": "61ae49be15ee60edc7d43869833f3c8bbf5c87a7235f8cf39aa9b561ee3ae81e",
+      "bytes": 30166
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-PO18492.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-PO18492.txt",
+      "sha256": "5fef24dde56242c88743ad6cf58dc1a3046c92f7d11f1823e5d6e1248d82a3b1",
+      "bytes": 828
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-POLICY.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-POLICY.txt",
+      "sha256": "1b93b38f95fa903d5170cad3db2b6b105c25745068ed694f4dc4cbd51ab34bf5",
+      "bytes": 1099
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUAL-A.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUAL-A.txt",
+      "sha256": "cdb2b05abb5fc6b9a1d3a1331e9f20f9e2647a1af64e199e16e2593297b3bae6",
+      "bytes": 805
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUAL-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUAL-B.txt",
+      "sha256": "3d548bef57ead1357391c143335ea45e8d58084688ff702ea0514e4cb0d39fc4",
+      "bytes": 805
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUAL-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUAL-C.txt",
+      "sha256": "f5d5f391ee2e8939fd6744593fa15aec2d7c4895bcb21b6e1d2fee28fc9da4bd",
+      "bytes": 805
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUAL-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUAL-D.txt",
+      "sha256": "e2f099ae98640f25398bdbdf59264afeb4e22257eb40461235df710d04ade461",
+      "bytes": 805
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUOTE-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUOTE-B.txt",
+      "sha256": "2136db60ad49ab841ff126acee78b6f04d16e50c6fbfe54428416b69d4384eef",
+      "bytes": 889
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUOTE-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUOTE-C.txt",
+      "sha256": "6bd7b4a68cd8656bc8306e13fcc5eb6c942b7cca729fd734d881efc810f8c5f6",
+      "bytes": 831
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-QUOTE-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-QUOTE-D.txt",
+      "sha256": "57a044f659af2eb436cab5d279f1d8ebd91f86afb29b6149589e2354d46d2f77",
+      "bytes": 838
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/documents/DOC-ROUTINE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/documents/DOC-ROUTINE.txt",
+      "sha256": "7dd0c88a835556692b2bc93b0feff39581a9efc40751121bac14b3f4570c745c",
+      "bytes": 745
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/inbox.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/inbox.json",
+      "sha256": "f081bd7f95067525d25e0985510ef4bc84770f9f0822545a3620d928a9feac68",
+      "bytes": 11883
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/bom.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/bom.ndjson",
+      "sha256": "88b534258c19d385e74da090b04133817be73cf3fd9796e0ddcc77b05ba25e83",
+      "bytes": 2873
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/customer_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/customer_orders.ndjson",
+      "sha256": "3b87aa70b8d252d01821aed6f7533cf237f771e5e07e8df01fb9868397d5edd3",
+      "bytes": 823
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/customers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/customers.ndjson",
+      "sha256": "6fb8ac995aabcaee75082380874ed15e2bb87cf44b59ad5d2c50d714b8a903d2",
+      "bytes": 320
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/inbound_deliveries.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/inbound_deliveries.ndjson",
+      "sha256": "fb988800d8f4cd04b83e4777288e873d868fcecc683be0e43de37a4d2da4587b",
+      "bytes": 347
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/inventory_snapshots.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/inventory_snapshots.ndjson",
+      "sha256": "036cf483043fb30ab889b345761d46905d6d3f6a8fd566ebe89e7645d91743da",
+      "bytes": 4915
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/locations.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/locations.ndjson",
+      "sha256": "2bbe86ac75cb6b08ad6ac3f08539973f56e184487bb7f4f801944781bd10edf8",
+      "bytes": 343
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/parts.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/parts.ndjson",
+      "sha256": "02088d42ce1bb1c38a9fb14ab1c008ebab9a22905242eef663fe432291febb2b",
+      "bytes": 1101
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/production_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/production_orders.ndjson",
+      "sha256": "82d62b20b50ea23a57c0c2c88693b067c12fa981ad38fa2abcc2c66aa0110a3d",
+      "bytes": 838
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/products.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/products.ndjson",
+      "sha256": "24b078c0c73ec24139389cfb2f3f889b8fed926adae8815196eccb021f8be993",
+      "bytes": 208
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/purchase_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/purchase_orders.ndjson",
+      "sha256": "18fcbb9c1e5230eaf5f2593a860ad5843104acf9280380fee1e09dba07cfe24a",
+      "bytes": 395
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/source_documents.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/source_documents.ndjson",
+      "sha256": "6f0e49fdd1cf9b20d51001eb2068898ab58f7e2e4d1ebc00853824371c06a331",
+      "bytes": 11090
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/supplier_offers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/supplier_offers.ndjson",
+      "sha256": "0460eeb53783cfbcb2c665d782db76b9bbaadc3f9779b124006b1c72b9efe187",
+      "bytes": 1059
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/supplier_qualifications.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/supplier_qualifications.ndjson",
+      "sha256": "e84fa9f10473e23ff3c868edb7d5449d36b3711cd62e72675e9d079b5bfe9f31",
+      "bytes": 900
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/suppliers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/suppliers.ndjson",
+      "sha256": "45ffe379f525cc012f85b316809ed7cf63ca6d4e0f2e495572c6dac63a396187",
+      "bytes": 419
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/supply_events.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/supply_events.ndjson",
+      "sha256": "3c626d568453d12e9d49ce7179c981c3bc387b6bcf9ff3d42657ffa29abdae8c",
+      "bytes": 252
+    },
+    {
+      "original_path": "sample_data/generated/donor_demand_increased/tables/transfer_lanes.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/donor_demand_increased/tables/transfer_lanes.ndjson",
+      "sha256": "8c50590ef94c8b3c312410c12937a0140d896ecc9464e79f67e7165e56a0739d",
+      "bytes": 554
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/dataset.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/dataset.json",
+      "sha256": "58e3c298255e92af3c32de180559ce3d547a2b56aaab7b58db02c35bac7a339f",
+      "bytes": 33365
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-PO18492.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-PO18492.txt",
+      "sha256": "6bcdc17ce8b0eedb209ed5545bdec3667117a6ff6b9319bb6c616b2c05d3ab93",
+      "bytes": 822
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-POLICY.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-POLICY.txt",
+      "sha256": "d90e58ddacd0234d84bf33500d777760ae869246c75427a852cb9cc038d0b983",
+      "bytes": 1093
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUAL-A.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUAL-A.txt",
+      "sha256": "9d1ed38e2747836c699cfc77011732fbfd89a5fd80d1d3682681bfd1f9f8b772",
+      "bytes": 799
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUAL-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUAL-B.txt",
+      "sha256": "622e3fe8bdbedeb1d7e109e178604871cd155f982a17f7177589e451f2c94c59",
+      "bytes": 799
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUAL-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUAL-C.txt",
+      "sha256": "ce83f7a94462b319c1051295a95d0be9da032840db5a90e639660d3c695088e6",
+      "bytes": 799
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUAL-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUAL-D.txt",
+      "sha256": "aec12067ede2f7d57a63fca62906917069e631bf936c46e1e85cfb517fdb7bcc",
+      "bytes": 799
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUOTE-B-UPDATE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUOTE-B-UPDATE.txt",
+      "sha256": "966e392ecea034bc003ac390112a365ac777942672b8528920bcb56641980a89",
+      "bytes": 1199
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUOTE-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUOTE-B.txt",
+      "sha256": "6fdd9984c1b154624d045cb7e02cf717b72580e3b738e6075ec0538ec2c7a2e1",
+      "bytes": 883
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUOTE-C-UPDATE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUOTE-C-UPDATE.txt",
+      "sha256": "a740a154b487ca03cd7cf9d6112a6121bca074378a5bf9460e84757ceb73d72b",
+      "bytes": 1070
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUOTE-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUOTE-C.txt",
+      "sha256": "3118cf4b2d4d57b6ae857f8a3ae6f8b27784886351f66a65e6ff97f7431a93aa",
+      "bytes": 825
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-QUOTE-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-QUOTE-D.txt",
+      "sha256": "fc78668bfb3dbbc697dca7cc5fb24aa72af81353d09416f295e0e15b2ac0ad79",
+      "bytes": 832
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/documents/DOC-ROUTINE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/documents/DOC-ROUTINE.txt",
+      "sha256": "b1e028859df3547e2f2fb63f4339ffb3d70e1d64e6b2acd8002a32dea29cc86d",
+      "bytes": 739
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/inbox.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/inbox.json",
+      "sha256": "509b68dd2e24d0a5c4c3c1aaf5ae9228a4ed8e5b26c12756aa6a8124b99e02c7",
+      "bytes": 14543
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/bom.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/bom.ndjson",
+      "sha256": "40d02292c86d7d9b3e656f27dae6793749c460c3f177dc51491bbad9acff5a0d",
+      "bytes": 2822
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/customer_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/customer_orders.ndjson",
+      "sha256": "49f9f3d06dfc349b0f32b9778ef325beedba89a331aef4b8d98cf0784c0587ee",
+      "bytes": 811
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/customers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/customers.ndjson",
+      "sha256": "6526d26aa90bccd0a83fd39ab6f9d7fa580aac0adfb3525b429c4491ae0b00f8",
+      "bytes": 311
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/inbound_deliveries.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/inbound_deliveries.ndjson",
+      "sha256": "141da09e89bcec6a56e8fd9140af723a2053efa1ab51e94c369171564007e9e3",
+      "bytes": 341
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/inventory_snapshots.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/inventory_snapshots.ndjson",
+      "sha256": "c1843e1ef96f4f5395985b3f616a0f9f0b4e409b7935ff8b0f7b80a21fa70078",
+      "bytes": 4849
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/locations.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/locations.ndjson",
+      "sha256": "bf1ce1019cc80e9f64d1bc0a7c2346068c8339669914959070dc8701d7ecbfe1",
+      "bytes": 334
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/parts.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/parts.ndjson",
+      "sha256": "012c4557bcc5c0f5ff9c51a1fa63c4283e499c9bbe16989473c70e2d4d0e4cc2",
+      "bytes": 1071
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/production_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/production_orders.ndjson",
+      "sha256": "93453fbb8e465641d0b2dcf40980d388b62bad11003d24192d4b302e536de9cd",
+      "bytes": 826
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/products.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/products.ndjson",
+      "sha256": "0a1c7da164e013d702c57b0330071bf3d28e785edb1e961a774719e82ebe290d",
+      "bytes": 202
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/purchase_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/purchase_orders.ndjson",
+      "sha256": "dd1cb68795618facc4271b5167cef200ff1eebe324ae4558ccf4dbfcbe5403ab",
+      "bytes": 389
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/source_documents.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/source_documents.ndjson",
+      "sha256": "1ebd25841b14faa2de9fd67e655e66071e4527543c128a0727b80d16615fd346",
+      "bytes": 13592
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/supplier_offers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/supplier_offers.ndjson",
+      "sha256": "10d869df2e212bdf039a4feb0298cd895dbf6b7157f6ceeed2d9bb667f185623",
+      "bytes": 1420
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/supplier_qualifications.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/supplier_qualifications.ndjson",
+      "sha256": "146ba41e5b3e54ffa99e6589b01d5896c40bd3bcdd79b2c052bad30551822ee8",
+      "bytes": 888
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/suppliers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/suppliers.ndjson",
+      "sha256": "24728173111fb248ebaad6a5fac667b90ecdcb5119bae6b86e144210ea85e30f",
+      "bytes": 407
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/supply_events.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/supply_events.ndjson",
+      "sha256": "95d6b9c873ba93be184dbaa494e6bcab94bcbdad3d97bb3c7a75900151613a42",
+      "bytes": 249
+    },
+    {
+      "original_path": "sample_data/generated/insufficient_supply/tables/transfer_lanes.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/insufficient_supply/tables/transfer_lanes.ndjson",
+      "sha256": "bf6bce615dce33b8af4b161e87b0916e4c7afd43709f1e5c1baee1ad2e90e4e2",
+      "bytes": 548
+    },
+    {
+      "original_path": "sample_data/generated/manifest.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/manifest.json",
+      "sha256": "0b8af789179577c918af053870a52ad5d66487a6e7db35d97c8389cd89ed480e",
+      "bytes": 3969
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/dataset.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/dataset.json",
+      "sha256": "10ca6d858d722d5c74bb418588d4b0e9baa77437ece6e01b50a94208e0afd0bf",
+      "bytes": 29868
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-PO18492.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-PO18492.txt",
+      "sha256": "4396d4608197cd424976e71ad95b618a3a8781fb2eaf1e18397facf8e60d18a7",
+      "bytes": 680
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-POLICY.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-POLICY.txt",
+      "sha256": "cfa1d54400cb8387313ee9808542e0df9e8600321e719210ab7eea9b6f06900c",
+      "bytes": 1081
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUAL-A.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUAL-A.txt",
+      "sha256": "4e13539dd79757b78a3b338b7cd2afe3af5804f69f84daf39f5519d1e33d7da7",
+      "bytes": 787
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUAL-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUAL-B.txt",
+      "sha256": "52c0da31b7cf6967a5306c687cf9b5ea0bd4ea4bd6bdd0d7444acb9e8bdce62b",
+      "bytes": 787
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUAL-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUAL-C.txt",
+      "sha256": "6170510f42abcf8c98f78df0c827b024909bbef0cbc414bf48e6d832ae1d013c",
+      "bytes": 787
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUAL-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUAL-D.txt",
+      "sha256": "0487420b9d2dc95838ad991c4f726a066dd8db6f6b0d42b9af350384f3c5c14f",
+      "bytes": 787
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUOTE-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUOTE-B.txt",
+      "sha256": "a4a603592206c081f663a08849903fa56af4aae0bca15f3047d6482265de9da3",
+      "bytes": 871
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUOTE-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUOTE-C.txt",
+      "sha256": "fb7d00d206c60ff1a491d674b5863eb02cbc14761b0ac3111ca085cde15181a9",
+      "bytes": 813
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-QUOTE-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-QUOTE-D.txt",
+      "sha256": "d44d1adad70d262bfe442f5d2e7d51136cc7c87501334ad824a4e0c15c2fc1c0",
+      "bytes": 820
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/documents/DOC-ROUTINE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/documents/DOC-ROUTINE.txt",
+      "sha256": "c60eb7a1b2bc50159c5d66037f014b225edcb9b5a6e2a034f8d243b69b1e2f5b",
+      "bytes": 727
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/inbox.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/inbox.json",
+      "sha256": "6011739bf982bd6809cfe36077061aa4ba90ac8dda58f30cedca693ae81b38ce",
+      "bytes": 11489
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/bom.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/bom.ndjson",
+      "sha256": "18b7436f6ec671a4f4656b8e020d41ad08ac520b551604da4673028ed5e6e952",
+      "bytes": 2720
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/customer_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/customer_orders.ndjson",
+      "sha256": "c097c7134ba5aa0f8a125e81223c170c7ceae45ce0ff49e9d9d2fa5153939cbf",
+      "bytes": 787
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/customers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/customers.ndjson",
+      "sha256": "bfa9731011c9518f63e9888276915babecd84771e5187da0b5a64888ebfd0819",
+      "bytes": 293
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/inbound_deliveries.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/inbound_deliveries.ndjson",
+      "sha256": "50c4975f7c5c314f96b757c2826fe87b7804e1645af0927f8178bc2af4ca511c",
+      "bytes": 329
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/inventory_snapshots.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/inventory_snapshots.ndjson",
+      "sha256": "b946889ce2b1e36e3443996adcd688a16d76036c618595945d48d21547831e48",
+      "bytes": 4717
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/locations.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/locations.ndjson",
+      "sha256": "e939301a1895219f58a4faf072113700186d96f62d587a1abd5e1d6d61fa418e",
+      "bytes": 316
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/parts.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/parts.ndjson",
+      "sha256": "2efc161d79d3fb09bc7cd3aa583f881dc0bd486259b5fb3645596baaf2e17cf1",
+      "bytes": 1011
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/production_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/production_orders.ndjson",
+      "sha256": "fc78bd3133eec806b2ced17c21ad5d7f2c4142a666922e6727ad74c696a0a2aa",
+      "bytes": 802
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/products.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/products.ndjson",
+      "sha256": "fbbfd546b239328d69f7a677b70af038fcde3e8f5b4c993db85d57e2452bb771",
+      "bytes": 190
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/purchase_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/purchase_orders.ndjson",
+      "sha256": "3fe73209bac8fc17b8b8940825dda85dbb87616f386759923d97730c1259ab1d",
+      "bytes": 377
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/source_documents.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/source_documents.ndjson",
+      "sha256": "29d019af52cd76891607168360c58ebd04f893de155f157df275cafcc0895be1",
+      "bytes": 10696
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/supplier_offers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/supplier_offers.ndjson",
+      "sha256": "cc6f3c1883bf5c0fb6037e65e65ea6a7614772ce3071306a08b08ec7ad3ef2bb",
+      "bytes": 1032
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/supplier_qualifications.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/supplier_qualifications.ndjson",
+      "sha256": "0ea8739fdfaf2abe128503a3946ab2ab5f5c7950c2d58d2847a449f4b8e2ce1a",
+      "bytes": 864
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/suppliers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/suppliers.ndjson",
+      "sha256": "f33618439c8abafce982071479a5658c7b829e4d6fdfc79208571e0a1ee7dd5e",
+      "bytes": 383
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/supply_events.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/supply_events.ndjson",
+      "sha256": "baedd97b7a45bfdb7d67c867d9f9869a95a11e52d725d45ca98004edd88fddcb",
+      "bytes": 250
+    },
+    {
+      "original_path": "sample_data/generated/no_disruption/tables/transfer_lanes.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/no_disruption/tables/transfer_lanes.ndjson",
+      "sha256": "90ee27f60b77584e4ae87b0c9a531de8cf4854bddbd1b243ae8ebe9c8518de55",
+      "bytes": 536
+    },
+    {
+      "original_path": "sample_data/generated/schema.sql",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/schema.sql",
+      "sha256": "5d81e1a2b0897a89a7e4e2e43692f868bf12e09f976b30fda88ccff20c4d23d9",
+      "bytes": 5262
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/dataset.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/dataset.json",
+      "sha256": "e89ea11b61ff457dd9adeb5bb938def36ad5890f782a80304f6c537e8a50e48c",
+      "bytes": 32157
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-PO18492.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-PO18492.txt",
+      "sha256": "ae721bf31c34347035697188e37ca044d8ae25b79929d977b8e81f942cf8cb93",
+      "bytes": 834
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-POLICY.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-POLICY.txt",
+      "sha256": "62b707cd5daac2c17dbb35861cc360b183c6f3ada78bd7d732e5c0919029eae4",
+      "bytes": 1105
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-A.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-A.txt",
+      "sha256": "c9b27610d471bb803b51c32886841c7594f90cdfd6b4ca243d81f54d7373e5b0",
+      "bytes": 811
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-B.txt",
+      "sha256": "d6eb86ef2eb8626fb56057f8ef4fa35252dc50f34f7e15185ab40538f6d50085",
+      "bytes": 811
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-C.txt",
+      "sha256": "1bd8c1e1418b1ff2df769982fa9ae525c0c8a0a6e386691fa13fe0cf269ab5c1",
+      "bytes": 811
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUAL-D.txt",
+      "sha256": "96012ac954d82ce5ef3cd049d947f9c341c84a5aeba4ee06b863459cb14b7a55",
+      "bytes": 811
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-B-UPDATE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-B-UPDATE.txt",
+      "sha256": "8fa86bcbc6b8fd00d0e616535f4b1c9fee2c46c239243e880fe809b479f461fb",
+      "bytes": 1223
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-B.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-B.txt",
+      "sha256": "0c434e64633db51540f72d7d73a58b5f88aa5eca992189e45d6b2538c0b853ef",
+      "bytes": 895
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-C.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-C.txt",
+      "sha256": "47fddb7ee7aa4a5bc57393f5cbc949d68e0b4b777c387b946b70f2c42aa3def8",
+      "bytes": 837
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-D.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-QUOTE-D.txt",
+      "sha256": "d74b7036fd2d64ce2b087dadee057eacb214495eb5aeef2abfd8ff19e48ae44b",
+      "bytes": 844
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/documents/DOC-ROUTINE.txt",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/documents/DOC-ROUTINE.txt",
+      "sha256": "1d5d9a1f75cc608acf76e16373db1db968777d85f11b2790b6ed355fe89bc340",
+      "bytes": 751
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/inbox.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/inbox.json",
+      "sha256": "7455b74b93ebd43d9626401d56ebe106ee6e0ad6dc3fdf268283b84a9ca1eee0",
+      "bytes": 13439
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/bom.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/bom.ndjson",
+      "sha256": "f69c0c20f7bd6a8499a4838dcce591909473130e5ca0f5baeb975bcfc868136e",
+      "bytes": 2924
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/customer_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/customer_orders.ndjson",
+      "sha256": "274957f06a542c4103cf1fa0df90153a5f2a70519c50d2bb82c502de856753cd",
+      "bytes": 835
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/customers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/customers.ndjson",
+      "sha256": "0642ec3fa7080eb406b22857826034e48e2b89256301710b85a149d3d6e93a1f",
+      "bytes": 329
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/inbound_deliveries.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/inbound_deliveries.ndjson",
+      "sha256": "e8172675ef167086348269501b39bccb77ddaa836d33d7da786928424d0a808a",
+      "bytes": 353
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/inventory_snapshots.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/inventory_snapshots.ndjson",
+      "sha256": "36cf2335fc3369090fedf32c7b6fac319d14f4f6565f45c4a439d7572e991430",
+      "bytes": 4981
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/locations.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/locations.ndjson",
+      "sha256": "c259ade3cabffe315b42623713da90f8ca1607dbfa8b61251d994657ea92a772",
+      "bytes": 352
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/parts.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/parts.ndjson",
+      "sha256": "14678b67dbb416bfd2cf7a93a7f186db4f32eb58bf6ea503ade3d7ddc317b164",
+      "bytes": 1131
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/production_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/production_orders.ndjson",
+      "sha256": "8bff43ecc473e82d063bd565c83b135bed05b57b946d65e013b76c5ae48178e3",
+      "bytes": 850
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/products.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/products.ndjson",
+      "sha256": "b326a718b66f8973da0acb779e8d5d267d094dcc9b5b78f5ccd2625daf21da45",
+      "bytes": 214
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/purchase_orders.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/purchase_orders.ndjson",
+      "sha256": "fbdd58851fc043d29288a08ef64a42b988af0f4a0539d9386cd1a1d92cafa585",
+      "bytes": 401
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/source_documents.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/source_documents.ndjson",
+      "sha256": "5f5a2a3fa5a3447113d2a99568716642eb8df24ba882741038e6d7a9dca14343",
+      "bytes": 12567
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/supplier_offers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/supplier_offers.ndjson",
+      "sha256": "98d27253c600b6a134e242c3f5cccaed5668f1dd44f78c6485e5f0df340a60b3",
+      "bytes": 1437
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/supplier_qualifications.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/supplier_qualifications.ndjson",
+      "sha256": "23530e918fb16fc108d09efeaad262c043408baa034a55f23dc3922a6f160e8b",
+      "bytes": 912
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/suppliers.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/suppliers.ndjson",
+      "sha256": "da79c694f04555d0cfa3fe1e223f18fc95c6c59f0015fa8e7a0b9eccbf1b27e6",
+      "bytes": 431
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/supply_events.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/supply_events.ndjson",
+      "sha256": "f92e979b868086756ee37660a7bc9611ab8c49bfabba9b1c51a7cd7f2f37b62d",
+      "bytes": 255
+    },
+    {
+      "original_path": "sample_data/generated/supplier_capacity_reduced/tables/transfer_lanes.ndjson",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/generated/supplier_capacity_reduced/tables/transfer_lanes.ndjson",
+      "sha256": "09b87a7bfa111f2577dfcae87ac2381f8aeb0dcac449dac41b4a7346d0c281b1",
+      "bytes": 560
+    },
+    {
+      "original_path": "sample_data/model.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/model.py",
+      "sha256": "58232878c7ec56c1c6f37449daa8bdbc79a3449d9f4c9ca4af11a7c9a51b5b56",
+      "bytes": 9467
+    },
+    {
+      "original_path": "sample_data/tests/__init__.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/tests/__init__.py",
+      "sha256": "469b77d836da13d69027da6ccb3ac1f4d6e10203a238d81278689a79072107dc",
+      "bytes": 73
+    },
+    {
+      "original_path": "sample_data/tests/expected_extractions.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/tests/expected_extractions.json",
+      "sha256": "9dc1682ceede85541a64d73906cc3b447968e3f0b99ff9be1a649d1bc6ea519f",
+      "bytes": 2345
+    },
+    {
+      "original_path": "sample_data/tests/expected_results.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/tests/expected_results.json",
+      "sha256": "cfe7cd0d1c9efb6f76baa27f23badb9ca223cd147b8a2b2aa2fc9196571db6f3",
+      "bytes": 1586
+    },
+    {
+      "original_path": "sample_data/tests/test_sample_data.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/tests/test_sample_data.py",
+      "sha256": "819e6884d3ecc9a512c4409770605ecb0054848f572ac6e50b2827a4385facee",
+      "bytes": 10803
+    },
+    {
+      "original_path": "sample_data/validate.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/sample_data/validate.py",
+      "sha256": "2a49f8fe397ca6c4ef9c4acdf2b7b0dc6986cd5ab58a6fb3af8c59e744b3112e",
+      "bytes": 22844
+    },
+    {
+      "original_path": "backend/data/initial_case.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/backend/data/initial_case.json",
+      "sha256": "d20e53c2c369344e3e098b4b7b88ab139920cf626c2a92b6fa9d88c9fd3a345a",
+      "bytes": 9863,
+      "source_commit": "ff061e0"
+    },
+    {
+      "original_path": "backend/demo/supplier_replies.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/backend/demo/supplier_replies.json",
+      "sha256": "d4f50449208c07a5c07b3c86fa8307e3b6fec765bb858107bd0f78cc03f8ffe9",
+      "bytes": 2739
+    },
+    {
+      "original_path": "backend/evaluator_data/realized_events.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/backend/evaluator_data/realized_events.json",
+      "sha256": "5479c6319b1c476b98a68d87334f921df14f3ccc14add979e564bd4e17485ffa",
+      "bytes": 329
+    },
+    {
+      "original_path": "snowflake/load/initial_case.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/snowflake/load/initial_case.json",
+      "sha256": "6eff4dafdefa3009d237ea9d655995c4a1372b87f609c9946a4801442fd916ee",
+      "bytes": 7195
+    },
+    {
+      "original_path": "snowflake/load/supplier_confirmations.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/snowflake/load/supplier_confirmations.json",
+      "sha256": "0b4d70e9ddb62b82e2b2067749d92d2566411ba2e1448d4a92d034f71874f8a5",
+      "bytes": 3827
+    },
+    {
+      "original_path": "docs/acceptance/console-assessment.png",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/console-assessment.png",
+      "sha256": "c930d67e85ebc998dcb462328c416b8431feff4c98fdc930e1da81b6018a517c",
+      "bytes": 76327
+    },
+    {
+      "original_path": "docs/acceptance/console-drafts.png",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/console-drafts.png",
+      "sha256": "8ce0d5d647302f911ed3e3b844e9aaaebe2cc8be7bea7694981666bc5f4d86c9",
+      "bytes": 82533
+    },
+    {
+      "original_path": "docs/acceptance/console-outcome.png",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/console-outcome.png",
+      "sha256": "c15278e74a703661fd40b50cff5c885f2de644604a072e0e071cba57fe08031c",
+      "bytes": 78464
+    },
+    {
+      "original_path": "docs/acceptance/live-analyst.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-analyst.json",
+      "sha256": "a895176d460ca0aad573d000e294f26c2ef2b0a284b3f6878ec7a308bd4d6ae6",
+      "bytes": 162
+    },
+    {
+      "original_path": "docs/acceptance/live-claude.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-claude.json",
+      "sha256": "7ee0d2757f6be87e6a6e6eb5bac7178b39263bc2f9c7bce63e99554558608ae8",
+      "bytes": 150
+    },
+    {
+      "original_path": "docs/acceptance/live-persistence.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-persistence.json",
+      "sha256": "4868c98e70025161235ccd5102551e3aa0906798902a73a9ae11445537b49b11",
+      "bytes": 150
+    },
+    {
+      "original_path": "docs/acceptance/live-search.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-search.json",
+      "sha256": "9e409220508911627571d63a2a3e42f646b0e9b0e0bdb685a4679f68fe03374c",
+      "bytes": 277
+    },
+    {
+      "original_path": "docs/acceptance/live-sql.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-sql.json",
+      "sha256": "bd2a6b29571f2fb032ddce848b45122d8831c727d34739a8c43973244976268a",
+      "bytes": 138
+    },
+    {
+      "original_path": "docs/acceptance/live-workflow-confirmed.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-workflow-confirmed.json",
+      "sha256": "de95333c163e08aec3e0393611234291c1532153a55156f649576bf0bc759025",
+      "bytes": 831
+    },
+    {
+      "original_path": "docs/acceptance/live-workflow-initial.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-workflow-initial.json",
+      "sha256": "7c95180848e85e74bd98a37a55fd06f102ae12cff4c4f7567170f7da33d290a6",
+      "bytes": 818
+    },
+    {
+      "original_path": "docs/acceptance/local-checks.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/local-checks.json",
+      "sha256": "93d466326a5e5472ccc14875cf5201422eb971aab08af416bdd6ee22bcf4b8c7",
+      "bytes": 429
+    },
+    {
+      "original_path": "docs/acceptance/offline-comparison.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/offline-comparison.json",
+      "sha256": "2a93f771254178fa9ffb747d45b72853f8638db57928190c3d1748ff703fd6a6",
+      "bytes": 42834
+    },
+    {
+      "original_path": "docs/acceptance/report.md",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/report.md",
+      "sha256": "52723da456cd4cf42e3a823323b160c81bee496b148ac7952b97f3ee02bc4120",
+      "bytes": 12261,
+      "source_commit": "ff061e0"
+    },
+    {
+      "original_path": "docs/acceptance/search-suspension.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/search-suspension.json",
+      "sha256": "d8382f742d00deded2d4bd3064a4160a07915263848d01c911a177c1abc718ec",
+      "bytes": 125
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/README.md",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/README.md",
+      "sha256": "923475fca9b0740ef84a12f9c5d37f66dfa6f234b6fadbed5e8e82dd256a494b",
+      "bytes": 14965
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/evaluate_outcomes.py",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/evaluate_outcomes.py",
+      "sha256": "d324236a4f22d93b12d5cd429d92185b4659419a2e7faae6c4d6b189b9f3fac1",
+      "bytes": 9853
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/evaluation_oracle.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/evaluation_oracle.json",
+      "sha256": "5a5f6651dd860b306f6fe9fab51798a0ee4de9725792ffcb9571c08c56367c1b",
+      "bytes": 2474
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/future_events.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/future_events.json",
+      "sha256": "d4f50449208c07a5c07b3c86fa8307e3b6fec765bb858107bd0f78cc03f8ffe9",
+      "bytes": 2739
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/initial_case.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/initial_case.json",
+      "sha256": "64ec3a0d1bacdb750ba4a79e6c8aaa205a16894d321f61a27621c056ecdc588d",
+      "bytes": 7218
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/outcome_evaluation.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/outcome_evaluation.json",
+      "sha256": "783aab5897e3c1fb2fe20464476bcab6471a14ce607dfc5bcf76d042f38c155f",
+      "bytes": 73794
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/public-outcome-validation.md",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/public-outcome-validation.md",
+      "sha256": "21ae08bd06108e7bcbf7e6737f162f90c941da9320d15f395dc2e5894a3d1c2e",
+      "bytes": 11467
+    },
+    {
+      "original_path": "docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/recommendation-and-outcomes.md",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/supplyrelay-handoff/reference/linekeeper/docs/research/shortage-recovery-v1/recommendation-and-outcomes.md",
+      "sha256": "648388ee707b725837057ce9b9ab0bcc09075341743b08eae58d74055cc5583e",
+      "bytes": 13201
+    },
+    {
+      "original_path": "docs/acceptance/lifecycle-v2-execution.png",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/lifecycle-v2-execution.png",
+      "sha256": "1905ef41fcd4c4ffd18b1fad3a19174f3e41dc61de19269c2a61e4bb4d8ec3b7",
+      "bytes": 125122,
+      "source_commit": "ff061e0"
+    },
+    {
+      "original_path": "docs/acceptance/live-recheck-2026-10-23.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/docs/acceptance/live-recheck-2026-10-23.json",
+      "sha256": "089358987d84a454d2a2f24484295e621460d93638003f69dedc79db22e097a7",
+      "bytes": 1739,
+      "source_commit": "ff061e0"
+    }
+  ],
+  "previous_versions": [
+    {
+      "original_path": "backend/data/initial_case.json",
+      "archive_path": "archive_data/pre_northstar_happy_path/previous_versions/93f0cdb/backend/data/initial_case.json",
+      "sha256": "64ec3a0d1bacdb750ba4a79e6c8aaa205a16894d321f61a27621c056ecdc588d",
+      "bytes": 7218,
+      "source_commit": "93f0cdb"
+    },
+    {
+      "original_path": "docs/acceptance/report.md",
+      "archive_path": "archive_data/pre_northstar_happy_path/previous_versions/93f0cdb/docs/acceptance/report.md",
+      "sha256": "21d44e30e366c1d3f493de67939f07be0ac672d314b4a73777c6fb590fbf068d",
+      "bytes": 10746,
+      "source_commit": "93f0cdb"
+    }
+  ]
+}

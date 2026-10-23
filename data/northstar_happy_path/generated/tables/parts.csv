@@ -1,0 +1,15 @@
+scenario_id,source_ref,available_stage,part_number,part_name,unit_of_measure
+northstar_happy_path_v2,bom.csv,0,BAT-480,Battery Pack 48V,each
+northstar_happy_path_v2,bom.csv,0,CDC-050,Charging Dock Connector,each
+northstar_happy_path_v2,bom.csv,0,CHF-300,Chassis Frame,each
+northstar_happy_path_v2,bom.csv,0,DCM-020,Depth Camera Module,each
+northstar_happy_path_v2,bom.csv,0,EST-010,Emergency Stop Assembly,each
+northstar_happy_path_v2,bom.csv,0,HDR-200,Harmonic Drive Reducer,each
+northstar_happy_path_v2,bom.csv,0,IMU-060,IMU Module,each
+northstar_happy_path_v2,bom.csv,0,LDR-360,LiDAR Sensor,each
+northstar_happy_path_v2,bom.csv,0,MCB-110,Main Controller Board,each
+northstar_happy_path_v2,bom.csv,0,MDB-210,Motor Driver Board,each
+northstar_happy_path_v2,bom.csv,0,SLS-090,Safety Laser Scanner,each
+northstar_happy_path_v2,bom.csv,0,SVM-400,Servo Motor,each
+northstar_happy_path_v2,bom.csv,0,WCM-070,Wireless Comms Module,each
+northstar_happy_path_v2,bom.csv,0,WHA-150,Wheel Hub Assembly,each

@@ -1,0 +1,5 @@
+scenario_id,source_ref,available_stage,customer_id,customer_name,is_forecast
+northstar_happy_path_v2,customer_orders.csv,0,CUS-001,SwiftLog Logistics,false
+northstar_happy_path_v2,customer_orders.csv,0,CUS-002,BayShip Fulfillment,false
+northstar_happy_path_v2,customer_orders.csv,0,CUS-003,NovaFab Manufacturing,false
+northstar_happy_path_v2,customer_orders.csv,0,CUS-004,Internal Forecast,true

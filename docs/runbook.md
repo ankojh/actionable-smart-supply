@@ -1,5 +1,11 @@
 # Runbook
 
+> This runbook describes the retired scenario. Its data is preserved under
+> `archive_data/pre_northstar_happy_path/`; local JSON inputs are no longer active.
+> Use [the NorthStar data guide](../data/northstar_happy_path/README.md) and
+> [role-play guide](../data/northstar_happy_path/ROLE_PLAY.md) for the new pack.
+> Application adaptation and Snowflake migration are pending.
+
 ## 1. Local installation and launch
 
 Use Python 3.12, uv, and Node.js 22.12 or newer (verified on Node.js 24). From the repository root, create the backend environment and install the pinned dependencies:

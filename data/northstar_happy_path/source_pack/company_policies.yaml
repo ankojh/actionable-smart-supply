@@ -1,0 +1,109 @@
+# NorthStar Robotics — Company Brain: shared business rules (Rev. 2)
+# Read by BOTH agents. Change policy here, not in agent code.
+# All companies and figures are fictional synthetic test data.
+
+company: NorthStar Robotics
+evaluation_date: "2026-10-26"
+currency: USD
+
+business_definitions:
+  at_risk_shipment:
+    description: >
+      A contracted order is at risk when projected shippable quantity
+      by its promised_ship_date is below the ordered quantity.
+    deadline_field: promised_ship_date        # not planned_completion_date
+  revenue_exposure:
+    description: >
+      At-risk contracted units multiplied by unit selling price.
+      Gross revenue exposure, not realized revenue loss.
+  uncovered_requirement:
+    description: >
+      Component quantity required by the full production plan
+      (contracted + forecast) minus usable warehouse inventory.
+
+source_precedence:
+  supplier_eta:
+    rule: >
+      Use the latest dated explicit supplier confirmation for planning.
+      Preserve ERP records and log discrepancies.
+    evidence_required: true
+  flag_past_due_erp_eta: true                 # latest_eta < evaluation_date and open_qty > 0
+
+allocation_policy:
+  priority:
+    - contracted_orders
+    - earliest_ship_date
+    - forecast_orders
+  tie_breaker:
+    same_promised_date: ascending_customer_order_id
+    fill_mode: sequential_whole_order         # fill each order completely before the next
+  allow_partial_order_allocation: true        # only the last order reached may be partial
+
+production_policy:
+  horizon_start: "2026-10-26"
+  horizon_end: "2026-11-06"
+  working_days: [Mon, Tue, Wed, Thu, Fri]
+  daily_capacity_units: 60
+  capacity_basis: robot_starts                # shared by all plans
+  material_to_ship_business_days: 2
+  day_zero: date_material_usable              # ship date = day 0 + 2 business days
+  same_day_shipping_after_completion: true
+  other_components_available: true
+
+recovery_policy:
+  approved_suppliers:
+    - Pacific Motion Systems
+    - Apex Drive Technologies
+  require_confirmed_availability: true        # a quotation alone is not confirmation
+  require_supplier_qualification: true
+  receipt_date_equals_usable_date: true       # incoming inspection included
+  internal_recovery_requires: {approved_for_use: "Y", condition_status: Usable}
+  objective: protect_contracted_shipments_first
+  unknown_costs_must_remain_unknown: true     # null, never zero
+
+approval_policy:
+  emergency_purchase_requires_manager_approval: true
+  autonomous_purchase_allowed: false
+  autonomous_email_sending_allowed: false
+  approval_limit_usd: 250000                  # manager's authority limit
+  above_limit: escalate_to_next_approver      # not modeled in MVP
+
+decision_policy:
+  steps: [evidence, feasibility, contract_protection, economic_check, governance, human_decision]
+
+  evidence:
+    every_number_traceable: true
+    on_missing: insufficient_evidence         # option stops; never assumed
+
+  feasibility:
+    require_approved_source: true
+    require_written_confirmation: true
+    latest_start: promised_ship_date_minus_material_to_ship_days
+    require_capacity: true
+    require_open_reservation_window: true
+
+  ranking:                                    # lexicographic, first difference wins
+    - min_contracted_units_at_risk
+    - min_customers_affected
+    - min_economic_cost
+    - min_cash_commitment
+
+  economic_check:
+    affects_ranking: false
+    economic_cost: price_premium_plus_known_extra_costs
+    report_cash_commitment: true
+    report_break_even_delay_cost: [per_order, per_unit, per_late_business_day, pct_of_order_value]
+    unknown_cost_tags: [blocking, non_blocking]
+    review_flag_ratio: 0.25                   # economic cost / protected exposure
+    net_cost_against_revenue_exposure: false
+
+  governance:
+    flag_open_primary_po_after_cover_purchase: true
+    report_cash_commitment_if_primary_po_unchanged: true
+    contract_cost_recovery_requires_review: true
+    safety_stock_breach: warn_only
+
+  human_decision:
+    options: [approve, choose_alternative, defer]
+    override_reason_required: true
+    log_override_as_training_signal: true

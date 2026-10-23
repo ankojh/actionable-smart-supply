@@ -1,0 +1,4 @@
+scenario_id,source_ref,available_stage,offer_id,supplier_id,part_number,offered_qty,minimum_order_qty,unit_price_cents,fixed_delivery_cost_cents,confirmed_receipt_date,acceptance_deadline,standard_lead_business_days,offer_status,document_id
+northstar_happy_path_v2,DOC-APEX-002,2,OFFER-APEX-EMERGENCY,SUP-001,HDR-200,400,400,48600,0,2026-10-29,2026-10-27,\N,confirmed,DOC-APEX-002
+northstar_happy_path_v2,DOC-QUOTE-001,0,OFFER-APEX-STANDARD,SUP-001,HDR-200,400,400,48600,\N,\N,2026-10-31,10,quoted,DOC-QUOTE-001
+northstar_happy_path_v2,DOC-CONF-C,4,OFFER-C,SUP-008,HDR-200,40,40,55000,0,2026-10-29,2026-10-27,\N,confirmed,DOC-CONF-C

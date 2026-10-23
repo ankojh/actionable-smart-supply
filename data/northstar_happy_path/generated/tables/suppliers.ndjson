@@ -1,0 +1,9 @@
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-001", "supplier_name": "Apex Drive Technologies"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-002", "supplier_name": "CircuitWorks Asia"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-003", "supplier_name": "DockTech Components"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-004", "supplier_name": "Kestrel Motion"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-005", "supplier_name": "Optiq Sensing"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-006", "supplier_name": "Pacific Motion Systems"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-007", "supplier_name": "RollCore Industries"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-008", "supplier_name": "Summit Precision Drives"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "purchase_orders.csv / fictional Supplier C extension", "available_stage": 0, "supplier_id": "SUP-009", "supplier_name": "Voltaic Energy"}

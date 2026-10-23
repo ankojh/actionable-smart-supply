@@ -1,0 +1,2 @@
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "production_plan.csv", "available_stage": 1, "plan_id": "PLAN-001", "model": "NS-AMR-200", "planned_start_date": "2026-10-26", "planned_completion_date": "2026-11-04", "priority": "Contracted", "planned_build_qty": 120}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "production_plan.csv", "available_stage": 1, "plan_id": "PLAN-002", "model": "NS-AMR-200", "planned_start_date": "2026-10-26", "planned_completion_date": "2026-11-06", "priority": "Forecast", "planned_build_qty": 130}

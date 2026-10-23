@@ -1,0 +1,2 @@
+scenario_id,source_ref,available_stage,request_id,case_id,scenario_version,parent_version,transfer_qty,purchase_qty,objective,actor_id
+northstar_happy_path_v2,updated happy-case manager chat,3,REQ-V2,NS-2026-1042,2,1,80,40,"Protect contracted shipments, then minimize upfront spending; disclose forecast gap and inventory trade-offs.",MANAGER

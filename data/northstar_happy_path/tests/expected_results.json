@@ -1,0 +1,6 @@
+{
+  "baseline": {"at_risk":{"SO-002":40,"SO-003":20},"exposure_cents":108000000,"robots_started":60,"ending_hdr_qty":0,"forecast_unbuilt":130,"ship_dates":{"SO-001":"2026-10-28"}},
+  "A": {"at_risk":{},"exposure_cents":0,"robots_started":250,"ending_hdr_qty":20,"forecast_unbuilt":0,"ship_dates":{"SO-001":"2026-10-28","SO-002":"2026-11-02","SO-003":"2026-11-02","FC-001":"2026-11-05"}},
+  "B": {"at_risk":{"SO-003":20},"exposure_cents":36000000,"robots_started":100,"ending_hdr_qty":0,"forecast_unbuilt":130,"ship_dates":{"SO-002":"2026-10-30"}},
+  "C": {"at_risk":{},"exposure_cents":0,"robots_started":120,"ending_hdr_qty":0,"forecast_unbuilt":130,"ship_dates":{"SO-001":"2026-10-28","SO-002":"2026-10-30","SO-003":"2026-11-02"}}
+}

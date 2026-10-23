@@ -1,0 +1,2333 @@
+{
+  "products": {
+    "description": "One finished product.",
+    "primary_key": [
+      "scenario_id",
+      "model"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "model",
+        "type": "str",
+        "nullable": false,
+        "description": "model",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "product_name",
+        "type": "str",
+        "nullable": false,
+        "description": "product name",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "parts": {
+    "description": "One component, counted in each.",
+    "primary_key": [
+      "scenario_id",
+      "part_number"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_name",
+        "type": "str",
+        "nullable": false,
+        "description": "part name",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "unit_of_measure",
+        "type": "str",
+        "nullable": false,
+        "description": "unit of measure",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "suppliers": {
+    "description": "Supplier master; approval is part-specific.",
+    "primary_key": [
+      "scenario_id",
+      "supplier_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "supplier_id",
+        "type": "str",
+        "nullable": false,
+        "description": "supplier id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "supplier_name",
+        "type": "str",
+        "nullable": false,
+        "description": "supplier name",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "customers": {
+    "description": "Customers and the internal forecast bucket.",
+    "primary_key": [
+      "scenario_id",
+      "customer_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "customer_id",
+        "type": "str",
+        "nullable": false,
+        "description": "customer id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "customer_name",
+        "type": "str",
+        "nullable": false,
+        "description": "customer name",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "is_forecast",
+        "type": "bool",
+        "nullable": false,
+        "description": "is forecast",
+        "snowflake_type": "BOOLEAN"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "locations": {
+    "description": "Physically distinct stock pools.",
+    "primary_key": [
+      "scenario_id",
+      "location_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "location_id",
+        "type": "str",
+        "nullable": false,
+        "description": "location id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "location_name",
+        "type": "str",
+        "nullable": false,
+        "description": "location name",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "location_type",
+        "type": "str",
+        "nullable": false,
+        "description": "location type",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "bom": {
+    "description": "Components consumed per robot; never add demand twice.",
+    "primary_key": [
+      "scenario_id",
+      "model",
+      "part_number"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "model",
+        "type": "str",
+        "nullable": false,
+        "description": "model",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "qty_per_unit",
+        "type": "int",
+        "nullable": false,
+        "description": "qty per unit",
+        "snowflake_type": "NUMBER(38,0)"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "model"
+        ],
+        "references_table": "products",
+        "references_columns": [
+          "scenario_id",
+          "model"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      }
+    ]
+  },
+  "inventory": {
+    "description": "Warehouse stock only. Pilot and R&D stock live exclusively in recovery_inventory.",
+    "primary_key": [
+      "scenario_id",
+      "part_number",
+      "location_id",
+      "snapshot_date"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "location_id",
+        "type": "str",
+        "nullable": false,
+        "description": "location id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "on_hand_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "on hand qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "allocated_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "allocated qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "safety_stock_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "safety stock qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "snapshot_date",
+        "type": "date",
+        "nullable": false,
+        "description": "snapshot date",
+        "snowflake_type": "DATE"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "location_id"
+        ],
+        "references_table": "locations",
+        "references_columns": [
+          "scenario_id",
+          "location_id"
+        ]
+      }
+    ]
+  },
+  "purchase_orders": {
+    "description": "ERP truth retained; only open_qty can represent future supply.",
+    "primary_key": [
+      "scenario_id",
+      "po_number"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "po_number",
+        "type": "str",
+        "nullable": false,
+        "description": "po number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "supplier_id",
+        "type": "str",
+        "nullable": false,
+        "description": "supplier id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "qty",
+        "type": "int",
+        "nullable": false,
+        "description": "qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "unit_price_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "unit price cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "original_eta",
+        "type": "date",
+        "nullable": false,
+        "description": "original eta",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "latest_eta",
+        "type": "date",
+        "nullable": false,
+        "description": "latest eta",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "status",
+        "type": "str",
+        "nullable": false,
+        "description": "status",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "open_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "open qty",
+        "snowflake_type": "NUMBER(38,0)"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "supplier_id"
+        ],
+        "references_table": "suppliers",
+        "references_columns": [
+          "scenario_id",
+          "supplier_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      }
+    ]
+  },
+  "production_plan": {
+    "description": "Demand by plan. Shared capacity comes from production_calendar, not each plan.",
+    "primary_key": [
+      "scenario_id",
+      "plan_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "plan_id",
+        "type": "str",
+        "nullable": false,
+        "description": "plan id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "model",
+        "type": "str",
+        "nullable": false,
+        "description": "model",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "planned_build_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "planned build qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "planned_start_date",
+        "type": "date",
+        "nullable": false,
+        "description": "planned start date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "planned_completion_date",
+        "type": "date",
+        "nullable": false,
+        "description": "planned completion date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "priority",
+        "type": "str",
+        "nullable": false,
+        "description": "priority",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "model"
+        ],
+        "references_table": "products",
+        "references_columns": [
+          "scenario_id",
+          "model"
+        ]
+      }
+    ]
+  },
+  "customer_orders": {
+    "description": "Contracted before forecast; earliest promise then ascending order ID. Need-by is derived from promise minus two working days.",
+    "primary_key": [
+      "scenario_id",
+      "customer_order_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "customer_order_id",
+        "type": "str",
+        "nullable": false,
+        "description": "customer order id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "customer_id",
+        "type": "str",
+        "nullable": false,
+        "description": "customer id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "model",
+        "type": "str",
+        "nullable": false,
+        "description": "model",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "units",
+        "type": "int",
+        "nullable": false,
+        "description": "units",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "promised_ship_date",
+        "type": "date",
+        "nullable": true,
+        "description": "promised ship date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "material_need_by_date",
+        "type": "date",
+        "nullable": true,
+        "description": "material need by date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "contracted",
+        "type": "bool",
+        "nullable": false,
+        "description": "contracted",
+        "snowflake_type": "BOOLEAN"
+      },
+      {
+        "name": "unit_revenue_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "unit revenue cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "plan_id",
+        "type": "str",
+        "nullable": false,
+        "description": "plan id",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "model"
+        ],
+        "references_table": "products",
+        "references_columns": [
+          "scenario_id",
+          "model"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "customer_id"
+        ],
+        "references_table": "customers",
+        "references_columns": [
+          "scenario_id",
+          "customer_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "plan_id"
+        ],
+        "references_table": "production_plan",
+        "references_columns": [
+          "scenario_id",
+          "plan_id"
+        ]
+      }
+    ]
+  },
+  "recovery_inventory": {
+    "description": "Physically separate reserved stock; eligibility is not release authorization. Unknown cost stays null.",
+    "primary_key": [
+      "scenario_id",
+      "recovery_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "recovery_id",
+        "type": "str",
+        "nullable": false,
+        "description": "recovery id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "location_id",
+        "type": "str",
+        "nullable": false,
+        "description": "location id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "recoverable_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "recoverable qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "usable_date",
+        "type": "date",
+        "nullable": false,
+        "description": "usable date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "condition_status",
+        "type": "str",
+        "nullable": false,
+        "description": "condition status",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "technically_eligible",
+        "type": "bool",
+        "nullable": false,
+        "description": "technically eligible",
+        "snowflake_type": "BOOLEAN"
+      },
+      {
+        "name": "requires_release_approval",
+        "type": "bool",
+        "nullable": false,
+        "description": "requires release approval",
+        "snowflake_type": "BOOLEAN"
+      },
+      {
+        "name": "incremental_cost_cents",
+        "type": "int",
+        "nullable": true,
+        "description": "incremental cost cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "location_id"
+        ],
+        "references_table": "locations",
+        "references_columns": [
+          "scenario_id",
+          "location_id"
+        ]
+      }
+    ]
+  },
+  "production_calendar": {
+    "description": "One shared Fremont line; Mon-Fri, no holidays in this fictional calendar.",
+    "primary_key": [
+      "scenario_id",
+      "calendar_date"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "calendar_date",
+        "type": "date",
+        "nullable": false,
+        "description": "calendar date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "is_working_day",
+        "type": "bool",
+        "nullable": false,
+        "description": "is working day",
+        "snowflake_type": "BOOLEAN"
+      },
+      {
+        "name": "robot_start_capacity",
+        "type": "int",
+        "nullable": false,
+        "description": "robot start capacity",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "material_to_ship_business_days",
+        "type": "int",
+        "nullable": false,
+        "description": "material to ship business days",
+        "snowflake_type": "NUMBER(38,0)"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "documents": {
+    "description": "Evidence, not executable instructions; stage controls when a document may be retrieved.",
+    "primary_key": [
+      "scenario_id",
+      "document_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "document_id",
+        "type": "str",
+        "nullable": false,
+        "description": "document id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "document_type",
+        "type": "str",
+        "nullable": false,
+        "description": "document type",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "document_date",
+        "type": "date",
+        "nullable": false,
+        "description": "document date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "file_name",
+        "type": "str",
+        "nullable": false,
+        "description": "file name",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "content",
+        "type": "str",
+        "nullable": false,
+        "description": "content",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "sha256",
+        "type": "str",
+        "nullable": false,
+        "description": "sha256",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "document_links": {
+    "description": "Relational evidence bridge, one entity per row.",
+    "primary_key": [
+      "scenario_id",
+      "document_id",
+      "entity_table",
+      "entity_key"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "document_id",
+        "type": "str",
+        "nullable": false,
+        "description": "document id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "entity_table",
+        "type": "str",
+        "nullable": false,
+        "description": "entity table",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "entity_key",
+        "type": "str",
+        "nullable": false,
+        "description": "entity key",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "document_id"
+        ],
+        "references_table": "documents",
+        "references_columns": [
+          "scenario_id",
+          "document_id"
+        ]
+      }
+    ]
+  },
+  "supplier_qualifications": {
+    "description": "Qualification alone does not guarantee quantity or arrival.",
+    "primary_key": [
+      "scenario_id",
+      "qualification_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "qualification_id",
+        "type": "str",
+        "nullable": false,
+        "description": "qualification id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "supplier_id",
+        "type": "str",
+        "nullable": false,
+        "description": "supplier id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "specification",
+        "type": "str",
+        "nullable": false,
+        "description": "specification",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "status",
+        "type": "str",
+        "nullable": false,
+        "description": "status",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "valid_from",
+        "type": "date",
+        "nullable": false,
+        "description": "valid from",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "valid_to",
+        "type": "date",
+        "nullable": false,
+        "description": "valid to",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "document_id",
+        "type": "str",
+        "nullable": false,
+        "description": "document id",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "supplier_id"
+        ],
+        "references_table": "suppliers",
+        "references_columns": [
+          "scenario_id",
+          "supplier_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "document_id"
+        ],
+        "references_table": "documents",
+        "references_columns": [
+          "scenario_id",
+          "document_id"
+        ]
+      }
+    ]
+  },
+  "supplier_offers": {
+    "description": "Optional supply; never inventory until a selected, authorized plan uses it.",
+    "primary_key": [
+      "scenario_id",
+      "offer_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "offer_id",
+        "type": "str",
+        "nullable": false,
+        "description": "offer id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "supplier_id",
+        "type": "str",
+        "nullable": false,
+        "description": "supplier id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "offered_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "offered qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "minimum_order_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "minimum order qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "unit_price_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "unit price cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "fixed_delivery_cost_cents",
+        "type": "int",
+        "nullable": true,
+        "description": "fixed delivery cost cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "confirmed_receipt_date",
+        "type": "date",
+        "nullable": true,
+        "description": "confirmed receipt date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "acceptance_deadline",
+        "type": "date",
+        "nullable": false,
+        "description": "acceptance deadline",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "standard_lead_business_days",
+        "type": "int",
+        "nullable": true,
+        "description": "standard lead business days",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "offer_status",
+        "type": "str",
+        "nullable": false,
+        "description": "offer status",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "document_id",
+        "type": "str",
+        "nullable": false,
+        "description": "document id",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "supplier_id"
+        ],
+        "references_table": "suppliers",
+        "references_columns": [
+          "scenario_id",
+          "supplier_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "document_id"
+        ],
+        "references_table": "documents",
+        "references_columns": [
+          "scenario_id",
+          "document_id"
+        ]
+      }
+    ]
+  },
+  "inventory_releases": {
+    "description": "Synthetic operational release authorization; execution is a separate later event.",
+    "primary_key": [
+      "scenario_id",
+      "release_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "release_id",
+        "type": "str",
+        "nullable": false,
+        "description": "release id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "recovery_id",
+        "type": "str",
+        "nullable": false,
+        "description": "recovery id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "approved_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "approved qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "approval_date",
+        "type": "date",
+        "nullable": false,
+        "description": "approval date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "release_date",
+        "type": "date",
+        "nullable": false,
+        "description": "release date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "usable_date",
+        "type": "date",
+        "nullable": false,
+        "description": "usable date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "handling_cost_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "handling cost cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "cost_basis",
+        "type": "str",
+        "nullable": false,
+        "description": "cost basis",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "approver_actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "approver actor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "document_id",
+        "type": "str",
+        "nullable": false,
+        "description": "document id",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "recovery_id"
+        ],
+        "references_table": "recovery_inventory",
+        "references_columns": [
+          "scenario_id",
+          "recovery_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "document_id"
+        ],
+        "references_table": "documents",
+        "references_columns": [
+          "scenario_id",
+          "document_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "approver_actor_id"
+        ],
+        "references_table": "actors",
+        "references_columns": [
+          "scenario_id",
+          "actor_id"
+        ]
+      }
+    ]
+  },
+  "case_events": {
+    "description": "Scripted fixture events for one case; no event performs a real action.",
+    "primary_key": [
+      "scenario_id",
+      "event_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "event_id",
+        "type": "str",
+        "nullable": false,
+        "description": "event id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "case_id",
+        "type": "str",
+        "nullable": false,
+        "description": "case id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "event_type",
+        "type": "str",
+        "nullable": false,
+        "description": "event type",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "event_date",
+        "type": "date",
+        "nullable": false,
+        "description": "event date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "scenario_version",
+        "type": "int",
+        "nullable": false,
+        "description": "scenario version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "actor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "message",
+        "type": "str",
+        "nullable": false,
+        "description": "message",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "actor_id"
+        ],
+        "references_table": "actors",
+        "references_columns": [
+          "scenario_id",
+          "actor_id"
+        ]
+      }
+    ]
+  },
+  "actors": {
+    "description": "Fictional role-play identities. All email domains are reserved .example domains.",
+    "primary_key": [
+      "scenario_id",
+      "actor_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "actor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "display_name",
+        "type": "str",
+        "nullable": false,
+        "description": "display name",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "organization",
+        "type": "str",
+        "nullable": false,
+        "description": "organization",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "role",
+        "type": "str",
+        "nullable": false,
+        "description": "role",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "email",
+        "type": "str",
+        "nullable": true,
+        "description": "email",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  },
+  "messages": {
+    "description": "Staged role-play input. Supplier claims need their linked evidence.",
+    "primary_key": [
+      "scenario_id",
+      "message_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "message_id",
+        "type": "str",
+        "nullable": false,
+        "description": "message id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "thread_id",
+        "type": "str",
+        "nullable": false,
+        "description": "thread id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "in_reply_to_message_id",
+        "type": "str",
+        "nullable": true,
+        "description": "in reply to message id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "case_id",
+        "type": "str",
+        "nullable": false,
+        "description": "case id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "scenario_version",
+        "type": "int",
+        "nullable": false,
+        "description": "scenario version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "sender_actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "sender actor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "channel",
+        "type": "str",
+        "nullable": false,
+        "description": "channel",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "subject",
+        "type": "str",
+        "nullable": false,
+        "description": "subject",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "content",
+        "type": "str",
+        "nullable": false,
+        "description": "content",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "document_id",
+        "type": "str",
+        "nullable": true,
+        "description": "document id",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "sender_actor_id"
+        ],
+        "references_table": "actors",
+        "references_columns": [
+          "scenario_id",
+          "actor_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "document_id"
+        ],
+        "references_table": "documents",
+        "references_columns": [
+          "scenario_id",
+          "document_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "in_reply_to_message_id"
+        ],
+        "references_table": "messages",
+        "references_columns": [
+          "scenario_id",
+          "message_id"
+        ]
+      }
+    ]
+  },
+  "message_recipients": {
+    "description": "One recipient per row; no comma-separated lists.",
+    "primary_key": [
+      "scenario_id",
+      "message_id",
+      "actor_id",
+      "recipient_type"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "message_id",
+        "type": "str",
+        "nullable": false,
+        "description": "message id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "actor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "recipient_type",
+        "type": "str",
+        "nullable": false,
+        "description": "recipient type",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "message_id"
+        ],
+        "references_table": "messages",
+        "references_columns": [
+          "scenario_id",
+          "message_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "actor_id"
+        ],
+        "references_table": "actors",
+        "references_columns": [
+          "scenario_id",
+          "actor_id"
+        ]
+      }
+    ]
+  },
+  "scenario_requests": {
+    "description": "Manager proposal, not a validated or approved plan.",
+    "primary_key": [
+      "scenario_id",
+      "request_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "request_id",
+        "type": "str",
+        "nullable": false,
+        "description": "request id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "case_id",
+        "type": "str",
+        "nullable": false,
+        "description": "case id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "scenario_version",
+        "type": "int",
+        "nullable": false,
+        "description": "scenario version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "parent_version",
+        "type": "int",
+        "nullable": false,
+        "description": "parent version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "transfer_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "transfer qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "purchase_qty",
+        "type": "int",
+        "nullable": false,
+        "description": "purchase qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "objective",
+        "type": "str",
+        "nullable": false,
+        "description": "objective",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "actor id",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "actor_id"
+        ],
+        "references_table": "actors",
+        "references_columns": [
+          "scenario_id",
+          "actor_id"
+        ]
+      }
+    ]
+  },
+  "plan_approvals": {
+    "description": "Role-play authorization to prepare drafts only; never supplier submission.",
+    "primary_key": [
+      "scenario_id",
+      "approval_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "approval_id",
+        "type": "str",
+        "nullable": false,
+        "description": "approval id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "case_id",
+        "type": "str",
+        "nullable": false,
+        "description": "case id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "scenario_version",
+        "type": "int",
+        "nullable": false,
+        "description": "scenario version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "option_id",
+        "type": "str",
+        "nullable": false,
+        "description": "option id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "actor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "actor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "approved_date",
+        "type": "date",
+        "nullable": false,
+        "description": "approved date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "authorized_purchase_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "authorized purchase cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "authorized_transfer_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "authorized transfer cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "authority_limit_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "authority limit cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "authorization_scope",
+        "type": "str",
+        "nullable": false,
+        "description": "authorization scope",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "actor_id"
+        ],
+        "references_table": "actors",
+        "references_columns": [
+          "scenario_id",
+          "actor_id"
+        ]
+      }
+    ]
+  },
+  "action_drafts": {
+    "description": "Expected draft examples released only after scripted approval.",
+    "primary_key": [
+      "scenario_id",
+      "draft_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "draft_id",
+        "type": "str",
+        "nullable": false,
+        "description": "draft id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "case_id",
+        "type": "str",
+        "nullable": false,
+        "description": "case id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "scenario_version",
+        "type": "int",
+        "nullable": false,
+        "description": "scenario version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "approval_id",
+        "type": "str",
+        "nullable": false,
+        "description": "approval id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "action_type",
+        "type": "str",
+        "nullable": false,
+        "description": "action type",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "part_number",
+        "type": "str",
+        "nullable": false,
+        "description": "part number",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "qty",
+        "type": "int",
+        "nullable": false,
+        "description": "qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "supplier_id",
+        "type": "str",
+        "nullable": true,
+        "description": "supplier id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_location_id",
+        "type": "str",
+        "nullable": true,
+        "description": "source location id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "destination_location_id",
+        "type": "str",
+        "nullable": false,
+        "description": "destination location id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "unit_price_cents",
+        "type": "int",
+        "nullable": true,
+        "description": "unit price cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "total_cents",
+        "type": "int",
+        "nullable": false,
+        "description": "total cents; integer USD cents, never floating point dollars",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "required_usable_date",
+        "type": "date",
+        "nullable": false,
+        "description": "required usable date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "status",
+        "type": "str",
+        "nullable": false,
+        "description": "status",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "transmitted",
+        "type": "bool",
+        "nullable": false,
+        "description": "transmitted",
+        "snowflake_type": "BOOLEAN"
+      }
+    ],
+    "foreign_keys": [
+      {
+        "columns": [
+          "scenario_id",
+          "approval_id"
+        ],
+        "references_table": "plan_approvals",
+        "references_columns": [
+          "scenario_id",
+          "approval_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "part_number"
+        ],
+        "references_table": "parts",
+        "references_columns": [
+          "scenario_id",
+          "part_number"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "supplier_id"
+        ],
+        "references_table": "suppliers",
+        "references_columns": [
+          "scenario_id",
+          "supplier_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "source_location_id"
+        ],
+        "references_table": "locations",
+        "references_columns": [
+          "scenario_id",
+          "location_id"
+        ]
+      },
+      {
+        "columns": [
+          "scenario_id",
+          "destination_location_id"
+        ],
+        "references_table": "locations",
+        "references_columns": [
+          "scenario_id",
+          "location_id"
+        ]
+      }
+    ]
+  },
+  "monitoring_events": {
+    "description": "Future simulation events; never evidence for initial recommendation.",
+    "primary_key": [
+      "scenario_id",
+      "monitor_id"
+    ],
+    "columns": [
+      {
+        "name": "scenario_id",
+        "type": "str",
+        "nullable": false,
+        "description": "scenario id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "source_ref",
+        "type": "str",
+        "nullable": false,
+        "description": "Provenance within supplied source pack or labeled authored extension",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "available_stage",
+        "type": "int",
+        "nullable": false,
+        "description": "First role-play stage where this record is visible; inclusive",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "monitor_id",
+        "type": "str",
+        "nullable": false,
+        "description": "monitor id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "case_id",
+        "type": "str",
+        "nullable": false,
+        "description": "case id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "scenario_version",
+        "type": "int",
+        "nullable": false,
+        "description": "scenario version",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "event_date",
+        "type": "date",
+        "nullable": false,
+        "description": "event date",
+        "snowflake_type": "DATE"
+      },
+      {
+        "name": "event_type",
+        "type": "str",
+        "nullable": false,
+        "description": "event type",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "entity_id",
+        "type": "str",
+        "nullable": false,
+        "description": "entity id",
+        "snowflake_type": "VARCHAR"
+      },
+      {
+        "name": "qty",
+        "type": "int",
+        "nullable": true,
+        "description": "qty",
+        "snowflake_type": "NUMBER(38,0)"
+      },
+      {
+        "name": "status",
+        "type": "str",
+        "nullable": false,
+        "description": "status",
+        "snowflake_type": "VARCHAR"
+      }
+    ],
+    "foreign_keys": []
+  }
+}

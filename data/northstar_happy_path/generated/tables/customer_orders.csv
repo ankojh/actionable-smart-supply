@@ -1,0 +1,5 @@
+scenario_id,source_ref,available_stage,customer_order_id,customer_id,model,units,promised_ship_date,material_need_by_date,contracted,unit_revenue_cents,plan_id
+northstar_happy_path_v2,customer_orders.csv + company_policies.yaml,1,FC-001,CUS-004,NS-AMR-200,130,\N,\N,false,1800000,PLAN-002
+northstar_happy_path_v2,customer_orders.csv + company_policies.yaml,1,SO-001,CUS-001,NS-AMR-200,60,2026-11-05,2026-11-03,true,1800000,PLAN-001
+northstar_happy_path_v2,customer_orders.csv + company_policies.yaml,1,SO-002,CUS-002,NS-AMR-200,40,2026-11-06,2026-11-04,true,1800000,PLAN-001
+northstar_happy_path_v2,customer_orders.csv + company_policies.yaml,1,SO-003,CUS-003,NS-AMR-200,20,2026-11-06,2026-11-04,true,1800000,PLAN-001

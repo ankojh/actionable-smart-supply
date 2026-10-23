@@ -1,0 +1,193 @@
+scenario_id,source_ref,available_stage,document_id,document_type,document_date,file_name,content,sha256
+northstar_happy_path_v2,apex_emergency_confirmation.md,2,DOC-APEX-002,supplier_confirmation,2026-10-26,DOC-APEX-002.md,"---
+document_id: DOC-APEX-002
+document_type: Emergency Availability Confirmation
+source: Apex Drive Technologies
+document_date: 2026-10-26
+related_po: NULL
+related_part: HDR-200
+---
+
+From: Priya Natarajan, Key Account Manager, Apex Drive Technologies
+To: Supply Chain Team, NorthStar Robotics
+Date: Monday, October 26, 2026
+Subject: Emergency availability — HDR-200, ref. quote ADQ-2026-1187
+
+Dear NorthStar team,
+
+Following your call this morning, Apex confirms emergency availability of 400 qualified HDR-200 harmonic drive reducers for delivery to NorthStar's production facility by October 29, 2026, at $486 per unit, including expedited delivery.
+
+- Quantity: 400 units (from finished-goods allocation)
+- Confirmed receipt date: Thursday, October 29, 2026, DAP Fremont, California
+- Unit price: $486.00, expedited delivery included (no separate expedite premium)
+- Total purchase value: $194,400.00
+- Specification: meets NorthStar's approved HDR-200 Rev C specification; certificates of conformance ship with the goods
+- Reference: quote ADQ-2026-1187
+
+Availability is reserved through October 27, 2026 and is subject to timely purchase order acceptance. If we do not receive an accepted purchase order by end of day October 27, this allocation will be released and standard lead time will apply.
+
+Delivered units are released to production on receipt; incoming inspection is completed at our facility before shipment.
+
+Best regards,
+Priya Natarajan
+Key Account Manager, Apex Drive Technologies
+",b4578909b9fc8efef6464baf4a88fb4bd62007d069673fe80b809be7dedb2b0a
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-CONF-C,supplier_confirmation,2026-10-26,DOC-CONF-C.md,"# Reserved 40-drive lot for NorthStar
+
+Synthetic role-play evidence.
+
+From: Owen Patel, Summit Precision Drives
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+For quote SPD-2026-0040, we confirm 40 HDR-200 Rev C drives at USD 550.00 each, USD 22,000.00 total, with MOQ 40. The full lot will be received and usable at Fremont on October 29, 2026, subject to PO acceptance by October 27, 2026, end of day America/Los_Angeles. Freight and inspection are included; fixed additional delivery cost is USD 0.00. Allocation expires after that deadline. No order has yet been placed.
+",df66899829ceeb57ad1250e02758405629e62503a8ccdeddc6193829ba1a8d95
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-COST-001,cost_assumption,2026-10-26,DOC-COST-001.md,"# Hybrid transfer and cash assumptions
+
+Synthetic role-play evidence.
+
+From: Sam Taylor, NorthStar Robotics
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+For NS-2026-1042 scenario V2, assume a one-time USD 2,000.00 handling and internal transfer cost for the 80-drive REC-001 movement. This is a fictional planning estimate, not an invoice. No other incremental fee is modeled. Supplier C purchase is USD 22,000.00; stated immediate expenditure is USD 24,000.00. Immediate expenditure is the demo comparison of commitments, not a literal cash-payment schedule under Net 30. Pacific PO-2026-1042 remains open at USD 164,800.00. The difference from Apex is upfront commitment reduction, not net economic savings or recovered damages.
+",6713418f522fbd997eeb7f69d2287673764bcfaa88f4912cda3c2f8507882745
+northstar_happy_path_v2,authored extension of updated Notion happy case,1,DOC-PILOT-001,inventory_check,2026-10-26,DOC-PILOT-001.md,"# Pilot stock is reserved, not released
+
+Synthetic role-play evidence.
+
+From: Elena Brooks, NorthStar Robotics
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+REC-001 contains 80 usable HDR-200 Rev C drives at the Pilot Line, outside the warehouse snapshot. They are technically eligible for production but reserved for pilot work. Transfer requires my release authorization and a manager-approved transfer request. Earliest physical availability is October 28. Handling cost has not yet been established. REC-002 contains 16 R&D drives requiring inspection and is not eligible.
+",96b73e69bd9280300dcfd8771828ee9f1b1fd45bcd81280a92ec5f0a8334ed36
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-PILOT-RELEASE,inventory_release,2026-10-26,DOC-PILOT-RELEASE.md,"# Release authorization for REC-001
+
+Synthetic role-play evidence.
+
+From: Elena Brooks, NorthStar Robotics
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+On October 26, 2026 I authorize release of all 80 usable HDR-200 Rev C drives from REC-001 on October 27, conditional on the manager approving the transfer request. Transfer completes and material is usable in production on October 28. Pilot work can be deferred until after November 10 and has no contracted customer commitment in this fixture. This does not authorize an executed stock movement. The R&D lot REC-002 remains excluded.
+",d77f505c8f1a4b762c9517318e984a0b27a19b6c97ee5e2e2f693a5f98d72846
+northstar_happy_path_v2,authored extension of updated Notion happy case,1,DOC-PLAN-001,planning_note,2026-10-26,DOC-PLAN-001.md,"# Production calendar and allocation
+
+Synthetic role-play evidence.
+
+From: Riley Park, NorthStar Robotics
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+The October 26 opening snapshot has 120 usable warehouse HDR-200 drives. The 80 pilot-line drives are a separate pool and remain reserved until the pilot owner approves release. There are no finished robots or WIP in this fixture. One Fremont line starts at most 60 robots per business day across both plans. Material usable on day zero can start that day; shipment follows two business days later. Protect contracted orders first, sorted by promise date and then sales order ID. SwiftLog material need-by is November 3; BayShip and NovaFab material need-by is November 4. Forecast FC-001 may be deferred.
+",1c47729521708b40bf0a6ad832b471fb7ad089683b6bbe56a2b1a80b39e40220
+northstar_happy_path_v2,authored extension of updated Notion happy case,2,DOC-QUAL-APEX,qualification_record,2026-10-26,DOC-QUAL-APEX.md,"# Approved HDR-200 suppliers
+
+Synthetic role-play evidence.
+
+From: Jordan Lee, NorthStar Robotics
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+Pacific Motion Systems and Apex Drive Technologies are approved for HDR-200 Rev C, ratio 100:1. Apex AVL reference AVL-HDR-200-02 is valid January 1 through December 31, 2026. This qualification does not itself confirm stock or delivery dates.
+",dcc766f875b6833dac81ec7b6601433503d713efd577ed5fe08a799a500ae7b5
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-QUAL-C,qualification_record,2026-10-26,DOC-QUAL-C.md,"# Supplier C qualification
+
+Synthetic role-play evidence.
+
+From: Jordan Lee, NorthStar Robotics
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+Summit Precision Drives is the fictional Supplier C for this demo. AVL-HDR-200-03 approves Summit for HDR-200 Rev C, ratio 100:1, January 1 through December 31, 2026. Review completed October 26. The reserved 40-drive lot meets the same NorthStar specification; certificates accompany delivery and inspection is completed before shipment.
+",d1aae052a7030c7337575e0a0a679ad5d29c3efe8f537bc557c96c335d3a32fd
+northstar_happy_path_v2,backup_supplier_quote.md,0,DOC-QUOTE-001,supplier_quote,2026-10-22,DOC-QUOTE-001.md,"---
+document_id: DOC-QUOTE-001
+document_type: Supplier Quotation
+source: Apex Drive Technologies
+document_date: 2026-10-22
+related_po: NULL
+related_part: HDR-200
+---
+
+# Quotation — Apex Drive Technologies
+
+**Quote No.:** ADQ-2026-1187
+**Date:** October 22, 2026
+**To:** NorthStar Robotics — Supply Chain Team
+**From:** Apex Drive Technologies, Sales Engineering
+
+| Item | Description | Qty | Unit price (USD) |
+|---|---|---|---|
+| HDR-200 (Apex build) | Harmonic drive reducer built to NorthStar specification HDR-200 Rev C, ratio 100:1 | 400 (MOQ) | $486.00 |
+
+**Supplier qualification:** Apex Drive Technologies is an approved second source for HDR-200 on NorthStar's approved vendor list (AVL ref. AVL-HDR-200-02).
+
+**Terms**
+
+- **Minimum order quantity (MOQ):** 400 units
+- **Standard lead time:** 10 business days from purchase order acceptance
+- **Delivery:** DAP NorthStar Fremont, California facility (Incoterms 2020)
+- **Payment:** Net 30 from delivery
+- **Validity:** This quotation is valid through **October 31, 2026**
+
+Apex Drive Technologies quotes HDR-200 harmonic drive reducers at $486 per unit, with a minimum order quantity of 400 units and a standard lead time of 10 business days after purchase order acceptance. This quotation is valid through October 31, 2026.
+
+Please reference quote ADQ-2026-1187 on your purchase order.
+
+Apex Drive Technologies — Sales Engineering
+",fbe6b52494eede2720189933db646bf4c6626c72caad75e2a442379182d5b7a2
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-QUOTE-C,supplier_quote,2026-10-26,DOC-QUOTE-C.md,"# Quote SPD-2026-0040
+
+Synthetic role-play evidence.
+
+From: Owen Patel, Summit Precision Drives
+To: Alex Morgan, NorthStar Robotics
+Date: 2026-10-26
+Case: NS-2026-1042
+
+Summit Precision Drives offers 40 HDR-200 Rev C drives at USD 550.00 each; MOQ 40, total USD 22,000.00. Delivery to Fremont and incoming-inspection release are included, with no additional freight charge. Net 30 from delivery. Quote valid through October 27, 2026. This quote alone is not a delivery commitment; see the separate allocation confirmation.
+",8218678e457895474cce2fff2609d1379b69b56cc8e1ee08b27623d27a2e4868
+northstar_happy_path_v2,DOC-SUP-001_updated_supplier_email.md,0,DOC-SUP-001,supplier_email,2026-10-16,DOC-SUP-001.md,"# Supplier Email — Updated Delivery Schedule
+
+| Field | Value |
+|---|---|
+| Document ID | DOC-SUP-001 |
+| Document Type | Supplier Email |
+| Source | Pacific Motion Systems |
+| Document Date | 2026-10-16 |
+| Related PO | PO-2026-1042 |
+| Related Part | HDR-200 |
+
+**From:** Daniel Reyes, Account Manager, Pacific Motion Systems  
+**To:** Supply Chain Team, NorthStar Robotics  
+**Date:** Friday, October 16, 2026  
+**Subject:** Updated Delivery Schedule — PO-2026-1042 (HDR-200 Harmonic Drive Reducers, 400 Units)
+
+Dear NorthStar Robotics Team,
+
+I am writing with an important update regarding purchase order **PO-2026-1042** for **400 units of the HDR-200 harmonic drive reducer**, originally scheduled for delivery to your Fremont facility on **October 20, 2026**.
+
+Due to production capacity constraints at our gear-finishing plant, including an unplanned maintenance shutdown on one of our two honing lines, we are unable to meet the original delivery schedule.
+
+The revised delivery date for all **400 HDR-200 units is November 10, 2026**, representing a **21-day delay** from the original commitment.
+
+Unfortunately, we are unable to offer a partial shipment or expedited delivery before November 10.
+
+We understand that this delay may affect your production schedule and sincerely apologize for the disruption. We will continue monitoring our production progress and notify you immediately if the delivery schedule changes.
+
+Please let us know if you require any additional information.
+
+Best regards,  
+**Daniel Reyes**  
+Account Manager  
+Pacific Motion Systems
+",94eb78f925ffcf689118702a07b4739b76486e9f9a1d47ac3a9cc54c22eeb903

@@ -1,0 +1,7 @@
+scenario_id,source_ref,available_stage,monitor_id,case_id,scenario_version,event_date,event_type,entity_id,qty,status
+northstar_happy_path_v2,held-back fictional execution feed,7,MON-01,NS-2026-1042,2,2026-10-27,simulated_manual_release,DRAFT-TRANSFER,80,released_by_human_in_simulation
+northstar_happy_path_v2,held-back fictional execution feed,7,MON-02,NS-2026-1042,2,2026-10-27,simulated_supplier_acceptance,DRAFT-PO,40,accepted_in_simulation
+northstar_happy_path_v2,held-back fictional execution feed,7,MON-03,NS-2026-1042,2,2026-10-28,simulated_transfer_receipt,REC-001,80,usable
+northstar_happy_path_v2,held-back fictional execution feed,7,MON-04,NS-2026-1042,2,2026-10-29,simulated_supplier_receipt,OFFER-C,40,usable
+northstar_happy_path_v2,held-back fictional execution feed,7,MON-05,NS-2026-1042,2,2026-10-29,forecast_follow_up,FC-001,130,uncovered_in_horizon
+northstar_happy_path_v2,held-back fictional execution feed,7,MON-06,NS-2026-1042,2,2026-10-29,primary_po_follow_up,PO-2026-1042,400,still_open_due_november_10

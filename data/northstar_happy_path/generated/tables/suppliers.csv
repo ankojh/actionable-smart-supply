@@ -1,0 +1,10 @@
+scenario_id,source_ref,available_stage,supplier_id,supplier_name
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-001,Apex Drive Technologies
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-002,CircuitWorks Asia
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-003,DockTech Components
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-004,Kestrel Motion
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-005,Optiq Sensing
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-006,Pacific Motion Systems
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-007,RollCore Industries
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-008,Summit Precision Drives
+northstar_happy_path_v2,purchase_orders.csv / fictional Supplier C extension,0,SUP-009,Voltaic Energy

@@ -1,0 +1,13 @@
+po_number,part_number,part_name,supplier,qty,unit_price_usd,original_eta,latest_eta,status,open_qty
+PO-2026-0961,HDR-200,Harmonic Drive Reducer,Pacific Motion Systems,400,412,2026-09-14,2026-09-14,Received,0
+PO-2026-1031,SVM-400,Servo Motor,Kestrel Motion,300,210,2026-10-12,2026-10-12,Received,0
+PO-2026-1036,LDR-360,LiDAR Sensor,Optiq Sensing,120,685,2026-10-14,2026-10-14,Received,0
+PO-2026-1042,HDR-200,Harmonic Drive Reducer,Pacific Motion Systems,400,412,2026-10-20,2026-10-20,Open,400
+PO-2026-1048,MCB-110,Main Controller Board,CircuitWorks Asia,150,340,2026-10-19,2026-10-19,Received,0
+PO-2026-1053,BAT-480,Battery Pack 48V,Voltaic Energy,120,890,2026-10-30,2026-10-30,In Transit,120
+PO-2026-1057,LDR-360,LiDAR Sensor,Optiq Sensing,80,685,2026-10-28,2026-10-28,Open,80
+PO-2026-1061,CDC-050,Charging Dock Connector,DockTech Components,200,58,2026-10-27,2026-11-03,Delayed,200
+PO-2026-1063,DCM-020,Depth Camera Module,Optiq Sensing,200,145,2026-11-02,2026-11-02,Open,200
+PO-2026-1066,WHA-150,Wheel Hub Assembly,RollCore Industries,300,96,2026-11-04,2026-11-04,Open,300
+PO-2026-1070,SVM-400,Servo Motor,Kestrel Motion,300,210,2026-11-09,2026-11-09,Open,300
+PO-2026-1074,IMU-060,IMU Module,Optiq Sensing,150,62,2026-11-12,2026-11-12,Open,150

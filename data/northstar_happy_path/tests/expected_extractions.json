@@ -1,0 +1,14 @@
+[
+  {"document_id":"DOC-SUP-001","field":"planning_eta","expected_value":"2026-11-10","exact_span":"November 10, 2026"},
+  {"document_id":"DOC-SUP-001","field":"affected_quantity","expected_value":400,"exact_span":"all **400 HDR-200 units"},
+  {"document_id":"DOC-SUP-001","field":"early_partial_available","expected_value":false,"exact_span":"unable to offer a partial shipment or expedited delivery before November 10"},
+  {"document_id":"DOC-QUOTE-001","field":"minimum_order_qty","expected_value":400,"exact_span":"**Minimum order quantity (MOQ):** 400 units"},
+  {"document_id":"DOC-APEX-002","field":"confirmed_receipt_date","expected_value":"2026-10-29","exact_span":"Confirmed receipt date: Thursday, October 29, 2026"},
+  {"document_id":"DOC-CONF-C","field":"confirmed_receipt_date","expected_value":"2026-10-29","exact_span":"received and usable at Fremont on October 29, 2026"},
+  {"document_id":"DOC-CONF-C","field":"minimum_order_qty","expected_value":40,"exact_span":"with MOQ 40"},
+  {"document_id":"DOC-CONF-C","field":"unit_price_cents","expected_value":55000,"exact_span":"USD 550.00 each"},
+  {"document_id":"DOC-CONF-C","field":"acceptance_deadline","expected_value":"2026-10-27","exact_span":"PO acceptance by October 27, 2026, end of day America/Los_Angeles"},
+  {"document_id":"DOC-PILOT-RELEASE","field":"release_date","expected_value":"2026-10-27","exact_span":"release of all 80 usable HDR-200 Rev C drives from REC-001 on October 27"},
+  {"document_id":"DOC-PILOT-RELEASE","field":"usable_date","expected_value":"2026-10-28","exact_span":"usable in production on October 28"},
+  {"document_id":"DOC-COST-001","field":"handling_cost_cents","expected_value":200000,"exact_span":"assume a one-time USD 2,000.00 handling and internal transfer cost"}
+]

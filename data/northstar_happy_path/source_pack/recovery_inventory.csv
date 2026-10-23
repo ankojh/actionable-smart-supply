@@ -1,0 +1,3 @@
+recovery_id,part_number,source_type,source_name,recoverable_qty,available_date,incremental_cost_usd,approved_for_use,condition_status
+REC-001,HDR-200,Internal,Pilot Line,80,2026-10-28,NULL,Y,Usable
+REC-002,HDR-200,Internal,R&D Test Bench,16,2026-10-30,NULL,N,Requires Inspection

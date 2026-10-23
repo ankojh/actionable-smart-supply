@@ -1,0 +1,14 @@
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "BAT-480", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "CDC-050", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "CHF-300", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "DCM-020", "qty_per_unit": 2}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "EST-010", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "HDR-200", "qty_per_unit": 2}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "IMU-060", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "LDR-360", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "MCB-110", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "MDB-210", "qty_per_unit": 2}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "SLS-090", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "SVM-400", "qty_per_unit": 2}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "WCM-070", "qty_per_unit": 1}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "model": "NS-AMR-200", "part_number": "WHA-150", "qty_per_unit": 2}

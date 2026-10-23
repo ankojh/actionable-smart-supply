@@ -1,0 +1,15 @@
+part_number,part_name,on_hand_qty,allocated_qty,safety_stock_qty,snapshot_date
+HDR-200,Harmonic Drive Reducer,120,0,100,2026-10-26
+SVM-400,Servo Motor,596,12,40,2026-10-26
+LDR-360,LiDAR Sensor,292,6,25,2026-10-26
+DCM-020,Depth Camera Module,568,8,40,2026-10-26
+BAT-480,Battery Pack 48V,284,4,20,2026-10-26
+MCB-110,Main Controller Board,276,5,15,2026-10-26
+MDB-210,Motor Driver Board,548,0,30,2026-10-26
+WHA-150,Wheel Hub Assembly,552,10,30,2026-10-26
+SLS-090,Safety Laser Scanner,274,3,15,2026-10-26
+CHF-300,Chassis Frame,268,0,10,2026-10-26
+CDC-050,Charging Dock Connector,288,0,20,2026-10-26
+IMU-060,IMU Module,281,4,20,2026-10-26
+EST-010,Emergency Stop Assembly,290,2,20,2026-10-26
+WCM-070,Wireless Comms Module,284,6,20,2026-10-26

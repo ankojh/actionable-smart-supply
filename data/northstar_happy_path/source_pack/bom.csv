@@ -1,0 +1,15 @@
+model,part_number,part_name,qty_per_unit,unit_of_measure
+NS-AMR-200,HDR-200,Harmonic Drive Reducer,2,ea
+NS-AMR-200,SVM-400,Servo Motor,2,ea
+NS-AMR-200,LDR-360,LiDAR Sensor,1,ea
+NS-AMR-200,DCM-020,Depth Camera Module,2,ea
+NS-AMR-200,BAT-480,Battery Pack 48V,1,ea
+NS-AMR-200,MCB-110,Main Controller Board,1,ea
+NS-AMR-200,MDB-210,Motor Driver Board,2,ea
+NS-AMR-200,WHA-150,Wheel Hub Assembly,2,ea
+NS-AMR-200,SLS-090,Safety Laser Scanner,1,ea
+NS-AMR-200,CHF-300,Chassis Frame,1,ea
+NS-AMR-200,CDC-050,Charging Dock Connector,1,ea
+NS-AMR-200,IMU-060,IMU Module,1,ea
+NS-AMR-200,EST-010,Emergency Stop Assembly,1,ea
+NS-AMR-200,WCM-070,Wireless Comms Module,1,ea

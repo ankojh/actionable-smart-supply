@@ -1,0 +1,68 @@
+document_id,document_type,source,document_date,related_po,related_part,file_name,content
+DOC-SUP-001,Supplier Email,Pacific Motion Systems,2026-10-16,PO-2026-1042,HDR-200,supplier_delay_email.md,"From: Daniel Reyes, Account Manager, Pacific Motion Systems
+To: Supply Chain Team, NorthStar Robotics
+Date: Friday, October 16, 2026
+Subject: Updated Delivery Schedule — PO-2026-1042 (HDR-200 harmonic drive reducers, 400 units)
+
+Dear NorthStar Robotics team,
+
+I am writing with an important update on purchase order PO-2026-1042 for 400 units of the HDR-200 harmonic drive reducer, originally scheduled for receipt at your Fremont facility on October 20, 2026.
+
+Due to production capacity constraints at our gear-finishing plant — including an unplanned maintenance shutdown on one of our two honing lines — we will not be able to ship this order on the original date. The delivery of 400 HDR-200 harmonic drive reducers under PO-2026-1042 has been delayed from October 20 to November 10, 2026. This revised receipt date applies to the full outstanding quantity.
+
+We are not able to offer a partial or expedited shipment for this order before November 10.
+
+I sincerely apologize for the disruption to your production schedule.
+
+Best regards,
+Daniel Reyes
+Account Manager, Pacific Motion Systems"
+DOC-QUOTE-001,Supplier Quotation,Apex Drive Technologies,2026-10-22,NULL,HDR-200,backup_supplier_quote.md,"# Quotation — Apex Drive Technologies
+
+**Quote No.:** ADQ-2026-1187
+**Date:** October 22, 2026
+**To:** NorthStar Robotics — Supply Chain Team
+**From:** Apex Drive Technologies, Sales Engineering
+
+| Item | Description | Qty | Unit price (USD) |
+|---|---|---|---|
+| HDR-200 (Apex build) | Harmonic drive reducer built to NorthStar specification HDR-200 Rev C, ratio 100:1 | 400 (MOQ) | $486.00 |
+
+**Supplier qualification:** Apex Drive Technologies is an approved second source for HDR-200 on NorthStar's approved vendor list (AVL ref. AVL-HDR-200-02).
+
+**Terms**
+
+- **Minimum order quantity (MOQ):** 400 units
+- **Standard lead time:** 10 business days from purchase order acceptance
+- **Delivery:** DAP NorthStar Fremont, California facility (Incoterms 2020)
+- **Payment:** Net 30 from delivery
+- **Validity:** This quotation is valid through **October 31, 2026**
+
+Apex Drive Technologies quotes HDR-200 harmonic drive reducers at $486 per unit, with a minimum order quantity of 400 units and a standard lead time of 10 business days after purchase order acceptance. This quotation is valid through October 31, 2026.
+
+Please reference quote ADQ-2026-1187 on your purchase order.
+
+Apex Drive Technologies — Sales Engineering"
+DOC-APEX-002,Emergency Availability Confirmation,Apex Drive Technologies,2026-10-26,NULL,HDR-200,apex_emergency_confirmation.md,"From: Priya Natarajan, Key Account Manager, Apex Drive Technologies
+To: Supply Chain Team, NorthStar Robotics
+Date: Monday, October 26, 2026
+Subject: Emergency availability — HDR-200, ref. quote ADQ-2026-1187
+
+Dear NorthStar team,
+
+Following your call this morning, Apex confirms emergency availability of 400 qualified HDR-200 harmonic drive reducers for delivery to NorthStar's production facility by October 29, 2026, at $486 per unit, including expedited delivery.
+
+- Quantity: 400 units (from finished-goods allocation)
+- Confirmed receipt date: Thursday, October 29, 2026, DAP Fremont, California
+- Unit price: $486.00, expedited delivery included (no separate expedite premium)
+- Total purchase value: $194,400.00
+- Specification: meets NorthStar's approved HDR-200 Rev C specification; certificates of conformance ship with the goods
+- Reference: quote ADQ-2026-1187
+
+Availability is reserved through October 27, 2026 and is subject to timely purchase order acceptance. If we do not receive an accepted purchase order by end of day October 27, this allocation will be released and standard lead time will apply.
+
+Delivered units are released to production on receipt; incoming inspection is completed at our facility before shipment.
+
+Best regards,
+Priya Natarajan
+Key Account Manager, Apex Drive Technologies"

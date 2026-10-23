@@ -1,0 +1,2 @@
+scenario_id,source_ref,available_stage,model,product_name
+northstar_happy_path_v2,SPEC.md,0,NS-AMR-200,Warehouse autonomous mobile robot

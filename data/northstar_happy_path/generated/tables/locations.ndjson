@@ -1,0 +1,4 @@
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "authored fixture extension", "available_stage": 0, "location_id": "FREMONT-WH", "location_name": "Fremont Warehouse", "location_type": "warehouse"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "authored fixture extension", "available_stage": 0, "location_id": "PILOT", "location_name": "Pilot Line", "location_type": "reserved"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "authored fixture extension", "available_stage": 0, "location_id": "PRODUCTION", "location_name": "Fremont Production", "location_type": "production"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "authored fixture extension", "available_stage": 0, "location_id": "RD", "location_name": "R&D Test Bench", "location_type": "inspection"}

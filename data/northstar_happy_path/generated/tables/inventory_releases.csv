@@ -1,0 +1,2 @@
+scenario_id,source_ref,available_stage,release_id,recovery_id,approved_qty,approval_date,release_date,usable_date,handling_cost_cents,cost_basis,approver_actor_id,document_id
+northstar_happy_path_v2,DOC-PILOT-RELEASE + DOC-COST-001,4,REL-001,REC-001,80,2026-10-26,2026-10-27,2026-10-28,200000,fictional_estimate,PILOT-OWNER,DOC-PILOT-RELEASE

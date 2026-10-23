@@ -1,0 +1,5 @@
+scenario_id,source_ref,available_stage,location_id,location_name,location_type
+northstar_happy_path_v2,authored fixture extension,0,FREMONT-WH,Fremont Warehouse,warehouse
+northstar_happy_path_v2,authored fixture extension,0,PILOT,Pilot Line,reserved
+northstar_happy_path_v2,authored fixture extension,0,PRODUCTION,Fremont Production,production
+northstar_happy_path_v2,authored fixture extension,0,RD,R&D Test Bench,inspection

@@ -1,0 +1,3 @@
+scenario_id,source_ref,available_stage,draft_id,case_id,scenario_version,approval_id,action_type,part_number,qty,supplier_id,source_location_id,destination_location_id,unit_price_cents,total_cents,required_usable_date,status,transmitted
+northstar_happy_path_v2,scripted expected action artifact,6,DRAFT-PO,NS-2026-1042,2,APPROVAL-V2,purchase_order,HDR-200,40,SUP-008,\N,PRODUCTION,55000,2200000,2026-10-29,draft,false
+northstar_happy_path_v2,scripted expected action artifact,6,DRAFT-TRANSFER,NS-2026-1042,2,APPROVAL-V2,internal_transfer,HDR-200,80,\N,PILOT,PRODUCTION,\N,200000,2026-10-28,draft,false

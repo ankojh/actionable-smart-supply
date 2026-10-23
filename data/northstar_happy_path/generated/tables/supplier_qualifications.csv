@@ -1,0 +1,3 @@
+scenario_id,source_ref,available_stage,qualification_id,supplier_id,part_number,specification,status,valid_from,valid_to,document_id
+northstar_happy_path_v2,DOC-QUAL-APEX,2,AVL-HDR-200-02,SUP-001,HDR-200,HDR-200 Rev C; ratio 100:1,approved,2026-01-01,2026-12-31,DOC-QUAL-APEX
+northstar_happy_path_v2,DOC-QUAL-C,4,AVL-HDR-200-03,SUP-008,HDR-200,HDR-200 Rev C; ratio 100:1,approved,2026-01-01,2026-12-31,DOC-QUAL-C

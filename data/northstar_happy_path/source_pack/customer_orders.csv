@@ -1,0 +1,5 @@
+customer_order_id,customer,model,units,promised_ship_date,contracted,unit_revenue_usd,plan_id
+SO-001,SwiftLog Logistics,NS-AMR-200,60,2026-11-05,Y,18000,PLAN-001
+SO-002,BayShip Fulfillment,NS-AMR-200,40,2026-11-06,Y,18000,PLAN-001
+SO-003,NovaFab Manufacturing,NS-AMR-200,20,2026-11-06,Y,18000,PLAN-001
+FC-001,Internal Forecast,NS-AMR-200,130,NULL,N,18000,PLAN-002

@@ -1,0 +1,11 @@
+scenario_id,source_ref,available_stage,actor_id,display_name,organization,role,email
+northstar_happy_path_v2,authored fixture extension,0,APEX,Priya Natarajan,Apex Drive Technologies,Key Account Manager,priya.natarajan@apex-drive.example
+northstar_happy_path_v2,authored fixture extension,0,BRAIN,Company Brain,NorthStar Robotics,Orchestrator,\N
+northstar_happy_path_v2,authored fixture extension,0,BUYER,Alex Morgan,NorthStar Robotics,Buyer,alex.morgan@northstar.example
+northstar_happy_path_v2,authored fixture extension,0,FINANCE,Sam Taylor,NorthStar Robotics,Finance Partner,sam.taylor@northstar.example
+northstar_happy_path_v2,authored fixture extension,0,MANAGER,Maya Chen,NorthStar Robotics,Supply Chain Manager,maya.chen@northstar.example
+northstar_happy_path_v2,authored fixture extension,0,PACIFIC,Daniel Reyes,Pacific Motion Systems,Account Manager,daniel.reyes@pacific-motion.example
+northstar_happy_path_v2,authored fixture extension,0,PILOT-OWNER,Elena Brooks,NorthStar Robotics,Pilot Line Owner,elena.brooks@northstar.example
+northstar_happy_path_v2,authored fixture extension,0,PLANNER,Riley Park,NorthStar Robotics,Production Planner,riley.park@northstar.example
+northstar_happy_path_v2,authored fixture extension,0,QUALITY,Jordan Lee,NorthStar Robotics,Supplier Quality,jordan.lee@northstar.example
+northstar_happy_path_v2,authored fixture extension,0,SUMMIT,Owen Patel,Summit Precision Drives,Sales Manager,owen.patel@summit-drives.example

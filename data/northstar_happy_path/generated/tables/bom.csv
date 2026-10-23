@@ -1,0 +1,15 @@
+scenario_id,source_ref,available_stage,model,part_number,qty_per_unit
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,BAT-480,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,CDC-050,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,CHF-300,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,DCM-020,2
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,EST-010,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,HDR-200,2
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,IMU-060,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,LDR-360,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,MCB-110,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,MDB-210,2
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,SLS-090,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,SVM-400,2
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,WCM-070,1
+northstar_happy_path_v2,bom.csv,0,NS-AMR-200,WHA-150,2

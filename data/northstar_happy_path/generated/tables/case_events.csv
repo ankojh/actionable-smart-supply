@@ -1,0 +1,9 @@
+scenario_id,source_ref,available_stage,event_id,case_id,event_type,event_date,scenario_version,actor_id,message
+northstar_happy_path_v2,scripted role-play timeline,0,EV-00,NS-2026-1042,potential_disruption,2026-10-23,1,BRAIN,Supplier email conflicts with ERP. Impact analysis pending; PO is three calendar days overdue on October 23.
+northstar_happy_path_v2,scripted role-play timeline,1,EV-01,NS-2026-1042,case_validated,2026-10-26,1,BRAIN,October 26 snapshot available; ERP PO is six calendar days overdue. Evaluate customer impact.
+northstar_happy_path_v2,scripted role-play timeline,2,EV-02,NS-2026-1042,initial_options_ready,2026-10-26,1,BRAIN,Compare Apex with conditional pilot transfer under contract protection policy.
+northstar_happy_path_v2,scripted role-play timeline,3,EV-03,NS-2026-1042,scenario_requested,2026-10-26,2,MANAGER,Create V2 within the same case; proposed 80 + 40 is not yet validated.
+northstar_happy_path_v2,scripted role-play timeline,4,EV-04,NS-2026-1042,evidence_released,2026-10-26,2,BRAIN,Validate Supplier C and pilot release; rerun shared-capacity simulation.
+northstar_happy_path_v2,scripted role-play timeline,5,EV-05,NS-2026-1042,plan_approved,2026-10-26,2,MANAGER,Scripted manager decision authorizes V2 draft preparation only.
+northstar_happy_path_v2,scripted role-play timeline,6,EV-06,NS-2026-1042,drafts_prepared,2026-10-26,2,BRAIN,Two draft examples prepared; no transmission.
+northstar_happy_path_v2,scripted role-play timeline,7,EV-07,NS-2026-1042,execution_monitoring,2026-10-29,2,BRAIN,Facilitator explicitly releases simulated execution evidence.

@@ -1,0 +1,4 @@
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "customer_orders.csv", "available_stage": 0, "customer_id": "CUS-001", "customer_name": "SwiftLog Logistics", "is_forecast": false}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "customer_orders.csv", "available_stage": 0, "customer_id": "CUS-002", "customer_name": "BayShip Fulfillment", "is_forecast": false}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "customer_orders.csv", "available_stage": 0, "customer_id": "CUS-003", "customer_name": "NovaFab Manufacturing", "is_forecast": false}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "customer_orders.csv", "available_stage": 0, "customer_id": "CUS-004", "customer_name": "Internal Forecast", "is_forecast": true}

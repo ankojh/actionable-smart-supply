@@ -1,0 +1,15 @@
+scenario_id,source_ref,available_stage,part_number,location_id,on_hand_qty,allocated_qty,safety_stock_qty,snapshot_date
+northstar_happy_path_v2,inventory.csv,1,BAT-480,FREMONT-WH,284,4,20,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,CDC-050,FREMONT-WH,288,0,20,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,CHF-300,FREMONT-WH,268,0,10,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,DCM-020,FREMONT-WH,568,8,40,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,EST-010,FREMONT-WH,290,2,20,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,HDR-200,FREMONT-WH,120,0,100,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,IMU-060,FREMONT-WH,281,4,20,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,LDR-360,FREMONT-WH,292,6,25,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,MCB-110,FREMONT-WH,276,5,15,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,MDB-210,FREMONT-WH,548,0,30,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,SLS-090,FREMONT-WH,274,3,15,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,SVM-400,FREMONT-WH,596,12,40,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,WCM-070,FREMONT-WH,284,6,20,2026-10-26
+northstar_happy_path_v2,inventory.csv,1,WHA-150,FREMONT-WH,552,10,30,2026-10-26

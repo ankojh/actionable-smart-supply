@@ -1,0 +1,2072 @@
+{
+  "metadata": {
+    "scenario_id": "northstar_happy_path_v2",
+    "case_id": "NS-2026-1042",
+    "schema_version": "2.0.0",
+    "stage": 4,
+    "stage_name": "04_hybrid_validated",
+    "as_of_date": "2026-10-26",
+    "timezone": "America/Los_Angeles",
+    "synthetic": true,
+    "description": "New supplier and pilot release evidence available; rerun schedule."
+  },
+  "policies": {
+    "policy_version": "northstar_happy_path_v2",
+    "company": "NorthStar Robotics",
+    "case_id": "NS-2026-1042",
+    "currency": "USD",
+    "money_storage": "integer_cents",
+    "timezone": "America/Los_Angeles",
+    "detection_date": "2026-10-23",
+    "evaluation_date": "2026-10-26",
+    "horizon_start": "2026-10-26",
+    "horizon_end": "2026-11-06",
+    "working_weekdays": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "holidays": [],
+    "daily_robot_start_capacity": 60,
+    "material_to_ship_business_days": 2,
+    "allocation_order": [
+      "contracted_first",
+      "earliest_promised_ship_date",
+      "ascending_customer_order_id"
+    ],
+    "forecast_deferrable": true,
+    "safety_stock": "warn_only",
+    "supplier_eta_precedence": "Latest dated explicit supplier confirmation; preserve ERP latest_eta and record discrepancy.",
+    "recovery_requires": [
+      "qualified_supplier",
+      "written_quantity_and_receipt_confirmation",
+      "minimum_order_quantity",
+      "open_acceptance_window",
+      "full_bom_availability",
+      "shared_production_capacity"
+    ],
+    "pilot_transfer_requires": [
+      "technical_eligibility",
+      "pilot_owner_release_authorization",
+      "no_disruption_to_other_contracts",
+      "manager_plan_approval",
+      "separate_human_execution_release"
+    ],
+    "scenario_v1_objective": [
+      "min_contracted_units_at_risk",
+      "min_customers_affected"
+    ],
+    "scenario_v2_objective": [
+      "min_contracted_units_at_risk",
+      "min_customers_affected",
+      "min_immediate_expenditure"
+    ],
+    "v2_objective_source": "Manager asks for lower upfront spending while protecting all contracted deliveries. Disclose additional inventory and forecast coverage separately.",
+    "economic_cost_advisory_only": true,
+    "unknown_cost_is_null": true,
+    "gross_exposure_is_realized_loss": false,
+    "cash_reduction_is_net_savings": false,
+    "immediate_expenditure_definition": "Demo commitment comparison; not a dated cash-payment schedule. Supplier Net 30 terms remain separate.",
+    "manager_approval_limit_cents": 25000000,
+    "plan_approval_scope": "prepare_drafts_only",
+    "autonomous_purchase_allowed": false,
+    "autonomous_email_allowed": false,
+    "primary_po_remains_open": true,
+    "optional_contract_excerpt_in_runtime": false
+  },
+  "tables": {
+    "products": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "SPEC.md",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "product_name": "Warehouse autonomous mobile robot"
+      }
+    ],
+    "parts": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "BAT-480",
+        "part_name": "Battery Pack 48V",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "CDC-050",
+        "part_name": "Charging Dock Connector",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "CHF-300",
+        "part_name": "Chassis Frame",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "DCM-020",
+        "part_name": "Depth Camera Module",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "EST-010",
+        "part_name": "Emergency Stop Assembly",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "HDR-200",
+        "part_name": "Harmonic Drive Reducer",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "IMU-060",
+        "part_name": "IMU Module",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "LDR-360",
+        "part_name": "LiDAR Sensor",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "MCB-110",
+        "part_name": "Main Controller Board",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "MDB-210",
+        "part_name": "Motor Driver Board",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "SLS-090",
+        "part_name": "Safety Laser Scanner",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "SVM-400",
+        "part_name": "Servo Motor",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "WCM-070",
+        "part_name": "Wireless Comms Module",
+        "unit_of_measure": "each"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "part_number": "WHA-150",
+        "part_name": "Wheel Hub Assembly",
+        "unit_of_measure": "each"
+      }
+    ],
+    "suppliers": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-001",
+        "supplier_name": "Apex Drive Technologies"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-002",
+        "supplier_name": "CircuitWorks Asia"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-003",
+        "supplier_name": "DockTech Components"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-004",
+        "supplier_name": "Kestrel Motion"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-005",
+        "supplier_name": "Optiq Sensing"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-006",
+        "supplier_name": "Pacific Motion Systems"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-007",
+        "supplier_name": "RollCore Industries"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-008",
+        "supplier_name": "Summit Precision Drives"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv / fictional Supplier C extension",
+        "available_stage": 0,
+        "supplier_id": "SUP-009",
+        "supplier_name": "Voltaic Energy"
+      }
+    ],
+    "customers": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv",
+        "available_stage": 0,
+        "customer_id": "CUS-001",
+        "customer_name": "SwiftLog Logistics",
+        "is_forecast": false
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv",
+        "available_stage": 0,
+        "customer_id": "CUS-002",
+        "customer_name": "BayShip Fulfillment",
+        "is_forecast": false
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv",
+        "available_stage": 0,
+        "customer_id": "CUS-003",
+        "customer_name": "NovaFab Manufacturing",
+        "is_forecast": false
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv",
+        "available_stage": 0,
+        "customer_id": "CUS-004",
+        "customer_name": "Internal Forecast",
+        "is_forecast": true
+      }
+    ],
+    "locations": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "location_id": "FREMONT-WH",
+        "location_name": "Fremont Warehouse",
+        "location_type": "warehouse"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "location_id": "PILOT",
+        "location_name": "Pilot Line",
+        "location_type": "reserved"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "location_id": "PRODUCTION",
+        "location_name": "Fremont Production",
+        "location_type": "production"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "location_id": "RD",
+        "location_name": "R&D Test Bench",
+        "location_type": "inspection"
+      }
+    ],
+    "bom": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "BAT-480",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "CDC-050",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "CHF-300",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "DCM-020",
+        "qty_per_unit": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "EST-010",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "HDR-200",
+        "qty_per_unit": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "IMU-060",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "LDR-360",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "MCB-110",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "MDB-210",
+        "qty_per_unit": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "SLS-090",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "SVM-400",
+        "qty_per_unit": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "WCM-070",
+        "qty_per_unit": 1
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "bom.csv",
+        "available_stage": 0,
+        "model": "NS-AMR-200",
+        "part_number": "WHA-150",
+        "qty_per_unit": 2
+      }
+    ],
+    "inventory": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "BAT-480",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 284,
+        "allocated_qty": 4,
+        "safety_stock_qty": 20,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "CDC-050",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 288,
+        "allocated_qty": 0,
+        "safety_stock_qty": 20,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "CHF-300",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 268,
+        "allocated_qty": 0,
+        "safety_stock_qty": 10,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "DCM-020",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 568,
+        "allocated_qty": 8,
+        "safety_stock_qty": 40,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "EST-010",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 290,
+        "allocated_qty": 2,
+        "safety_stock_qty": 20,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "HDR-200",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 120,
+        "allocated_qty": 0,
+        "safety_stock_qty": 100,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "IMU-060",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 281,
+        "allocated_qty": 4,
+        "safety_stock_qty": 20,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "LDR-360",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 292,
+        "allocated_qty": 6,
+        "safety_stock_qty": 25,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "MCB-110",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 276,
+        "allocated_qty": 5,
+        "safety_stock_qty": 15,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "MDB-210",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 548,
+        "allocated_qty": 0,
+        "safety_stock_qty": 30,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "SLS-090",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 274,
+        "allocated_qty": 3,
+        "safety_stock_qty": 15,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "SVM-400",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 596,
+        "allocated_qty": 12,
+        "safety_stock_qty": 40,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "WCM-070",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 284,
+        "allocated_qty": 6,
+        "safety_stock_qty": 20,
+        "snapshot_date": "2026-10-26"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "inventory.csv",
+        "available_stage": 1,
+        "part_number": "WHA-150",
+        "location_id": "FREMONT-WH",
+        "on_hand_qty": 552,
+        "allocated_qty": 10,
+        "safety_stock_qty": 30,
+        "snapshot_date": "2026-10-26"
+      }
+    ],
+    "purchase_orders": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-0961",
+        "part_number": "HDR-200",
+        "supplier_id": "SUP-006",
+        "qty": 400,
+        "unit_price_cents": 41200,
+        "original_eta": "2026-09-14",
+        "latest_eta": "2026-09-14",
+        "status": "Received",
+        "open_qty": 0
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1031",
+        "part_number": "SVM-400",
+        "supplier_id": "SUP-004",
+        "qty": 300,
+        "unit_price_cents": 21000,
+        "original_eta": "2026-10-12",
+        "latest_eta": "2026-10-12",
+        "status": "Received",
+        "open_qty": 0
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1036",
+        "part_number": "LDR-360",
+        "supplier_id": "SUP-005",
+        "qty": 120,
+        "unit_price_cents": 68500,
+        "original_eta": "2026-10-14",
+        "latest_eta": "2026-10-14",
+        "status": "Received",
+        "open_qty": 0
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1042",
+        "part_number": "HDR-200",
+        "supplier_id": "SUP-006",
+        "qty": 400,
+        "unit_price_cents": 41200,
+        "original_eta": "2026-10-20",
+        "latest_eta": "2026-10-20",
+        "status": "Open",
+        "open_qty": 400
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1048",
+        "part_number": "MCB-110",
+        "supplier_id": "SUP-002",
+        "qty": 150,
+        "unit_price_cents": 34000,
+        "original_eta": "2026-10-19",
+        "latest_eta": "2026-10-19",
+        "status": "Received",
+        "open_qty": 0
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1053",
+        "part_number": "BAT-480",
+        "supplier_id": "SUP-009",
+        "qty": 120,
+        "unit_price_cents": 89000,
+        "original_eta": "2026-10-30",
+        "latest_eta": "2026-10-30",
+        "status": "In Transit",
+        "open_qty": 120
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1057",
+        "part_number": "LDR-360",
+        "supplier_id": "SUP-005",
+        "qty": 80,
+        "unit_price_cents": 68500,
+        "original_eta": "2026-10-28",
+        "latest_eta": "2026-10-28",
+        "status": "Open",
+        "open_qty": 80
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1061",
+        "part_number": "CDC-050",
+        "supplier_id": "SUP-003",
+        "qty": 200,
+        "unit_price_cents": 5800,
+        "original_eta": "2026-10-27",
+        "latest_eta": "2026-11-03",
+        "status": "Delayed",
+        "open_qty": 200
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1063",
+        "part_number": "DCM-020",
+        "supplier_id": "SUP-005",
+        "qty": 200,
+        "unit_price_cents": 14500,
+        "original_eta": "2026-11-02",
+        "latest_eta": "2026-11-02",
+        "status": "Open",
+        "open_qty": 200
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1066",
+        "part_number": "WHA-150",
+        "supplier_id": "SUP-007",
+        "qty": 300,
+        "unit_price_cents": 9600,
+        "original_eta": "2026-11-04",
+        "latest_eta": "2026-11-04",
+        "status": "Open",
+        "open_qty": 300
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1070",
+        "part_number": "SVM-400",
+        "supplier_id": "SUP-004",
+        "qty": 300,
+        "unit_price_cents": 21000,
+        "original_eta": "2026-11-09",
+        "latest_eta": "2026-11-09",
+        "status": "Open",
+        "open_qty": 300
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "purchase_orders.csv",
+        "available_stage": 0,
+        "po_number": "PO-2026-1074",
+        "part_number": "IMU-060",
+        "supplier_id": "SUP-005",
+        "qty": 150,
+        "unit_price_cents": 6200,
+        "original_eta": "2026-11-12",
+        "latest_eta": "2026-11-12",
+        "status": "Open",
+        "open_qty": 150
+      }
+    ],
+    "production_plan": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "production_plan.csv",
+        "available_stage": 1,
+        "plan_id": "PLAN-001",
+        "model": "NS-AMR-200",
+        "planned_start_date": "2026-10-26",
+        "planned_completion_date": "2026-11-04",
+        "priority": "Contracted",
+        "planned_build_qty": 120
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "production_plan.csv",
+        "available_stage": 1,
+        "plan_id": "PLAN-002",
+        "model": "NS-AMR-200",
+        "planned_start_date": "2026-10-26",
+        "planned_completion_date": "2026-11-06",
+        "priority": "Forecast",
+        "planned_build_qty": 130
+      }
+    ],
+    "customer_orders": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv + company_policies.yaml",
+        "available_stage": 1,
+        "customer_order_id": "FC-001",
+        "customer_id": "CUS-004",
+        "model": "NS-AMR-200",
+        "units": 130,
+        "promised_ship_date": null,
+        "material_need_by_date": null,
+        "contracted": false,
+        "unit_revenue_cents": 1800000,
+        "plan_id": "PLAN-002"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv + company_policies.yaml",
+        "available_stage": 1,
+        "customer_order_id": "SO-001",
+        "customer_id": "CUS-001",
+        "model": "NS-AMR-200",
+        "units": 60,
+        "promised_ship_date": "2026-11-05",
+        "material_need_by_date": "2026-11-03",
+        "contracted": true,
+        "unit_revenue_cents": 1800000,
+        "plan_id": "PLAN-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv + company_policies.yaml",
+        "available_stage": 1,
+        "customer_order_id": "SO-002",
+        "customer_id": "CUS-002",
+        "model": "NS-AMR-200",
+        "units": 40,
+        "promised_ship_date": "2026-11-06",
+        "material_need_by_date": "2026-11-04",
+        "contracted": true,
+        "unit_revenue_cents": 1800000,
+        "plan_id": "PLAN-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "customer_orders.csv + company_policies.yaml",
+        "available_stage": 1,
+        "customer_order_id": "SO-003",
+        "customer_id": "CUS-003",
+        "model": "NS-AMR-200",
+        "units": 20,
+        "promised_ship_date": "2026-11-06",
+        "material_need_by_date": "2026-11-04",
+        "contracted": true,
+        "unit_revenue_cents": 1800000,
+        "plan_id": "PLAN-001"
+      }
+    ],
+    "recovery_inventory": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "recovery_inventory.csv + updated Notion happy case",
+        "available_stage": 1,
+        "recovery_id": "REC-001",
+        "part_number": "HDR-200",
+        "location_id": "PILOT",
+        "recoverable_qty": 80,
+        "usable_date": "2026-10-28",
+        "condition_status": "Usable",
+        "technically_eligible": true,
+        "requires_release_approval": true,
+        "incremental_cost_cents": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "recovery_inventory.csv + updated Notion happy case",
+        "available_stage": 1,
+        "recovery_id": "REC-002",
+        "part_number": "HDR-200",
+        "location_id": "RD",
+        "recoverable_qty": 16,
+        "usable_date": "2026-10-30",
+        "condition_status": "Requires Inspection",
+        "technically_eligible": false,
+        "requires_release_approval": true,
+        "incremental_cost_cents": null
+      }
+    ],
+    "production_calendar": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-23",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-24",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-25",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-26",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-27",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-28",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-29",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-30",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-10-31",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-01",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-02",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-03",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-04",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-05",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-06",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-07",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-08",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-09",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-10",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-11",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-12",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-13",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-14",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-15",
+        "is_working_day": false,
+        "robot_start_capacity": 0,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-16",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-17",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-18",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-19",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "company_policies.yaml",
+        "available_stage": 0,
+        "calendar_date": "2026-11-20",
+        "is_working_day": true,
+        "robot_start_capacity": 60,
+        "material_to_ship_business_days": 2
+      }
+    ],
+    "documents": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "apex_emergency_confirmation.md",
+        "available_stage": 2,
+        "document_id": "DOC-APEX-002",
+        "document_type": "supplier_confirmation",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-APEX-002.md",
+        "content": "---\ndocument_id: DOC-APEX-002\ndocument_type: Emergency Availability Confirmation\nsource: Apex Drive Technologies\ndocument_date: 2026-10-26\nrelated_po: NULL\nrelated_part: HDR-200\n---\n\nFrom: Priya Natarajan, Key Account Manager, Apex Drive Technologies\nTo: Supply Chain Team, NorthStar Robotics\nDate: Monday, October 26, 2026\nSubject: Emergency availability — HDR-200, ref. quote ADQ-2026-1187\n\nDear NorthStar team,\n\nFollowing your call this morning, Apex confirms emergency availability of 400 qualified HDR-200 harmonic drive reducers for delivery to NorthStar's production facility by October 29, 2026, at $486 per unit, including expedited delivery.\n\n- Quantity: 400 units (from finished-goods allocation)\n- Confirmed receipt date: Thursday, October 29, 2026, DAP Fremont, California\n- Unit price: $486.00, expedited delivery included (no separate expedite premium)\n- Total purchase value: $194,400.00\n- Specification: meets NorthStar's approved HDR-200 Rev C specification; certificates of conformance ship with the goods\n- Reference: quote ADQ-2026-1187\n\nAvailability is reserved through October 27, 2026 and is subject to timely purchase order acceptance. If we do not receive an accepted purchase order by end of day October 27, this allocation will be released and standard lead time will apply.\n\nDelivered units are released to production on receipt; incoming inspection is completed at our facility before shipment.\n\nBest regards,\nPriya Natarajan\nKey Account Manager, Apex Drive Technologies\n",
+        "sha256": "b4578909b9fc8efef6464baf4a88fb4bd62007d069673fe80b809be7dedb2b0a"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-CONF-C",
+        "document_type": "supplier_confirmation",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-CONF-C.md",
+        "content": "# Reserved 40-drive lot for NorthStar\n\nSynthetic role-play evidence.\n\nFrom: Owen Patel, Summit Precision Drives\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nFor quote SPD-2026-0040, we confirm 40 HDR-200 Rev C drives at USD 550.00 each, USD 22,000.00 total, with MOQ 40. The full lot will be received and usable at Fremont on October 29, 2026, subject to PO acceptance by October 27, 2026, end of day America/Los_Angeles. Freight and inspection are included; fixed additional delivery cost is USD 0.00. Allocation expires after that deadline. No order has yet been placed.\n",
+        "sha256": "df66899829ceeb57ad1250e02758405629e62503a8ccdeddc6193829ba1a8d95"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-COST-001",
+        "document_type": "cost_assumption",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-COST-001.md",
+        "content": "# Hybrid transfer and cash assumptions\n\nSynthetic role-play evidence.\n\nFrom: Sam Taylor, NorthStar Robotics\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nFor NS-2026-1042 scenario V2, assume a one-time USD 2,000.00 handling and internal transfer cost for the 80-drive REC-001 movement. This is a fictional planning estimate, not an invoice. No other incremental fee is modeled. Supplier C purchase is USD 22,000.00; stated immediate expenditure is USD 24,000.00. Immediate expenditure is the demo comparison of commitments, not a literal cash-payment schedule under Net 30. Pacific PO-2026-1042 remains open at USD 164,800.00. The difference from Apex is upfront commitment reduction, not net economic savings or recovered damages.\n",
+        "sha256": "6713418f522fbd997eeb7f69d2287673764bcfaa88f4912cda3c2f8507882745"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 1,
+        "document_id": "DOC-PILOT-001",
+        "document_type": "inventory_check",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-PILOT-001.md",
+        "content": "# Pilot stock is reserved, not released\n\nSynthetic role-play evidence.\n\nFrom: Elena Brooks, NorthStar Robotics\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nREC-001 contains 80 usable HDR-200 Rev C drives at the Pilot Line, outside the warehouse snapshot. They are technically eligible for production but reserved for pilot work. Transfer requires my release authorization and a manager-approved transfer request. Earliest physical availability is October 28. Handling cost has not yet been established. REC-002 contains 16 R&D drives requiring inspection and is not eligible.\n",
+        "sha256": "96b73e69bd9280300dcfd8771828ee9f1b1fd45bcd81280a92ec5f0a8334ed36"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-PILOT-RELEASE",
+        "document_type": "inventory_release",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-PILOT-RELEASE.md",
+        "content": "# Release authorization for REC-001\n\nSynthetic role-play evidence.\n\nFrom: Elena Brooks, NorthStar Robotics\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nOn October 26, 2026 I authorize release of all 80 usable HDR-200 Rev C drives from REC-001 on October 27, conditional on the manager approving the transfer request. Transfer completes and material is usable in production on October 28. Pilot work can be deferred until after November 10 and has no contracted customer commitment in this fixture. This does not authorize an executed stock movement. The R&D lot REC-002 remains excluded.\n",
+        "sha256": "d77f505c8f1a4b762c9517318e984a0b27a19b6c97ee5e2e2f693a5f98d72846"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 1,
+        "document_id": "DOC-PLAN-001",
+        "document_type": "planning_note",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-PLAN-001.md",
+        "content": "# Production calendar and allocation\n\nSynthetic role-play evidence.\n\nFrom: Riley Park, NorthStar Robotics\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nThe October 26 opening snapshot has 120 usable warehouse HDR-200 drives. The 80 pilot-line drives are a separate pool and remain reserved until the pilot owner approves release. There are no finished robots or WIP in this fixture. One Fremont line starts at most 60 robots per business day across both plans. Material usable on day zero can start that day; shipment follows two business days later. Protect contracted orders first, sorted by promise date and then sales order ID. SwiftLog material need-by is November 3; BayShip and NovaFab material need-by is November 4. Forecast FC-001 may be deferred.\n",
+        "sha256": "1c47729521708b40bf0a6ad832b471fb7ad089683b6bbe56a2b1a80b39e40220"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 2,
+        "document_id": "DOC-QUAL-APEX",
+        "document_type": "qualification_record",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-QUAL-APEX.md",
+        "content": "# Approved HDR-200 suppliers\n\nSynthetic role-play evidence.\n\nFrom: Jordan Lee, NorthStar Robotics\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nPacific Motion Systems and Apex Drive Technologies are approved for HDR-200 Rev C, ratio 100:1. Apex AVL reference AVL-HDR-200-02 is valid January 1 through December 31, 2026. This qualification does not itself confirm stock or delivery dates.\n",
+        "sha256": "dcc766f875b6833dac81ec7b6601433503d713efd577ed5fe08a799a500ae7b5"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-QUAL-C",
+        "document_type": "qualification_record",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-QUAL-C.md",
+        "content": "# Supplier C qualification\n\nSynthetic role-play evidence.\n\nFrom: Jordan Lee, NorthStar Robotics\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nSummit Precision Drives is the fictional Supplier C for this demo. AVL-HDR-200-03 approves Summit for HDR-200 Rev C, ratio 100:1, January 1 through December 31, 2026. Review completed October 26. The reserved 40-drive lot meets the same NorthStar specification; certificates accompany delivery and inspection is completed before shipment.\n",
+        "sha256": "d1aae052a7030c7337575e0a0a679ad5d29c3efe8f537bc557c96c335d3a32fd"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "backup_supplier_quote.md",
+        "available_stage": 0,
+        "document_id": "DOC-QUOTE-001",
+        "document_type": "supplier_quote",
+        "document_date": "2026-10-22",
+        "file_name": "DOC-QUOTE-001.md",
+        "content": "---\ndocument_id: DOC-QUOTE-001\ndocument_type: Supplier Quotation\nsource: Apex Drive Technologies\ndocument_date: 2026-10-22\nrelated_po: NULL\nrelated_part: HDR-200\n---\n\n# Quotation — Apex Drive Technologies\n\n**Quote No.:** ADQ-2026-1187\n**Date:** October 22, 2026\n**To:** NorthStar Robotics — Supply Chain Team\n**From:** Apex Drive Technologies, Sales Engineering\n\n| Item | Description | Qty | Unit price (USD) |\n|---|---|---|---|\n| HDR-200 (Apex build) | Harmonic drive reducer built to NorthStar specification HDR-200 Rev C, ratio 100:1 | 400 (MOQ) | $486.00 |\n\n**Supplier qualification:** Apex Drive Technologies is an approved second source for HDR-200 on NorthStar's approved vendor list (AVL ref. AVL-HDR-200-02).\n\n**Terms**\n\n- **Minimum order quantity (MOQ):** 400 units\n- **Standard lead time:** 10 business days from purchase order acceptance\n- **Delivery:** DAP NorthStar Fremont, California facility (Incoterms 2020)\n- **Payment:** Net 30 from delivery\n- **Validity:** This quotation is valid through **October 31, 2026**\n\nApex Drive Technologies quotes HDR-200 harmonic drive reducers at $486 per unit, with a minimum order quantity of 400 units and a standard lead time of 10 business days after purchase order acceptance. This quotation is valid through October 31, 2026.\n\nPlease reference quote ADQ-2026-1187 on your purchase order.\n\nApex Drive Technologies — Sales Engineering\n",
+        "sha256": "fbe6b52494eede2720189933db646bf4c6626c72caad75e2a442379182d5b7a2"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-QUOTE-C",
+        "document_type": "supplier_quote",
+        "document_date": "2026-10-26",
+        "file_name": "DOC-QUOTE-C.md",
+        "content": "# Quote SPD-2026-0040\n\nSynthetic role-play evidence.\n\nFrom: Owen Patel, Summit Precision Drives\nTo: Alex Morgan, NorthStar Robotics\nDate: 2026-10-26\nCase: NS-2026-1042\n\nSummit Precision Drives offers 40 HDR-200 Rev C drives at USD 550.00 each; MOQ 40, total USD 22,000.00. Delivery to Fremont and incoming-inspection release are included, with no additional freight charge. Net 30 from delivery. Quote valid through October 27, 2026. This quote alone is not a delivery commitment; see the separate allocation confirmation.\n",
+        "sha256": "8218678e457895474cce2fff2609d1379b69b56cc8e1ee08b27623d27a2e4868"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-SUP-001_updated_supplier_email.md",
+        "available_stage": 0,
+        "document_id": "DOC-SUP-001",
+        "document_type": "supplier_email",
+        "document_date": "2026-10-16",
+        "file_name": "DOC-SUP-001.md",
+        "content": "# Supplier Email — Updated Delivery Schedule\n\n| Field | Value |\n|---|---|\n| Document ID | DOC-SUP-001 |\n| Document Type | Supplier Email |\n| Source | Pacific Motion Systems |\n| Document Date | 2026-10-16 |\n| Related PO | PO-2026-1042 |\n| Related Part | HDR-200 |\n\n**From:** Daniel Reyes, Account Manager, Pacific Motion Systems  \n**To:** Supply Chain Team, NorthStar Robotics  \n**Date:** Friday, October 16, 2026  \n**Subject:** Updated Delivery Schedule — PO-2026-1042 (HDR-200 Harmonic Drive Reducers, 400 Units)\n\nDear NorthStar Robotics Team,\n\nI am writing with an important update regarding purchase order **PO-2026-1042** for **400 units of the HDR-200 harmonic drive reducer**, originally scheduled for delivery to your Fremont facility on **October 20, 2026**.\n\nDue to production capacity constraints at our gear-finishing plant, including an unplanned maintenance shutdown on one of our two honing lines, we are unable to meet the original delivery schedule.\n\nThe revised delivery date for all **400 HDR-200 units is November 10, 2026**, representing a **21-day delay** from the original commitment.\n\nUnfortunately, we are unable to offer a partial shipment or expedited delivery before November 10.\n\nWe understand that this delay may affect your production schedule and sincerely apologize for the disruption. We will continue monitoring our production progress and notify you immediately if the delivery schedule changes.\n\nPlease let us know if you require any additional information.\n\nBest regards,  \n**Daniel Reyes**  \nAccount Manager  \nPacific Motion Systems\n",
+        "sha256": "94eb78f925ffcf689118702a07b4739b76486e9f9a1d47ac3a9cc54c22eeb903"
+      }
+    ],
+    "document_links": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "apex_emergency_confirmation.md",
+        "available_stage": 2,
+        "document_id": "DOC-APEX-002",
+        "entity_table": "parts",
+        "entity_key": "HDR-200"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-CONF-C",
+        "entity_table": "parts",
+        "entity_key": "HDR-200"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-COST-001",
+        "entity_table": "purchase_orders",
+        "entity_key": "PO-2026-1042"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-COST-001",
+        "entity_table": "recovery_inventory",
+        "entity_key": "REC-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 1,
+        "document_id": "DOC-PILOT-001",
+        "entity_table": "recovery_inventory",
+        "entity_key": "REC-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 1,
+        "document_id": "DOC-PILOT-001",
+        "entity_table": "recovery_inventory",
+        "entity_key": "REC-002"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-PILOT-RELEASE",
+        "entity_table": "recovery_inventory",
+        "entity_key": "REC-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 1,
+        "document_id": "DOC-PLAN-001",
+        "entity_table": "production_plan",
+        "entity_key": "PLAN-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 1,
+        "document_id": "DOC-PLAN-001",
+        "entity_table": "production_plan",
+        "entity_key": "PLAN-002"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 2,
+        "document_id": "DOC-QUAL-APEX",
+        "entity_table": "suppliers",
+        "entity_key": "SUP-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-QUAL-C",
+        "entity_table": "suppliers",
+        "entity_key": "SUP-008"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "backup_supplier_quote.md",
+        "available_stage": 0,
+        "document_id": "DOC-QUOTE-001",
+        "entity_table": "parts",
+        "entity_key": "HDR-200"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored extension of updated Notion happy case",
+        "available_stage": 4,
+        "document_id": "DOC-QUOTE-C",
+        "entity_table": "parts",
+        "entity_key": "HDR-200"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-SUP-001_updated_supplier_email.md",
+        "available_stage": 0,
+        "document_id": "DOC-SUP-001",
+        "entity_table": "parts",
+        "entity_key": "HDR-200"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-SUP-001_updated_supplier_email.md",
+        "available_stage": 0,
+        "document_id": "DOC-SUP-001",
+        "entity_table": "purchase_orders",
+        "entity_key": "PO-2026-1042"
+      }
+    ],
+    "supplier_qualifications": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-QUAL-APEX",
+        "available_stage": 2,
+        "qualification_id": "AVL-HDR-200-02",
+        "supplier_id": "SUP-001",
+        "part_number": "HDR-200",
+        "specification": "HDR-200 Rev C; ratio 100:1",
+        "status": "approved",
+        "valid_from": "2026-01-01",
+        "valid_to": "2026-12-31",
+        "document_id": "DOC-QUAL-APEX"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-QUAL-C",
+        "available_stage": 4,
+        "qualification_id": "AVL-HDR-200-03",
+        "supplier_id": "SUP-008",
+        "part_number": "HDR-200",
+        "specification": "HDR-200 Rev C; ratio 100:1",
+        "status": "approved",
+        "valid_from": "2026-01-01",
+        "valid_to": "2026-12-31",
+        "document_id": "DOC-QUAL-C"
+      }
+    ],
+    "supplier_offers": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-APEX-002",
+        "available_stage": 2,
+        "offer_id": "OFFER-APEX-EMERGENCY",
+        "supplier_id": "SUP-001",
+        "part_number": "HDR-200",
+        "offered_qty": 400,
+        "minimum_order_qty": 400,
+        "unit_price_cents": 48600,
+        "fixed_delivery_cost_cents": 0,
+        "confirmed_receipt_date": "2026-10-29",
+        "acceptance_deadline": "2026-10-27",
+        "standard_lead_business_days": null,
+        "offer_status": "confirmed",
+        "document_id": "DOC-APEX-002"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-QUOTE-001",
+        "available_stage": 0,
+        "offer_id": "OFFER-APEX-STANDARD",
+        "supplier_id": "SUP-001",
+        "part_number": "HDR-200",
+        "offered_qty": 400,
+        "minimum_order_qty": 400,
+        "unit_price_cents": 48600,
+        "fixed_delivery_cost_cents": null,
+        "confirmed_receipt_date": null,
+        "acceptance_deadline": "2026-10-31",
+        "standard_lead_business_days": 10,
+        "offer_status": "quoted",
+        "document_id": "DOC-QUOTE-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-CONF-C",
+        "available_stage": 4,
+        "offer_id": "OFFER-C",
+        "supplier_id": "SUP-008",
+        "part_number": "HDR-200",
+        "offered_qty": 40,
+        "minimum_order_qty": 40,
+        "unit_price_cents": 55000,
+        "fixed_delivery_cost_cents": 0,
+        "confirmed_receipt_date": "2026-10-29",
+        "acceptance_deadline": "2026-10-27",
+        "standard_lead_business_days": null,
+        "offer_status": "confirmed",
+        "document_id": "DOC-CONF-C"
+      }
+    ],
+    "inventory_releases": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "DOC-PILOT-RELEASE + DOC-COST-001",
+        "available_stage": 4,
+        "release_id": "REL-001",
+        "recovery_id": "REC-001",
+        "approved_qty": 80,
+        "approval_date": "2026-10-26",
+        "release_date": "2026-10-27",
+        "usable_date": "2026-10-28",
+        "handling_cost_cents": 200000,
+        "cost_basis": "fictional_estimate",
+        "approver_actor_id": "PILOT-OWNER",
+        "document_id": "DOC-PILOT-RELEASE"
+      }
+    ],
+    "case_events": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "scripted role-play timeline",
+        "available_stage": 0,
+        "event_id": "EV-00",
+        "case_id": "NS-2026-1042",
+        "event_type": "potential_disruption",
+        "event_date": "2026-10-23",
+        "scenario_version": 1,
+        "actor_id": "BRAIN",
+        "message": "Supplier email conflicts with ERP. Impact analysis pending; PO is three calendar days overdue on October 23."
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "scripted role-play timeline",
+        "available_stage": 1,
+        "event_id": "EV-01",
+        "case_id": "NS-2026-1042",
+        "event_type": "case_validated",
+        "event_date": "2026-10-26",
+        "scenario_version": 1,
+        "actor_id": "BRAIN",
+        "message": "October 26 snapshot available; ERP PO is six calendar days overdue. Evaluate customer impact."
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "scripted role-play timeline",
+        "available_stage": 2,
+        "event_id": "EV-02",
+        "case_id": "NS-2026-1042",
+        "event_type": "initial_options_ready",
+        "event_date": "2026-10-26",
+        "scenario_version": 1,
+        "actor_id": "BRAIN",
+        "message": "Compare Apex with conditional pilot transfer under contract protection policy."
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "scripted role-play timeline",
+        "available_stage": 3,
+        "event_id": "EV-03",
+        "case_id": "NS-2026-1042",
+        "event_type": "scenario_requested",
+        "event_date": "2026-10-26",
+        "scenario_version": 2,
+        "actor_id": "MANAGER",
+        "message": "Create V2 within the same case; proposed 80 + 40 is not yet validated."
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "scripted role-play timeline",
+        "available_stage": 4,
+        "event_id": "EV-04",
+        "case_id": "NS-2026-1042",
+        "event_type": "evidence_released",
+        "event_date": "2026-10-26",
+        "scenario_version": 2,
+        "actor_id": "BRAIN",
+        "message": "Validate Supplier C and pilot release; rerun shared-capacity simulation."
+      }
+    ],
+    "actors": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "APEX",
+        "display_name": "Priya Natarajan",
+        "organization": "Apex Drive Technologies",
+        "role": "Key Account Manager",
+        "email": "priya.natarajan@apex-drive.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "BRAIN",
+        "display_name": "Company Brain",
+        "organization": "NorthStar Robotics",
+        "role": "Orchestrator",
+        "email": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "BUYER",
+        "display_name": "Alex Morgan",
+        "organization": "NorthStar Robotics",
+        "role": "Buyer",
+        "email": "alex.morgan@northstar.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "FINANCE",
+        "display_name": "Sam Taylor",
+        "organization": "NorthStar Robotics",
+        "role": "Finance Partner",
+        "email": "sam.taylor@northstar.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "MANAGER",
+        "display_name": "Maya Chen",
+        "organization": "NorthStar Robotics",
+        "role": "Supply Chain Manager",
+        "email": "maya.chen@northstar.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "PACIFIC",
+        "display_name": "Daniel Reyes",
+        "organization": "Pacific Motion Systems",
+        "role": "Account Manager",
+        "email": "daniel.reyes@pacific-motion.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "PILOT-OWNER",
+        "display_name": "Elena Brooks",
+        "organization": "NorthStar Robotics",
+        "role": "Pilot Line Owner",
+        "email": "elena.brooks@northstar.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "PLANNER",
+        "display_name": "Riley Park",
+        "organization": "NorthStar Robotics",
+        "role": "Production Planner",
+        "email": "riley.park@northstar.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "QUALITY",
+        "display_name": "Jordan Lee",
+        "organization": "NorthStar Robotics",
+        "role": "Supplier Quality",
+        "email": "jordan.lee@northstar.example"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "actor_id": "SUMMIT",
+        "display_name": "Owen Patel",
+        "organization": "Summit Precision Drives",
+        "role": "Sales Manager",
+        "email": "owen.patel@summit-drives.example"
+      }
+    ],
+    "messages": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 2,
+        "message_id": "MSG-APEX-CONF",
+        "thread_id": "APEX-1187",
+        "in_reply_to_message_id": "MSG-APEX-REQUEST",
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "APEX",
+        "channel": "email",
+        "subject": "DOC-APEX-002",
+        "content": "---\ndocument_id: DOC-APEX-002\ndocument_type: Emergency Availability Confirmation\nsource: Apex Drive Technologies\ndocument_date: 2026-10-26\nrelated_po: NULL\nrelated_part: HDR-200\n---\n\nFrom: Priya Natarajan, Key Account Manager, Apex Drive Technologies\nTo: Supply Chain Team, NorthStar Robotics\nDate: Monday, October 26, 2026\nSubject: Emergency availability — HDR-200, ref. quote ADQ-2026-1187\n\nDear NorthStar team,\n\nFollowing your call this morning, Apex confirms emergency availability of 400 qualified HDR-200 harmonic drive reducers for delivery to NorthStar's production facility by October 29, 2026, at $486 per unit, including expedited delivery.\n\n- Quantity: 400 units (from finished-goods allocation)\n- Confirmed receipt date: Thursday, October 29, 2026, DAP Fremont, California\n- Unit price: $486.00, expedited delivery included (no separate expedite premium)\n- Total purchase value: $194,400.00\n- Specification: meets NorthStar's approved HDR-200 Rev C specification; certificates of conformance ship with the goods\n- Reference: quote ADQ-2026-1187\n\nAvailability is reserved through October 27, 2026 and is subject to timely purchase order acceptance. If we do not receive an accepted purchase order by end of day October 27, this allocation will be released and standard lead time will apply.\n\nDelivered units are released to production on receipt; incoming inspection is completed at our facility before shipment.\n\nBest regards,\nPriya Natarajan\nKey Account Manager, Apex Drive Technologies\n",
+        "document_id": "DOC-APEX-002"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 0,
+        "message_id": "MSG-APEX-QUOTE",
+        "thread_id": "APEX-1187",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "APEX",
+        "channel": "email",
+        "subject": "DOC-QUOTE-001",
+        "content": "---\ndocument_id: DOC-QUOTE-001\ndocument_type: Supplier Quotation\nsource: Apex Drive Technologies\ndocument_date: 2026-10-22\nrelated_po: NULL\nrelated_part: HDR-200\n---\n\n# Quotation — Apex Drive Technologies\n\n**Quote No.:** ADQ-2026-1187\n**Date:** October 22, 2026\n**To:** NorthStar Robotics — Supply Chain Team\n**From:** Apex Drive Technologies, Sales Engineering\n\n| Item | Description | Qty | Unit price (USD) |\n|---|---|---|---|\n| HDR-200 (Apex build) | Harmonic drive reducer built to NorthStar specification HDR-200 Rev C, ratio 100:1 | 400 (MOQ) | $486.00 |\n\n**Supplier qualification:** Apex Drive Technologies is an approved second source for HDR-200 on NorthStar's approved vendor list (AVL ref. AVL-HDR-200-02).\n\n**Terms**\n\n- **Minimum order quantity (MOQ):** 400 units\n- **Standard lead time:** 10 business days from purchase order acceptance\n- **Delivery:** DAP NorthStar Fremont, California facility (Incoterms 2020)\n- **Payment:** Net 30 from delivery\n- **Validity:** This quotation is valid through **October 31, 2026**\n\nApex Drive Technologies quotes HDR-200 harmonic drive reducers at $486 per unit, with a minimum order quantity of 400 units and a standard lead time of 10 business days after purchase order acceptance. This quotation is valid through October 31, 2026.\n\nPlease reference quote ADQ-2026-1187 on your purchase order.\n\nApex Drive Technologies — Sales Engineering\n",
+        "document_id": "DOC-QUOTE-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 1,
+        "message_id": "MSG-APEX-REQUEST",
+        "thread_id": "APEX-1187",
+        "in_reply_to_message_id": "MSG-APEX-QUOTE",
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "BUYER",
+        "channel": "email",
+        "subject": "Emergency availability request",
+        "content": "Please confirm a qualified HDR-200 lot, MOQ, all-in price, usable receipt date and acceptance deadline. The standard quote alone cannot establish timely supply.",
+        "document_id": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-CONF-C",
+        "thread_id": "C-VALIDATION",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "SUMMIT",
+        "channel": "email",
+        "subject": "Reserved 40-drive lot for NorthStar",
+        "content": "For quote SPD-2026-0040, we confirm 40 HDR-200 Rev C drives at USD 550.00 each, USD 22,000.00 total, with MOQ 40. The full lot will be received and usable at Fremont on October 29, 2026, subject to PO acceptance by October 27, 2026, end of day America/Los_Angeles. Freight and inspection are included; fixed additional delivery cost is USD 0.00. Allocation expires after that deadline. No order has yet been placed.",
+        "document_id": "DOC-CONF-C"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-COST-001",
+        "thread_id": "C-VALIDATION",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "FINANCE",
+        "channel": "email",
+        "subject": "Hybrid transfer and cash assumptions",
+        "content": "For NS-2026-1042 scenario V2, assume a one-time USD 2,000.00 handling and internal transfer cost for the 80-drive REC-001 movement. This is a fictional planning estimate, not an invoice. No other incremental fee is modeled. Supplier C purchase is USD 22,000.00; stated immediate expenditure is USD 24,000.00. Immediate expenditure is the demo comparison of commitments, not a literal cash-payment schedule under Net 30. Pacific PO-2026-1042 remains open at USD 164,800.00. The difference from Apex is upfront commitment reduction, not net economic savings or recovered damages.",
+        "document_id": "DOC-COST-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 1,
+        "message_id": "MSG-DOC-PILOT-001",
+        "thread_id": "OPERATIONS",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "PILOT-OWNER",
+        "channel": "email",
+        "subject": "Pilot stock is reserved, not released",
+        "content": "REC-001 contains 80 usable HDR-200 Rev C drives at the Pilot Line, outside the warehouse snapshot. They are technically eligible for production but reserved for pilot work. Transfer requires my release authorization and a manager-approved transfer request. Earliest physical availability is October 28. Handling cost has not yet been established. REC-002 contains 16 R&D drives requiring inspection and is not eligible.",
+        "document_id": "DOC-PILOT-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-PILOT-RELEASE",
+        "thread_id": "C-VALIDATION",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "PILOT-OWNER",
+        "channel": "email",
+        "subject": "Release authorization for REC-001",
+        "content": "On October 26, 2026 I authorize release of all 80 usable HDR-200 Rev C drives from REC-001 on October 27, conditional on the manager approving the transfer request. Transfer completes and material is usable in production on October 28. Pilot work can be deferred until after November 10 and has no contracted customer commitment in this fixture. This does not authorize an executed stock movement. The R&D lot REC-002 remains excluded.",
+        "document_id": "DOC-PILOT-RELEASE"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 1,
+        "message_id": "MSG-DOC-PLAN-001",
+        "thread_id": "OPERATIONS",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "PLANNER",
+        "channel": "email",
+        "subject": "Production calendar and allocation",
+        "content": "The October 26 opening snapshot has 120 usable warehouse HDR-200 drives. The 80 pilot-line drives are a separate pool and remain reserved until the pilot owner approves release. There are no finished robots or WIP in this fixture. One Fremont line starts at most 60 robots per business day across both plans. Material usable on day zero can start that day; shipment follows two business days later. Protect contracted orders first, sorted by promise date and then sales order ID. SwiftLog material need-by is November 3; BayShip and NovaFab material need-by is November 4. Forecast FC-001 may be deferred.",
+        "document_id": "DOC-PLAN-001"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 2,
+        "message_id": "MSG-DOC-QUAL-APEX",
+        "thread_id": "OPERATIONS",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "QUALITY",
+        "channel": "email",
+        "subject": "Approved HDR-200 suppliers",
+        "content": "Pacific Motion Systems and Apex Drive Technologies are approved for HDR-200 Rev C, ratio 100:1. Apex AVL reference AVL-HDR-200-02 is valid January 1 through December 31, 2026. This qualification does not itself confirm stock or delivery dates.",
+        "document_id": "DOC-QUAL-APEX"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-QUAL-C",
+        "thread_id": "C-VALIDATION",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "QUALITY",
+        "channel": "email",
+        "subject": "Supplier C qualification",
+        "content": "Summit Precision Drives is the fictional Supplier C for this demo. AVL-HDR-200-03 approves Summit for HDR-200 Rev C, ratio 100:1, January 1 through December 31, 2026. Review completed October 26. The reserved 40-drive lot meets the same NorthStar specification; certificates accompany delivery and inspection is completed before shipment.",
+        "document_id": "DOC-QUAL-C"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-QUOTE-C",
+        "thread_id": "C-VALIDATION",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "SUMMIT",
+        "channel": "email",
+        "subject": "Quote SPD-2026-0040",
+        "content": "Summit Precision Drives offers 40 HDR-200 Rev C drives at USD 550.00 each; MOQ 40, total USD 22,000.00. Delivery to Fremont and incoming-inspection release are included, with no additional freight charge. Net 30 from delivery. Quote valid through October 27, 2026. This quote alone is not a delivery commitment; see the separate allocation confirmation.",
+        "document_id": "DOC-QUOTE-C"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 4,
+        "message_id": "MSG-MANAGER-CONFIRM",
+        "thread_id": "CASE-CHAT",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "MANAGER",
+        "channel": "chat",
+        "subject": "Decision case NS-2026-1042",
+        "content": "Can we meet all three contracted customer commitments, and what forecast work remains uncovered?",
+        "document_id": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 3,
+        "message_id": "MSG-MANAGER-COST",
+        "thread_id": "CASE-CHAT",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "MANAGER",
+        "channel": "chat",
+        "subject": "Decision case NS-2026-1042",
+        "content": "Option A seems expensive. Why do we need to purchase 400 drives? Can we protect all customer deliveries at a lower upfront cost?",
+        "document_id": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 3,
+        "message_id": "MSG-MANAGER-HYBRID",
+        "thread_id": "CASE-CHAT",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "MANAGER",
+        "channel": "chat",
+        "subject": "Decision case NS-2026-1042",
+        "content": "Evaluate transferring 80 pilot-line drives and buying the remaining 40 from another qualified supplier. Keep all customer commitments protected.",
+        "document_id": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 1,
+        "message_id": "MSG-MANAGER-IMPACT",
+        "thread_id": "CASE-CHAT",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "MANAGER",
+        "channel": "chat",
+        "subject": "Decision case NS-2026-1042",
+        "content": "Which customer shipments are at risk, and what evidence supports the revised arrival date?",
+        "document_id": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 3,
+        "message_id": "MSG-MANAGER-PILOT",
+        "thread_id": "CASE-CHAT",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "sender_actor_id": "MANAGER",
+        "channel": "chat",
+        "subject": "Decision case NS-2026-1042",
+        "content": "Why cannot we use the 80 pilot-line drives? What approval and operational checks are needed?",
+        "document_id": null
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored role-play / linked source",
+        "available_stage": 0,
+        "message_id": "MSG-PACIFIC",
+        "thread_id": "PACIFIC-1042",
+        "in_reply_to_message_id": null,
+        "case_id": "NS-2026-1042",
+        "scenario_version": 1,
+        "sender_actor_id": "PACIFIC",
+        "channel": "email",
+        "subject": "DOC-SUP-001",
+        "content": "# Supplier Email — Updated Delivery Schedule\n\n| Field | Value |\n|---|---|\n| Document ID | DOC-SUP-001 |\n| Document Type | Supplier Email |\n| Source | Pacific Motion Systems |\n| Document Date | 2026-10-16 |\n| Related PO | PO-2026-1042 |\n| Related Part | HDR-200 |\n\n**From:** Daniel Reyes, Account Manager, Pacific Motion Systems  \n**To:** Supply Chain Team, NorthStar Robotics  \n**Date:** Friday, October 16, 2026  \n**Subject:** Updated Delivery Schedule — PO-2026-1042 (HDR-200 Harmonic Drive Reducers, 400 Units)\n\nDear NorthStar Robotics Team,\n\nI am writing with an important update regarding purchase order **PO-2026-1042** for **400 units of the HDR-200 harmonic drive reducer**, originally scheduled for delivery to your Fremont facility on **October 20, 2026**.\n\nDue to production capacity constraints at our gear-finishing plant, including an unplanned maintenance shutdown on one of our two honing lines, we are unable to meet the original delivery schedule.\n\nThe revised delivery date for all **400 HDR-200 units is November 10, 2026**, representing a **21-day delay** from the original commitment.\n\nUnfortunately, we are unable to offer a partial shipment or expedited delivery before November 10.\n\nWe understand that this delay may affect your production schedule and sincerely apologize for the disruption. We will continue monitoring our production progress and notify you immediately if the delivery schedule changes.\n\nPlease let us know if you require any additional information.\n\nBest regards,  \n**Daniel Reyes**  \nAccount Manager  \nPacific Motion Systems\n",
+        "document_id": "DOC-SUP-001"
+      }
+    ],
+    "message_recipients": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 2,
+        "message_id": "MSG-APEX-CONF",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "message_id": "MSG-APEX-QUOTE",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 1,
+        "message_id": "MSG-APEX-REQUEST",
+        "actor_id": "APEX",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-CONF-C",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-COST-001",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 1,
+        "message_id": "MSG-DOC-PILOT-001",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-PILOT-RELEASE",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 1,
+        "message_id": "MSG-DOC-PLAN-001",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 2,
+        "message_id": "MSG-DOC-QUAL-APEX",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-QUAL-C",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 4,
+        "message_id": "MSG-DOC-QUOTE-C",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 4,
+        "message_id": "MSG-MANAGER-CONFIRM",
+        "actor_id": "BRAIN",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 3,
+        "message_id": "MSG-MANAGER-COST",
+        "actor_id": "BRAIN",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 3,
+        "message_id": "MSG-MANAGER-HYBRID",
+        "actor_id": "BRAIN",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 1,
+        "message_id": "MSG-MANAGER-IMPACT",
+        "actor_id": "BRAIN",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 3,
+        "message_id": "MSG-MANAGER-PILOT",
+        "actor_id": "BRAIN",
+        "recipient_type": "to"
+      },
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "authored fixture extension",
+        "available_stage": 0,
+        "message_id": "MSG-PACIFIC",
+        "actor_id": "BUYER",
+        "recipient_type": "to"
+      }
+    ],
+    "scenario_requests": [
+      {
+        "scenario_id": "northstar_happy_path_v2",
+        "source_ref": "updated happy-case manager chat",
+        "available_stage": 3,
+        "request_id": "REQ-V2",
+        "case_id": "NS-2026-1042",
+        "scenario_version": 2,
+        "parent_version": 1,
+        "transfer_qty": 80,
+        "purchase_qty": 40,
+        "objective": "Protect contracted shipments, then minimize upfront spending; disclose forecast gap and inventory trade-offs.",
+        "actor_id": "MANAGER"
+      }
+    ],
+    "plan_approvals": [],
+    "action_drafts": [],
+    "monitoring_events": []
+  }
+}

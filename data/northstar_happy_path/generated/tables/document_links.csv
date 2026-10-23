@@ -1,0 +1,16 @@
+scenario_id,source_ref,available_stage,document_id,entity_table,entity_key
+northstar_happy_path_v2,apex_emergency_confirmation.md,2,DOC-APEX-002,parts,HDR-200
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-CONF-C,parts,HDR-200
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-COST-001,purchase_orders,PO-2026-1042
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-COST-001,recovery_inventory,REC-001
+northstar_happy_path_v2,authored extension of updated Notion happy case,1,DOC-PILOT-001,recovery_inventory,REC-001
+northstar_happy_path_v2,authored extension of updated Notion happy case,1,DOC-PILOT-001,recovery_inventory,REC-002
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-PILOT-RELEASE,recovery_inventory,REC-001
+northstar_happy_path_v2,authored extension of updated Notion happy case,1,DOC-PLAN-001,production_plan,PLAN-001
+northstar_happy_path_v2,authored extension of updated Notion happy case,1,DOC-PLAN-001,production_plan,PLAN-002
+northstar_happy_path_v2,authored extension of updated Notion happy case,2,DOC-QUAL-APEX,suppliers,SUP-001
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-QUAL-C,suppliers,SUP-008
+northstar_happy_path_v2,backup_supplier_quote.md,0,DOC-QUOTE-001,parts,HDR-200
+northstar_happy_path_v2,authored extension of updated Notion happy case,4,DOC-QUOTE-C,parts,HDR-200
+northstar_happy_path_v2,DOC-SUP-001_updated_supplier_email.md,0,DOC-SUP-001,parts,HDR-200
+northstar_happy_path_v2,DOC-SUP-001_updated_supplier_email.md,0,DOC-SUP-001,purchase_orders,PO-2026-1042

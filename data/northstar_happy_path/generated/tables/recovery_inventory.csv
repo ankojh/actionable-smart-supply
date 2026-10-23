@@ -1,0 +1,3 @@
+scenario_id,source_ref,available_stage,recovery_id,part_number,location_id,recoverable_qty,usable_date,condition_status,technically_eligible,requires_release_approval,incremental_cost_cents
+northstar_happy_path_v2,recovery_inventory.csv + updated Notion happy case,1,REC-001,HDR-200,PILOT,80,2026-10-28,Usable,true,true,\N
+northstar_happy_path_v2,recovery_inventory.csv + updated Notion happy case,1,REC-002,HDR-200,RD,16,2026-10-30,Requires Inspection,false,true,\N

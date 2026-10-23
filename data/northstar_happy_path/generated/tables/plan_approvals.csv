@@ -1,0 +1,2 @@
+scenario_id,source_ref,available_stage,approval_id,case_id,scenario_version,option_id,actor_id,approved_date,authorized_purchase_cents,authorized_transfer_cents,authority_limit_cents,authorization_scope
+northstar_happy_path_v2,scripted manager role-play,5,APPROVAL-V2,NS-2026-1042,2,C,MANAGER,2026-10-26,2200000,200000,25000000,prepare_drafts_only

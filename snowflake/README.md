@@ -1,5 +1,12 @@
 # Snowflake integration
 
+> **Retired scenario integration.** The load JSON files described below have moved
+> to `archive_data/pre_northstar_happy_path/snowflake/load/`. Do not load those files
+> or treat existing cloud snapshots as the current happy path. The new local pack
+> is [NorthStar V2](../data/northstar_happy_path/README.md); its dictionary and flat
+> exports are prepared for a later migration. No cloud migration or deletion was
+> performed. The remaining instructions document the previous implementation.
+
 ## Managed Cortex Agents
 
 New live specialist runs default to four versioned managed objects in the existing application schema: `SUMO_OPERATIONS_V1`, `SUMO_SOURCING_V1`, `SUMO_QUALIFICATION_V1`, and `SUMO_SINGLE_V1`. **Cloud provisioning is pending explicit approval:** automatic approval review blocked creating these objects and granting their access. The existing running process and historical cases have not been converted or represented as native Agent executions.

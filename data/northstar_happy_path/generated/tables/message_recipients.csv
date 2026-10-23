@@ -1,0 +1,19 @@
+scenario_id,source_ref,available_stage,message_id,actor_id,recipient_type
+northstar_happy_path_v2,authored fixture extension,2,MSG-APEX-CONF,BUYER,to
+northstar_happy_path_v2,authored fixture extension,0,MSG-APEX-QUOTE,BUYER,to
+northstar_happy_path_v2,authored fixture extension,1,MSG-APEX-REQUEST,APEX,to
+northstar_happy_path_v2,authored fixture extension,4,MSG-DOC-CONF-C,BUYER,to
+northstar_happy_path_v2,authored fixture extension,4,MSG-DOC-COST-001,BUYER,to
+northstar_happy_path_v2,authored fixture extension,1,MSG-DOC-PILOT-001,BUYER,to
+northstar_happy_path_v2,authored fixture extension,4,MSG-DOC-PILOT-RELEASE,BUYER,to
+northstar_happy_path_v2,authored fixture extension,1,MSG-DOC-PLAN-001,BUYER,to
+northstar_happy_path_v2,authored fixture extension,2,MSG-DOC-QUAL-APEX,BUYER,to
+northstar_happy_path_v2,authored fixture extension,4,MSG-DOC-QUAL-C,BUYER,to
+northstar_happy_path_v2,authored fixture extension,4,MSG-DOC-QUOTE-C,BUYER,to
+northstar_happy_path_v2,authored fixture extension,5,MSG-MANAGER-APPROVE,BRAIN,to
+northstar_happy_path_v2,authored fixture extension,4,MSG-MANAGER-CONFIRM,BRAIN,to
+northstar_happy_path_v2,authored fixture extension,3,MSG-MANAGER-COST,BRAIN,to
+northstar_happy_path_v2,authored fixture extension,3,MSG-MANAGER-HYBRID,BRAIN,to
+northstar_happy_path_v2,authored fixture extension,1,MSG-MANAGER-IMPACT,BRAIN,to
+northstar_happy_path_v2,authored fixture extension,3,MSG-MANAGER-PILOT,BRAIN,to
+northstar_happy_path_v2,authored fixture extension,0,MSG-PACIFIC,BUYER,to

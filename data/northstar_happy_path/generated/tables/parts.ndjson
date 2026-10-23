@@ -1,0 +1,14 @@
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "BAT-480", "part_name": "Battery Pack 48V", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "CDC-050", "part_name": "Charging Dock Connector", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "CHF-300", "part_name": "Chassis Frame", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "DCM-020", "part_name": "Depth Camera Module", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "EST-010", "part_name": "Emergency Stop Assembly", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "HDR-200", "part_name": "Harmonic Drive Reducer", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "IMU-060", "part_name": "IMU Module", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "LDR-360", "part_name": "LiDAR Sensor", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "MCB-110", "part_name": "Main Controller Board", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "MDB-210", "part_name": "Motor Driver Board", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "SLS-090", "part_name": "Safety Laser Scanner", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "SVM-400", "part_name": "Servo Motor", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "WCM-070", "part_name": "Wireless Comms Module", "unit_of_measure": "each"}
+{"scenario_id": "northstar_happy_path_v2", "source_ref": "bom.csv", "available_stage": 0, "part_number": "WHA-150", "part_name": "Wheel Hub Assembly", "unit_of_measure": "each"}
